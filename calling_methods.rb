@@ -1,7 +1,7 @@
 require 'selenium-webdriver'
-require './navigate_browser_extension.rb'
-require './login_extension.rb'
-require './login_app_extension.rb'
+require './library/navigate_browser_extension.rb'
+require './library/login_extension.rb'
+require './library/login_app_extension.rb'
 
 
 
