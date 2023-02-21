@@ -8,7 +8,7 @@ class LoginExtension
         end
         
         def login_pass
-                driver.find_element(id: 'email-input').send_keys "admin@ocun.com"
+                driver.find_element(id: 'email-input').send_keys "admin01@regressionaccount.com"
                 sleep 1
                 driver.find_element(name: 'password').send_keys "Password1"
                 sleep 1
@@ -17,7 +17,7 @@ class LoginExtension
         end       
 
         def login_fail
-                driver.find_element(id: 'email-input').send_keys "admin@ocun.com"
+                driver.find_element(id: 'email-input').send_keys "admin01@regressionaccount.com"
                 sleep 1
                 driver.find_element(name: 'password').send_keys "failOnPassword"
                 sleep 1
