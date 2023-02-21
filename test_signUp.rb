@@ -1,6 +1,6 @@
 require 'selenium-webdriver'
 require './library/navigate_browser_extension.rb'
-require './library/sign_up.rb'
+require './library/sign_up_extension.rb'
 
 
 class TestSignUp
@@ -18,9 +18,6 @@ class TestSignUp
             puts "Test - Sign Up - Pass #{exception}"
         end
 
-
-
-        
         driver.close
     end
 end
