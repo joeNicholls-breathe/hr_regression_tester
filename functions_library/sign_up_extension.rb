@@ -1,18 +1,20 @@
 require 'selenium-webdriver'
+require_relative '../settings.rb'
 require 'pry'
 
 class SignUpExtension
+    include Settings
+
     attr_accessor :driver
+
     def initialize(driver)
          @driver = driver
     end
 
-
     def sign_up 
         driver.find_element(id:'admin-first-name').send_keys "Admin"
         driver.find_element(id:'admin-last-name').send_keys "User"
-        binding.pry
-        driver.find_element(id:'admin-email').send_keys "admin03@regressionaccount.com"
+        driver.find_element(id:'admin-email').send_keys settings[:staging][:test_sign_up_email]
         driver.find_element(id:'account-name').send_keys "RegressionAccount"
         drop = driver.find_element(id:'employee-count')
         choose = Selenium::WebDriver::Support::Select.new(drop)
@@ -25,8 +27,4 @@ class SignUpExtension
         driver.find_element(id:'new-account-submit').click
         sleep 5
     end
-
-    private 
-
-    attr_reader :driver
 end

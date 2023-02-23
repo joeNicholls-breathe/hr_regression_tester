@@ -2,8 +2,6 @@ require 'selenium-webdriver'
 require './functions_library/navigate_browser_extension.rb'
 require './functions_library/sign_up_extension.rb'
 
-
-
 class TestSignUp
     attr_accessor :driver
     def initialize 
