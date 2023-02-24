@@ -1,7 +1,7 @@
 require File.expand_path('../base.rb', __FILE__)
 
 class SignUpExtension < Base
-    def sign_up 
+    def sign_up
         driver.find_element(id:'admin-first-name').send_keys "Admin"
         driver.find_element(id:'admin-last-name').send_keys "User"
         driver.find_element(id:'admin-email').send_keys settings[:staging][:test_sign_up_email]
