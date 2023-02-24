@@ -4,23 +4,22 @@ require './functions_library/sign_up_extension.rb'
 require_relative '../settings.rb'
 
 class TestName
-    include Settings
+  include Settings
 
-    attr_accessor :driver
+  attr_accessor :driver
 
-    def initialize 
-        @driver = Selenium::WebDriver.for :browser
+  def initialize 
+    @driver = Selenium::WebDriver.for :browser
+  end
+
+  def run_test
+    begin
+      ExtensionName.new(@driver).functionName       
+    rescue => exception
+      puts "Test - Output Name - Pass #{exception}"
     end
-
-    def run_test
-        begin
-            ExtensionName.new(@driver).functionName       
-        rescue => exception
-            puts "Test - Output Name - Pass #{exception}"
-        end
-        
-        driver.close
-    end
+    driver.close
+  end
 end
 
 TestName.new.run_test
