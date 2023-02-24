@@ -1,16 +1,6 @@
-require 'selenium-webdriver'
-require_relative '../settings.rb'
-require 'pry'
+require File.expand_path('../base.rb', __FILE__)
 
-class SignUpExtension
-    include Settings
-
-    attr_accessor :driver
-
-    def initialize(driver)
-         @driver = driver
-    end
-
+class SignUpExtension < Base
     def sign_up 
         driver.find_element(id:'admin-first-name').send_keys "Admin"
         driver.find_element(id:'admin-last-name').send_keys "User"
