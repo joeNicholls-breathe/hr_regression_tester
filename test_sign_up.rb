@@ -18,7 +18,7 @@ class TestSignUp
       puts "Test - Sign Up - Pass #{exception}"
     end
 
-    driver.close
+    #driver.close
   end
 end
 
