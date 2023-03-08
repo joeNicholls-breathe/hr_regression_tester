@@ -9,6 +9,10 @@ class BulkImportExtension < Base
     driver.find_element(css:'body > section.content.container > div.float-right > a').click
   end
 
+  def add_new_import 
+    driver.find_element(css:'body > section.content.container > div.float-right > a').click
+  end
+
   def bulk_upload_employee_full
     driver.find_element(id:'employees_data_import_type').click
     drop = driver.find_element(id:'employees_data_import_type')

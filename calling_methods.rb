@@ -4,23 +4,19 @@ require './functions_library/login_extension.rb'
 require './functions_library/login_app_extension.rb'
 
 
-
-class TestOne
+class TestAccountCreation
     attr_accessor :driver
     def initialize 
         @driver = Selenium::WebDriver.for :chrome
     end
 
-    def run_test_login
+    def run_test_
         begin
             NavigateBrowserExtension.new(@driver).breathe_login
             LoginExtension.new(@driver).login_fail
             LoginAppExtension.new(@driver).select_hr
         rescue => exception
             puts "test one failed #{exception}"
-            NavigateBrowserExtension.new(@driver).breathe_login
-            LoginExtension.new(@driver).login_pass
-            LoginAppExtension.new(@driver).select_hr     
             sleep 5
         end
 
