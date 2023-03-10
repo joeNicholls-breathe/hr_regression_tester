@@ -10,7 +10,7 @@ class TestAccountCreation
         @driver = Selenium::WebDriver.for :chrome
     end
 
-    def run_test_
+    def run_test_login
         begin
             NavigateBrowserExtension.new(@driver).breathe_login
             LoginExtension.new(@driver).login_fail

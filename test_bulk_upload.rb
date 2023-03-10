@@ -1,6 +1,6 @@
 require 'selenium-webdriver'
 require './functions_library/navigate_browser_extension.rb'
-require './functions_library/bulk_import_extension.rb'
+require './functions_library/bulk_imports_extension.rb'
 
 class TestBulkUpload
   attr_accessor :driver
@@ -51,7 +51,7 @@ class TestBulkUpload
       puts "Test - Bulk upload - Employee additional payments uploaded - Pass #{exception}"
     end
 
-    Sleep 30
+    sleep 30
 
     #driver.close
   end
