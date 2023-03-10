@@ -21,4 +21,4 @@ attr_accessor :driver
     end
 end
 
-TestOne.new.run_test_create
+TestOne.new.run_test_account_create
