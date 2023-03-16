@@ -10,7 +10,8 @@ module Settings
         login_password: 'Password1',
         admin_email: 'admin@hr-regression.com',
         line_manager_email: 'line@hr-regression-101.com',
-        employee_email: 'employee@hr-regression-101.com'
+        employee_email: 'employee@ocun.com',
+        employee_e:'employee@hr-regression-101.com'
       }
     }
   end

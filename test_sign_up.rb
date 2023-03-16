@@ -6,20 +6,17 @@ class TestSignUp
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :firefox
+    @driver = Selenium::WebDriver.for :chrome
   end
 
-  def run_test
-    begin
-      NavigateBrowserExtension.new(driver).breathe_signup
-      NavigateBrowserExtension.new(driver).cookie_modal_accept
-      SignUpExtension.new(driver).sign_up
-    rescue => exception
-      puts "Test - Sign Up - Pass #{exception}"
-    end
-
-    #driver.close
+  def test_sign_up
+    NavigateBrowserExtension.new(driver).breathe_signup
+    NavigateBrowserExtension.new(driver).cookie_modal_accept
+    SignUpExtension.new(driver).sign_up
+    puts "Test - Sign Up - Pass"
+    sleep 5
+    driver.close
   end
 end
 
-TestSignUp.new.run_test
+TestSignUp.new.test_sign_up
