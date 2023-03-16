@@ -18,7 +18,7 @@ class BulkImportExtension < Base
     drop = driver.find_element(id:'employees_data_import_type')
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:text, 'Import new people')
-    driver.find_element(id:'employees_data_import_import').send_keys "/Users/henrycole/Desktop/automation/account_employee_setup/positive_imports/employee_full.xlsx"
+    driver.find_element(id:'employees_data_import_import').send_keys(File.expand_path('./account_employee_setup/postive_imports/employee_full.xlsx'))
     driver.find_element(id:'submit-import').click
   end
     
