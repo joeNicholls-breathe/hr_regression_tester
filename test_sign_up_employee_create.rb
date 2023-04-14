@@ -4,6 +4,7 @@ require './functions_library/sign_up_extension.rb'
 require './functions_library/bulk_imports_extension.rb'
 require './functions_library/navigate_around_app_manager.rb'
 require './functions_library/test_page_check.rb'
+require './functions_library/test_reference_extension.rb'
 
 class TestSignUp
   attr_accessor :driver
@@ -24,7 +25,7 @@ class TestSignUp
     SignUpExtension.new(driver).sign_up
     puts "Sign Up form - Pass"
     sleep 2
-    BulkImportExtension.navigate_to_bulk_upload
+    BulkImportExtension.new(driver).navigate_to_bulk_upload
     puts "Navigate to bulk upload form"
     sleep 2
     BulkImportExtension.bulk_upload_employee_full
