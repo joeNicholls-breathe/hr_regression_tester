@@ -10,6 +10,8 @@ class TestSignUp
 
   def initialize
     @driver = Selenium::WebDriver.for :chrome
+    #driver.manage.timeout.implicit_wait = 3
+    Selenium::WebDriver.logger.level = :info
   end
 
   def test_sign_up

@@ -10,4 +10,8 @@ class Base
   def initialize(driver)
     @driver = driver
   end
+
+  def wait
+    wait = Selenium::WebDriver::Wait.new(timeout: 3)
+  end
 end

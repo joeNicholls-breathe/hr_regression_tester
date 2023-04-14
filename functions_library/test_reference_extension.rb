@@ -8,7 +8,9 @@ class TestRefExtension < Base
 
     def todays_date
       Date.today
-      date.new
     end
 
+    def tomorrow
+      Date.today + 1
+    end
 end

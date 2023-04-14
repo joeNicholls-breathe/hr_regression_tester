@@ -5,7 +5,7 @@ class SignUpExtension < Base
         driver.find_element(id:'admin-first-name').send_keys "Admin"
         driver.find_element(id:'admin-last-name').send_keys "User"
         driver.find_element(id:'admin-email').send_keys settings[:staging][:test_sign_up_email]
-        driver.find_element(id:'account-name').send_keys "RegressionAccount"
+        driver.find_element(id:'account-name').send_keys "RegressionAccount" + 1 
         drop = driver.find_element(id:'employee-count')
         choose = Selenium::WebDriver::Support::Select.new(drop)
         choose.select_by(:text, "11-20")
