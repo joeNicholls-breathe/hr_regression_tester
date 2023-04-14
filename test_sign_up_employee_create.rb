@@ -15,7 +15,10 @@ class TestSignUp
   def test_sign_up
     NavigateBrowserExtension.new(driver).breathe_signup
     puts "Navigate to breathe sign up screen - Pass"
+    sleep 1
     NavigateBrowserExtension.new(driver).cookie_modal_accept
+    puts "Accept cookie in pop up"
+    sleep 1
     SignUpExtension.new(driver).sign_up
     puts "Sign Up form - Pass"
     sleep 2
@@ -27,8 +30,18 @@ class TestSignUp
     sleep 2
     AppNavigationExtensionManager.navigate_to_employee_dashboard_as_manager
     puts "Return to Manager Dashboard"
+    sleep 2
+    AppNavigationExtensionManager.navigate_to_people_screen
+    puts "Navigate to People screen via pill"
+    sleep 2
+    CreateEmployeeExtension.create_employee_pending_starter_from_people_page
+    puts "Create new employee via people page, that will start tomorrow"
+    sleep 2
+    AppNavigationExtensionManager.navigate_to_employee_dashboard_as_manager
+    puts "Return to Manager Dashboard"
+    sleep 2
     TestPageCheck.check_pending_starters
-    puts "Check pending starters on dashboard"
+    puts "Check pending starters on dashboard are present"
     sleep 2
 
 

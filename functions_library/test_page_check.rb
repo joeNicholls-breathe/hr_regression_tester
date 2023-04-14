@@ -5,6 +5,6 @@ class TestPageCheck
     searchtextbox = driver.find_element(xpath: '//*[@id="tab-hr-dashboard"]/div[2]/div[2]/div[3]/div[2]/div[2]').click
     var AccountName = searchtextbox.getattribute('innerHTML')
     string s = new.string(AccountName)
-    string s1 = new.string('Starting on 14/04/2023')
+    string s1 = new.string('Starting on 14/04/2023') ##today plus 1
   end
 end 
