@@ -2,7 +2,6 @@ require File.expand_path('../base.rb', __FILE__)
 
 class BulkImportExtension < Base
   def navigate_to_bulk_upload
-    binding.pry
     driver.find_element(css:'#navbar-nav-dropdown > ul > li:nth-child(3)').click
     driver.find_element(css:'#navbar-nav-dropdown a:nth-child(4)').click
     driver.find_element(css:'body > section.content.container > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > a').click
