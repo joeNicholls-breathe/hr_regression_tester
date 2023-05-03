@@ -121,4 +121,163 @@ class AccountConfigExtension < Base
     driver.find_element(id: 'account_use_xero_payroll_1').click
     driver.find_element(css: 'data-disable-with="update modules"').click
   end
+
+  def navigate_to_picklist
+  driver find_element(css: 'href="/account/picklists"').click
+  end
+
+  def details_contract_types_add
+    driver.find_element(css: 'href="/company_contract_types"').click
+    driver.find_element(css: 'href="/company_contract_types/new"').click
+    driver.find_element(id: 'company_contract_type_name').sendkeys "Add Contract Type"
+    driver.find_element(css: '#new_company_contract_type > p > input').click
+  end
+
+  def details_contract_types_add_cancel
+    driver.find_element(css: 'href="/company_contract_types"').click
+    driver.find_element(css: 'href="/company_contract_types/new"').click
+    driver.find_element(id: 'company_contract_type_name').sendkeys "Add Contract Type"
+    driver.find_element(xpath: '//*[@id="new_company_contract_type"]/p/a').click
+  end
+
+  def details_contract_type_add_return_breadcrumb
+    driver.find_element(css: 'href="/company_contract_types"').click
+    driver.find_element(css: 'href="/company_contract_types/new"').click
+    driver.find_element(xpath: '/html/body/section/div/div/div/a').click
+  end
+
+  def details_contract_types_edit
+    driver.find_element(css: 'href="/company_contract_types"').click
+    driver.find_element(css: '//*[@id="DataTables_Table_0"]/tbody/tr[1]/td[2]/a[1]/svg').click
+    driver.find_element(id: 'company_contract_type_name').sendkeys "Contract Type Edit"
+    driver.find_element(css: '#new_company_contract_type > p > input').click
+  end
+  
+  def details_contract_types_edit_cancel
+    driver.find_element(css: 'href="/company_contract_types"').click
+    driver.find_element(css: '//*[@id="DataTables_Table_0"]/tbody/tr[1]/td[2]/a[1]/svg').click
+    driver.find_element(id: 'company_contract_type_name').sendkeys "Contract Type Edit"
+    driver.find_element(css: '#new_company_contract_type > p > input').click
+  end
+  
+  def details_contract_types_delete
+    driver.find_element(css: 'href="/company_contract_types"').click
+    driver.find_element(css: 'href="/company_contract_types/new"').click
+    driver.find_element(css: '//*[@id="DataTables_Table_0"]/tbody/tr[4]/td[2]/svg').click
+    driver.find_element(class: 'btn btn-danger modal-confirm').click
+  end
+
+  def details_contract_types_delete_cancel
+    driver.find_element(css: 'href="/company_contract_types"').click
+    driver.find_element(css: 'href="/company_contract_types/new"').click
+    driver.find_element(css: '//*[@id="DataTables_Table_0"]/tbody/tr[4]/td[2]/svg').click
+    driver.find_element(class: 'btn btn-danger modal-confirm').click
+  end
+
+  def details_equipment_types_add
+    driver.find_element(css: 'href="/company_asset_types"').click
+    driver.find_element(xpath: '/html/body/section[2]/div[2]/a/span/svg[2]').click
+    driver.find_element(id: 'company_asset_type_name').sendkeys "Equipment test add"
+    driver.find_element(id: 'company_asset_type_current').click
+  end 
+
+  def details_equipment_types_edit
+    driver.find_element(css: 'href="/company_asset_types"').click
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[1]/td[3]/a[1]').click
+    driver.find_element(id: 'company_asset_type_name').sendkeys "Equipment test Edit"
+    driver.find_element(id: 'company_asset_type_current').click
+  end 
+
+  def details_equipment_types_delete
+    driver.find_element(css: 'href="/company_asset_types"').click
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[3]/svg').click
+    driver.find_element(xpath: '//*[@id="delete_company_asset_type_11"]/div/div/div[3]/button[2]').click
+  end 
+
+  def details_equipment_types_return_breadscrumb
+    driver.find_element(css: 'href="/company_asset_types"').click
+    driver.find_element(css: 'href="/account/picklists"').click
+  end 
+
+  def details_ethnicities_add
+    driver.find_element(css: 'href="/company_ethnicities"').click
+    driver.find_element(xpath: '/html/body/section[2]/div[2]/a/span').click
+    driver.find_element(id: 'company_ethnicity_name').sendkeys "Test Ethnicity Add"
+    driver.find_element(xpath: '//*[@id="new_company_ethnicity"]/p/input').click
+  end
+
+  def details_ethnicities_edit
+    driver.find_element(css: 'href="/company_ethnicities"').click
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[1]/td[2]/a[1]').click
+    driver.find_element(xpath: '//*[@id="delete_ethnicity_39775"]/div/div/div[3]/button[2]').click
+  end
+
+  def details_ethnicities_delete
+    driver.find_element(css: 'href="/company_ethnicities"').click
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[6]/td[2]/svg').click
+    driver.find_element(id: 'company_ethnicity_name').sendkeys "Test Ethnicity Add"
+    driver.find_element(xpath: '//*[@id="new_company_ethnicity"]/p/input').click
+  end
+
+  def details_ethnicities_search
+    driver.find_element(css: 'href="/company_ethnicities"').click
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "Chinese"
+  end
+
+  def details_genders_add
+    driver.find_element(css: 'href="/genders"').click
+    driver.find_element(css: 'href="/genders/new"').click
+    driver.find_element(id: 'gender_name').sendkeys "Other"
+    driver.find_element(css: '#edit_gender_5833 > p > input').click
+  end
+
+  def details_genders_edit
+    driver.find_element(css: 'href="/genders"').click
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr.odd > td.actions > a').click
+    driver.find_element(id: 'gender_name').sendkeys "Other"
+    driver.find_element(css: '#edit_gender_5833 > p > input').click
+  end
+
+  def details_genders_return_breadcrumb
+    driver.find_element(css: 'href="/genders"').click
+    driver.find_element(css: 'href="/account/picklists"').click  
+  end
+  
+
+
+
+  def details_id_documents_types
+    driver.find_element(: '').
+  end
+
+  def details_kudos_types
+    driver.find_element(: '').
+  end
+
+  def details_notice_periods
+    driver.find_element(: '').
+  end
+
+  def details_pronouns
+    driver.find_element(: '').
+  end
+
+  def details_reason_for_leaving
+    driver.find_element(: ''). 
+  end
+
+  def details_onboarding_tasks
+    driver.find_element(: '').
+  end
+
+
+
+
+
+  def absence
+  end
+
+
+
+
 end

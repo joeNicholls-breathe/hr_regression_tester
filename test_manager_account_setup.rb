@@ -40,8 +40,9 @@ class AccountSetup
     puts "add onboarding tasks for employee"
     AccountConfigExtension.xero_payroll_integration
     puts "switch on xero integration *might want to do this as the buy now journey"
+    AccountConfigExtension.navigate_to_picklist
+    puts "navigate to picklists"
 
-    navigate to picklists
     details
     absence
     training
