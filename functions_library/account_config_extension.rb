@@ -390,7 +390,35 @@ class AccountConfigExtension < Base
   end
 
 #reason for leaving
-  def details_reason_for_leaving
+  def details_reason_for_leaving_add
+    driver.find_element(css: 'href="/company_reason_for_leaving_types"').click
+    driver.find_element(css: 'href="/company_reason_for_leaving_types/new"').click
+    driver.find_element(id: 'id="company_reason_for_leaving_type_name"').sendkeys "Regression Add TODAY DATE"
+    driver.find_element(xpath: '//*[@id="new_company_reason_for_leaving_type"]/p/input').click
+  end
+
+  def details_reason_for_leaving_edit
+    driver.find_element(css: 'href="/company_reason_for_leaving_types"').click
+    driver.find_element(css: '//*[@id="DataTables_Table_0"]/tbody/tr[1]/td[3]').click
+    driver.find_element(id: 'id="company_reason_for_leaving_type_name"').sendkeys "Regression Edit TODAY DATE"
+    driver.find_element(xpath: '//*[@id="new_company_reason_for_leaving_type"]/p/input').click
+  end
+
+    def details_reason_for_leaving_delete
+    driver.find_element(css: 'href="/company_reason_for_leaving_types"').click
+    driver.find_element(css: '//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[3]/svg').click
+    driver.find_element(xpath: '//*[@id="delete_reason_for_leaving_type_53318"]/div/div/div[3]/button[2]').click
+  end
+
+  def details_reason_for_leaving_search
+    driver.find_element(css: 'href="/company_reason_for_leaving_types"').click
+    driver.find_element(css: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys ""
+    sleep 1
+  end
+
+    def details_reason_for_leaving_breadcrumb
+    driver.find_element(css: 'href="/company_reason_for_leaving_types"').click
+    driver.find_element(css: 'href="/company_reason_for_leaving_types/new"').click
     driver.find_element(css: 'href="/company_reason_for_leaving_types"').click
   end
 
