@@ -42,30 +42,82 @@ class AccountSetup
     puts "switch on xero integration *might want to do this as the buy now journey"
     AccountConfigExtension.navigate_to_picklist
     puts "navigate to picklists"
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    AccountConfigExtension
+    puts "Picklist details add/edit/delete/search/breadcrumb"
 
-    details
-    absence
-    training
-    company organisation
-    pay and benefits
-    recruitment
-    performance management
-    email notification set up
-    permissions and approvals of HR/Line Managers and employees
-    abscence settings - holidays and working patterns (adding new and editing away from the default)
-    check what people can do - employee
-    check what people can do - Line manager
-    check what people can do - HR user
-    security 2fa
+    puts "Picklist absence add/edit/delete/search/breadcrumb"
+    
+    puts "Picklist training add/edit/delete/search/breadcrumb"
 
-    add line manager to account
-    add employee to account
+    puts "Picklist company organisation add/edit/delete/search/breadcrumb"
 
-    assign permissions to employees 
-    assign line managers to employees
+    puts "Piclist pay and benefits add/edit/delete/search/breadcrumb"
+
+    puts "Pickilst recruitment add/edit/delete/search/breadcrumb"
+
+    puts "Picklist performance management add/edit/delete/search/breadcrumb"
+
+    puts "Email notification set up add/edit/delete/search/breadcrumb"
+
+    puts "Permissions and approvals of HR/Line Managers and employees add/edit/delete/search/breadcrumb" 
+
+    puts "abscence settings - holidays and working patterns (adding new and editing away from the default)"
+
+    puts "check what people can do - employee"
+
+    puts "check what people can do - Line manager"
+
+    puts "check what people can do - HR user"
+
+    puts "security 2fa"
+
+    puts "add line manager to account"
+
+    puts "add employee to account"
+
+    puts "assign permissions to employees"
+
+    puts "assign line managers to employees"
   
-
-
     driver.close
   end
 end
