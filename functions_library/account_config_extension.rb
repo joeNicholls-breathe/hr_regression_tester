@@ -390,74 +390,221 @@ class AccountConfigExtension < Base
   end
 
 #reason for leaving
-  def details_reason_for_leaving
+  def details_reason_for_leaving_add
+    driver.find_element(css: 'href="/company_reason_for_leaving_types"').click
+    driver.find_element(css: 'href="/company_reason_for_leaving_types/new"').click
+    driver.find_element(id: 'id="company_reason_for_leaving_type_name"').sendkeys "Regression Add TODAY DATE"
+    driver.find_element(xpath: '//*[@id="new_company_reason_for_leaving_type"]/p/input').click
+  end
+
+  def details_reason_for_leaving_edit
+    driver.find_element(css: 'href="/company_reason_for_leaving_types"').click
+    driver.find_element(css: '//*[@id="DataTables_Table_0"]/tbody/tr[1]/td[3]').click
+    driver.find_element(id: 'id="company_reason_for_leaving_type_name"').sendkeys "Regression Edit TODAY DATE"
+    driver.find_element(xpath: '//*[@id="new_company_reason_for_leaving_type"]/p/input').click
+  end
+
+    def details_reason_for_leaving_delete
+    driver.find_element(css: 'href="/company_reason_for_leaving_types"').click
+    driver.find_element(css: '//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[3]/svg').click
+    driver.find_element(xpath: '//*[@id="delete_reason_for_leaving_type_53318"]/div/div/div[3]/button[2]').click
+  end
+
+  def details_reason_for_leaving_search
+    driver.find_element(css: 'href="/company_reason_for_leaving_types"').click
+    driver.find_element(css: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys ""
+    sleep 1
+  end
+
+    def details_reason_for_leaving_breadcrumb
+    driver.find_element(css: 'href="/company_reason_for_leaving_types"').click
+    driver.find_element(css: 'href="/company_reason_for_leaving_types/new"').click
     driver.find_element(css: 'href="/company_reason_for_leaving_types"').click
   end
 
 #onboarding tasks
-  def details_onboarding_tasks
+  def details_onboarding_tasks_add
     driver.find_element(css: 'href="/company_tasks"').click
+    driver.find_element(id: 'create-company-task-submit').click
+    driver.find_element(id: 'company_task_title').sendkeys "New Task - Regression Test DATE TODAY"
+    driver.find_element(id: 'company_task_description').sendkeys "Description test for Regression Suite TODAY DATE"
+    driver.find_element(id: 'add-company-task-submit').click
+  end
+
+    def details_onboarding_tasks_edit
+    driver.find_element(css: 'href="/company_tasks"').click
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[1]/td[2]/a/svg').click
+    driver.find_element(id: 'company_task_title').sendkeys "Edit Task - Regression Test DATE TODAY"
+    driver.find_element(id: 'company_task_description').sendkeys "Edit description test for Regression Suite TODAY DATE"
+    driver.find_element(id: 'add-company-task-submit').click
+  end
+
+  def details_onboarding_tasks_delete
+    driver.find_element(css: 'href="/company_tasks"').click
+    driver.find_element(id: 'delete_task_142').click #need to make sure i pull the appropriate id out of the ui
+    driver.find_element(css: '#delete_task_142 > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm').click
+  end
+
+  def details_onboarding_tasks_search #this will need to be reviewed
+    driver.find_element(css: 'href="/company_tasks"').click
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "New Task - Regression Test DATE TODAY"
+    sleep 1
+    so = driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[1]')
+    so.each do |t|
+    if t.text() == 'New Task - Regression Test Date TODAY' then 
+      result = "Pass"
+    else 
+      result = "Failed to find picklist item"
+  end
+
+  def details_onboarding_tasks_breadscrumb
+    driver.find_element(css: 'href="/company_tasks"').click
+    driver.find_element(css: 'href="/account/picklists"').click
+  end
+
+  def details_onboarding_tasks_cancel_add
+    river.find_element(css: 'href="/company_tasks"').click
+    driver.find_element(id: 'create-company-task-submit').click
+    driver.find_element(id: 'company_task_title').sendkeys "New Task - Regression Test DATE TODAY"
+    driver.find_element(id: 'company_task_description').sendkeys "Description test for Regression Suite TODAY DATE"
+    river.find_element(css: 'href="/company_tasks"').click
   end
 
 #other leave types
-  def absence_other_leave_reasons
+  def absence_other_leave_reasons_add #current and employee selectable (default)
+    driver.find_element(css: 'href="/company_leave_reasons"').click
+    driver.find_element(css: 'href="/company_leave_reasons/new"').click
+    driver.find_element(id: 'company_leave_reason_name').sendkeys "New Leave Reason - Test Regression TODAY DATE"
+    driver.find_element(xpath: '//*[@id="new_company_leave_reason"]/p/input').click
+  end
+
+  def absence_other_leave_reasons_edit
+    driver.find_element(css: 'href="/company_leave_reasons"').click
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[1]/td[4]/a/svg').click
+    driver.find_element(id: 'company_leave_reason_name').sendkeys "New Leave Reason - Test Regression TODAY DATE"
+    driver.find_element(xpath: '//*[@id="new_company_leave_reason"]/p/input').click
+  end
+  
+  def absence_other_leave_reasons_cancel
+    driver.find_element(css: 'href="/company_leave_reasons"').click
+    driver.find_element(css: 'href="/company_leave_reasons/new"').click
+    driver.find_element(id: 'company_leave_reason_name').sendkeys "New Leave Reason - Test Regression TODAY DATE"
     driver.find_element(css: 'href="/company_leave_reasons"').click
   end
+  
+  def absence_other_leave_reasons_delete
+    driver.find_element(css: 'href="/company_leave_reasons"').click
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[4]/svg').click
+    driver.find_element(css: '#delete_company_leave_reason_39573 > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm').click #will need to work out to make generic without id
+  end
+  
+  def absence_other_leave_reasons_search
+    driver.find_element(css: 'href="/company_leave_reasons"').click
+    driver.find_element(css: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "New Leave Reason - Test Regression TODAY DATE"
+    sleep 1
+    so = driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[1]')
+    so.each do |t|
+    if t.text() == 'New Task - Regression Test Date TODAY' then 
+      result = "Pass"
+    else 
+      result = "Failed to find picklist item"
+  end
+  
+  def absence_other_leave_reasonsbreadcrumb
+    driver.find_element(css: 'href="/company_leave_reasons"').click
+    driver.find_element(css: 'href="/account/picklists"').click
+  end
+  
+
+
+#currently HERE
 
 #sickness types
   def absence_sickness_types
     driver.find_element(css: 'href="/company_sicknesstypes"').click
+    driver.find_element(: '').click
+    driver.find_element(: '').sendkeys ""
+    driver.find_element(: '').click
   end
 
 #training categories
   def training_categories
     driver.find_element(css: 'href="/company_training_categories"').click
+    driver.find_element(: '').click
+    driver.find_element(: '').sendkeys ""
+    driver.find_element(: '').click
   end 
 
 #training provider
   def training_providers
     driver.find_element(css: 'href="/company_training_providers"').click
+    driver.find_element(: '').click
+    driver.find_element(: '').sendkeys ""
+    driver.find_element(: '').click
   end 
 
 #training types
   def training_types
     driver.find_element(css: 'href="/company_training_types"').click
+    driver.find_element(: '').click
+    driver.find_element(: '').sendkeys ""
+    driver.find_element(: '').click
   end 
 
 #departments
   def company_organisation_department
     driver.find_element(css: 'href="/company_departments"').click  
+    driver.find_element(: '').click
+    driver.find_element(: '').sendkeys ""
+    driver.find_element(: '').click
   end
 
 #divisions
   def company_organisation_division
     driver.find_element(css: 'href="/company_divisions"').click
+    driver.find_element(: '').click
+    driver.find_element(: '').sendkeys ""
+    driver.find_element(: '').click
   end
 
 #additional payment types
   def pay_and_benefits_additional_payment_types
     driver.find_element(css: 'href="/company_additional_payment_types"').click
+    driver.find_element(: '').click
+    driver.find_element(: '').sendkeys ""
+    driver.find_element(: '').click
   end
 
 #benefit types
   def pay_and_benefits_benefit_types
     driver.find_element(css: 'href="/company_benefit_types"').click
+    driver.find_element(: '').click
+    driver.find_element(: '').sendkeys ""
+    driver.find_element(: '').click
   end
  
 #disciplinary outcomes
   def performance_management_disciplinary_outcomes
     driver.find_element(css: 'href="/company_disciplinary_outcomes"').click
+    driver.find_element(: '').click
+    driver.find_element(: '').sendkeys ""
+    driver.find_element(: '').click
   end
   
 #grievence outcomes
   def performance_management_grievance_outcomes
     driver.find_element(css: 'href="/company_grievance_outcomes"').click
+    driver.find_element(: '').click
+    driver.find_element(: '').sendkeys ""
+    driver.find_element(: '').click
   end
   
 #one to ones
   def performance_management_one_to_one_types
     driver.find_element(css: 'href="/company_one_to_one_types"').click
+    driver.find_element(: '').click
+    driver.find_element(: '').sendkeys ""
+    driver.find_element(: '').click
   end
   
-
 end
