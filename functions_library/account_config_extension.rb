@@ -515,33 +515,123 @@ class AccountConfigExtension < Base
     driver.find_element(css: 'href="/account/picklists"').click
   end
   
-
-
-#currently HERE
-
 #sickness types
-  def absence_sickness_types
+  def absence_sickness_types_new
     driver.find_element(css: 'href="/company_sicknesstypes"').click
-    driver.find_element(: '').click
-    driver.find_element(: '').sendkeys ""
-    driver.find_element(: '').click
+    driver.find_element(css: 'href="/company_sicknesstypes/new"').click
+    driver.find_element(id: 'company_sicknesstype_name').sendkeys "Regression New Test DATE TODAY"
+    driver.find_element(xpath: '//*[@id="new_company_sicknesstype"]/p/input').click
+  end
+
+  def absence_sickness_types_edit
+    driver.find_element(css: 'href="/company_sicknesstypes"').click
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > a > svg').click
+    driver.find_element(id: 'company_sicknesstype_name').sendkeys "Regression EDIT Test DATE TODAY"
+    driver.find_element(xpath: '//*[@id="new_company_sicknesstype"]/p/input').click
+  end
+
+  def absence_sickness_types_cancel_new
+    driver.find_element(css: 'href="/company_sicknesstypes"').click
+    driver.find_element(css: 'href="/company_sicknesstypes/new"').click
+    driver.find_element(id: 'company_sicknesstype_name').sendkeys "Regression New Test DATE TODAY"
+    driver.find_element(css: 'href="/company_sicknesstypes"').click
+  end
+
+  def absence_sickness_types_delete
+    driver.find_element(css: 'href="/company_sicknesstypes"').click
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(5) > td.actions > svg').click
+    driver.find_element(xpath: '//*[@id="delete_company_sickness_type_19556"]/div/div/div[3]/button[2]').click #need to sort out sickness id for test account
+  end
+
+  def absence_sickness_types_search
+    driver.find_element(css: 'href="/company_sicknesstypes"').click
+    driver.find_element(css: 'href="/company_sicknesstypes/new"').click
+    driver.find_element(id: 'company_sicknesstype_name').sendkeys "Regression New Test DATE TODAY"
+    driver.find_element(xpath: '//*[@id="new_company_sicknesstype"]/p/input').click
+  end
+
+  def absence_sickness_types_breadcrumb
+    driver.find_element(css: 'href="/company_sicknesstypes"').click
+    driver.find_element(css: 'href="/company_sicknesstypes/new"').click
+    driver.find_element(id: 'company_sicknesstype_name').sendkeys "Regression New Test DATE TODAY"
+    driver.find_element(css: 'href="/account/picklists"').click
   end
 
 #training categories
-  def training_categories
+  def training_categories_new
     driver.find_element(css: 'href="/company_training_categories"').click
-    driver.find_element(: '').click
-    driver.find_element(: '').sendkeys ""
-    driver.find_element(: '').click
-  end 
+    driver.find_element(css: 'href="/company_training_categories/new"').click
+    driver.find_element(id: 'company_training_category_name').sendkeys "Regression New training Test DATE TODAY"
+    driver.find_element(css: '//*[@id="new_company_training_category"]/p/input').click
+  end
+
+  def training_categories_edit
+    driver.find_element(css: 'href="/company_training_categories"').click
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[1]/td[2]/a[1]/svg').click
+    driver.find_element(id: 'company_training_category_name').sendkeys "Regression EDIT training Test DATE TODAY"
+    driver.find_element(css: '//*[@id="new_company_training_category"]/p/input').click
+  end
+
+  def training_categories_cancel
+    driver.find_element(css: 'href="/company_training_categories"').click
+    driver.find_element(css: 'href="/company_training_categories/new"').click
+    driver.find_element(id: 'company_training_category_name').sendkeys "Regression CANCEL training Test DATE TODAY"
+    driver.find_element(css: 'href="/company_training_categories"').click
+  end
+
+  def training_categories_search
+    driver.find_element(css: 'href="/company_training_categories"').click
+    driver.find_element(css: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "Regression New training Test DATE TODAY"
+    sleep 1
+  end
+
+  def training_categories_breadcrumb
+    driver.find_element(css: 'href="/company_training_categories"').click
+    driver.find_element(css: 'href="/account/picklists"').click
+  end
 
 #training provider
-  def training_providers
+  def training_providers_new
     driver.find_element(css: 'href="/company_training_providers"').click
-    driver.find_element(: '').click
-    driver.find_element(: '').sendkeys ""
-    driver.find_element(: '').click
+    driver.find_element(css: 'href="/company_training_providers/new"').click
+    driver.find_element(id: 'company_training_provider_name').sendkeys "Regression Test NEW DATE TODAY"
+    driver.find_element(xpath: '//*[@id="new_company_training_provider"]/p/input').click
   end 
+
+  def training_providers_edit
+    driver.find_element(css: 'href="/company_training_providers"').click
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[1]/td[3]/a/svg').click
+    driver.find_element(id: 'company_training_provider_name').sendkeys "Regression Test EDIT DATE TODAY"
+    driver.find_element(xpath: '//*[@id="new_company_training_provider"]/p/input').click
+  end 
+
+  def training_providers_cancel_new
+    driver.find_element(css: 'href="/company_training_providers"').click
+    driver.find_element(css: 'href="/company_training_providers/new"').click
+    driver.find_element(id: 'company_training_provider_name').sendkeys "Regression Test CANCEL DATE TODAY"
+    driver.find_element(css: 'href="/company_training_providers"').click
+  end 
+
+  def training_providers_search
+    driver.find_element(css: 'href="/company_training_providers"').click
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "Regression Test NEW DATE TODAY"
+    sleep 1
+  end 
+
+  def training_providers_delete
+    driver.find_element(css: 'href="/company_training_providers"').click
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(3) > td.actions > svg > path').click
+    driver.find_element(xpath: '//*[@id="delete_provider_7749"]/div/div/div[3]/button[2]').click
+  end 
+
+  def training_providers_breadcrumb
+    driver.find_element(css: 'href="/company_training_providers"').click
+    driver.find_element(css: 'href="/company_training_providers/new"').click
+    driver.find_element(css: 'href="/company_training_providers"').click
+  end 
+
+
+#currently HERE
 
 #training types
   def training_types
