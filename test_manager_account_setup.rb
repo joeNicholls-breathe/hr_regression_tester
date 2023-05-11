@@ -259,8 +259,14 @@ class AccountSetup
     AccountConfigExtension.twofa_everyone_on
     AccountConfigExtension.navigate_back_to_settings_breadcrumb
     puts "security 2fa everyone"
-
-
+    AccountConfigExtension.navigate_to_change_what_hr_users_can_do
+    AccountConfigExtension.hr_user_configuration_leave_needs_approval_on
+    AccountConfigExtension.hr_user_configuration_use_gravatar_on
+    AccountConfigExtension.hr_user_configuration_disable_welcome_page_on
+    AccountConfigExtension.hr_user_configuration_use_bradford_factor_on
+    AccountConfigExtension.hr_user_configuration_remind_line_manager_to_give_121_on
+    AccountConfigExtension.hr_user_configuration_grapevine_label
+    AccountConfigExtension.update_hr_settings
     puts "Permissions and approvals - check what people can do - HR user"
 
 
