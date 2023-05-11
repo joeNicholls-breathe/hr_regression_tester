@@ -240,21 +240,58 @@ class AccountSetup
     AccountConfigExtension.performance_management_grievance_outcomes_cancel_new
     AccountConfigExtension.performance_management_one_to_one_types_cancel_new
     puts "Picklist Cancel New"
+    AccountConfigExtension.navigate_to_email_notifications
+    AccountConfigExtension.system_notifications_on
+    puts "Email notification On"
+    AccountConfigExtension.navigate_to_email_notifications
+    AccountConfigExtension.system_notifications_off
+    puts "Email notification Off"
+    AccountConfigExtension.navigate_to_email_notifications
+    AccountConfigExtension.third_party_email_invoice
+    puts "Email notification thid party invoice email"
+    AccountConfigExtension.navigate_to_email_notifications
+    AccountConfigExtension.third_party_email_leave_request_approval
+    puts "Email notification thid party leave requests email"
+    AccountConfigExtension.navigate_to_email_notifications
+    AccountConfigExtension.third_party_email_approved_expenses
+    puts "Email notification thid party expenses email"
+    AccountConfigExtension.navigate_to_two_factor_authentication
+    AccountConfigExtension.twofa_everyone_on
+    AccountConfigExtension.navigate_back_to_settings_breadcrumb
+    puts "security 2fa everyone"
+
+
+    puts "Permissions and approvals - check what people can do - HR user"
+
+
+    puts "Permissions and approvals - check what people can do - Line manager"
+
+
+    puts "Permissions and approvals - check what people can do - employee"
+
+
+    puts "Abscence settings - working patterns (adding new and editing away from the default)"
+
+
+    puts "Abscence settings - holidays allowances"
     
 
-    puts "Email notification set up add/edit/delete/search/breadcrumb"
+    puts "Abscence settings - holidays years"
 
-    puts "Permissions and approvals of HR/Line Managers and employees add/edit/delete/search/breadcrumb" 
+    
+    puts "Abscence settings - company holidays"
+    
 
-    puts "abscence settings - holidays and working patterns (adding new and editing away from the default)"
+    puts "Abscence settings - company blackouts"
 
-    puts "check what people can do - employee"
 
-    puts "check what people can do - Line manager"
+    puts "Integrations - API setup"
 
-    puts "check what people can do - HR user"
 
-    puts "security 2fa"
+    puts "Integrations - calendar subscriptions"
+
+    puts "Integrations - Rotacloud"
+    
 
     puts "add line manager to account"
 
