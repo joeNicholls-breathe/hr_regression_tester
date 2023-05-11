@@ -1286,7 +1286,7 @@ def company_organisation_department_edit
     driver.find_element(id: 'one-to-one-frequency-checkbox').click
   end
 
-  def hr_user_configuration_grapevine_lael
+  def hr_user_configuration_grapevine_label
     driver.find_element(id: 'account_grapevine_label').senkeys "Regression Test add value DATE TODAY"
   end
 
@@ -1297,5 +1297,7 @@ def company_organisation_department_edit
   def cancel_hr_settings
     driver.find_element(css: 'href="/account/settings"').click
   end
+
+  def line_manager_configuration_
 
 end
