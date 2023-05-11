@@ -18,6 +18,58 @@ class AccountConfigExtension < Base
   driver find_element(css: 'href="/account/picklists"').click
   end
 
+  def navigate_to_email_notifications
+    driver.find_element(css: 'href="/account/edit_email_configuration"').click
+  end
+
+  def navigate_to_two_factor_authentication
+    driver.find_element(css: 'href="/account/edit_mfa_configuration"').click
+  end
+
+  def navigate_to_change_what_hr_users_can_do
+    driver.find_element(css: 'href="/account/edit_staff_configuration"').click
+  end
+
+  def navigate_to_change_what_line_managers_can_do
+    driver.find_element(css: 'href="/account/line_manager_permissions"').click
+  end
+
+  def navigate_to_change_what_employees_can_do
+    driver.find_element(css: 'href="/account/edit_employee_configuration"').click
+  end
+
+  def navigate_to_woking_patterns
+    driver.find_element(css: 'href="/account_working_patterns"').click
+  end
+
+  def navigate_to_holiday_allowances
+    driver.find_element(css: 'href="/account_holiday_allowances"').click
+  end
+
+  def navigate_to_holiday_years
+    driver.find_element(css: 'href="/account/holiday_years"').click
+  end
+
+  def navigate_to_company_holidays
+    driver.find_element(css: 'href="/company_holidays"').click
+  end
+
+  def navigate_to_company_blackout
+    driver.find_element(css: 'href="/company_blackouts"').click
+  end
+
+  def navigate_to_api_setup
+    driver.find_element(css: 'href="/account/api_setup"').click
+  end
+
+  def navigate_to_calendar_subscriptions
+    driver.find_element(css: 'href="/account/calendar_syncing"').click
+  end
+
+  def navigate_to_rota_cloud
+    driver.find_element(css: 'href="/account/integrations"').click
+  end
+
 #Account Details data
   def company_details_data_entry_edit
     driver.find_element(class: 'href="/account/edit"').click
@@ -1132,7 +1184,118 @@ def company_organisation_department_edit
     driver.find_element(css: 'href="/company_one_to_one_types"').click
     driver.find_element(css: 'href="/company_one_to_one_types/new"').click
     driver.find_element(id: 'company_one_to_one_type_name').sendkeys "Regression Test BREADCRUMB TODAY"
-  driver.find_element(css: 'href="/company_one_to_one_types"').click
+    driver.find_element(css: 'href="/company_one_to_one_types"').click
+  end
+
+#email notifications
+  def system_notifications_on
+    driver.find_element(id: 'account_email_notifications_enabled_1').click
+  end
+
+  def system_notifications_off
+    driver.find_element(id: 'account_email_notifications_enabled_0').click
+  end
+
+  def third_party_email_invoice
+    driver.find_element(id: 'account_copy_invoice_email_address').sendkeys "reguser@email.com"
+    driver.find_element(xpath: '//*[@id="edit_account_2869"]/p/input').click  #will need to amend to id of company
+  end 
+
+  def third_party_email_leave_request_approval
+    driver.find_element(id: 'account_third_party_holiday_recipient').sendkeys "reguser@email.com"
+    driver.find_element(xpath: '//*[@id="edit_account_2869"]/p/input').click  #will need to amend to id of company
+  end 
+  
+  def third_party_email_approved_expenses
+    driver.find_element(id: 'account_expense_payer_email').sendkeys "reguser@email.com"
+    driver.find_element(xpath: '//*[@id="edit_account_2869"]/p/input').click  #will need to amend to id of company
+  end 
+
+#2FA
+  def twofa_everyone_on
+    driver.find_element(xpath: '/html/body/section[2]/div[3]/div/div/div[3]/div[2]/div/div/label[1]').click
+  end 
+
+  def twofa_everyone_off
+    driver.find_element(xpath: '/html/body/section[2]/div[3]/div/div/div[3]/div[2]/div/div/label[2]').click
+  end 
+
+  def twofa_hrusers_on
+    driver.find_element(xpath: '/html/body/section[2]/div[3]/div/div/div[4]/div[2]/div/div/label[1]').click
+  end
+
+  def twofa_hrusers_off
+    driver.find_element(xpath: '/html/body/section[2]/div[3]/div/div/div[4]/div[2]/div/div/label[2]').click
+  end
+
+  def twofa_line_manager_on
+    driver.find_element(xpath: '/html/body/section[2]/div[3]/div/div/div[5]/div[2]/div/div/label[1]').click
+  end
+
+  def twofa_line_manager_off
+    driver.find_element(xpath: '/html/body/section[2]/div[3]/div/div/div[5]/div[2]/div/div/label[2]').click
+  end
+
+  def twofa_financeusers_on
+    driver.find_element(xpath: '/html/body/section[2]/div[3]/div/div/div[6]/div[2]/div/div/label[1]').click
+  end
+
+  def twofa_financeusers_off
+    driver.find_element(xpath: '/html/body/section[2]/div[3]/div/div/div[6]/div[2]/div/div/label[2]').click
+  end
+
+#hr_user_configuration
+  def hr_user_configuration_leave_needs_approval_on
+    driver.find_element(id: 'account_hr_leave_needs_approval').click
+  end
+
+  def hr_user_configuration_leave_needs_approval_off
+    driver.find_element(: '').click
+  end
+
+  def hr_user_configuration_use_gravatar_on
+    driver.find_element(id: 'account_use_gravatar').click
+  end
+
+  def hr_user_configuration_use_gravatar_off
+    driver.find_element(id: 'account_use_gravatar').click
+  end
+
+  def hr_user_configuration_disable_welcome_page_on
+    driver.find_element(id: 'account_getting_started_finished').click
+  end
+
+  def hr_user_configuration_disable_welcome_page_off
+    driver.find_element(id: 'account_getting_started_finished').click
+  end
+
+  def hr_user_configuration_use_bradford_factor_on
+    driver.find_element(id: 'account_use_bradford_factor').click
+  end
+
+  def hr_user_configuration_use_bradford_factor_off
+    driver.find_element(id: 'account_use_bradford_factor').click
+  end
+
+  def hr_user_configuration_remind_line_manager_to_give_121_on
+    driver.find_element(id: 'one-to-one-frequency-checkbox').click
+    driver.find_element(id: 'account_one_to_one_frequency').sendkeys "5"
+  end
+
+  def hr_user_configuration_remind_line_manager_to_give_121_off
+    driver.find_element(id: 'one-to-one-frequency-checkbox').click
+  end
+
+  def hr_user_configuration_grapevine_lael
+    driver.find_element(id: 'account_grapevine_label').senkeys "Regression Test add value DATE TODAY"
+  end
+
+  def update_hr_settings
+    driver.find_element(class: 'btn btn-success').click
+  end
+
+  def cancel_hr_settings
+    driver.find_element(css: 'href="/account/settings"').click
   end
 
 end
