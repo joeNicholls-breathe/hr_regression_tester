@@ -1604,7 +1604,42 @@ s
     driver.find_element(css: 'href="/account/settings"').click
   end
 
+#working patterns
+  def working_pattern_add
+    driver.find_element(css: 'href="/account_working_patterns/new"').click
+  end
+
+  def working_pattern_set_new_default
+    driver.find_element(: '').click
+  end
+
+  def working_pattern_edit
+    driver.find_element(: '').click
+  end
+
+  def working_pattern_delete
+    driver.find_element(: '').click
+  end
+
+  def working_pattern_search
+    driver.find_element(: '').click
+  end
+
+  def working_pattern_show_inactive
+    driver.find_element(: '').click
+  end
+
+
+#holiday allowance
+#holiday year
+#company holidays
+#company blackouts
+#api setup
+#calendar subscriptions
+#rotacloud
   
+
+
 
 
 end

@@ -42,7 +42,7 @@ class AccountSetup
     puts "switch on xero integration *might want to do this as the buy now journey"
     AccountConfigExtension.navigate_to_picklist
     puts "navigate to picklists"
-    #details
+#details
     AccountConfigExtension.details_contract_types_add
     AccountConfigExtension.details_equipment_types_add
     AccountConfigExtension.details_ethnicities_add
@@ -52,25 +52,25 @@ class AccountSetup
     AccountConfigExtension.details_pronouns_add
     AccountConfigExtension.details_reason_for_leaving_add
     AccountConfigExtension.details_onboarding_tasks_add
-    #absence
+#absence
     AccountConfigExtension.absence_other_leave_reasons_add
     AccountConfigExtension.absence_sickness_types_new
-    #training
+#training
     AccountConfigExtension.training_categories_new
     AccountConfigExtension.training_providers_new
     AccountConfigExtension.training_types_new
-    #company organisation
+#company organisation
     AccountConfigExtension.company_organisation_department_new
     AccountConfigExtension.company_organisation_division_new
-    #pay and benefits
+#pay and benefits
     AccountConfigExtension.pay_and_benefits_additional_payment_types_new
     AccountConfigExtension.pay_and_benefits_benefit_types_new
     AccountConfigExtension.pay_and_benefits_expense_types_new
     AccountConfigExtension.pay_and_benefits_mileage_rates_new
-    #recruitment
+#recruitment
     AccountConfigExtension.recruitment_applicant_stages_new
     AccountConfigExtension.recruitment_applicant_source_new
-    #performance 
+#performance 
     AccountConfigExtension.performance_management_disciplinary_outcomes_new
     AccountConfigExtension.performance_management_grievance_outcomes_new
     AccountConfigExtension.performance_management_one_to_one_types_new
@@ -85,25 +85,25 @@ class AccountSetup
     AccountConfigExtension.details_pronouns_edit
     AccountConfigExtension.details_reason_for_leaving_edit
     AccountConfigExtension.details_onboarding_tasks_edit
-    #absence
+#absence
     AccountConfigExtension.absence_other_leave_reasons_edit
     AccountConfigExtension.absence_sickness_types_edit
-    #training
+#training
     AccountConfigExtension.training_categories_edit
     AccountConfigExtension.training_providers_edit
     AccountConfigExtension.training_types_edit
-    #company organisation
+#company organisation
     AccountConfigExtension.company_organisation_department_edit
     AccountConfigExtension.company_organisation_division_edit
-    #pay and benefits
+#pay and benefits
     AccountConfigExtension.pay_and_benefits_additional_payment_types_edit
     AccountConfigExtension.pay_and_benefits_benefit_types_edit
     AccountConfigExtension.pay_and_benefits_expense_types_edit
     AccountConfigExtension.pay_and_benefits_mileage_rates_edit
-    #recruitment
+#recruitment
     AccountConfigExtension.recruitment_applicant_stages_edit
     AccountConfigExtension.recruitment_applicant_source_edit
-    #performance 
+#performance 
     AccountConfigExtension.performance_management_disciplinary_outcomes_edit
     AccountConfigExtension.performance_management_grievance_outcomes_edit
     AccountConfigExtension.performance_management_one_to_one_types_edit
@@ -118,25 +118,25 @@ class AccountSetup
     AccountConfigExtension.details_pronouns_search
     AccountConfigExtension.details_reason_for_leaving_search
     AccountConfigExtension.details_onboarding_tasks_search
-    #absence
+#absence
     AccountConfigExtension.absence_other_leave_reasons_search
     AccountConfigExtension.absence_sickness_types_search
-    #training
+#training
     AccountConfigExtension.training_categories_search
     AccountConfigExtension.training_providers_search
     AccountConfigExtension.training_types_search
-    #company organisation
+#company organisation
     AccountConfigExtension.company_organisation_department_search
     AccountConfigExtension.company_organisation_division_search
-    #pay and benefits
+#pay and benefits
     AccountConfigExtension.pay_and_benefits_additional_payment_types_search
     AccountConfigExtension.pay_and_benefits_benefit_types_search
     AccountConfigExtension.pay_and_benefits_expense_types_search
     AccountConfigExtension.pay_and_benefits_mileage_rates_search
-    #recruitment
+#recruitment
     AccountConfigExtension.recruitment_applicant_stages_search
     AccountConfigExtension.recruitment_applicant_source_search
-    #performance 
+#performance 
     AccountConfigExtension.performance_management_disciplinary_outcomes_search
     AccountConfigExtension.performance_management_grievance_outcomes_search
     AccountConfigExtension.performance_management_one_to_one_types_search
@@ -151,25 +151,25 @@ class AccountSetup
     AccountConfigExtension.details_pronouns_delete
     AccountConfigExtension.details_reason_for_leaving_delete
     AccountConfigExtension.details_onboarding_tasks_delete
-    #absence
+#absence
     AccountConfigExtension.absence_other_leave_reasons_delete
     AccountConfigExtension.absence_sickness_types_delete
-    #training
+#training
     AccountConfigExtension.training_categories_delete
     AccountConfigExtension.training_providers_delete
     AccountConfigExtension.training_types_delete
-    #company organisation
+#company organisation
     AccountConfigExtension.company_organisation_department_delete
     AccountConfigExtension.company_organisation_division_delete
-    #pay and benefits
+#pay and benefits
     AccountConfigExtension.pay_and_benefits_additional_payment_types_delete
     AccountConfigExtension.pay_and_benefits_benefit_types_delete
     AccountConfigExtension.pay_and_benefits_expense_types_delete
     AccountConfigExtension.pay_and_benefits_mileage_rates_delete
-    #recruitment
+#recruitment
     AccountConfigExtension.recruitment_applicant_stages_delete
     AccountConfigExtension.recruitment_applicant_source_delete
-    #performance 
+#performance 
     AccountConfigExtension.performance_management_disciplinary_outcomes_delete
     AccountConfigExtension.performance_management_grievance_outcomes_delete
     AccountConfigExtension.performance_management_one_to_one_types_delete
@@ -184,25 +184,25 @@ class AccountSetup
     AccountConfigExtension.details_pronouns_breadcrumb
     AccountConfigExtension.details_reason_for_leaving_breadcrumb
     AccountConfigExtension.details_onboarding_tasks_breadcrumb
-    #absence
+#absence
     AccountConfigExtension.absence_other_leave_reasons_breadcrumb
     AccountConfigExtension.absence_sickness_types_breadcrumb
-    #training
+#training
     AccountConfigExtension.training_categories_breadcrumb
     AccountConfigExtension.training_providers_breadcrumb
     AccountConfigExtension.training_types_breadcrumb
-    #company organisation
+#company organisation
     AccountConfigExtension.company_organisation_department_breadcrumb
     AccountConfigExtension.company_organisation_division_breadcrumb
-    #pay and benefits
+#pay and benefits
     AccountConfigExtension.pay_and_benefits_additional_payment_types_breadcrumb
     AccountConfigExtension.pay_and_benefits_benefit_types_breadcrumb
     AccountConfigExtension.pay_and_benefits_expense_types_breadcrumb
     AccountConfigExtension.pay_and_benefits_mileage_rates_breadcrumb
-    #recruitment
+#recruitment
     AccountConfigExtension.recruitment_applicant_stages_breadcrumb
     AccountConfigExtension.recruitment_applicant_source_breadcrumb
-    #performance 
+#performance 
     AccountConfigExtension.performance_management_disciplinary_outcomes_breadcrumb
     AccountConfigExtension.performance_management_grievance_outcomes_breadcrumb
     AccountConfigExtension.performance_management_one_to_one_types_breadcrumb
@@ -217,25 +217,25 @@ class AccountSetup
     AccountConfigExtension.details_pronouns_cancel_new
     AccountConfigExtension.details_reason_for_leaving_cancel_new
     AccountConfigExtension.details_onboarding_tasks_cancel_new
-    #absence
+#absence
     AccountConfigExtension.absence_other_leave_reasons_cancel_new
     AccountConfigExtension.absence_sickness_types_cancel_new
-    #training
+#training
     AccountConfigExtension.training_categories_cancel_new
     AccountConfigExtension.training_providers_cancel_new
     AccountConfigExtension.training_types_cancel_new
-    #company organisation
+#company organisation
     AccountConfigExtension.company_organisation_department_cancel_new
     AccountConfigExtension.company_organisation_division_cancel_new
-    #pay and benefits
+#pay and benefits
     AccountConfigExtension.pay_and_benefits_additional_payment_types_cancel_new
     AccountConfigExtension.pay_and_benefits_benefit_types_cancel_new
     AccountConfigExtension.pay_and_benefits_expense_types_cancel_new
     AccountConfigExtension.pay_and_benefits_mileage_rates_cancel_new
-    #recruitment
+#recruitment
     AccountConfigExtension.recruitment_applicant_stages_cancel_new
     AccountConfigExtension.recruitment_applicant_source_cancel_new
-    #performance 
+#performance 
     AccountConfigExtension.performance_management_disciplinary_outcomes_cancel_new
     AccountConfigExtension.performance_management_grievance_outcomes_cancel_new
     AccountConfigExtension.performance_management_one_to_one_types_cancel_new
@@ -269,7 +269,7 @@ class AccountSetup
     AccountConfigExtension.update_hr_settings
     AccountConfigExtension.navigate_back_to_settings_breadcrumb
     puts "Permissions and approvals - check what people can do - HR user"
-    #view
+#view
     AccountConfigExtension.navigate_to_change_what_line_managers_can_do
     AccountConfigExtension.line_manager_configuration_on_personal_profile_view
     AccountConfigExtension.line_manager_configuration_on_leave_view
@@ -294,7 +294,7 @@ class AccountSetup
     # to return to settings if required - one to think about in the process when we run the script
     AccountConfigExtension.navigate_back_to_settings_breadcrumb
     puts "Permissions and approvals - Line manager can view all employee areas"
-    #manage
+#manage
     AccountConfigExtension.navigate_to_change_what_line_managers_can_do
     AccountConfigExtension.line_manager_configuration_on_profile_manage
     AccountConfigExtension.line_manager_configuration_on_personal_profile_manage
@@ -319,7 +319,7 @@ class AccountSetup
     AccountConfigExtension.line_manager_configurations_update
     puts "Permissions and approvals - Line manager can manage all employee areas"
     AccountConfigExtension.navigate_back_to_settings_breadcrumb
-    #delete
+#delete
     AccountConfigExtension.navigate_to_change_what_line_managers_can_do
     AccountConfigExtension.line_manager_configuration_on_profile_delete_docs_only
     AccountConfigExtension.line_manager_configuration_on_leave_delete
@@ -342,7 +342,7 @@ class AccountSetup
     AccountConfigExtension.line_manager_configurations_update
     puts "Permissions and approvals - Line manager can delete all employee areas"
     AccountConfigExtension.navigate_back_to_settings_breadcrumb
-    #Add line manager view of peoples, people and bank details
+#Add line manager view of peoples, people and bank details
     AccountConfigExtension.navigate_to_change_what_line_managers_can_do
     AccountConfigExtension.line_manager_able_to_see_their_peoples_people
     AccountConfigExtension.line_manage_able_to_see_their_peoples_bank_details
@@ -365,30 +365,42 @@ class AccountSetup
     AccountConfigExtension.employee_congifuration_update
     AccountConfigExtension.navigate_back_to_settings_breadcrumb
     puts "Permissions and approvals - Employee check what people can see and do"
-
-
+    
+    AccountConfigExtension.navigate_to_woking_patterns
     puts "Abscence settings - working patterns (adding new and editing away from the default)"
+    AccountConfigExtension.navigate_back_to_settings_breadcrumb
 
-
+    AccountConfigExtension.navigate_to_holiday_allowances
     puts "Abscence settings - holidays allowances"
-    
+    AccountConfigExtension.navigate_back_to_settings_breadcrumb
 
+    AccountConfigExtension.navigate_to_holiday_years
     puts "Abscence settings - holidays years"
+    AccountConfigExtension.navigate_back_to_settings_breadcrumb
 
-    
+    AccountConfigExtension.navigate_to_company_holidays
     puts "Abscence settings - company holidays"
-    
+    AccountConfigExtension.navigate_back_to_settings_breadcrumb
 
+    AccountConfigExtension.navigate_to_company_blackout
     puts "Abscence settings - company blackouts"
+    AccountConfigExtension.navigate_back_to_settings_breadcrumb
 
-
+    AccountConfigExtension.navigate_to_api_setup
     puts "Integrations - API setup"
+    AccountConfigExtension.navigate_back_to_settings_breadcrumb
 
-
+    AccountConfigExtension.navigate_to_calendar_subscriptions
     puts "Integrations - calendar subscriptions"
+    AccountConfigExtension.navigate_back_to_settings_breadcrumb
 
+    AccountConfigExtension.navigate_to_rota_cloud
     puts "Integrations - Rotacloud"
+    AccountConfigExtension.navigate_back_to_settings_breadcrumb
     
+
+
+
 
     puts "add line manager to account"
 
