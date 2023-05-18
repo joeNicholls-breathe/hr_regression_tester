@@ -108,39 +108,6 @@ class AccountSetup
     AccountConfigExtension.performance_management_grievance_outcomes_edit
     AccountConfigExtension.performance_management_one_to_one_types_edit
     puts "Picklist details edit"
-    AccountConfigExtension.details_contract_types_delete
-    AccountConfigExtension.details_equipment_types_delete
-    AccountConfigExtension.details_ethnicities_delete
-    AccountConfigExtension.details_genders_delete
-    AccountConfigExtension.details_id_documents_types_delete
-    AccountConfigExtension.details_kudos_types_delete
-    AccountConfigExtension.details_notice_periods_delete
-    AccountConfigExtension.details_pronouns_delete
-    AccountConfigExtension.details_reason_for_leaving_delete
-    AccountConfigExtension.details_onboarding_tasks_delete
-    #absence
-    AccountConfigExtension.absence_other_leave_reasons_delete
-    AccountConfigExtension.absence_sickness_types_delete
-    #training
-    AccountConfigExtension.training_categories_delete
-    AccountConfigExtension.training_providers_delete
-    AccountConfigExtension.training_types_delete
-    #company organisation
-    AccountConfigExtension.company_organisation_department_delete
-    AccountConfigExtension.company_organisation_division_delete
-    #pay and benefits
-    AccountConfigExtension.pay_and_benefits_additional_payment_types_delete
-    AccountConfigExtension.pay_and_benefits_benefit_types_delete
-    AccountConfigExtension.pay_and_benefits_expense_types_delete
-    AccountConfigExtension.pay_and_benefits_mileage_rates_delete
-    #recruitment
-    AccountConfigExtension.recruitment_applicant_stages_delete
-    AccountConfigExtension.recruitment_applicant_source_delete
-    #performance 
-    AccountConfigExtension.performance_management_disciplinary_outcomes_delete
-    AccountConfigExtension.performance_management_grievance_outcomes_delete
-    AccountConfigExtension.performance_management_one_to_one_types_delete
-    Puts "Picklist details delete" 
     AccountConfigExtension.details_contract_types_search
     AccountConfigExtension.details_equipment_types_search
     AccountConfigExtension.details_ethnicities_search
@@ -174,6 +141,39 @@ class AccountSetup
     AccountConfigExtension.performance_management_grievance_outcomes_search
     AccountConfigExtension.performance_management_one_to_one_types_search
     Puts "Picklist details search"
+    AccountConfigExtension.details_contract_types_delete
+    AccountConfigExtension.details_equipment_types_delete
+    AccountConfigExtension.details_ethnicities_delete
+    AccountConfigExtension.details_genders_delete
+    AccountConfigExtension.details_id_documents_types_delete
+    AccountConfigExtension.details_kudos_types_delete
+    AccountConfigExtension.details_notice_periods_delete
+    AccountConfigExtension.details_pronouns_delete
+    AccountConfigExtension.details_reason_for_leaving_delete
+    AccountConfigExtension.details_onboarding_tasks_delete
+    #absence
+    AccountConfigExtension.absence_other_leave_reasons_delete
+    AccountConfigExtension.absence_sickness_types_delete
+    #training
+    AccountConfigExtension.training_categories_delete
+    AccountConfigExtension.training_providers_delete
+    AccountConfigExtension.training_types_delete
+    #company organisation
+    AccountConfigExtension.company_organisation_department_delete
+    AccountConfigExtension.company_organisation_division_delete
+    #pay and benefits
+    AccountConfigExtension.pay_and_benefits_additional_payment_types_delete
+    AccountConfigExtension.pay_and_benefits_benefit_types_delete
+    AccountConfigExtension.pay_and_benefits_expense_types_delete
+    AccountConfigExtension.pay_and_benefits_mileage_rates_delete
+    #recruitment
+    AccountConfigExtension.recruitment_applicant_stages_delete
+    AccountConfigExtension.recruitment_applicant_source_delete
+    #performance 
+    AccountConfigExtension.performance_management_disciplinary_outcomes_delete
+    AccountConfigExtension.performance_management_grievance_outcomes_delete
+    AccountConfigExtension.performance_management_one_to_one_types_delete
+    Puts "Picklist details delete"
     AccountConfigExtension.details_contract_types_breadcrumb
     AccountConfigExtension.details_equipment_types_breadcrumb
     AccountConfigExtension.details_ethnicities_breadcrumb
@@ -267,13 +267,104 @@ class AccountSetup
     AccountConfigExtension.hr_user_configuration_remind_line_manager_to_give_121_on
     AccountConfigExtension.hr_user_configuration_grapevine_label
     AccountConfigExtension.update_hr_settings
+    AccountConfigExtension.navigate_back_to_settings_breadcrumb
     puts "Permissions and approvals - check what people can do - HR user"
-
-
-    puts "Permissions and approvals - check what people can do - Line manager"
-
-
-    puts "Permissions and approvals - check what people can do - employee"
+    #view
+    AccountConfigExtension.navigate_to_change_what_line_managers_can_do
+    AccountConfigExtension.line_manager_configuration_on_personal_profile_view
+    AccountConfigExtension.line_manager_configuration_on_leave_view
+    AccountConfigExtension.line_manager_configuration_on_adjustments_and_toil_view
+    AccountConfigExtension.line_manager_configuration_on_sickness_view
+    AccountConfigExtension.line_manager_configuration_on_training_view
+    AccountConfigExtension.line_manager_configuration_on_one_to_ones_view
+    AccountConfigExtension.line_manager_configuration_on_objectives_view
+    AccountConfigExtension.line_manager_configuration_on_deliverables_view
+    AccountConfigExtension.line_manager_configuration_on_job_details_view
+    AccountConfigExtension.line_manager_configuration_on_remuneration_view
+    AccountConfigExtension.line_manager_configuration_on_emergency_contacts_view
+    AccountConfigExtension.line_manager_configuration_on_medical_facts_view
+    AccountConfigExtension.line_manager_configuration_on_personal_history_view
+    AccountConfigExtension.line_manager_configuration_on_notes_view
+    AccountConfigExtension.line_manager_configuration_on_equipment_view
+    AccountConfigExtension.line_manager_configuration_on_id_documents_view
+    AccountConfigExtension.line_manager_configuration_on_dbs_checks_view
+    AccountConfigExtension.line_manager_configuration_on_grievances_and_disciplinaries_view
+    AccountConfigExtension.line_manager_configuration_on_time_logs_view
+    AccountConfigExtension.line_manager_configurations_update
+    # to return to settings if required - one to think about in the process when we run the script
+    AccountConfigExtension.navigate_back_to_settings_breadcrumb
+    puts "Permissions and approvals - Line manager can view all employee areas"
+    #manage
+    AccountConfigExtension.navigate_to_change_what_line_managers_can_do
+    AccountConfigExtension.line_manager_configuration_on_profile_manage
+    AccountConfigExtension.line_manager_configuration_on_personal_profile_manage
+    AccountConfigExtension.line_manager_configuration_on_leave_manage
+    AccountConfigExtension.line_manager_configuration_on_adjustments_and_toil_manage
+    AccountConfigExtension.line_manager_configuration_on_sickness_manage
+    AccountConfigExtension.line_manager_configuration_on_training_manage
+    AccountConfigExtension.line_manager_configuration_on_one_to_ones_manage
+    AccountConfigExtension.line_manager_configuration_on_objectives_manage
+    AccountConfigExtension.line_manager_configuration_on_deliverables_manage
+    AccountConfigExtension.line_manager_configuration_on_job_details_manage
+    AccountConfigExtension.line_manager_configuration_on_remuneration_manage
+    AccountConfigExtension.line_manager_configuration_on_emergency_contacts_manage
+    AccountConfigExtension.line_manager_configuration_on_medical_facts_manage
+    AccountConfigExtension.line_manager_configuration_on_personal_history_manage
+    AccountConfigExtension.line_manager_configuration_on_notes_manage
+    AccountConfigExtension.line_manager_configuration_on_equipment_manage
+    AccountConfigExtension.line_manager_configuration_on_id_documents_manage
+    AccountConfigExtension.line_manager_configuration_on_dbs_checks_manage
+    AccountConfigExtension.line_manager_configuration_on_grievances_and_disciplinaries_manage
+    AccountConfigExtension.line_manager_configuration_on_time_logs_manage
+    AccountConfigExtension.line_manager_configurations_update
+    puts "Permissions and approvals - Line manager can manage all employee areas"
+    AccountConfigExtension.navigate_back_to_settings_breadcrumb
+    #delete
+    AccountConfigExtension.navigate_to_change_what_line_managers_can_do
+    AccountConfigExtension.line_manager_configuration_on_profile_delete_docs_only
+    AccountConfigExtension.line_manager_configuration_on_leave_delete
+    AccountConfigExtension.line_manager_configuration_on_sickness_delete
+    AccountConfigExtension.line_manager_configuration_on_training_delete
+    AccountConfigExtension.line_manager_configuration_on_one_to_ones_delete
+    AccountConfigExtension.line_manager_configuration_on_objectives_delete
+    AccountConfigExtension.line_manager_configuration_on_deliverables_delete
+    AccountConfigExtension.line_manager_configuration_on_job_details_delete
+    AccountConfigExtension.line_manager_configuration_on_remuneration_delete
+    AccountConfigExtension.line_manager_configuration_on_emergency_contacts_delete
+    AccountConfigExtension.line_manager_configuration_on_medical_facts_delete
+    AccountConfigExtension.line_manager_configuration_on_personal_history_delete
+    AccountConfigExtension.line_manager_configuration_on_notes_delete
+    AccountConfigExtension.line_manager_configuration_on_equipment_delete
+    AccountConfigExtension.line_manager_configuration_on_id_documents_delete
+    AccountConfigExtension.line_manager_configuration_on_dbs_checks_delete
+    AccountConfigExtension.line_manager_configuration_on_grievances_and_disciplinaries_delete
+    AccountConfigExtension.line_manager_configuration_on_time_logs_delete
+    AccountConfigExtension.line_manager_configurations_update
+    puts "Permissions and approvals - Line manager can delete all employee areas"
+    AccountConfigExtension.navigate_back_to_settings_breadcrumb
+    #Add line manager view of peoples, people and bank details
+    AccountConfigExtension.navigate_to_change_what_line_managers_can_do
+    AccountConfigExtension.line_manager_able_to_see_their_peoples_people
+    AccountConfigExtension.line_manage_able_to_see_their_peoples_bank_details
+    AccountConfigExtension.line_manager_configurations_update
+    puts "Permissions and approvals - Line manager has all access to personal profile details"
+    AccountConfigExtension.navigate_to_change_what_employees_can_do
+    AccountConfigExtension.employee_congifuration_what_can_see_remunerations
+    AccountConfigExtension.employee_congifuration_what_can_see_performance_metrics
+    AccountConfigExtension.employee_congifuration_what_can_see_custom_fields
+    AccountConfigExtension.employee_congifuration_what_can_see_directory
+    AccountConfigExtension.employee_congifuration_what_can_see_calendar
+    AccountConfigExtension.employee_congifuration_what_can_see_kudus_leaderboard
+    AccountConfigExtension.employee_congifuration_what_can_see_location_booking_report
+    AccountConfigExtension.employee_congifuration_what_can_do_update_profile_picture
+    AccountConfigExtension.employee_congifuration_what_can_do_request_toil
+    AccountConfigExtension.employee_congifuration_what_can_do_report_sickness
+    AccountConfigExtension.employee_congifuration_what_can_do_request_one_to_ones
+    AccountConfigExtension.employee_congifuration_what_can_do_enter_traiining_record
+    AccountConfigExtension.employee_congifuration_what_can_do_booking_locations
+    AccountConfigExtension.employee_congifuration_update
+    AccountConfigExtension.navigate_back_to_settings_breadcrumb
+    puts "Permissions and approvals - Employee check what people can see and do"
 
 
     puts "Abscence settings - working patterns (adding new and editing away from the default)"
