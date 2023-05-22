@@ -9,7 +9,8 @@ module Settings
         login_password: 'Password1',
         admin_email: 'admin@hr-regression.com',
         line_manager_email: 'line@hr-regression.com',
-        employee_email: 'employee@hr-regression.com'
+        employee_email: 'employee@hr-regression.com',
+        setup_acc_email: 'admin@auto-reg.co.uk'
       }
     }
   end
