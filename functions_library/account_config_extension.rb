@@ -74,7 +74,7 @@ class AccountConfigExtension < Base
   def company_details_data_entry_edit
     driver.find_element(class: 'href="/account/edit"').click
     #company address
-    driver.find_element(id: 'account_name').sendkeys "Regression Account Ltd"
+    driver.find_element(id: 'account_name').sendkeys "Regression Setup Account Ltd"
     driver.find_element(id: 'account_address1').sendkeys "Testing House"
     driver.find_element(id: 'account_address2').sendkeys "Testing Lane"
     driver.find_element(id: 'account_address3').sendkeys "Testing Town"
@@ -93,8 +93,8 @@ class AccountConfigExtension < Base
     driver.find_element(id: 'account_charity_name').sendkeys "Regression Account Ltd"
     driver.find_element(id: 'account_subscription_attributes_charity_number').sendkeys "4354129"
     driver.find_element(id: 'account_subscription_attributes_registered_charity_name').sendkeys "Regression Account Ltd"
-    driver.find_element(id: 'account_subscription_attributes_charity_sort_code').sendkeys ""
-    driver.find_element(id: 'account_subscription_attributes_charity_bank_account_number').sendkeys ""
+    driver.find_element(id: 'account_subscription_attributes_charity_sort_code').sendkeys "04-00-04"
+    driver.find_element(id: 'account_subscription_attributes_charity_bank_account_number').sendkeys "12345678"
     #domain
     driver.find_element(id: 'account_domain').sendkeys "regressionaccountdomain"
     driver.find_element(id: 'account-name-change-disclaimer').click
@@ -268,7 +268,7 @@ class AccountConfigExtension < Base
   def details_ethnicities_edit
     driver.find_element(css: 'href="/company_ethnicities"').click
     driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[1]/td[2]/a[1]').click
-    driver.find_element(xpath: '//*[@id="delete_ethnicity_39775"]/div/div/div[3]/button[2]').click
+    driver.find_element(xpath: '//*[@id="delete_ethnicity"]/div/div/div[3]/button[2]').click
   end
 
   def details_ethnicities_delete
@@ -287,7 +287,7 @@ class AccountConfigExtension < Base
     driver.find_element(css: 'href="/genders"').click
     driver.find_element(css: 'href="/genders/new"').click
     driver.find_element(id: 'gender_name').sendkeys "Other"
-    driver.find_element(css: '#edit_gender_5833 > p > input').click
+    driver.find_element(css: '#edit_gender > p > input').click
   end
 
 #gender
@@ -295,7 +295,7 @@ class AccountConfigExtension < Base
     driver.find_element(css: 'href="/genders"').click
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr.odd > td.actions > a').click
     driver.find_element(id: 'gender_name').sendkeys "Other"
-    driver.find_element(css: '#edit_gender_5833 > p > input').click
+    driver.find_element(css: '#edit_gender > p > input').click
   end
 
   def details_genders_return_breadcrumb
@@ -347,7 +347,7 @@ class AccountConfigExtension < Base
 
   def details_kudos_types_edit
     driver.find_element(css: 'href="/company_kudos_types"').click
-    driver.find_element(:'//*[@id="DataTables_Table_0"]/tbody/tr[1]/td[3]/a[1]').click
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[1]/td[3]/a[1]').click
     driver.find_element(id:'company_kudos_type_name').sendkeys "Regression test edit TODAY DATE"
     driver.find_element(xpath:'//*[@id="new_company_kudos_type"]/p/input').click
   end
@@ -355,12 +355,12 @@ class AccountConfigExtension < Base
   def details_kudos_types_delete
     driver.find_element(css: 'href="/company_kudos_types"').click
     driver.find_element(xpath:'//*[@id="DataTables_Table_0"]/tbody/tr[3]/td[3]/svg').click
-    driver.find_element(xpath:'//*[@id="delete_company_kudos_type_14155"]/div/div/div[3]/button[2]').click
+    driver.find_element(xpath:'//*[@id="delete_company_kudos_type"]/div/div/div[3]/button[2]').click
   end
 
   def details_kudos_types_search
     driver.find_element(css: 'href="/company_kudos_types"').click
-    driver.find_element(:'//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "Awesome service"
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "Awesome service"
   end
 
   def details_kudos_types_breadcrumb
@@ -399,7 +399,7 @@ class AccountConfigExtension < Base
   def details_notice_periods_breadcrumb
     driver.find_element(css: 'href="/company_noticeperiods"').click
     driver.find_element(css:'href="/company_noticeperiods/new"').click
-    driver.find_element(xpath:'//*[@id="delete_noticeperiod_28337"]/div/div/div[3]/button[2]').click
+    driver.find_element(xpath:'//*[@id="delete_noticeperiod"]/div/div/div[3]/button[2]').click
   end
 
 #pronouns
@@ -547,7 +547,7 @@ class AccountConfigExtension < Base
   def absence_other_leave_reasons_delete
     driver.find_element(css: 'href="/company_leave_reasons"').click
     driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[4]/svg').click
-    driver.find_element(css: '#delete_company_leave_reason_39573 > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm').click #will need to work out to make generic without id
+    driver.find_element(css: '#delete_company_leave_reason > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm').click #will need to work out to make generic without id
   end
   
   def absence_other_leave_reasons_search
@@ -592,7 +592,7 @@ class AccountConfigExtension < Base
   def absence_sickness_types_delete
     driver.find_element(css: 'href="/company_sicknesstypes"').click
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(5) > td.actions > svg').click
-    driver.find_element(xpath: '//*[@id="delete_company_sickness_type_19556"]/div/div/div[3]/button[2]').click #need to sort out sickness id for test account
+    driver.find_element(xpath: '//*[@id="delete_company_sickness_type"]/div/div/div[3]/button[2]').click #need to sort out sickness id for test account
   end
 
   def absence_sickness_types_search
@@ -673,7 +673,7 @@ class AccountConfigExtension < Base
   def training_providers_delete
     driver.find_element(css: 'href="/company_training_providers"').click
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(3) > td.actions > svg > path').click
-    driver.find_element(xpath: '//*[@id="delete_provider_7749"]/div/div/div[3]/button[2]').click
+    driver.find_element(xpath: '//*[@id="delete_provider"]/div/div/div[3]/button[2]').click
   end 
 
   def training_providers_breadcrumb
@@ -707,7 +707,7 @@ class AccountConfigExtension < Base
   def training_types_delete
     driver.find_element(css: 'href="/company_training_types"').click
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(4) > td.actions > svg').click
-    driver.find_element(xpath: '//*[@id="delete_type_17139"]/div/div/div[3]/button[2]').click
+    driver.find_element(xpath: '//*[@id="delete_type"]/div/div/div[3]/button[2]').click
   end 
 
   def training_types_breadcrumb
@@ -748,7 +748,7 @@ class AccountConfigExtension < Base
   def company_organisation_department_delete
     driver.find_element(css: 'href="/company_departments"').click  
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > svg').click
-    driver.find_element(xpath: '//*[@id="delete_department_22750"]/div/div/div[3]/button[2]').click
+    driver.find_element(xpath: '//*[@id="delete_department"]/div/div/div[3]/button[2]').click
   end
 
   def company_organisation_department_breadcrumb
@@ -789,7 +789,7 @@ class AccountConfigExtension < Base
   def company_organisation_division_delete
     driver.find_element(css: 'href="/company_divisions"').click
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr.even > td.actions > svg').click
-    driver.find_element(xpath: '//*[@id="delete_division_648"]/div/div/div[3]/button[2]').click
+    driver.find_element(xpath: '//*[@id="delete_division"]/div/div/div[3]/button[2]').click
   end
 
   def company_organisation_division_breadcrumb
@@ -830,7 +830,7 @@ class AccountConfigExtension < Base
   def pay_and_benefits_additional_payment_types_delete
     driver.find_element(css: 'href="/company_additional_payment_types"').click
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(3) > td.actions > svg').click
-    driver.find_element(xpath: '//*[@id="delete_company_additional_payment_type_11395"]/div/div/div[3]/button[2]').click
+    driver.find_element(xpath: '//*[@id="delete_company_additional_payment_type"]/div/div/div[3]/button[2]').click
   end
 
   def pay_and_benefits_additional_payment_types_breadcrumb
@@ -872,7 +872,7 @@ class AccountConfigExtension < Base
   def pay_and_benefits_benefit_types_delete
     driver.find_element(css: 'href="/company_benefit_types"').click
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(4) > td.actions > svg').click
-    driver.find_element(xpath: '//*[@id="delete_company_benefit_type_11320"]/div/div/div[3]/button[2]').click
+    driver.find_element(xpath: '//*[@id="delete_company_benefit_type"]/div/div/div[3]/button[2]').click
   end
 
   def pay_and_benefits_benefit_types_breadcrumb
@@ -917,7 +917,7 @@ class AccountConfigExtension < Base
   def pay_and_benefits_expense_types_delete
     driver.find_element(css: 'href="/company_expense_types"').click
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(6) > td.actions > svg').click
-    driver.find_element(xpath: '//*[@id="company_expense_type_22634"]/div/div/div[3]/button[2]').click
+    driver.find_element(xpath: '//*[@id="company_expense_type"]/div/div/div[3]/button[2]').click
   end
 
   def pay_and_benefits_expense_types_search
@@ -957,7 +957,7 @@ class AccountConfigExtension < Base
   def pay_and_benefits_mileage_rates_delete
     driver.find_element(css: 'href="/company_mileage_rates"').click
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr.odd > td.actions > svg').click
-    driver.find_element(xpath: '//*[@id="company_mileage_rate_14"]/div/div/div[3]/button[2]').click
+    driver.find_element(xpath: '//*[@id="company_mileage_rate"]/div/div/div[3]/button[2]').click
   end
 
   def pay_and_benefits_mileage_rates_search
@@ -1018,7 +1018,7 @@ class AccountConfigExtension < Base
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > a > svg').click
     driver.find_element(id: 'applicant_stage_email_subject').sendkeys "Regression Test EDIT applicant email DATE TODAY"
     driver.find_element(id: 'applicant_stage_email_text').sendkeys "Dear Applicant, REgression test has updateed the body of this email DATE TODAY"
-    driver.find_element(xpath: '//*[@id="edit_applicant_stage_9927"]/p/input').click
+    driver.find_element(xpath: '//*[@id="edit_applicant_stage"]/p/input').click
   end
 
   def recruitment_applicant_email_edit_cancel
@@ -1026,7 +1026,7 @@ class AccountConfigExtension < Base
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > a > svg').click
     driver.find_element(id: 'applicant_stage_email_subject').sendkeys "Regression Test EDIT applicant email DATE TODAY"
     driver.find_element(id: 'applicant_stage_email_text').sendkeys "Dear Applicant, REgression test has updateed the body of this email DATE TODAY"
-    driver.find_element(xpath: '//*[@id="edit_applicant_stage_9927"]/p/a').click
+    driver.find_element(xpath: '//*[@id="edit_applicant_stage"]/p/a').click
   end
 
 #applicant sources
@@ -1171,7 +1171,7 @@ class AccountConfigExtension < Base
   def performance_management_one_to_one_types_delete
     driver.find_element(css: 'href="/company_one_to_one_types"').click
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(3) > td.actions > svg').click
-    driver.find_element(xpath: '//*[@id="delete_type_22634"]/div/div/div[3]/button[2]').click
+    driver.find_element(xpath: '//*[@id="delete_type"]/div/div/div[3]/button[2]').click
   end
   
   def performance_management_one_to_one_types_search
@@ -1604,7 +1604,87 @@ s
     driver.find_element(css: 'href="/account/settings"').click
   end
 
+#working patterns
+  def working_pattern_add
+    driver.find_element(css: 'href="/account_working_patterns/new"').click
+    driver.find_element(id: 'working_pattern_name').sendkeys "Reggression Add Working Pattern"
+    driver.find_element(id: 'working_pattern_mon_hr_hours').sendkeys "7"
+    driver.find_element(id: 'working_pattern_mon_hr_minutes').sendkeys "30"
+    driver.find_element(id: 'working_pattern_tue_hr_hours').sendkeys "7"
+    driver.find_element(id: 'working_pattern_tue_hr_minutes').sendkeys "30"
+    driver.find_element(id: 'working_pattern_wed_hr_hours').sendkeys "7"
+    driver.find_element(id: 'working_pattern_wed_hr_minutes').sendkeys "30"
+    driver.find_element(id: 'working_pattern_thu_hr_hours').sendkeys "7"
+    driver.find_element(id: 'working_pattern_thu_hr_minutes').sendkeys "30"
+    driver.find_element(id: 'working_pattern_fri_hr_hours').sendkeys "7"
+    driver.find_element(id: 'working_pattern_fri_hr_minutes').sendkeys "30"
+    driver.find_element(id: 'working_pattern_sat_hr_hours').sendkeys "7"
+    driver.find_element(id: 'working_pattern_sat_hr_minutes').sendkeys "30"
+    driver.find_element(id: 'working_pattern_sun_hr_hours').sendkeys "7"
+    driver.find_element(id: 'working_pattern_sun_hr_minutes').sendkeys "30"
+    driver.find_element(xpath: '//*[@id="new_working_pattern"]/p/input').click
+  end
+
+  def working_pattern_set_new_default
+    drop = driver.find_element(id:'account_working_pattern_id')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:value, "3936")
+    driver.find_element(xpath: '/html/body/section[2]/form[2]/div/div[2]/input').click
+  end
+
+  def working_pattern_edit
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[5]/a[1]/svg').click
+    driver.find_element(id: 'working_pattern_sun_hr_hours').sendkeys "10"
+    driver.find_element(xpath: '//*[@id="edit_working_pattern"]/p/input').click
+  end
+
+  def working_pattern_delete
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[5]/svg/path').click
+    driver.find_element(xpath: '//*[@id="delete_pattern"]/div/div/div[3]/button[2]:').click
+  end
+
+  def working_pattern_search
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "Auto Regression"
+    sleep 1
+  end
+
+  def working_pattern_show_inactive
+    driver.find_element(id: 'show-inactive-patterns').click
+  end
+
+#holiday allowance
+  def holiday_allowances_add
+    driver.find_element(: '').click
+    driver.find_element(: '').sendkeys ""
+  end
+
+  def holiday_allowances_edit
+    driver.find_element(: '').click
+    driver.find_element(: '').sendkeys ""
+  end
+
+  def holiday_allowances_select_default
+    driver.find_element(: '').click
+    driver.find_element(: '').sendkeys ""
+  end
+
+  def holiday_allowances_delete
+    driver.find_element(: '').click
+    driver.find_element(: '').sendkeys ""
+  end
+
+
+
+
+#holiday year
+#company holidays
+#company blackouts
+#api setup
+#calendar subscriptions
+#rotacloud
   
+
+
 
 
 end
