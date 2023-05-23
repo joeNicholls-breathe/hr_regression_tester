@@ -5,6 +5,10 @@ class AppNavigationExtensionManager < Base
     driver.find_element(xpath: '//*[@id="tab-my-dashboard-link"]/span').click
   end
 
+  def navigate_to_dashboard
+    driver.find_element(css: 'href="/"').click
+  end
+
   def navigate_to_people_screen_pill
     driver.find_element(xpath: '//*[@id="tab-hr-dashboard"]/div[1]/div[2]/a[1]').click
   end

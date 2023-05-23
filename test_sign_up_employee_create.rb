@@ -11,7 +11,7 @@ class TestSignUp
 
   def initialize
     @driver = Selenium::WebDriver.for :chrome
-    #driver.manage.timeout.implicit_wait = 3
+    driver.manage.timeouts.implicit_wait = 3
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -27,29 +27,29 @@ class TestSignUp
     sleep 2
     BulkImportExtension.new(driver).navigate_to_bulk_upload
     puts "Navigate to bulk upload form"
-    sleep 2
-    BulkImportExtension.bulk_upload_employee_full
-    puts "Upload full import spreadsheet"
-    sleep 2
-    AppNavigationExtensionManager.navigate_to_employee_dashboard_as_manager
+    sleep 1
+    #BulkImportExtension.new(driver).bulk_upload_employee_full
+    #puts "Upload full import spreadsheet"
+    #sleep 2
+    AppNavigationExtensionManager.new(driver).navigate_to_dashboard
     puts "Return to Manager Dashboard"
     sleep 2
-    AppNavigationExtensionManager.navigate_to_people_screen
+    AppNavigationExtensionManager.new(driver).navigate_to_people_screen
     puts "Navigate to People screen via pill"
     sleep 2
-    CreateEmployeeExtension.create_employee_pending_starter_from_people_page
+    CreateEmployeeExtension.new(driver).create_employee_pending_starter_from_people_page
     puts "Create new employee via people page, that will start tomorrow"
     sleep 2
-    AppNavigationExtensionManager.navigate_to_employee_dashboard_as_manager
+    AppNavigationExtensionManager.new(driver).navigate_to_employee_dashboard_as_manager
     puts "Return to Manager Dashboard"
     sleep 2
-    TestPageCheck.check_pending_starters
+    TestPageCheck.new(driver).check_pending_starters
     puts "Check pending starters on dashboard are present"
     sleep 2
 
 
 
-
+    sleep 10
     driver.close
   end
 end
