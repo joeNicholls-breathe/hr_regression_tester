@@ -2,7 +2,7 @@ require File.expand_path('../base.rb', __FILE__)
 require 'Benchmark'
 
 class NavigateBrowserExtension < Base
-  def breathe_login
+  def breathe_login_with_timer
     timer = Benchmark.measure do
       driver.navigate.to('https://login.breathehrstaging.com/login')
       puts 'Test Navigate to URl'
@@ -21,4 +21,9 @@ class NavigateBrowserExtension < Base
   def cookie_modal_accept
     driver.find_element(id:'CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll').click
   end
+
+  def breathe_login
+    driver.navigate.to('https://login.breathehrstaging.com/login')
+  end
+  
 end

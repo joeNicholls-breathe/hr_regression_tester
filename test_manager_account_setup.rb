@@ -12,20 +12,25 @@ class AccountSetup
   def initialize
     @driver = Selenium::WebDriver.for :chrome
     Selenium::WebDriver.logger.level = :info
+    driver.manage.timeouts.implicit_wait = 5
   end
 
   def test_account_setup
-    LoginExtension.login_admin
-    LoginAppExtension.select_hr
+    NavigateBrowserExtension.new(driver).breathe_login
+    puts "navigate to breathe login url"
+    LoginExtension.new(driver).login_setup_acc_admin
+    sleep 1
+    LoginAppExtension.new(driver).select_hr
+    sleep 1
     puts "login"
-    AppNavigationExtensionManager.navigate_to_settings
+    AppNavigationExtensionManager.new(driver).navigate_to_settings
     puts "navigate to configuration settings"
-    AccountConfigExtension.navigate_to_company_details
-    AccountConfigExtension.company_details_data_entry_edit
-    AccountConfigExtension.navigate_back_to_settings_breadcrumb
+    AccountConfigExtension.new(driver).navigate_to_company_details
+    AccountConfigExtension.new(driver).company_details_data_entry_edit
+    AccountConfigExtension.new(driver).navigate_back_to_settings_breadcrumb
     puts "enter company details"
-    AccountConfigExtension.navigate_to_modules_chargable
-    AccountConfigExtension.modules_chargable_switch_on
+    AccountConfigExtension.new(driver).navigate_to_modules_chargable
+    AccountConfigExtension.new(driver).modules_chargable_switch_on
     puts "switch on modules - chargable"
     AccountConfigExtension.navigate_to_modules_free
     AccountConfigExtension.modules_free_switch_on
@@ -409,7 +414,7 @@ class AccountSetup
     puts "assign permissions to employees"
 
     puts "assign line managers to employees"
-  
+    sleep 10
     driver.close
   end
 end
