@@ -6,13 +6,12 @@ require './functions_library/login_app_extension.rb'
 require './functions_library/navigate_browser_extension.rb'
 require './functions_library/navigate_around_app_manager.rb'
 
-class AccountSetup
+class AccountSetup < Base
   attr_accessor :driver
 
   def initialize
     @driver = Selenium::WebDriver.for :chrome
     Selenium::WebDriver.logger.level = :info
-    driver.manage.timeouts.implicit_wait = 5
   end
 
   def test_account_setup
