@@ -1,9 +1,9 @@
 require File.expand_path('../base.rb', __FILE__)
 require 'date'
 
-class TestRefExtension < Base
-    def test_reference_admin_signup
-      testref_string = Random.new.rand(0..100)
+module TestRefExtension
+    def random_number_string
+      Random.new.rand(0..100).to_s
     end
 
     def todays_date
