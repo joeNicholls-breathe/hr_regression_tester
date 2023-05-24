@@ -25,6 +25,8 @@ class TestSignUp < Base
     puts "Navigate to bulk upload form"
     #BulkImportExtension.new(driver).bulk_upload_employee_full
     #puts "Upload full import spreadsheet"
+    #added whilst bulk isn't working
+    BulkImportExtension.new(driver).breadcrumb_data_imports_return
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
     puts "Return to Manager Dashboard"
     AppNavigationExtensionManager.new(driver).navigate_to_people_screen
