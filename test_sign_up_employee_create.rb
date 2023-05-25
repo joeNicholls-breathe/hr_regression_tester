@@ -3,6 +3,7 @@ require './functions_library/navigate_browser_extension.rb'
 require './functions_library/sign_up_extension.rb'
 require './functions_library/bulk_imports_extension.rb'
 require './functions_library/navigate_around_app_manager.rb'
+require './functions_library/create_employee_extension.rb'
 require './functions_library/test_page_check.rb'
 require './functions_library/test_reference_extension.rb'
 
@@ -29,9 +30,12 @@ class TestSignUp < Base
     BulkImportExtension.new(driver).breadcrumb_data_imports_return
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
     puts "Return to Manager Dashboard"
-    AppNavigationExtensionManager.new(driver).navigate_to_people_screen
+    AppNavigationExtensionManager.new(driver).navigate_to_people_list
+    AppNavigationExtensionManager.new(driver).navigate_to_people_screen_pill
     puts "Navigate to People screen via pill"
     CreateEmployeeExtension.new(driver).create_employee_pending_starter_from_people_page
+    sleep 10
+    binding.pry
     puts "Create new employee via people page, that will start tomorrow"
     AppNavigationExtensionManager.new(driver).navigate_to_employee_dashboard_as_manager
     puts "Return to Manager Dashboard"
