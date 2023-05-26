@@ -1,0 +1,1 @@
+require File.expand_path('../base.rb', __FILE__)
