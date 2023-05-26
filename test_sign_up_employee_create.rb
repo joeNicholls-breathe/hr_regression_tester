@@ -37,8 +37,10 @@ class TestSignUp < Base
     puts "Create new employee via people page, that will start tomorrow"
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
     puts "Return to Manager Dashboard"
-    PageValueCheck.new(driver).checking_pending_starter
+    sleep 10
+    PageValueCheck.new.checking_pending_starter
     puts "Employee create - new pending starter is present on account dashboard"
+    binding.pry
     puts "Make Pending Starter a Finance User"
     puts "Switch on 2FA to Finance User"
     CancelPLanExtension.cancel_account
