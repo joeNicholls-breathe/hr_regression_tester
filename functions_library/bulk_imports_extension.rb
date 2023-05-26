@@ -8,6 +8,10 @@ class BulkImportExtension < Base
     driver.find_element(css: 'body > section.content.container > div.float-right > a').click
   end
 
+  def breadcrumb_data_imports_return
+    driver.find_element(xpath: '/html/body/section/div/div/div[1]/a').click
+  end
+
   def add_new_import 
     driver.find_element(css: 'body > section.content.container > div.float-right > a').click
   end

@@ -6,7 +6,11 @@ class AppNavigationExtensionManager < Base
   end
 
   def navigate_to_dashboard
-    driver.find_element(css: 'href="/"').click
+    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[2]/a').click
+  end
+
+  def navigate_to_people_list
+    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[3]').click
   end
 
   def navigate_to_people_screen_pill

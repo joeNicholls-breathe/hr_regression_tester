@@ -18,9 +18,7 @@ class AccountSetup < Base
     NavigateBrowserExtension.new(driver).breathe_login
     puts "navigate to breathe login url"
     LoginExtension.new(driver).login_setup_acc_admin
-    sleep 1
     LoginAppExtension.new(driver).select_hr
-    sleep 1
     puts "login"
     AppNavigationExtensionManager.new(driver).navigate_to_settings
     puts "navigate to configuration settings"
@@ -31,20 +29,20 @@ class AccountSetup < Base
     AccountConfigExtension.new(driver).navigate_to_modules_chargable
     AccountConfigExtension.new(driver).modules_chargable_switch_on
     puts "switch on modules - chargable"
-    AccountConfigExtension.navigate_to_modules_free
-    AccountConfigExtension.modules_free_switch_on
+    AccountConfigExtension.new(driver).navigate_to_modules_free
+    AccountConfigExtension.new(driver).modules_free_switch_on
     puts "switch on modules - free"
-    AccountConfigExtension.custom_fields
+    AccountConfigExtension.new(driver).custom_fields
     puts "add a custom field"
-    AccountConfigExtension.payroll_export_log_changes_only
+    AccountConfigExtension.new(driver).payroll_export_log_changes_only
     puts "switch on payroll exports"
-    AccountConfigExtension.person_change_logs
+    AccountConfigExtension.new(driver).person_change_logs
     puts "switch on change logs"
-    AccountConfigExtension.onboarding_tasks_on
+    AccountConfigExtension.new(driver).onboarding_tasks_on
     puts "add onboarding tasks for employee"
-    AccountConfigExtension.xero_payroll_integration
+    AccountConfigExtension.new(driver).xero_payroll_integration
     puts "switch on xero integration *might want to do this as the buy now journey"
-    AccountConfigExtension.navigate_to_picklist
+    AccountConfigExtension.new(driver).navigate_to_picklist
     puts "navigate to picklists"
 #details
     AccountConfigExtension.details_contract_types_add
