@@ -9,7 +9,6 @@ class BulkImportExtension < Base
   end
 
   def breadcrumb_data_imports_return
-    #driver.find_element(css: 'href="/employees/data/imports"').click
     driver.find_element(xpath: '/html/body/section/div/div/div[1]/a').click
   end
 

@@ -12,9 +12,12 @@ class CreateEmployeeExtension < Base
     ## may not be able to do this on a new account as id are new for the account although we could scan the url and find them
     #driver.find_element(id: 'employee_company_department_id').send_keys "" 
     #driver.find_element(id: 'employee_company_location_id').send_keys ""
-    driver.find_element(id: 'employee_employee_ref').send_keys "1010"
+    driver.find_element(id: 'employee_employee_ref').send_keys random_number_string
     driver.find_element(id: 'employee_gets_statutory_true').click
     driver.find_element(id: 'employee_statutory_holiday_country_id').click
+    drop = driver.find_element(id:'employee_statutory_holiday_country_id')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:value, "1")
     driver.find_element(xpath: '//*[@id="new_employee"]/p/input').click
   end
 end

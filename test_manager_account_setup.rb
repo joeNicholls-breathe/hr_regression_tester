@@ -18,9 +18,7 @@ class AccountSetup < Base
     NavigateBrowserExtension.new(driver).breathe_login
     puts "navigate to breathe login url"
     LoginExtension.new(driver).login_setup_acc_admin
-    sleep 1
     LoginAppExtension.new(driver).select_hr
-    sleep 2
     puts "login"
     AppNavigationExtensionManager.new(driver).navigate_to_settings
     puts "navigate to configuration settings"
