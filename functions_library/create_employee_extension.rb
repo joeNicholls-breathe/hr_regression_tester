@@ -20,4 +20,18 @@ class CreateEmployeeExtension < Base
     choose.select_by(:value, "1")
     driver.find_element(xpath: '//*[@id="new_employee"]/p/input').click
   end
+
+  def make_pending_starter_a_finance_user
+    binding.pry
+    driver.find_element(xpath: '//*[@id="quicksearch"]').send_keys "Newemployee User"
+    sleep 0.5
+    #profile more - permissions
+    driver.find_element(xpath: '/html/body/section[2]/div[2]/div[7]/ul/li[7]').click
+    driver.find_element(xpath: '//*[@id="permissions"]').click
+    #edit
+    driver.find_element(xpath: '/html/body/section[2]/div[3]/div').click
+    driver.find_element(id: 'employee_finance_true').click
+    #may need to scroll page
+    driver.find_element(xpath: '//*[@id="update-employee-button"]').click
+  end
 end
