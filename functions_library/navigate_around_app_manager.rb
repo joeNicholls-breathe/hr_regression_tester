@@ -17,9 +17,23 @@ class AppNavigationExtensionManager < Base
     driver.find_element(xpath: '//*[@id="tab-hr-dashboard"]/div[1]/div[2]/a[1]').click
   end
 
-  def navigate_to_settings
+  def navigate_to_settings_without_welcome_page_active
     driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[6]').click
     driver.find_element(css: 'href="/account/settings"').click
   end
 
+  def navigate_to_settings_with_welcome_page_active
+    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[7]').click
+    driver.find_element(css: 'href="/account/settings"').click
+  end
+
+  def navigate_to_plan_and_billing
+    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[7]').click 
+    driver.find_element(css: 'href="/account/plan_and_billing"').click
+  end
+
+  def manager_logout
+    driver.find_element(id: 'user-menu-dropdown').click
+    driver.find_element(xpath: '/html/body/div[3]/div/div[3]/ul/li[5]').click
+  end
 end

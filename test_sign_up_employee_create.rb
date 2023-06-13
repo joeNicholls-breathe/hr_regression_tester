@@ -4,7 +4,7 @@ require './functions_library/sign_up_extension.rb'
 require './functions_library/bulk_imports_extension.rb'
 require './functions_library/navigate_around_app_manager.rb'
 require './functions_library/create_employee_extension.rb'
-require './functions_library/test_page_check.rb'
+require './functions_library/ui_page_element_check.rb'
 require './functions_library/test_reference_extension.rb'
 
 class TestSignUp < Base
@@ -12,7 +12,7 @@ class TestSignUp < Base
 
   def initialize
     @driver = Selenium::WebDriver.for :chrome
-    Selenium::WebDriver.logger.level = :info
+    Selenium::WebDriver.logger.level = :infoß
   end
 
   def test_sign_up
@@ -37,15 +37,23 @@ class TestSignUp < Base
     puts "Create new employee via people page, that will start tomorrow"
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
     puts "Return to Manager Dashboard"
-    sleep 10
-    PageValueCheck.new.checking_pending_starter
+    PageValueCheck.new(driver).checking_pending_starter
     puts "Employee create - new pending starter is present on account dashboard"
-    binding.pry
+    CreateEmployeeExtension.new(driver).make_pending_starter_a_finance_user
     puts "Make Pending Starter a Finance User"
+    AppNavigationExtensionManager.new(driver).navigate_to_settings
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_two_factor_authentication
+    MultiFactorExtension.new(driver).twofa_financeusers_on
     puts "Switch on 2FA to Finance User"
-    CancelPLanExtension.cancel_account
-    puts "Cancel account"
-
+    AppNavigationExtensionManager.new(driver).manager_logout
+    puts "Logout of direct account admin"
+    NavigateBrowserExtension.new(driver).login_as_saas_admin
+    SaasExtension.new(driver).delete_account_from_direct_search_account_page #if trial
+    puts "SAAS delete account"
+    #SaasExtension.new(driver).search_direct_trial_account #user if account is active status
+    #SaasExtension.new(driver).add_the_ability_for_the_account_to_cancel #user if account is active status
+    #puts "SAAS allow account to cancel"
+    SaasExtension.new(driver).saas_user_logout
     sleep 10
     driver.close
   end
