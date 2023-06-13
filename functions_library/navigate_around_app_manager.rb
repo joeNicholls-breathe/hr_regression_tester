@@ -23,6 +23,7 @@ class AppNavigationExtensionManager < Base
   end
 
   def navigate_to_settings_with_welcome_page_active
+    binding.pry
     driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[7]').click
     driver.find_element(css: 'href="/account/settings"').click
   end

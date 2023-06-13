@@ -12,7 +12,7 @@ class TestSignUp < Base
 
   def initialize
     @driver = Selenium::WebDriver.for :chrome
-    Selenium::WebDriver.logger.level = :infoß
+    Selenium::WebDriver.logger.level = :info
   end
 
   def test_sign_up
@@ -41,7 +41,7 @@ class TestSignUp < Base
     puts "Employee create - new pending starter is present on account dashboard"
     CreateEmployeeExtension.new(driver).make_pending_starter_a_finance_user
     puts "Make Pending Starter a Finance User"
-    AppNavigationExtensionManager.new(driver).navigate_to_settings
+    AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     NavigationAroundAccountConfiguration.new(driver).navigate_to_two_factor_authentication
     MultiFactorExtension.new(driver).twofa_financeusers_on
     puts "Switch on 2FA to Finance User"

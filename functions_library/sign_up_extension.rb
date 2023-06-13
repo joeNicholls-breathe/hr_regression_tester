@@ -8,7 +8,7 @@ class SignUpExtension < Base
         driver.find_element(id:'account-name').send_keys("Regression Account1 " + random_number_string)
         drop = driver.find_element(id:'employee-count')
         choose = Selenium::WebDriver::Support::Select.new(drop)
-        choose.select_by(:text, "11-20")
+        choose.select_by(:text, "21-50")
         driver.find_element(id:'contact-number').send_keys "01342 717123"
         driver.find_element(id:'admin-password').send_keys "Password1"
         driver.find_element(id:'admin-password-confirmation').send_keys "Password1"
