@@ -12,7 +12,7 @@ class TestSignUp < Base
 
   def initialize
     @driver = Selenium::WebDriver.for :chrome
-    Selenium::WebDriver.logger.level = :info
+    Selenium::WebDriver.logger.level = :infoß
   end
 
   def test_sign_up
@@ -47,9 +47,13 @@ class TestSignUp < Base
     puts "Switch on 2FA to Finance User"
     AppNavigationExtensionManager.new(driver).manager_logout
     puts "Logout of direct account admin"
-    NavigateBrowserExtension.new(driver).breathe_login
-    SaasExtension.new(driver).delete_account_from_direct_search_account_page
+    NavigateBrowserExtension.new(driver).login_as_saas_admin
+    SaasExtension.new(driver).delete_account_from_direct_search_account_page #if trial
     puts "SAAS delete account"
+    #SaasExtension.new(driver).search_direct_trial_account #user if account is active status
+    #SaasExtension.new(driver).add_the_ability_for_the_account_to_cancel #user if account is active status
+    #puts "SAAS allow account to cancel"
+    SaasExtension.new(driver).saas_user_logout
     sleep 10
     driver.close
   end
