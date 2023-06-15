@@ -1,4 +1,4 @@
-require File.expand_path('../base.rb', __FILE__)
+
 
 class NavigationAroundAccountConfiguration < Base
 #Navigation
@@ -23,7 +23,7 @@ class NavigationAroundAccountConfiguration < Base
   end
 
   def navigate_to_two_factor_authentication
-    driver.find_element(css: 'href="/account/edit_mfa_configuration"').click
+    driver.find_element(xpath: '/html/body/section[2]/div[3]/div[1]/div[2]/a').click
   end
 
   def navigate_to_change_what_hr_users_can_do
@@ -69,5 +69,4 @@ class NavigationAroundAccountConfiguration < Base
   def navigate_to_rota_cloud
     driver.find_element(css: 'href="/account/integrations"').click
   end
-
 end

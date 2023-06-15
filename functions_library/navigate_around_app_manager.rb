@@ -23,9 +23,8 @@ class AppNavigationExtensionManager < Base
   end
 
   def navigate_to_settings_with_welcome_page_active
-    binding.pry
     driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[7]').click
-    driver.find_element(css: 'href="/account/settings"').click
+    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[7]/div/a[2]').click
   end
 
   def navigate_to_plan_and_billing
@@ -35,6 +34,6 @@ class AppNavigationExtensionManager < Base
 
   def manager_logout
     driver.find_element(id: 'user-menu-dropdown').click
-    driver.find_element(xpath: '/html/body/div[3]/div/div[3]/ul/li[5]').click
+    driver.find_element(xpath: '/html/body/div[3]/div/div[3]/ul/li[4]/a/img').click
   end
 end
