@@ -28,8 +28,8 @@ class CreateEmployeeExtension < Base
     driver.find_element(xpath: '//*[@id="more-link"]/span').click
     driver.find_element(xpath: '//*[@id="permissions"]').click
     #edit
-    driver.find_element(xpath: '/html/body/section[2]/div[3]/div').click
-    binding.pry
+    driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a > span').click
+    
     driver.find_element(id: 'employee_finance_true').click
     #may need to scroll page
     driver.find_element(xpath: '//*[@id="update-employee-button"]').click

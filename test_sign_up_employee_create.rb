@@ -1,4 +1,5 @@
 require 'selenium-webdriver'
+require 'logger'
 require './functions_library/navigate_browser_extension.rb'
 require './functions_library/sign_up_extension.rb'
 require './functions_library/bulk_imports_extension.rb'
@@ -6,17 +7,27 @@ require './functions_library/navigate_around_app_manager.rb'
 require './functions_library/create_employee_extension.rb'
 require './functions_library/ui_page_element_check.rb'
 require './functions_library/test_reference_extension.rb'
+require './functions_library/settings_config/account_config_navigation/account_configuration_navigation_extension.rb'
+require './functions_library/settings_config/2FA/2fa_extension.rb'
+require './functions_library/login_extension.rb'
+require './functions_library/login_app_extension.rb'
+require './functions_library/saas_extension.rb'
 
 class TestSignUp < Base
   attr_accessor :driver
 
   def initialize
     @driver = Selenium::WebDriver.for :chrome
-    Selenium::WebDriver.logger.level = :infoß
+    Selenium::WebDriver.logger.level = :info
+    log = Logger.new('log.txt')
+    log.level = Logger::
   end
 
   def test_sign_up
     NavigateBrowserExtension.new(driver).breathe_signup
+    
+    logger.log "Navigate to breathe sign up screen - Pass"
+
     puts "Navigate to breathe sign up screen - Pass"
     NavigateBrowserExtension.new(driver).cookie_modal_accept
     puts "Accept cookie in pop up"
@@ -24,10 +35,14 @@ class TestSignUp < Base
     puts "Sign Up form - Pass"
     BulkImportExtension.new(driver).navigate_to_bulk_upload
     puts "Navigate to bulk upload form"
+
     #BulkImportExtension.new(driver).bulk_upload_employee_full
     #puts "Upload full import spreadsheet"
+
     BulkImportExtension.new(driver).breadcrumb_data_imports_return
+
     #added whilst bulk isn't working
+
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
     puts "Return to Manager Dashboard"
     AppNavigationExtensionManager.new(driver).navigate_to_people_list
@@ -41,18 +56,22 @@ class TestSignUp < Base
     puts "Employee create - new pending starter is present on account dashboard"
     CreateEmployeeExtension.new(driver).make_pending_starter_a_finance_user
     puts "Make Pending Starter a Finance User"
-    AppNavigationExtensionManager.new(driver).navigate_to_settings
+    AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     NavigationAroundAccountConfiguration.new(driver).navigate_to_two_factor_authentication
     MultiFactorExtension.new(driver).twofa_financeusers_on
     puts "Switch on 2FA to Finance User"
     AppNavigationExtensionManager.new(driver).manager_logout
     puts "Logout of direct account admin"
-    NavigateBrowserExtension.new(driver).login_as_saas_admin
+    NavigateBrowserExtension.new(driver).breathe_login
+    LoginExtension.new(driver).login_as_saas_admin
+    LoginAppExtension.new(driver).select_saas
     SaasExtension.new(driver).delete_account_from_direct_search_account_page #if trial
     puts "SAAS delete account"
+
     #SaasExtension.new(driver).search_direct_trial_account #user if account is active status
     #SaasExtension.new(driver).add_the_ability_for_the_account_to_cancel #user if account is active status
     #puts "SAAS allow account to cancel"
+
     SaasExtension.new(driver).saas_user_logout
     sleep 10
     driver.close
