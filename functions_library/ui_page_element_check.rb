@@ -8,4 +8,11 @@ class PageValueCheck < Base
     s1 = "Starting on " + tomorrow.strftime("%d/%m/%Y")
     puts s == s1
   end
+
+  def api_prod_key_check
+    api_key = driver.find_element(xpath: '')
+    account_key = api_key.attribute("innerHTML")
+    s = account_key.to_s
+    puts s
+  end
 end 

@@ -19,15 +19,10 @@ class TestSignUp < Base
   def initialize
     @driver = Selenium::WebDriver.for :chrome
     Selenium::WebDriver.logger.level = :info
-    log = Logger.new('log.txt')
-    log.level = Logger::
   end
 
   def test_sign_up
     NavigateBrowserExtension.new(driver).breathe_signup
-    
-    logger.log "Navigate to breathe sign up screen - Pass"
-
     puts "Navigate to breathe sign up screen - Pass"
     NavigateBrowserExtension.new(driver).cookie_modal_accept
     puts "Accept cookie in pop up"
@@ -38,11 +33,9 @@ class TestSignUp < Base
 
     #BulkImportExtension.new(driver).bulk_upload_employee_full
     #puts "Upload full import spreadsheet"
-
     BulkImportExtension.new(driver).breadcrumb_data_imports_return
 
     #added whilst bulk isn't working
-
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
     puts "Return to Manager Dashboard"
     AppNavigationExtensionManager.new(driver).navigate_to_people_list
