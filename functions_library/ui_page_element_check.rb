@@ -10,9 +10,30 @@ class PageValueCheck < Base
   end
 
   def api_prod_key_check
-    api_key = driver.find_element(xpath: '')
+    api_key = driver.find_element(xpath: '//*[@id="api-status"]/fieldset[1]/table/tbody/tr[1]/td')
     account_key = api_key.attribute("innerHTML")
     s = account_key.to_s
+    puts s
+  end
+
+  def url_check
+    url_check = driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[2]')
+    calendar_url = url_check.attribute("innerHTML")
+    s = calendar_url.to_s
+    puts s
+  end
+
+  def calendar_subscription_manage_centrally_url
+    url_check = driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[2]')
+    calendar_url = url_check.attribute("innerHTML")
+    s = calendar_url.to_s
+    puts s
+  end
+
+  def calendar_subscription_manage_own_leave_url
+    url_check = driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[2]')
+    calendar_url = url_check.attribute("innerHTML")
+    s = calendar_url.to_s
     puts s
   end
 end 

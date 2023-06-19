@@ -1,7 +1,7 @@
 require File.expand_path('../base.rb', __FILE__)
 
 class SignUpExtension < Base
-    def sign_up
+    def sign_up_std_positive
         driver.find_element(id:'admin-first-name').send_keys "Admin"
         driver.find_element(id:'admin-last-name').send_keys "User"
         driver.find_element(id:'admin-email').send_keys("admin" + random_number_string + "@regressionaccount.com")
@@ -16,4 +16,12 @@ class SignUpExtension < Base
         sleep 0.5
         driver.find_element(id:'new-account-submit').click
     end
+
+    def sign_up_buy_now_positive
+        driver.find_element(: '').click
+        driver.find_element(: '').click
+        driver.find_element(: '').click
+        driver.find_element(: '').click
+    end
+
 end

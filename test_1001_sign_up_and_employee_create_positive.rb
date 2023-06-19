@@ -18,18 +18,18 @@ class TestSignUp < Base
 
   def initialize
     @driver = Selenium::WebDriver.for :chrome
-    Selenium::WebDriver.logger.level = :info
+    #Selenium::WebDriver.logger.level = :info
   end
 
   def test_sign_up
     NavigateBrowserExtension.new(driver).breathe_signup
     puts "Navigate to breathe sign up screen - Pass"
     NavigateBrowserExtension.new(driver).cookie_modal_accept
-    puts "Accept cookie in pop up"
-    SignUpExtension.new(driver).sign_up
-    puts "Sign Up form - Pass"
+    puts "Pop Up - Cookies - Accept - Pass"
+    SignUpExtension.new(driver).sign_up_std_positive
+    puts "Sign Up Std form - Pass"
     BulkImportExtension.new(driver).navigate_to_bulk_upload
-    puts "Navigate to bulk upload form"
+    puts "Navigate to bulk upload form - Pass"
 
     #BulkImportExtension.new(driver).bulk_upload_employee_full
     #puts "Upload full import spreadsheet"
@@ -37,35 +37,37 @@ class TestSignUp < Base
 
     #added whilst bulk isn't working
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
-    puts "Return to Manager Dashboard"
+    puts "Return to Manager Dashboard - Pass"
     AppNavigationExtensionManager.new(driver).navigate_to_people_list
     AppNavigationExtensionManager.new(driver).navigate_to_people_screen_pill
-    puts "Navigate to People screen via pill"
+    puts "Navigate to People screen via pill - Pass"
     CreateEmployeeExtension.new(driver).create_employee_pending_starter_from_people_page
-    puts "Create new employee via people page, that will start tomorrow"
+    puts "Create new employee via people page, that will start tomorrow - Pass"
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
-    puts "Return to Manager Dashboard"
+    puts "Return to Manager Dashboard - Pass"
     PageValueCheck.new(driver).checking_pending_starter
-    puts "Employee create - new pending starter is present on account dashboard"
+    puts "Employee create - new pending starter is present on account dashboard - Pass"
     CreateEmployeeExtension.new(driver).make_pending_starter_a_finance_user
-    puts "Make Pending Starter a Finance User"
+    puts "Make Pending Starter a Finance User - Pass"
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     NavigationAroundAccountConfiguration.new(driver).navigate_to_two_factor_authentication
     MultiFactorExtension.new(driver).twofa_financeusers_on
-    puts "Switch on 2FA to Finance User"
+    puts "Switch on 2FA to Finance User - Pass"
     AppNavigationExtensionManager.new(driver).manager_logout
-    puts "Logout of direct account admin"
+    puts "Logout of direct account admin - Pass"
     NavigateBrowserExtension.new(driver).breathe_login
     LoginExtension.new(driver).login_as_saas_admin
     LoginAppExtension.new(driver).select_saas
     SaasExtension.new(driver).delete_account_from_direct_search_account_page #if trial
-    puts "SAAS delete account"
+    puts "SAAS delete account - Pass"
 
     #SaasExtension.new(driver).search_direct_trial_account #user if account is active status
     #SaasExtension.new(driver).add_the_ability_for_the_account_to_cancel #user if account is active status
     #puts "SAAS allow account to cancel"
 
     SaasExtension.new(driver).saas_user_logout
+    puts "Saas User Logout - Pass"
+    Puts "Test Complete - Positive journey"
     sleep 10
     driver.close
   end
