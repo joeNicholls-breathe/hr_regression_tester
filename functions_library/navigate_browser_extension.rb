@@ -25,5 +25,9 @@ class NavigateBrowserExtension < Base
   def breathe_login
     driver.navigate.to('https://login.breathehrstaging.com/login')
   end
+
+  def breathe_signup_buy_now
+    driver.navigate.to('https://hr.breathehrstaging.com/signup?type=buy-now')
+  end
   
 end

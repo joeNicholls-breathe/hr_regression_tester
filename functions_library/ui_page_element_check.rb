@@ -22,4 +22,18 @@ class PageValueCheck < Base
     s = calendar_url.to_s
     puts s
   end
+
+  def calendar_subscription_manage_centrally_url
+    url_check = driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[2]')
+    calendar_url = url_check.attribute("innerHTML")
+    s = calendar_url.to_s
+    puts s
+  end
+
+  def calendar_subscription_manage_own_leave_url
+    url_check = driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[2]')
+    calendar_url = url_check.attribute("innerHTML")
+    s = calendar_url.to_s
+    puts s
+  end
 end 
