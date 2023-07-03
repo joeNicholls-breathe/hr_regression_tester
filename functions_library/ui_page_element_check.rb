@@ -36,4 +36,11 @@ class PageValueCheck < Base
     s = calendar_url.to_s
     puts s
   end
+
+  def sign_up_error_negative_journey
+    url_check = driver.find_element(xpath: '')
+    calendar_url = url_check.attribute("innerHTML")
+    s = calendar_url.to_s
+    puts s
+  end
 end 

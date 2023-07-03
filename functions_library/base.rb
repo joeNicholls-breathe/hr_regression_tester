@@ -1,4 +1,5 @@
 require 'selenium-webdriver'
+require 'roo'
 require_relative '../settings.rb'
 require './functions_library/test_reference_extension.rb'
 require 'pry'
