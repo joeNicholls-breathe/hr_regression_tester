@@ -4,7 +4,7 @@ class BulkImportExtension < Base
   def navigate_to_bulk_upload
     driver.find_element(css: '#navbar-nav-dropdown > ul > li:nth-child(3)').click
     driver.find_element(css: '#navbar-nav-dropdown a:nth-child(4)').click
-    driver.find_element(css: 'body > section.content.container > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > a').click
+    driver.find_element(xpath: '//*[@id="employees-data-imports-link"]').click
     driver.find_element(css: 'body > section.content.container > div.float-right > a').click
   end
 
@@ -21,9 +21,25 @@ class BulkImportExtension < Base
     drop = driver.find_element(id: 'employees_data_import_type')
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:text, 'Import new people')
-    driver.find_element(id: 'employees_data_import_import').send_keys(File.expand_path('./account_employee_setup/postive_imports/employee_full.xlsx'))
+    file_input = driver.find_element(id: 'employees_data_import_import')
+    file_path = './account_employee_setup/positive_imports/employee_full.xlsx'
+    binding.pry
+    file_input.send_keys(file_path)
+    sleep 5
     driver.find_element(id: 'submit-import').click
+    sleep 5
   end
+
+
+
+
+
+
+
+
+
+
+
     
   def bulk_upload_employee_basic
     driver.find_element(id: 'employees_data_import_type').click

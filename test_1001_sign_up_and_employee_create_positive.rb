@@ -18,7 +18,7 @@ class TestSignUp < Base
 
   def initialize
     @driver = Selenium::WebDriver.for :chrome
-    #Selenium::WebDriver.logger.level = :info
+    Selenium::WebDriver.logger.level = :info
   end
 
   def test_sign_up
@@ -31,12 +31,12 @@ class TestSignUp < Base
     BulkImportExtension.new(driver).navigate_to_bulk_upload
     puts "Navigate to bulk upload form - Pass"
 
-    #BulkImportExtension.new(driver).bulk_upload_employee_full
-    #puts "Upload full import spreadsheet"
+    BulkImportExtension.new(driver).bulk_upload_employee_full
+    puts "Upload full import spreadsheet - Pass"
     
-
-    BulkImportExtension.new(driver).breadcrumb_data_imports_return
+    #BulkImportExtension.new(driver).breadcrumb_data_imports_return
     #added whilst bulk isn't working
+    
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
     puts "Return to Manager Dashboard - Pass"
     AppNavigationExtensionManager.new(driver).navigate_to_people_list
