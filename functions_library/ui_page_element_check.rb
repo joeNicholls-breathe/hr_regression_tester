@@ -24,23 +24,32 @@ class PageValueCheck < Base
   end
 
   def calendar_subscription_manage_centrally_url
-    url_check = driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[2]')
+    calendar_check = driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[2]')
     calendar_url = url_check.attribute("innerHTML")
     s = calendar_url.to_s
     puts s
   end
 
   def calendar_subscription_manage_own_leave_url
-    url_check = driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[2]')
+    calendar_check = driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[2]')
     calendar_url = url_check.attribute("innerHTML")
     s = calendar_url.to_s
     puts s
   end
 
   def sign_up_error_negative_journey
-    url_check = driver.find_element(xpath: '')
-    calendar_url = url_check.attribute("innerHTML")
-    s = calendar_url.to_s
+    signup_check = driver.find_element(id: 'submit-button')
+    sign_up_url = signup_check.attribute("innerHTML")
+    s = sign_up_url.to_s
     puts s
+  end
+
+  def signup_fail_check
+    begin
+      return driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[1]/a')
+      puts "Dashboard reached"
+    rescue Selenium::WebDriver::Error::NoSuchElementError
+      puts "Account was not Signed Up - TEST PASS Pass - Element not Found"
+    end
   end
 end 

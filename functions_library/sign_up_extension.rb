@@ -114,7 +114,7 @@ class SignUpExtension < Base
     end
 
     def sign_up_login_button
-        driver.find_element(xpath: '/html/body/div[1]/nav/div/div/div[2]/a').click
+        driver.find_element(css: 'body > div.page--wrapper > nav > div > div > div.login--btn').click
     end
 
     def logo_to_website

@@ -72,6 +72,17 @@ class TestSignUp < Base
     sleep 10
     driver.close
   end
+
+  def signup_login_path
+    NavigateBrowserExtension.new(driver).breathe_signup
+    NavigateBrowserExtension.new(driver).cookie_modal_accept
+    SignUpExtension.new(driver).sign_up_login_button
+    LoginExtension.new(driver).login_setup_acc_admin
+    PageValueCheck.new(driver).signup_fail_check
+    puts "Login from sign up page - Pass"
+    driver.close
+  end
 end
 
 TestSignUp.new.test_sign_up
+TestSignUp.new.signup_login_path
