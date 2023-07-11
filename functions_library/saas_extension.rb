@@ -3,8 +3,9 @@ require File.expand_path('../base.rb', __FILE__)
 class SaasExtension < Base
 	def delete_account_from_direct_search_account_page
 		driver.find_element(xpath: '//*[@id="DataTables_Table_0_filter"]/label/input').send_keys "Regression Account1"
-        driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg > path').click
-		sleep 0.5
+        sleep 8
+        driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions').click
+        sleep 0.5
 		driver.find_element(css: 'button.btn.btn-danger.modal-confirm').click
 	end
 
@@ -25,6 +26,7 @@ class SaasExtension < Base
     end
 
     def saas_user_logout
+        sleep 3
     	driver.find_element(css: 'body > div > section > div > div.col-6.text-right > a').click
     end
 end
