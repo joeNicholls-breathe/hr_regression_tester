@@ -36,4 +36,9 @@ class AppNavigationExtensionManager < Base
     driver.find_element(id: 'user-menu-dropdown').click
     driver.find_element(xpath: '/html/body/div[3]/div/div[3]/ul/li[4]/a/img').click
   end
+
+  def user_logout
+    driver.find_element(id: 'user-menu-dropdown').click
+    driver.find_element(xpath: '/html/body/div[3]/div/div[3]/ul/li[4]/a/img').click
+  end
 end
