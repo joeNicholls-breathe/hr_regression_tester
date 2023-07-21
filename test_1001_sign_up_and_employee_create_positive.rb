@@ -32,10 +32,8 @@ class TestSignUp < Base
     puts "Navigate to bulk upload form - Pass"
     BulkImportExtension.new(driver).bulk_upload_employee_full
     puts "Upload full import spreadsheet - Pass"
-    
     #BulkImportExtension.new(driver).breadcrumb_data_imports_return
     #added whilst bulk isn't working
-    
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
     puts "Return to Manager Dashboard - Pass"
     AppNavigationExtensionManager.new(driver).navigate_to_people_list
@@ -79,6 +77,7 @@ class TestSignUp < Base
     puts "Pop Up - Cookies - Accept - Pass"
     SignUpExtension.new(driver).sign_up_std_positive
     puts "Sign Up Std form - Pass"
+    binding.pry
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
     puts "Return to Manager Dashboard - Pass"
     AppNavigationExtensionManager.new(driver).navigate_to_people_screen_pill
@@ -120,5 +119,6 @@ class TestSignUp < Base
   end
 end
 
-#TestSignUp.new.test_sign_up_with_add_employee_manually
+#TestSignUp.new.test_sign_up_with_bulk
+TestSignUp.new.test_sign_up_with_add_employee_manually
 TestSignUp.new.signup_login_path
