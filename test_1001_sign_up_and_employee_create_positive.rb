@@ -77,7 +77,6 @@ class TestSignUp < Base
     puts "Pop Up - Cookies - Accept - Pass"
     SignUpExtension.new(driver).sign_up_std_positive
     puts "Sign Up Std form - Pass"
-    binding.pry
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
     puts "Return to Manager Dashboard - Pass"
     AppNavigationExtensionManager.new(driver).navigate_to_people_screen_pill
