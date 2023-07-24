@@ -52,4 +52,10 @@ class PageValueCheck < Base
       puts "Account was not Signed Up - TEST PASS Pass - Element not Found"
     end
   end
+
+  def account_active
+    buy_now_check = driver.find_element(css: 'div.row:nth-child(1)')
+    buy_now_positive = buy_now_check("innerHTML")
+    puts buy_now_positive
+  end
 end 
