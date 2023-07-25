@@ -1,4 +1,4 @@
-require File.expand_path('../base.rb', __FILE__)
+require File.expand_path('../../../base.rb', __FILE__)
 
 class AccountPicklistExtension < Base
 #contract type 
@@ -206,7 +206,7 @@ class AccountPicklistExtension < Base
   def details_notice_periods_delete
     driver.find_element(css: 'href="/company_noticeperiods"').click
     driver.find_element(xpath:'//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[2]/svg').click
-    driver.find_element(:'').
+    #driver.find_element(:'').
   end
 
   def details_notice_periods_search
@@ -245,7 +245,7 @@ class AccountPicklistExtension < Base
   def details_pronouns_delete
     driver.find_element(css: 'href="/company_pronouns"').click
     driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[2]/svg').click
-    driver.find_element(: '').
+    #driver.find_element(: '').
   end
 
   def details_pronouns_search
@@ -275,7 +275,7 @@ class AccountPicklistExtension < Base
     driver.find_element(xpath: '//*[@id="new_company_reason_for_leaving_type"]/p/input').click
   end
 
-    def details_reason_for_leaving_delete
+  def details_reason_for_leaving_delete
     driver.find_element(css: 'href="/company_reason_for_leaving_types"').click
     driver.find_element(css: '//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[3]/svg').click
     driver.find_element(xpath: '//*[@id="delete_reason_for_leaving_type_53318"]/div/div/div[3]/button[2]').click
@@ -287,7 +287,7 @@ class AccountPicklistExtension < Base
     sleep 1
   end
 
-    def details_reason_for_leaving_breadcrumb
+  def details_reason_for_leaving_breadcrumb
     driver.find_element(css: 'href="/company_reason_for_leaving_types"').click
     driver.find_element(css: 'href="/company_reason_for_leaving_types/new"').click
     driver.find_element(css: 'href="/company_reason_for_leaving_types"').click
@@ -302,7 +302,7 @@ class AccountPicklistExtension < Base
     driver.find_element(id: 'add-company-task-submit').click
   end
 
-    def details_onboarding_tasks_edit
+  def details_onboarding_tasks_edit
     driver.find_element(css: 'href="/company_tasks"').click
     driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[1]/td[2]/a/svg').click
     driver.find_element(id: 'company_task_title').sendkeys "Edit Task - Regression Test DATE TODAY"
@@ -316,17 +316,17 @@ class AccountPicklistExtension < Base
     driver.find_element(css: '#delete_task_142 > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm').click
   end
 
-  def details_onboarding_tasks_search #this will need to be reviewed
-    driver.find_element(css: 'href="/company_tasks"').click
-    driver.find_element(xpath: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "New Task - Regression Test DATE TODAY"
-    sleep 1
-    so = driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[1]')
-    so.each do |t|
-    if t.text() == 'New Task - Regression Test Date TODAY' then 
-      result = "Pass"
-    else 
-      result = "Failed to find picklist item"
-  end
+  #def details_onboarding_tasks_search #this will need to be reviewed
+  #  driver.find_element(css: 'href="/company_tasks"').click
+  #  driver.find_element(xpath: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "New Task - Regression Test DATE TODAY"
+  #  sleep 1
+  #  so = driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[1]')
+  #  so.each do |t|
+  #  if t.text() == 'New Task - Regression Test Date TODAY' then 
+  #    result = "Pass"
+  #  else 
+  #    result = "Failed to find picklist item"
+  #end
 
   def details_onboarding_tasks_breadscrumb
     driver.find_element(css: 'href="/company_tasks"').click
@@ -369,17 +369,17 @@ class AccountPicklistExtension < Base
     driver.find_element(css: '#delete_company_leave_reason > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm').click #will need to work out to make generic without id
   end
   
-  def absence_other_leave_reasons_search
-    driver.find_element(css: 'href="/company_leave_reasons"').click
-    driver.find_element(css: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "New Leave Reason - Test Regression TODAY DATE"
-    sleep 1
-    so = driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[1]')
-    so.each do |t|
-    if t.text() == 'New Task - Regression Test Date TODAY' then 
-      result = "Pass"
-    else 
-      result = "Failed to find picklist item"
-  end
+  #def absence_other_leave_reasons_search
+  #  driver.find_element(css: 'href="/company_leave_reasons"').click
+  #  driver.find_element(css: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "New Leave Reason - Test Regression TODAY DATE"
+  #  sleep 1
+  #  so = driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[1]')
+  #  so.each do |t|
+  #  if t.text() == 'New Task - Regression Test Date TODAY' then 
+  #    result = "Pass"
+  #  else 
+  #    result = "Failed to find picklist item"
+  #end
   
   def absence_other_leave_reasonsbreadcrumb
     driver.find_element(css: 'href="/company_leave_reasons"').click
@@ -706,303 +706,5 @@ class AccountPicklistExtension < Base
     driver.find_element(css: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "Regression Test NEW - DATE TODAY"
     sleep 1
     driver.find_element(xpath: '').click
-  end
-
-#expense types
-  def pay_and_benefits_expense_types_new
-    driver.find_element(css: 'href="/company_expense_types"').click
-    driver.find_element(css: 'href="/company_expense_types/new"').click
-    driver.find_element(id: 'company_expense_type_name').sendkeys "Regression Test NEW DATE TODAY"
-    driver.find_element(id: 'company_expense_type_code').sendkeys "Regression Test NEW DATE TODAY"
-    driver.find_element(xpath: '//*[@id="new_company_expense_type"]/p/input').click
-  end
-  
-  def pay_and_benefits_expense_types_edit
-    driver.find_element(css: 'href="/company_expense_types"').click
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > a > svg').click
-    driver.find_element(id: 'company_expense_type_name').sendkeys "Regression Test EDIT DATE TODAY"
-    driver.find_element(id: 'company_expense_type_code').sendkeys "Regression Test EDIT DATE TODAY"
-    driver.find_element(xpath: '//*[@id="new_company_expense_type"]/p/input').click
-  end
-
-  def pay_and_benefits_expense_types_cancel_new
-    driver.find_element(css: 'href="/company_expense_types"').click
-    driver.find_element(css: 'href="/company_expense_types/new"').click
-    driver.find_element(id: 'company_expense_type_name').sendkeys "Regression Test CANCEL NEW DATE TODAY"
-    driver.find_element(id: 'company_expense_type_code').sendkeys "Regression Test CANCEL NEW DATE TODAY"
-    driver.find_element(css: 'href="/company_expense_types"').click
-  end
-
-  def pay_and_benefits_expense_types_delete
-    driver.find_element(css: 'href="/company_expense_types"').click
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(6) > td.actions > svg').click
-    driver.find_element(xpath: '//*[@id="company_expense_type"]/div/div/div[3]/button[2]').click
-  end
-
-  def pay_and_benefits_expense_types_search
-    driver.find_element(css: 'href="/company_expense_types"').click
-    driver.find_element(id: 'company_expense_type_name').sendkeys ""
-    sleep 1
-  end
-
-  def pay_and_benefits_expense_types_breadcrumb
-    driver.find_element(css: 'href="/company_expense_types"').click
-    driver.find_element(css: 'href="/company_expense_types/new"').click
-    driver.find_element(css: 'href="/company_expense_types"').click
-  end
-
-#mileage rates
-  def pay_and_benefits_mileage_rates_new
-    driver.find_element(css: 'href="/company_mileage_rates"').click
-    driver.find_element(css: 'href="/company_mileage_rates/new"').click
-    driver.find_element(id: 'company_mileage_rate_rate').sendkeys "0.85" #rate is current by default
-    driver.find_element(xpath: '//*[@id="new_company_mileage_rate"]/p/input').click
-  end
-
-  def pay_and_benefits_mileage_rates_edit
-    driver.find_element(css: 'href="/company_mileage_rates"').click
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr.odd > td.actions > a:nth-child(1) > svg').click
-    driver.find_element(id: 'company_mileage_rate_rate').sendkeys "1.30" #rate is current by default
-    driver.find_element(xpath: '//*[@id="new_company_mileage_rate"]/p/input').click
-  end
-
-  def pay_and_benefits_mileage_rates_cancel_new
-    driver.find_element(css: 'href="/company_mileage_rates"').click
-    driver.find_element(css: 'href="/company_mileage_rates/new"').click
-    driver.find_element(id: 'company_mileage_rate_rate').sendkeys "101.11" #rate is current by default
-    driver.find_element(css: 'href="/company_mileage_rates"').click
-  end
-
-  def pay_and_benefits_mileage_rates_delete
-    driver.find_element(css: 'href="/company_mileage_rates"').click
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr.odd > td.actions > svg').click
-    driver.find_element(xpath: '//*[@id="company_mileage_rate"]/div/div/div[3]/button[2]').click
-  end
-
-  def pay_and_benefits_mileage_rates_search
-    driver.find_element(css: 'href="/company_mileage_rates"').click
-    driver.find_element(css: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys
-    sleep 1
-  end
-
-  def pay_and_benefits_mileage_rates_breadcrumb
-    driver.find_element(css: 'href="/company_mileage_rates"').click
-    driver.find_element(css: 'href="/company_mileage_rates/new"').click
-    driver.find_element(css: 'href="/company_mileage_rates"').click
-  end
-
-#applicant stages
-  def recruitment_applicant_stages_new
-    driver.find_element(css: 'href="/recruitment/applicant_stages"').click
-    driver.find_element(css: 'href="/recruitment/applicant_stages/new"').click
-    driver.find_element(id: 'applicant_stage_name').sendkeys "Regression Test NEW DATE TODAY"
-    driver.find_element(xpath: '//*[@id="new_applicant_stage"]/p/input').click
-  end
-
-  def recruitment_applicant_stages_edit
-    driver.find_element(css: 'href="/recruitment/applicant_stages"').click
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(3) > td.actions > a:nth-child(1) > svg').click
-    driver.find_element(id: 'applicant_stage_name').sendkeys "Regression Test EDIT DATE TODAY"
-    driver.find_element(xpath: '//*[@id="new_applicant_stage"]/p/input').click
-  end
-
-  def recruitment_applicant_stages_cancel_new
-    driver.find_element(css: 'href="/recruitment/applicant_stages"').click
-    driver.find_element(css: 'href="/recruitment/applicant_stages/new"').click
-    driver.find_element(id: 'applicant_stage_name').sendkeys "Regression Test CANCEL DATE TODAY"
-    driver.find_element(css: 'href="/recruitment/applicant_stages"').click
-  end
-
-  def recruitment_applicant_stages_breadcrumb
-    driver.find_element(css: 'href="/recruitment/applicant_stages"').click
-    driver.find_element(css: 'href="/recruitment/applicant_stages/new"').click
-    driver.find_element(css: 'href="/recruitment/applicant_stages"').click
-  end
-
-  def recruitment_applicant_stages_delete
-    driver.find_element(css: 'href="/recruitment/applicant_stages"').click
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(3) > td.actions > svg').click
-    driver.find_element(css: '#delete_type_11782 > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm').click
-  end
-
-  def recruitment_applicant_stages_search
-    driver.find_element(css: 'href="/recruitment/applicant_stages"').click
-    driver.find_element(xpath: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "Regression Test NEW DATE TODAY"
-    sleep 1
-  end
-
-#applicant emails
-  def recruitment_applicant_email_edit
-    driver.find_element(css: 'href="/recruitment/applicant_stages/emails_index"').click
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > a > svg').click
-    driver.find_element(id: 'applicant_stage_email_subject').sendkeys "Regression Test EDIT applicant email DATE TODAY"
-    driver.find_element(id: 'applicant_stage_email_text').sendkeys "Dear Applicant, REgression test has updateed the body of this email DATE TODAY"
-    driver.find_element(xpath: '//*[@id="edit_applicant_stage"]/p/input').click
-  end
-
-  def recruitment_applicant_email_edit_cancel
-    driver.find_element(css: 'href="/recruitment/applicant_stages/emails_index"').click
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > a > svg').click
-    driver.find_element(id: 'applicant_stage_email_subject').sendkeys "Regression Test EDIT applicant email DATE TODAY"
-    driver.find_element(id: 'applicant_stage_email_text').sendkeys "Dear Applicant, REgression test has updateed the body of this email DATE TODAY"
-    driver.find_element(xpath: '//*[@id="edit_applicant_stage"]/p/a').click
-  end
-
-#applicant sources
- def recruitment_applicant_source_new
-    driver.find_element(css: 'href="/applicant_sources"').click
-    driver.find_element(css: 'href="/applicant_sources/new"').click
-    driver.find_element(id: 'applicant_source_name').sendkeys "Regression Test NEW DATE TODAY"
-    driver.find_element(xpath: '//*[@id="new_applicant_source"]/p/input').click
-  end
-
-  def recruitment_applicant_source_cancel_new
-    driver.find_element(css: 'href="/applicant_sources"').click
-    driver.find_element(css: 'href="/applicant_sources/new"').click
-    driver.find_element(id: 'applicant_source_name').sendkeys "Regression Test CANCEL DATE TODAY"
-    driver.find_element(css: 'href="/applicant_sources"').click
-  end
-
-  def recruitment_applicant_source_edit
-    driver.find_element(css: 'href="/applicant_sources"').click
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > a:nth-child(1) > svg').click
-    driver.find_element(id: 'applicant_source_name').sendkeys "Regression Test EDIT DATE TODAY"
-    driver.find_element(xpath: '//*[@id="new_applicant_source"]/p/input').click
-  end
-
-  def recruitment_applicant_source_delete
-    driver.find_element(css: 'href="/applicant_sources"').click
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > svg').click
-    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[1]/td[2]/svg').click
-  end
-
-  def recruitment_applicant_source_search
-    driver.find_element(css: 'href="/applicant_sources"').click
-    driver.find_element(css: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "Agency"
-    sleep 1
-    #driver.find_element(xpath: '').click
-  end
-
-#disciplinary outcomes
-  def performance_management_disciplinary_outcomes_new
-    driver.find_element(css: 'href="/company_disciplinary_outcomes"').click
-    driver.find_element(css: 'href="/company_disciplinary_outcomes/new"').click
-    driver.find_element(id: 'company_disciplinary_outcome_name').sendkeys "Regression Test - NEW DATE TODAY"
-    driver.find_element(xpath: '//*[@id="new_company_disciplinary_outcome"]/p/input').click
-  end
-
-  def performance_management_disciplinary_outcomes_edit
-    driver.find_element(css: 'href="/company_disciplinary_outcomes"').click
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > a:nth-child(1) > svg').click
-    driver.find_element(id: 'company_disciplinary_outcome_name').sendkeys "Regression Test - EDIT DATE TODAY"
-    driver.find_element(xpath: '//*[@id="new_company_disciplinary_outcome"]/p/input').click
-  end
-
-  def performance_management_disciplinary_outcomes_cancel_new
-    driver.find_element(css: 'href="/company_disciplinary_outcomes"').click
-    driver.find_element(css: 'href="/company_disciplinary_outcomes/new"').click
-    driver.find_element(id: 'company_disciplinary_outcome_name').sendkeys "Regression Test - NEW DATE TODAY"
-    driver.find_element(css: 'href="/company_disciplinary_outcomes/new"').click
-  end
-
-  def performance_management_disciplinary_outcomes_delete
-    driver.find_element(css: 'href="/company_disciplinary_outcomes"').click
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > svg').click
-    driver.find_element(xpath: '//*[@id="delete_type_19803"]/div/div/div[3]/button[2]').click
-  end
-
-  def performance_management_disciplinary_outcomes_search
-    driver.find_element(css: 'href="/company_disciplinary_outcomes"').click
-    driver.find_element(id: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "Regression Test - NEW DATE TODAY"
-    sleep 1
-  end
-
-  def performance_management_disciplinary_outcomes_breadcrumb
-    driver.find_element(css: 'href="/company_disciplinary_outcomes"').click
-    driver.find_element(css: 'href="/company_disciplinary_outcomes/new"').click
-    driver.find_element(id: 'company_disciplinary_outcome_name').sendkeys "Regression Test - BREADCRUMB DATE TODAY"
-    driver.find_element(css: 'href="/company_disciplinary_outcomes"').click
-  end
-
-#grievence outcomes
-  def performance_management_grievance_outcomes_new
-    driver.find_element(css: 'href="/company_grievance_outcomes"').click
-    driver.find_element(css: 'href="/company_grievance_outcomes/new"').click
-    driver.find_element(id: 'company_grievance_outcome_name').sendkeys "Regression Test NEW DATE TODAY"
-    driver.find_element(xpath: '//*[@id="new_company_grievance_outcome"]/p/input').click
-  end
-  
-  def performance_management_grievance_outcomes_edit
-    driver.find_element(css: 'href="/company_grievance_outcomes"').click
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > a:nth-child(1) > svg').click
-    driver.find_element(id: 'company_grievance_outcome_name').sendkeys "Regression Test EDIT DATE TODAY"
-    driver.find_element(xpath: '//*[@id="new_company_grievance_outcome"]/p/input').click
-  end
-  
-  def performance_management_grievance_outcomes_cancel_new
-    driver.find_element(css: 'href="/company_grievance_outcomes"').click
-    driver.find_element(css: 'href="/company_grievance_outcomes/new"').click
-    driver.find_element(id: 'company_grievance_outcome_name').sendkeys "Regression Test CANCEL NEW DATE TODAY"
-    driver.find_element(css: 'href="/company_grievance_outcomes"').click
-  end
-
-  def performance_management_grievance_outcomes_delete
-    driver.find_element(css: 'href="/company_grievance_outcomes"').click
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > svg').click
-    driver.find_element(xpath: '//*[@id="delete_type_8488"]/div/div/div[3]/button[2]').click
-  end
-
-  def performance_management_grievance_outcomes_search
-    driver.find_element(css: 'href="/company_grievance_outcomes"').click
-    driver.find_element(css: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "Regression Test NEW DATE TODAY"
-    sleep 1 
-  end
-
-  def performance_management_grievance_outcomes_breadcrumb
-    driver.find_element(css: 'href="/company_grievance_outcomes"').click
-    driver.find_element(css: 'href="/company_grievance_outcomes/new"').click
-    driver.find_element(id: 'company_grievance_outcome_name').sendkeys "Regression Test BREADCRUMB DATE TODAY"
-    driver.find_element(css: 'href="/company_grievance_outcomes"').click
-  end
-
-#one to ones
-  def performance_management_one_to_one_types_new
-    driver.find_element(css: 'href="/company_one_to_one_types"').click
-    driver.find_element(css: 'href="/company_one_to_one_types/new"').click
-    driver.find_element(id: 'company_one_to_one_type_name').sendkeys "Regression Test NEW DATE TODAY"
-    driver.find_element(xpath: '//*[@id="new_company_one_to_one_type"]/p/input').click
-  end
-
-  def performance_management_one_to_one_types_edit
-    driver.find_element(css: 'href="/company_one_to_one_types"').click
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > a > svg').click
-    driver.find_element(id: 'company_one_to_one_type_name').sendkeys "Regression Test EDIT DATE TODAY"
-    driver.find_element(xpath: '//*[@id="new_company_one_to_one_type"]/p/input').click
-  end
-
-  def performance_management_one_to_one_types_cancel_new
-    driver.find_element(css: 'href="/company_one_to_one_types"').click
-    driver.find_element(css: 'href="/company_one_to_one_types/new"').click
-    driver.find_element(id: 'company_one_to_one_type_name').sendkeys "Regression Test CANCEL NEW DATE TODAY"
-    driver.find_element(xpath: '').click
-  end
-  
-  def performance_management_one_to_one_types_delete
-    driver.find_element(css: 'href="/company_one_to_one_types"').click
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(3) > td.actions > svg').click
-    driver.find_element(xpath: '//*[@id="delete_type"]/div/div/div[3]/button[2]').click
-  end
-  
-  def performance_management_one_to_one_types_search
-    driver.find_element(css: 'href="/company_one_to_one_types"').click
-    driver.find_element(xpath: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "Regression Test NEW DATE TODAY"
-    sleep 1
-  end
-
-  def performance_management_one_to_one_types_search_breadcrumb
-    driver.find_element(css: 'href="/company_one_to_one_types"').click
-    driver.find_element(css: 'href="/company_one_to_one_types/new"').click
-    driver.find_element(id: 'company_one_to_one_type_name').sendkeys "Regression Test BREADCRUMB TODAY"
-    driver.find_element(css: 'href="/company_one_to_one_types"').click
   end
 end

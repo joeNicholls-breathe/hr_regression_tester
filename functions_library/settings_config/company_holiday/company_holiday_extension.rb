@@ -1,4 +1,4 @@
-require File.expand_path('../base.rb', __FILE__)
+require File.expand_path('../../../base.rb', __FILE__)
 
 class CompanyHolidaysExtension < Base 
 	def company_holiday_add

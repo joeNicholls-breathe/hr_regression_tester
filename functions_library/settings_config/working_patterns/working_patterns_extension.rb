@@ -1,4 +1,4 @@
-require File.expand_path('../base.rb', __FILE__)
+require File.expand_path('../../../base.rb', __FILE__)
 
 class AccountWorkingPatternExtension < Base
   def working_pattern_add

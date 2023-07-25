@@ -1,4 +1,4 @@
-require File.expand_path('../base.rb', __FILE__)
+require File.expand_path('../../../base.rb', __FILE__)
 
 class EmployeeConfigExtension < Base
   def employee_congifuration_what_can_see_remunerations

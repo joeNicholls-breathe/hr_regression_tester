@@ -1,9 +1,9 @@
-require File.expand_path('../base.rb', __FILE__)
+require File.expand_path('../../../base.rb', __FILE__)
 
 class CompanyBlackoutsExtension < Base
 	def company_blakout_add_new
 		driver.find_element(xpath: '/html/body/section[2]/div[2]/a').click
-		driver.find_element(id: 'company_blackout_name').sendkeys "Balckout test" + todays_date)
+		driver.find_element(id: 'company_blackout_name').sendkeys "Balckout test" + todays_date
 		driver.find_element(id: '#company_blackout_start_date_react').sendkeys todays_date + 14
 		driver.find_element(id: '#company_blackout_end_date_react').sendkeys todays_date + 14
 		driver.find_element(id: 'company_blackout_whole_company').click		

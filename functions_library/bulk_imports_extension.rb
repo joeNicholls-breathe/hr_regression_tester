@@ -29,17 +29,6 @@ class BulkImportExtension < Base
     driver.find_element(id: 'submit-import').click
     sleep 5
   end
-
-
-
-
-
-
-
-
-
-
-
     
   def bulk_upload_employee_basic
     driver.find_element(id: 'employees_data_import_type').click
