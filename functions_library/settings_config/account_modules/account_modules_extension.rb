@@ -1,4 +1,4 @@
-require File.expand_path('../base.rb', __FILE__)
+require File.expand_path('../../../base.rb', __FILE__)
 
 class AccountModulesExtension < Base
   def modules_chargable_switch_on
@@ -66,3 +66,4 @@ class AccountModulesExtension < Base
     driver.find_element(id: 'account_use_xero_payroll_1').click
     driver.find_element(css: 'data-disable-with="update modules"').click
   end
+end

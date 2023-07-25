@@ -1,4 +1,4 @@
-require File.expand_path('../base.rb', __FILE__)
+require File.expand_path('../../../base.rb', __FILE__)
 
 class APIExtenion < Base 
 	def api_key_switch_on
@@ -6,7 +6,6 @@ class APIExtenion < Base
 		driver.find_element(xpath: '//*[@id="api-confirm"]/div/div/form/div[2]/p[2]/input').click
 		driver.find_element(xpath: '//*[@id="api-confirm"]/div/div/form/div[3]/input').click
 		sleep 10
-		
 	end
 
 	def api_key_switch_reset

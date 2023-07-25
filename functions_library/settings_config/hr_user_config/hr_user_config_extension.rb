@@ -1,13 +1,13 @@
-require File.expand_path('../base.rb', __FILE__)
+require File.expand_path('../../../base.rb', __FILE__)
 
 class HrUserConfigExtension < Base
   def hr_user_configuration_leave_needs_approval_on
     driver.find_element(id: 'account_hr_leave_needs_approval').click
   end
 
-  def hr_user_configuration_leave_needs_approval_off
-    driver.find_element(: '').click
-  end
+  #def hr_user_configuration_leave_needs_approval_off
+  #  driver.find_element(: '').click
+  #end
 
   def hr_user_configuration_use_gravatar_on
     driver.find_element(id: 'account_use_gravatar').click

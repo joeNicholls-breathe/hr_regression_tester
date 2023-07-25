@@ -1,39 +1,67 @@
-require File.expand_path('../base.rb', __FILE__)
+require File.expand_path('../../../base.rb', __FILE__)
 
 class AccountDetailsExtension < Base
   def company_details_data_entry_edit_positive
-    driver.find_element(class: 'href="/account/edit"').click
+    driver.find_element(xpath: '/html/body/section[2]/div[2]/a').click
     #company address
-    driver.find_element(id: 'account_name').sendkeys "Regression Setup Account Ltd"
-    driver.find_element(id: 'account_address1').sendkeys "Testing House"
-    driver.find_element(id: 'account_address2').sendkeys "Testing Lane"
-    driver.find_element(id: 'account_address3').sendkeys "Testing Town"
-    driver.find_element(id: 'account_city').sendkeys "London"
-    driver.find_element(id: 'account_county').sendkeys "Greater London"
-    driver.find_element(id: 'account_postcode').sendkeys "EC1N 3RD"
-    driver.find_element(id: 'account_country_id').sendkeys "273"
+    driver.find_element(id: 'account_name').clear
+    driver.find_element(id: 'account_name').send_keys "Regression Setup Account Ltd"
+    driver.find_element(id: 'account_address1').clear
+    driver.find_element(id: 'account_address1').send_keys "Testing House"
+    driver.find_element(id: 'account_address2').clear
+    driver.find_element(id: 'account_address2').send_keys "Testing Lane"
+    driver.find_element(id: 'account_address3').clear
+    driver.find_element(id: 'account_address3').send_keys "Testing Town"
+    driver.find_element(id: 'account_city').clear
+    driver.find_element(id: 'account_city').send_keys "London"
+    driver.find_element(id: 'account_county').clear
+    driver.find_element(id: 'account_county').send_keys "Greater London"
+    #scroll to button
+    element = driver.find_element(css: 'account_charity_name')
+    driver.execute_script('arguments[0].scrollIntoView(true);', element)
+    sleep 0.15
+    driver.find_element(id: 'account_postcode').clear
+    driver.find_element(id: 'account_postcode').send_keys "EC1N 3RD"
+    driver.find_element(id: 'account_country_id').clear
+    driver.find_element(id: 'account_country_id').send_keys "273"
+
     #company contact
-    driver.find_element(id: 'account_contact_name').sendkeys "Administrator User"
-    driver.find_element(id: 'account_contact_number').sendkeys "0207 654 2580"
-    #driver.find_element(id: account_contact_email').sendkeys "info@regressionaccount.com"
+    driver.find_element(id: 'account_contact_name').clear
+    driver.find_element(id: 'account_contact_name').send_keys "Administrator User"
+    driver.find_element(id: 'account_contact_number').clear
+    driver.find_element(id: 'account_contact_number').send_keys "0207 654 2580"
+    driver.find_element(id: 'account_contact_email').clear
+    driver.find_element(id: 'account_contact_email').send_keys "info@regressionaccount.com"
     #additional company info
-    driver.find_element(id: 'account_area').select_by("South East")
-    driver.find_element(id: 'account_industry').select_by("Finance and insurance")
+    drop = driver.find_element(id:'account_area')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:value, "South East")
+    drop = driver.find_element(id:'account_industry')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:value, "Finance and insurance")
     #charity settings - non std
-    driver.find_element(id: 'account_charity_name').sendkeys "Regression Account Ltd"
-    driver.find_element(id: 'account_subscription_attributes_charity_number').sendkeys "4354129"
-    driver.find_element(id: 'account_subscription_attributes_registered_charity_name').sendkeys "Regression Account Ltd"
-    driver.find_element(id: 'account_subscription_attributes_charity_sort_code').sendkeys "04-00-04"
-    driver.find_element(id: 'account_subscription_attributes_charity_bank_account_number').sendkeys "12345678"
+    driver.find_element(id: 'account_charity_name').clear
+    driver.find_element(id: 'account_charity_name').send_keys "Regression Account Ltd"
+    driver.find_element(id: 'account_subscription_attributes_charity_number').clear
+    driver.find_element(id: 'account_subscription_attributes_charity_number').send_keys "4354129"
+    driver.find_element(id: 'account_subscription_attributes_registered_charity_name').clear
+    driver.find_element(id: 'account_subscription_attributes_registered_charity_name').send_keys "Regression Account Ltd"
+    driver.find_element(id: 'account_subscription_attributes_charity_sort_code').clear
+    driver.find_element(id: 'account_subscription_attributes_charity_sort_code').send_keys "04-00-04"
+    driver.find_element(id: 'account_subscription_attributes_charity_bank_account_number').clear
+    driver.find_element(id: 'account_subscription_attributes_charity_bank_account_number').send_keys "12345678"
     #domain
-    driver.find_element(id: 'account_domain').sendkeys "regressionaccountdomain"
     driver.find_element(id: 'account-name-change-disclaimer').click
+    driver.find_element(id: 'account_domain').clear
+    driver.find_element(id: 'account_domain').send_keys "regressionaccountdomain"
     #company logo
-    driver.find_element(id: 'account_logo').sendkeys "" #need to find an image to upload and reference it here to the file
+    #driver.find_element(id: 'account_logo').send_keys "" #need to find an image to upload and reference it here to the file
     #company payrite reference
     #driver.find_element(id: 'account_payrite_ref').sendkeys "159654"
     #remuneration currency
-    driver.find_element(id: 'account_remuneration_currency_id').select_by(17)
+    drop = driver.find_element(id:'account_remuneration_currency_id')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:value, "17")
     #hr partner code - non std
     #driver.find_element(id: 'account_partner_company_reference').sendkeys "215"
     #referral code - non std

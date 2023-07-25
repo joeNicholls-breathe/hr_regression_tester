@@ -1,4 +1,4 @@
-
+require File.expand_path('../../../base.rb', __FILE__)
 
 class MultiFactorExtension < Base
 #2FA

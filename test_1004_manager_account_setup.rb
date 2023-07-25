@@ -1,10 +1,31 @@
 require 'selenium-webdriver'
-require './functions_library/test_page_check.rb'
+require 'logger'
+require './functions_library/ui_page_element_check.rb'
 require './functions_library/test_reference_extension.rb'
+require './functions_library/navigate_browser_extension.rb'
 require './functions_library/login_extension.rb'
 require './functions_library/login_app_extension.rb'
-require './functions_library/navigate_browser_extension.rb'
 require './functions_library/navigate_around_app_manager.rb'
+require './functions_library/settings_config/2FA/2fa_extension.rb'
+require './functions_library/settings_config/account_config_navigation/account_configuration_navigation_extension.rb'
+require './functions_library/settings_config/account_details/account_details_extension.rb'
+require './functions_library/settings_config/account_modules/account_modules_extension.rb'
+require './functions_library/settings_config/account_picklists/picklist_extension.rb'
+require './functions_library/settings_config/account_picklists/picklist_recruitment_extension.rb'
+require './functions_library/settings_config/account_picklists/picklist_expenses_extension.rb'
+require './functions_library/settings_config/account_picklists/picklist_performance_extension.rb'
+require './functions_library/settings_config/api_setup/api_setup_extension.rb'
+require './functions_library/settings_config/calendar_subscription/calendar_subscription_extension.rb'
+require './functions_library/settings_config/company_blackouts/company_blackouts_extension.rb'
+require './functions_library/settings_config/company_holiday/company_holiday_extension.rb'
+require './functions_library/settings_config/email_notifications/email_notification_extension.rb'
+require './functions_library/settings_config/employee_config/employee_config_extension.rb'
+require './functions_library/settings_config/holiday_allowance/holiday_allowance_extension.rb'
+require './functions_library/settings_config/holiday_years/holiday_years_extension.rb'
+require './functions_library/settings_config/hr_user_config/hr_user_config_extension.rb'
+require './functions_library/settings_config/line_manager_config/line_manager_config_extension.rb'
+require './functions_library/settings_config/rotacloud/rotacloud_extension.rb'
+require './functions_library/settings_config/working_patterns/working_patterns_extension.rb'
 
 class AccountSetup < Base
   attr_accessor :driver
@@ -20,12 +41,17 @@ class AccountSetup < Base
     LoginExtension.new(driver).login_setup_acc_admin
     LoginAppExtension.new(driver).select_hr
     puts "login"
-    AppNavigationExtensionManager.new(driver).navigate_to_settings
+    AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     puts "navigate to configuration settings"
-    AccountConfigExtension.new(driver).navigate_to_company_details
-    AccountConfigExtension.new(driver).company_details_data_entry_edit
-    AccountConfigExtension.new(driver).navigate_back_to_settings_breadcrumb
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_company_details
+    AccountDetailsExtension.new(driver).company_details_data_entry_edit_positive
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     puts "enter company details"
+binding.pry
+
+
+
+
     AccountConfigExtension.new(driver).navigate_to_modules_chargable
     AccountConfigExtension.new(driver).modules_chargable_switch_on
     puts "switch on modules - chargable"
@@ -400,10 +426,6 @@ class AccountSetup < Base
     puts "Integrations - Rotacloud"
     AccountConfigExtension.navigate_back_to_settings_breadcrumb
     
-
-
-
-
     puts "add line manager to account"
 
     puts "add employee to account"

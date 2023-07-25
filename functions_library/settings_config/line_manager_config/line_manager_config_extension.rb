@@ -1,4 +1,4 @@
-require File.expand_path('../base.rb', __FILE__)
+require File.expand_path('../../../base.rb', __FILE__)
 
 class LineManagerConfigExtension < Base
   def line_manager_configuration_on_profile_manage
