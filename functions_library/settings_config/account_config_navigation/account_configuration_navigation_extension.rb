@@ -7,7 +7,7 @@ class NavigationAroundAccountConfiguration < Base
   end
 
   def navigate_back_to_settings_breadcrumb
-    driver.find_element(css: 'href="/account/settings"').click
+    driver.find_element(css: 'body > section.content.container.p-4 > div.breadcrumb.mb-2 > a').click
   end
 
   def navigate_to_modules_chargable

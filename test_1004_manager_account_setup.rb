@@ -45,15 +45,16 @@ class AccountSetup < Base
     puts "navigate to configuration settings"
     NavigationAroundAccountConfiguration.new(driver).navigate_to_company_details
     AccountDetailsExtension.new(driver).company_details_data_entry_edit_positive
+    puts "enter company details - save changes"
+    AccountDetailsExtension.new(driver).company_details_data_entry_cancel_changes
+    puts "enter company details - cancel changes"
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    puts "enter company details"
+    puts "return to company settings"
+
+#CURRENT POSITION
 binding.pry
-
-
-
-
-    AccountConfigExtension.new(driver).navigate_to_modules_chargable
-    AccountConfigExtension.new(driver).modules_chargable_switch_on
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_modules_chargable
+    .new(driver).modules_chargable_switch_on
     puts "switch on modules - chargable"
     AccountConfigExtension.new(driver).navigate_to_modules_free
     AccountConfigExtension.new(driver).modules_free_switch_on
