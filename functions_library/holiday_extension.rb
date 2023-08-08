@@ -12,17 +12,21 @@ class HolidayExtension < Base
     driver.find_element(css: 'href=["/employees/settings[:staging][:employee_id]/leave_requests/make_request"]').click
   end
 
+  def holiday_employee_absence_index
+    driver.navigate.to('https://login.breathehrstaging.com/employees/20717/absences')
+  end
+
   def holiday_request_profile_navigate_employee
     driver.find_element(xpath: '//*[@id="leave"]').click
     driver.find_element(xpath: '/html/body/section[2]/div[2]/div/a').click
   end
 
   def holiday_form_complete_employee
-    driver.find_element(css: '#\#leave_request_start_date_react').send_keys "22/03/2023" #start date
+    driver.find_element(css: '#\#leave_request_start_date_react').send_keys "22/09/2023" #start date
     driver.find_element(id: 'leave_request_half_start_true').click #half day
     driver.find_element(id: 'leave_request_half_start_am_pm_am').click #am
     driver.find_element(id: 'leave_request_half_start_am_pm_pm').click #pm
-    driver.find_element(css: '#\#leave_request_end_date_react').send_keys "22/03/2023" #end date
+    driver.find_element(css: '#\#leave_request_end_date_react').send_keys "22/09/2023" #end date
     driver.find_element(id: 'leave_request_notes').send_keys "Test Leave request as employee reference no. DATE" #note
     driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
   end
@@ -78,14 +82,4 @@ class HolidayExtension < Base
     driver.find_element(xpath: '/html/body/section[2]/div[7]/div[1]/div/table/tbody/tr/td[7]/svg').click
     driver.find_element(xpath: '/html/body/section[2]/div[7]/div[1]/div/table/tbody/tr/td[7]/div/div/div/div[3]/button[2]').click
   end
-
-
-
-
-
-
-
-
-
-
 end

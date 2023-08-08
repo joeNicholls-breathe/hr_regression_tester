@@ -1,0 +1,63 @@
+require 'selenium-webdriver'
+require './functions_library/navigate_browser_extension.rb'
+require './functions_library/login_extension.rb'
+require './functions_library/logout_extension.rb'
+require './functions_library/login_app_extension.rb'
+require './functions_library/employee_dashboard_extension.rb'
+require './functions_library/holiday_extension.rb'
+require './functions_library/navigate_around_app_employee.rb'
+
+
+class TestLeaveRequest
+  attr_accessor :driver
+
+  def initialize
+    @driver = Selenium::WebDriver.for :chrome
+    #driver.manage.timeout.implicit_wait = 3
+    Selenium::WebDriver.logger.level = :info
+  end
+
+  def test_leave_request
+    NavigateBrowserExtension.new(driver).breathe_login
+    puts "Pass - Navigate to Login Screen" 
+    sleep 1
+    LoginExtension.new(driver).login_holiday_employee
+    puts "Pass - Login as employeen"
+    sleep 1
+    LoginAppExtension.new(driver).select_hr
+    puts "Pass - Selects HR"  
+    sleep 1
+    EmployeeDashboardExtension.new(driver).make_holiday_request
+    puts "Pass - Opens leave request" 
+    sleep 1
+    HolidayExtension.new(driver).holiday_form_complete_employee
+    puts "Pass - Completes leave request" 
+    sleep 1
+    EmployeeDashboardExtension.new(driver).view_holiday_request
+    puts "Pass - Displays leave request" 
+    sleep 1
+    puts "Test complete - Create leave request"
+    LogoutExtension.new(driver).user_logout
+    puts 'Pass - Holiday Employee logged out'
+
+    NavigateBrowserExtension.new(driver).breathe_login
+    puts "Pass - Navigate to Login Screen" 
+    sleep 1
+    LoginExtension.new(driver).login_admin
+    puts "Pass - Login as admin"
+    sleep 1
+    LoginAppExtension.new(driver).select_hr
+    puts "Pass - Selects HR"  
+    sleep 1
+
+    HolidayExtension.new(driver).holiday_employee_absence_index
+    puts "Pass - Navigate to holiday employee absences" 
+    sleep 1
+
+    puts "Test complete - view leave request"
+  end
+
+
+end
+
+TestLeaveRequest.new.test_leave_request
