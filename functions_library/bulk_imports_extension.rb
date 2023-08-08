@@ -1,4 +1,5 @@
 require File.expand_path('../base.rb', __FILE__)
+require file_path = File.join(__dir__,'./account_employee_setup/positive_imports/employee_full.xlsx')
 
 class BulkImportExtension < Base
   def navigate_to_bulk_upload

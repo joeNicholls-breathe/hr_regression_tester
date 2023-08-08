@@ -10,6 +10,8 @@ class AccountModulesExtension < Base
     driver.find_element(id: 'account_use_learn_1').click
     #Rota, Time & Attendance
     driver.find_element(id: 'account_use_rta_1').click
+    sleep 0.25
+    driver.find_element(css: '#enable-rta-modal .modal-confirm').click
     driver.find_element(id: 'update-chargeable-modules-btn').click
   end
 

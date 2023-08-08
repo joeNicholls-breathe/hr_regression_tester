@@ -11,7 +11,12 @@ class NavigationAroundAccountConfiguration < Base
   end
 
   def navigate_to_modules_chargable
-    driver.find_element(css: 'href="/account/modules"').click
+    driver.find_element(xpath: '/html/body/section[2]/div[2]/div[1]/div[1]/a[2]').click
+  end
+
+  def navigate_to_modules_free
+    binding.pry
+    driver.find_element(xpath: '//*[@id="tabs-0"]/li[2]/a').click
   end
 
   def navigate_to_picklist
