@@ -50,27 +50,29 @@ class AccountSetup < Base
     puts "enter company details - cancel changes"
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     puts "return to company settings"
-
-#CURRENT POSITION
-binding.pry
     NavigationAroundAccountConfiguration.new(driver).navigate_to_modules_chargable
-    .new(driver).modules_chargable_switch_on
+
+#CURRENT POSITION - need to see why i cant get to the button within the modal? maybe two elements named the same thing 
+    AccountModulesExtension.new(driver).modules_chargable_switch_on
     puts "switch on modules - chargable"
-    AccountConfigExtension.new(driver).navigate_to_modules_free
-    AccountConfigExtension.new(driver).modules_free_switch_on
+    AccountModulesExtension.new(driver).navigate_to_modules_free
+    AccountModulesExtension.new(driver).modules_free_switch_on
     puts "switch on modules - free"
-    AccountConfigExtension.new(driver).custom_fields
+    AccountModulesExtension.new(driver).custom_fields
     puts "add a custom field"
-    AccountConfigExtension.new(driver).payroll_export_log_changes_only
+    AccountModulesExtension.new(driver).payroll_export_log_changes_only
     puts "switch on payroll exports"
-    AccountConfigExtension.new(driver).person_change_logs
+    AccountModulesExtension.new(driver).person_change_logs
     puts "switch on change logs"
-    AccountConfigExtension.new(driver).onboarding_tasks_on
+    AccountModulesExtension.new(driver).onboarding_tasks_on
     puts "add onboarding tasks for employee"
-    AccountConfigExtension.new(driver).xero_payroll_integration
+    AccountModulesExtension.new(driver).xero_payroll_integration
     puts "switch on xero integration *might want to do this as the buy now journey"
-    AccountConfigExtension.new(driver).navigate_to_picklist
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_picklist
     puts "navigate to picklists"
+
+
+binding.pry
 #details
     AccountConfigExtension.details_contract_types_add
     AccountConfigExtension.details_equipment_types_add
