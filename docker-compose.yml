@@ -1,0 +1,8 @@
+services:
+  hr_regression:
+    build: .
+    volumes:
+      - .:/usr/src/app
+    stdin_open: true
+    tty: true
+
