@@ -51,11 +51,10 @@ class AccountSetup < Base
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     puts "return to company settings"
     NavigationAroundAccountConfiguration.new(driver).navigate_to_modules_chargable
-
-#CURRENT POSITION - need to see why i cant get to the button within the modal? maybe two elements named the same thing 
     AccountModulesExtension.new(driver).modules_chargable_switch_on
     puts "switch on modules - chargable"
-    AccountModulesExtension.new(driver).navigate_to_modules_free
+    
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_modules_free
     AccountModulesExtension.new(driver).modules_free_switch_on
     puts "switch on modules - free"
     AccountModulesExtension.new(driver).custom_fields
@@ -67,11 +66,11 @@ class AccountSetup < Base
     AccountModulesExtension.new(driver).onboarding_tasks_on
     puts "add onboarding tasks for employee"
     AccountModulesExtension.new(driver).xero_payroll_integration
-    puts "switch on xero integration *might want to do this as the buy now journey"
+    puts "switch on xero integration might want to do this as the buy now journey"
     NavigationAroundAccountConfiguration.new(driver).navigate_to_picklist
     puts "navigate to picklists"
 
-
+#CURRENT POSITION - need to see why i cant get to the button within the modal? maybe two elements named the same thing 
 binding.pry
 #details
     AccountConfigExtension.details_contract_types_add
