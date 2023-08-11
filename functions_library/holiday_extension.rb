@@ -12,8 +12,18 @@ class HolidayExtension < Base
     driver.find_element(css: 'href=["/employees/settings[:staging][:employee_id]/leave_requests/make_request"]').click
   end
 
+  def holiday_employee_absence_index_requests
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/20717/holidays#tab_requests')
+  end
+
   def holiday_employee_absence_index
-    driver.navigate.to('https://login.breathehrstaging.com/employees/20717/absences')
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/20717/holidays')
+  end
+
+  def approve_leave_request
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[7]/a[1]').click
+    driver.find_element(xpath: '/html/body/section[2]/div[4]/div[2]/button[2]').click
+    driver.find_element(xpath: '/html/body/section[2]/div[4]/div[2]/div[2]/div/div/form/div[3]/input').click
   end
 
   def holiday_request_profile_navigate_employee
