@@ -22,7 +22,7 @@ class TestLeaveRequest
     puts "Pass - Navigate to Login Screen" 
     sleep 1
     LoginExtension.new(driver).login_holiday_employee
-    puts "Pass - Login as employeen"
+    puts "Pass - Login as employee"
     sleep 1
     LoginAppExtension.new(driver).select_hr
     puts "Pass - Selects HR"  
@@ -36,9 +36,9 @@ class TestLeaveRequest
     EmployeeDashboardExtension.new(driver).view_holiday_request
     puts "Pass - Displays leave request" 
     sleep 1
-    puts "Test complete - Create leave request"
     LogoutExtension.new(driver).user_logout
     puts 'Pass - Holiday Employee logged out'
+    puts "Test complete - Employee creates leave request"
 
     NavigateBrowserExtension.new(driver).breathe_login
     puts "Pass - Navigate to Login Screen" 
@@ -49,12 +49,15 @@ class TestLeaveRequest
     LoginAppExtension.new(driver).select_hr
     puts "Pass - Selects HR"  
     sleep 1
-
-    HolidayExtension.new(driver).holiday_employee_absence_index
+    HolidayExtension.new(driver).holiday_employee_absence_index_requests
     puts "Pass - Navigate to holiday employee absences" 
     sleep 1
-
-    puts "Test complete - view leave request"
+    HolidayExtension.new(driver).approve_leave_request
+    puts "Pass - approve employee leave request" 
+    sleep 1
+    HolidayExtension.new(driver).holiday_employee_absence_index
+    puts "Pass - Navigate to holiday employee absences"
+    puts "Test complete - Approver can approve holiday request"
   end
 
 
