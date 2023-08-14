@@ -31,6 +31,14 @@ class HolidayExtension < Base
     driver.find_element(xpath: '/html/body/section[2]/div[2]/div/a').click
   end
 
+  def booked_amount_test_one
+    driver.find_element(id: 'booked-and-taken').text
+  end
+
+  def available_amount_test_one
+    driver.find_element(id: 'available').text
+  end
+
   def holiday_form_complete_employee
     driver.find_element(css: '#\#leave_request_start_date_react').send_keys "22/09/2023" #start date
     driver.find_element(id: 'leave_request_half_start_true').click #half day
