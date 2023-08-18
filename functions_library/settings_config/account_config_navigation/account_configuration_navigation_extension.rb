@@ -15,7 +15,6 @@ class NavigationAroundAccountConfiguration < Base
   end
 
   def navigate_to_modules_free
-    binding.pry
     driver.find_element(xpath: '//*[@id="tabs-0"]/li[2]/a').click
   end
 

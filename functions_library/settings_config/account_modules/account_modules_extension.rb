@@ -29,11 +29,14 @@ class AccountModulesExtension < Base
     driver.find_element(id: 'account_use_org_chart').click
     driver.find_element(id: 'account_use_payslip_imports').click
     #payslip import - learn more
-    driver.find_element(css: 'href="https://intercom.help/breathehr/articles/1899570-payslip-uploader"').click
+    driver.find_element(xpath: '//*[@id="edit_account_3899"]/div/div[1]/div/div[14]/a').click
+    # will need to return to the previous page.
+
     driver.find_element(id: 'account_use_personal_history').click
     driver.find_element(id: 'account_use_time_logs').click
     driver.find_element(id: 'account_use_training').click
     #submit in order to activate location booking
+    binding.pry
     driver.find_element(css: 'data-disable-with="update modules"').click
     driver.find_element(id: 'account_location_booking_enabled').click
     driver.find_element(css: 'data-disable-with="update modules"').click

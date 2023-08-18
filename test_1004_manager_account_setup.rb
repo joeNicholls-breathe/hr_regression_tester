@@ -51,8 +51,8 @@ class AccountSetup < Base
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     puts "return to company settings"
     NavigationAroundAccountConfiguration.new(driver).navigate_to_modules_chargable
-    AccountModulesExtension.new(driver).modules_chargable_switch_on
-    puts "switch on modules - chargable"
+    #AccountModulesExtension.new(driver).modules_chargable_switch_on
+    #puts "switch on modules - chargable"
     
     NavigationAroundAccountConfiguration.new(driver).navigate_to_modules_free
     AccountModulesExtension.new(driver).modules_free_switch_on
