@@ -14,10 +14,6 @@ class AccountModulesExtension < Base
     driver.find_element(css: '#enable-rta-modal .modal-confirm').click
     driver.find_element(id: 'update-chargeable-modules-btn').click
   end
-
-  def navigate_to_modules_free
-    driver.find_element(xpath: '//*[@id="tabs-0"]/li[2]/a').click
-  end
   
   def modules_free_switch_on
     driver.find_element(id: 'account_use_company_suggestions').click
