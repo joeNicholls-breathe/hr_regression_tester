@@ -16,8 +16,16 @@ class HolidayExtension < Base
     driver.navigate.to('https://hr.breathehrstaging.com/employees/20717/holidays#tab_requests')
   end
 
+  def carry_over_holiday_employee_absence_index_requests
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/21090/holidays#tab_requests')
+  end
+
   def holiday_employee_absence_index
     driver.navigate.to('https://hr.breathehrstaging.com/employees/20717/holidays')
+  end
+
+  def carry_over_holiday_employee_absence_index
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/21090/holidays')
   end
 
   def approve_leave_request
@@ -31,22 +39,32 @@ class HolidayExtension < Base
     driver.find_element(xpath: '/html/body/section[2]/div[2]/div/a').click
   end
 
-  def booked_amount_test_one
+  def booked_amount
     driver.find_element(id: 'booked-and-taken').text
   end
 
-  def available_amount_test_one
+  def available_amount
     driver.find_element(id: 'available').text
   end
 
-  def holiday_form_complete_employee
-    driver.find_element(css: '#\#leave_request_start_date_react').send_keys "22/09/2023" #start date
-    driver.find_element(id: 'leave_request_half_start_true').click #half day
-    driver.find_element(id: 'leave_request_half_start_am_pm_am').click #am
-    driver.find_element(id: 'leave_request_half_start_am_pm_pm').click #pm
-    driver.find_element(css: '#\#leave_request_end_date_react').send_keys "22/09/2023" #end date
-    driver.find_element(id: 'leave_request_notes').send_keys "Test Leave request as employee reference no. DATE" #note
-    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
+  def purge_holiday_data_holiday_employee
+    driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
+    drop = driver.find_element(:id, "employee_id")
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:text, "Holiday employee")
+    driver.find_element(xpath: '/html/body/section[2]/div/div[3]/div/form/div/div[3]/input').click
+    driver.find_element(id: 'continue-purge').click
+    driver.find_element(xpath: '//*[@id="purge_data_modal"]/div/div/div[3]/button[2]').click
+  end
+
+  def purge_holiday_data_holiday_carry_over_employee
+    driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
+    drop = driver.find_element(:id, "employee_id")
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:text, "Carry-over Employee ")
+    driver.find_element(xpath: '/html/body/section[2]/div/div[3]/div/form/div/div[3]/input').click
+    driver.find_element(id: 'continue-purge').click
+    driver.find_element(xpath: '//*[@id="purge_data_modal"]/div/div/div[3]/button[2]').click
   end
 
   def cancel_form
@@ -73,18 +91,6 @@ class HolidayExtension < Base
     driver.find_element(xpath: '//*[@id="tab-hr-dashboard"]/div/div[1]/div[3]/div[2]/div[1]/div[1]').click
     driver.find_element(xpath: '/html/body/section[2]/div[4]/div[2]/button[1]').click
     driver.find_element(xpath: '//*[@id="edit_leave_request_10374"]/div[3]/button').click #need to find request no from ui
-  end
-
-  def holiday_employee_edit
-    driver.find_element(class: '').click
-  end
-
-  def holiday_manager_edit
-    driver.find_element(class: '').click
-  end
-
-  def holiday_manager_cancel
-    driver.find_element(class: '').click
   end
 
   def holiday_show_employee
