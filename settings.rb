@@ -10,6 +10,7 @@ module Settings
         line_manager_email: 'line@hr-regression.com',
         employee_email: 'employee@hr-regression.com',
         holiday_employee_email: 'holiday-employee@hr-regression.com',
+        carry_over_holiday_email: 'carry.over@hr-regression.com',
         setup_acc_email: 'admin@auto-reg.co.uk',
         saas_admin_email: 'antiqueruby0@nllessons.com'
       }
