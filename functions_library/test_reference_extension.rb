@@ -10,6 +10,10 @@ module TestRefExtension
       Date.today
     end
 
+    def todays_date_string
+      Date.today.strftime("%d-%m-%Y")
+    end
+
     def tomorrow
       Date.today + 1
     end

@@ -2,7 +2,7 @@ require 'selenium-webdriver'
 require 'logger'
 require './functions_library/navigate_browser_extension.rb'
 require './functions_library/sign_up_extension.rb'
-require File.join(__dir__, "account_employee_setup", "positive_imports", "employee_full.xlsx")
+#require File.join(__dir__, "account_employee_setup", "positive_imports", "employee_full.xlsx")
 #require './account_employee_setup/positive_imports/employee_full.xlsx'
 require './functions_library/navigate_around_app_manager.rb'
 require './functions_library/create_employee_extension.rb'
@@ -119,6 +119,6 @@ class TestSignUp < Base
   end
 end
 
-TestSignUp.new.test_sign_up_with_bulk
+#TestSignUp.new.test_sign_up_with_bulk
 TestSignUp.new.test_sign_up_with_add_employee_manually
 TestSignUp.new.signup_login_path
