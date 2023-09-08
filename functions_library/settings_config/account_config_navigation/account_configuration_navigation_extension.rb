@@ -15,12 +15,11 @@ class NavigationAroundAccountConfiguration < Base
   end
 
   def navigate_to_modules_free
-    binding.pry
     driver.find_element(xpath: '//*[@id="tabs-0"]/li[2]/a').click
   end
 
   def navigate_to_picklist
-  driver.find_element(css: 'href="/account/picklists"').click
+  driver.find_element(xpath: '/html/body/section[2]/div[2]/div[1]/div[1]/a[3]').click
   end
 
   def navigate_to_email_notifications

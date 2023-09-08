@@ -37,51 +37,90 @@ class AccountSetup < Base
 
   def test_account_setup
     NavigateBrowserExtension.new(driver).breathe_login
-    puts "navigate to breathe login url"
+    puts "1. navigate to breathe login url"
     LoginExtension.new(driver).login_setup_acc_admin
     LoginAppExtension.new(driver).select_hr
-    puts "login"
+    puts "2. login"
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
-    puts "navigate to configuration settings"
+    puts "3. navigate to configuration settings"
     NavigationAroundAccountConfiguration.new(driver).navigate_to_company_details
     AccountDetailsExtension.new(driver).company_details_data_entry_edit_positive
-    puts "enter company details - save changes"
+    puts "4. enter company details - save changes"
     AccountDetailsExtension.new(driver).company_details_data_entry_cancel_changes
-    puts "enter company details - cancel changes"
+    puts "5. enter company details - cancel changes"
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    puts "return to company settings"
+    puts "6. return to company settings"
     NavigationAroundAccountConfiguration.new(driver).navigate_to_modules_chargable
-    AccountModulesExtension.new(driver).modules_chargable_switch_on
-    puts "switch on modules - chargable"
-    
+    #AccountModulesExtension.new(driver).modules_chargable_switch_on
+    #puts "switch on modules - chargable"
     NavigationAroundAccountConfiguration.new(driver).navigate_to_modules_free
-    AccountModulesExtension.new(driver).modules_free_switch_on
-    puts "switch on modules - free"
+    AccountModulesExtension.new(driver).modules_free_switch_on_off
+    puts "7. switch on and off modules - free"
+    sleep 1
     AccountModulesExtension.new(driver).custom_fields
-    puts "add a custom field"
-    AccountModulesExtension.new(driver).payroll_export_log_changes_only
-    puts "switch on payroll exports"
+    puts "8. add a custom field"
+    AccountModulesExtension.new(driver).payroll_export_log_changes_only_on
+    puts "9a. switch on payroll exports"
+    AccountModulesExtension.new(driver).payroll_export_log_off
+    puts "9b. switch off payroll exports"
     AccountModulesExtension.new(driver).person_change_logs
-    puts "switch on change logs"
+    puts "10a. switch on change logs"
+    AccountModulesExtension.new(driver).person_change_logs
+    puts "10b. switch off change logs"
     AccountModulesExtension.new(driver).onboarding_tasks_on
-    puts "add onboarding tasks for employee"
-    AccountModulesExtension.new(driver).xero_payroll_integration
-    puts "switch on xero integration might want to do this as the buy now journey"
+    puts "11a. Turn on onboarding tasks"
+    AccountModulesExtension.new(driver).onboarding_tasks_off
+    puts "11b. Turn off onboarding tasks"
+    AccountModulesExtension.new(driver).xero_payroll_integration_on
+    puts "12. switch on xero integration might want to do this as the buy now journey"
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+    sleep 0.50
     NavigationAroundAccountConfiguration.new(driver).navigate_to_picklist
-    puts "navigate to picklists"
+    puts "13. navigate to picklists"
+    AccountPicklistExtension.new(driver).details_contract_types_add
+    puts "14a. Contract types - Add"
+    AccountPicklistExtension.new(driver).details_contract_types_add_cancel
+    puts "14b. Contract types - Cancel add new"
+    AccountPicklistExtension.new(driver).details_contract_types_edit
+    puts "14c. Contract type - Edit"
+    AccountPicklistExtension.new(driver).details_contract_types_edit_cancel
+    puts "14d. Contract type - Cancel Edit"
+    sleep 0.50
+    AccountPicklistExtension.new(driver).details_contract_types_delete
+    puts "14e. Contract type - Delete"
 
-#CURRENT POSITION - need to see why i cant get to the button within the modal? maybe two elements named the same thing 
-binding.pry
-#details
-    AccountConfigExtension.details_contract_types_add
-    AccountConfigExtension.details_equipment_types_add
-    AccountConfigExtension.details_ethnicities_add
-    AccountConfigExtension.details_id_documents_types_add
-    AccountConfigExtension.details_kudos_types_add
-    AccountConfigExtension.details_notice_periods_add
-    AccountConfigExtension.details_pronouns_add
-    AccountConfigExtension.details_reason_for_leaving_add
-    AccountConfigExtension.details_onboarding_tasks_add
+#CURRENT POSITION
+    AccountPicklistExtension.new(driver).details_contract_types_delete_cancel
+    puts "14f. Contract type - Cancel delete"
+    AccountPicklistExtension.new(driver).details_contract_type_add_return_breadcrumb
+    puts "14g. Breadcrumb return from Contract type"
+
+    AccountPicklistExtension.new(driver).details_equipment_types_add
+    puts ""
+    AccountPicklistExtension.new(driver).details_ethnicities_add
+    puts ""
+    AccountPicklistExtension.new(driver).details_id_documents_types_add
+    puts ""
+    AccountPicklistExtension.new(driver).details_kudos_types_add
+    puts ""
+    AccountPicklistExtension.new(driver).details_notice_periods_add
+    puts ""
+    AccountPicklistExtension.new(driver).details_pronouns_add
+    puts ""
+    AccountPicklistExtension.new(driver).details_reason_for_leaving_add
+    puts ""
+    AccountPicklistExtension.new(driver).details_onboarding_tasks_add
+    puts ""
+    AccountPicklistExtension.new(driver).
+    puts ""
+
+
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+    puts "Complete contract types - return to picklist"
+    
+    
+    
+
 #absence
     AccountConfigExtension.absence_other_leave_reasons_add
     AccountConfigExtension.absence_sickness_types_new
