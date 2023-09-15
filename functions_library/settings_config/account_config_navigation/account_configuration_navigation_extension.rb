@@ -19,7 +19,11 @@ class NavigationAroundAccountConfiguration < Base
   end
 
   def navigate_to_picklist
-  driver.find_element(xpath: '/html/body/section[2]/div[2]/div[1]/div[1]/a[3]').click
+    driver.find_element(xpath: '/html/body/section[2]/div[2]/div[1]/div[1]/a[3]').click
+  end
+
+  def return_to_picklist_menu
+    driver.find_element(xpath: '/html/body/section[2]/div[1]/a').click
   end
 
   def navigate_to_email_notifications

@@ -41,4 +41,8 @@ class AppNavigationExtensionManager < Base
     driver.find_element(id: 'user-menu-dropdown').click
     driver.find_element(xpath: '/html/body/div[3]/div/div[3]/ul/li[4]/a/img').click
   end
+
+  def pop_modal_price_increase
+    driver.find_element(css: '#pricing-dismiss').click
+  end
 end
