@@ -1,81 +1,6 @@
 require File.expand_path('../../../base.rb', __FILE__)
 
 class AccountPicklistExtension < Base
-#contract type 
-  def details_contract_types_add
-    driver.find_element(xpath: '/html/body/section[2]/div[3]/div[1]/div[3]/a[1]').click
-    driver.find_element(xpath: '/html/body/section[2]/div[2]').click
-    driver.find_element(id: 'company_contract_type_name').send_keys("Add Contract Type" + todays_date_string)
-    driver.find_element(css: '#new_company_contract_type > p > input').click
-  end
-
-  def details_contract_types_add_cancel
-    driver.find_element(xpath: '/html/body/section[2]/div[2]').click
-    driver.find_element(id: 'company_contract_type_name').send_keys "Add Contract Type Cancel"
-    driver.find_element(xpath: '//*[@id="new_company_contract_type"]/p/a').click
-  end
-
-  def details_contract_type_add_return_breadcrumb
-    driver.find_element(xpath: '/html/body/section[2]/div[2]').click
-    driver.find_element(xpath: '/html/body/section/div/div/div/a').click
-  end
-
-  def details_contract_types_edit
-    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[1]/td[2]/a[1]').click
-    driver.find_element(id: 'company_contract_type_name').clear
-    driver.find_element(id: 'company_contract_type_name').send_keys "Contract Type Edit"
-    driver.find_element(xpath: '//*/p/input').click
-  end
-  
-  def details_contract_types_edit_cancel
-    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[1]/td[2]/a[1]').click
-    driver.find_element(id: 'company_contract_type_name').clear
-    driver.find_element(id: 'company_contract_type_name').send_keys "Contract Type Edit Cancel"
-    driver.find_element(xpath: '//*/p/a').click
-  end
-  
-  def details_contract_types_delete
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr.even > td.actions > svg').click
-    a = driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(2) > td.actions > a:nth-child(3)')
-    attribute_value = a.attribute('href')
-    split_value = attribute_value.split('/')[4]
-    #puts "value: #{split_value}"
-    selector = "#delete_contract_type_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
-    driver.find_element(css: selector).click
-  end
-
-  def details_contract_types_delete_cancel
-    binding.pry
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr.even > td.actions > svg').click
-    driver.find_element(xpath: '//*/div/div/div[3]/button[1]').click
-  end
-
-#equipment type
-  def details_equipment_types_add
-    driver.find_element(css: 'href="/company_asset_types"').click
-    driver.find_element(xpath: '/html/body/section[2]/div[2]/a/span/svg[2]').click
-    driver.find_element(id: 'company_asset_type_name').send_keys "Equipment test add"
-    driver.find_element(id: 'company_asset_type_current').click
-  end 
-
-  def details_equipment_types_edit
-    driver.find_element(css: 'href="/company_asset_types"').click
-    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[1]/td[3]/a[1]').click
-    driver.find_element(id: 'company_asset_type_name').send_keys "Equipment test Edit"
-    driver.find_element(id: 'company_asset_type_current').click
-  end 
-
-  def details_equipment_types_delete
-    driver.find_element(css: 'href="/company_asset_types"').click
-    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[3]/svg').click
-    driver.find_element(xpath: '//*[@id="delete_company_asset_type_11"]/div/div/div[3]/button[2]').click
-  end 
-
-  def details_equipment_types_return_breadscrumb
-    driver.find_element(css: 'href="/company_asset_types"').click
-    driver.find_element(css: 'href="/account/picklists"').click
-  end 
-
 #ethnicities
   def details_ethnicities_add
     driver.find_element(css: 'href="/company_ethnicities"').click
@@ -109,19 +34,7 @@ class AccountPicklistExtension < Base
     driver.find_element(css: '#edit_gender > p > input').click
   end
 
-#gender
-  def details_genders_edit
-    driver.find_element(css: 'href="/genders"').click
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr.odd > td.actions > a').click
-    driver.find_element(id: 'gender_name').send_keys "Other"
-    driver.find_element(css: '#edit_gender > p > input').click
-  end
 
-  def details_genders_return_breadcrumb
-    driver.find_element(css: 'href="/genders"').click
-    driver.find_element(css: 'href="/account/picklists"').click  
-  end
-  
 #id documents
   def details_id_documents_types_add
     driver.find_element(css: 'href="/company_identification_types"').click
@@ -155,6 +68,7 @@ class AccountPicklistExtension < Base
     driver.find_element(xpath: '/html/body/section[2]/div[2]/a/span/svg[1]').click
     driver.find_element(css: 'href="/company_identification_types"').click
   end
+
 
 #kudos types
   def details_kudos_types_add

@@ -83,7 +83,7 @@ class AccountModulesExtension < Base
     driver.find_element(id: 'account_use_custom_fields').click
     sleep 1
     driver.find_element(id: 'account_custom_field_1_label').clear
-    driver.find_element(id: 'account_custom_field_1_label').send_keys "Computer Equipment"
+    driver.find_element(id: 'account_custom_field_1_label').send_keys ("Computer Equipment" + todays_date_string)
     driver.find_element(css: '#edit_account_3899 > p > input').click
   end 
   

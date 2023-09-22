@@ -11,6 +11,8 @@ require './functions_library/settings_config/account_config_navigation/account_c
 require './functions_library/settings_config/account_details/account_details_extension.rb'
 require './functions_library/settings_config/account_modules/account_modules_extension.rb'
 require './functions_library/settings_config/account_picklists/picklist_extension.rb'
+require './functions_library/settings_config/account_picklists/picklist_contract_extension.rb'
+require './functions_library/settings_config/account_picklists/picklist_gender_extension.rb'
 require './functions_library/settings_config/account_picklists/picklist_recruitment_extension.rb'
 require './functions_library/settings_config/account_picklists/picklist_expenses_extension.rb'
 require './functions_library/settings_config/account_picklists/picklist_performance_extension.rb'
@@ -41,6 +43,8 @@ class AccountSetup < Base
     LoginExtension.new(driver).login_setup_acc_admin
     LoginAppExtension.new(driver).select_hr
     puts "2. login"
+    AppNavigationExtensionManager.new(driver).pop_modal_price_increase
+    puts "2. price modal dismiss - cookie refresh so only when FF is On"
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     puts "3. navigate to configuration settings"
     NavigationAroundAccountConfiguration.new(driver).navigate_to_company_details
@@ -76,27 +80,51 @@ class AccountSetup < Base
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     sleep 0.50
     NavigationAroundAccountConfiguration.new(driver).navigate_to_picklist
-    puts "13. navigate to picklists"
-    AccountPicklistExtension.new(driver).details_contract_types_add
+    puts "13a. navigate to picklists"
+    PicklistContactExtension.new(driver).details_navigate_to_contract_type
+    puts "13b"
+    PicklistContactExtension.new(driver).details_contract_types_add
     puts "14a. Contract types - Add"
-    AccountPicklistExtension.new(driver).details_contract_types_add_cancel
+    PicklistContactExtension.new(driver).details_contract_types_add_cancel
     puts "14b. Contract types - Cancel add new"
-    AccountPicklistExtension.new(driver).details_contract_types_edit
+    PicklistContactExtension.new(driver).details_contract_types_edit
     puts "14c. Contract type - Edit"
-    AccountPicklistExtension.new(driver).details_contract_types_edit_cancel
+    PicklistContactExtension.new(driver).details_contract_types_edit_cancel
     puts "14d. Contract type - Cancel Edit"
     sleep 0.50
-    AccountPicklistExtension.new(driver).details_contract_types_delete
+    PicklistContactExtension.new(driver).details_contract_types_delete
     puts "14e. Contract type - Delete"
-
-#CURRENT POSITION
-    AccountPicklistExtension.new(driver).details_contract_types_delete_cancel
+    PicklistContactExtension.new(driver).details_contract_types_delete_cancel
     puts "14f. Contract type - Cancel delete"
-    AccountPicklistExtension.new(driver).details_contract_type_add_return_breadcrumb
+    PicklistContactExtension.new(driver).details_contract_type_add_return_breadcrumb
     puts "14g. Breadcrumb return from Contract type"
-
-    AccountPicklistExtension.new(driver).details_equipment_types_add
+    NavigationAroundAccountConfiguration.new(driver).return_to_picklist_menu
+    puts "15a. retutn to picklists"
+    PicklistGenderExtension.new(driver).navigate_to_gender
+    puts "15b. navigate to genders"
+    PicklistGenderExtension.new(driver).details_genders_add
+    puts "16a. Gender add new"
+    PicklistGenderExtension.new(driver).details_genders_edit
+    puts "16b. Gender edit"
+    PicklistGenderExtension.new(driver).delete_gender
+    puts "16c. Gender delete"
+    PicklistGenderExtension.new(driver).details_genders_return_breadcrumb
     puts ""
+    
+
+    PicklistEquipmentExtension.new(driver).details_equipment_types_add
+    puts ""
+    PicklistEquipmentExtension.new(driver).details_equipment_types_edit
+    puts ""
+    PicklistEquipmentExtension.new(driver).details_equipment_types_delete
+    puts ""
+    PicklistEquipmentExtension.new(driver).details_equipment_types_return_breadscrumb
+    puts ""
+
+
+
+
+
     AccountPicklistExtension.new(driver).details_ethnicities_add
     puts ""
     AccountPicklistExtension.new(driver).details_id_documents_types_add
@@ -109,9 +137,7 @@ class AccountSetup < Base
     puts ""
     AccountPicklistExtension.new(driver).details_reason_for_leaving_add
     puts ""
-    AccountPicklistExtension.new(driver).details_onboarding_tasks_add
-    puts ""
-    AccountPicklistExtension.new(driver).
+    AccountPicklistExtension.new(driver).details_onrubyoarding_tasks_add
     puts ""
 
 
