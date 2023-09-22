@@ -10,6 +10,8 @@ require './functions_library/holiday_extension'
 require './functions_library/leave_request_extension'
 require './functions_library/navigate_around_app_employee'
 
+# rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/AbcSize
 class TestLeaveRequest
   attr_accessor :driver
 
@@ -24,9 +26,11 @@ class TestLeaveRequest
   # and finish by deleting the absence and checking the totals
 
   def test_leave_request
+    puts 'Running - test_employee_holiday_totals_on_non_working_days.rb'
     test_01_employee_makes_request
     test_02_approver_approves_request
     test_03_delete_holiday_data
+    puts 'Complete - test_employee_holiday_totals_on_non_working_days.rb'
   end
 
   def test_01_employee_makes_request
@@ -106,5 +110,6 @@ class TestLeaveRequest
     puts 'Test complete - Holiday employees holiday deleted'
   end
 end
-
+# rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/AbcSize
 TestLeaveRequest.new.test_leave_request
