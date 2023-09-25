@@ -13,19 +13,13 @@ require './functions_library/settings_config/account_modules/account_modules_ext
 require './functions_library/settings_config/account_picklists/picklist_extension.rb'
 require './functions_library/settings_config/account_picklists/picklist_contract_extension.rb'
 require './functions_library/settings_config/account_picklists/picklist_gender_extension.rb'
-require './functions_library/settings_config/account_picklists/picklist_recruitment_extension.rb'
-require './functions_library/settings_config/account_picklists/picklist_expenses_extension.rb'
-require './functions_library/settings_config/account_picklists/picklist_performance_extension.rb'
 require './functions_library/settings_config/api_setup/api_setup_extension.rb'
 require './functions_library/settings_config/calendar_subscription/calendar_subscription_extension.rb'
 require './functions_library/settings_config/company_blackouts/company_blackouts_extension.rb'
 require './functions_library/settings_config/company_holiday/company_holiday_extension.rb'
 require './functions_library/settings_config/email_notifications/email_notification_extension.rb'
-require './functions_library/settings_config/employee_config/employee_config_extension.rb'
 require './functions_library/settings_config/holiday_allowance/holiday_allowance_extension.rb'
 require './functions_library/settings_config/holiday_years/holiday_years_extension.rb'
-require './functions_library/settings_config/hr_user_config/hr_user_config_extension.rb'
-require './functions_library/settings_config/line_manager_config/line_manager_config_extension.rb'
 require './functions_library/settings_config/rotacloud/rotacloud_extension.rb'
 require './functions_library/settings_config/working_patterns/working_patterns_extension.rb'
 
@@ -43,8 +37,8 @@ class AccountSetup < Base
     LoginExtension.new(driver).login_setup_acc_admin
     LoginAppExtension.new(driver).select_hr
     puts "2. login"
-    AppNavigationExtensionManager.new(driver).pop_modal_price_increase
-    puts "2. price modal dismiss - cookie refresh so only when FF is On"
+    #AppNavigationExtensionManager.new(driver).pop_modal_price_increase
+    #puts "2a. price modal dismiss - cookie refresh so only when FF is On"
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     puts "3. navigate to configuration settings"
     NavigationAroundAccountConfiguration.new(driver).navigate_to_company_details
@@ -82,7 +76,7 @@ class AccountSetup < Base
     NavigationAroundAccountConfiguration.new(driver).navigate_to_picklist
     puts "13a. navigate to picklists"
     PicklistContactExtension.new(driver).details_navigate_to_contract_type
-    puts "13b"
+    puts "13b. navigate to picklist - Contract types"
     PicklistContactExtension.new(driver).details_contract_types_add
     puts "14a. Contract types - Add"
     PicklistContactExtension.new(driver).details_contract_types_add_cancel
@@ -109,397 +103,73 @@ class AccountSetup < Base
     PicklistGenderExtension.new(driver).delete_gender
     puts "16c. Gender delete"
     PicklistGenderExtension.new(driver).details_genders_return_breadcrumb
-    puts ""
+    puts "16d. Breadcrumb return to picklist Contract type"    
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_email_notifications
+    puts "17. navigate to Email notification"
+    EmailNotificationConfigExtension.new(driver).system_notifications_off
+    puts "18a. System email notification Off"
+    EmailNotificationConfigExtension.new(driver).system_notifications_on
+    puts "18b. System email notification On"
+    EmailNotificationConfigExtension.new(driver).third_party_email_invoice
+    puts "18c. Email notification thid party invoice email"
+    EmailNotificationConfigExtension.new(driver).third_party_email_leave_request_approval
+    puts "18d. Email notification thid party leave requests email"
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb_email_notification
+    binding.pry
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_woking_patterns
+    puts "19. Navigate to Abscence settings - Working Patterns"
+    AccountWorkingPatternExtension.new(driver).working_pattern_add
+    puts "20a. Working Pattern"
+    AccountWorkingPatternExtension.new(driver).working_pattern_set_new_default
+    puts "20b. Working Pattern"
+    AccountWorkingPatternExtension.new(driver).working_pattern_edit
+    puts "20c. Working Pattern"
+    AccountWorkingPatternExtension.new(driver).working_pattern_delete
+    puts "20d. Working Pattern"
+    AccountWorkingPatternExtension.new(driver).working_pattern_search
+    puts "20e. Working Pattern"
+    AccountWorkingPatternExtension.new(driver).working_pattern_show_inactive
+    puts "20f. Working Pattern"
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_holiday_allowances
+    puts "21 Navigate to Abscence settings - holidays allowances"
     
-
-    PicklistEquipmentExtension.new(driver).details_equipment_types_add
-    puts ""
-    PicklistEquipmentExtension.new(driver).details_equipment_types_edit
-    puts ""
-    PicklistEquipmentExtension.new(driver).details_equipment_types_delete
-    puts ""
-    PicklistEquipmentExtension.new(driver).details_equipment_types_return_breadscrumb
-    puts ""
-
-
-
-
-
-    AccountPicklistExtension.new(driver).details_ethnicities_add
-    puts ""
-    AccountPicklistExtension.new(driver).details_id_documents_types_add
-    puts ""
-    AccountPicklistExtension.new(driver).details_kudos_types_add
-    puts ""
-    AccountPicklistExtension.new(driver).details_notice_periods_add
-    puts ""
-    AccountPicklistExtension.new(driver).details_pronouns_add
-    puts ""
-    AccountPicklistExtension.new(driver).details_reason_for_leaving_add
-    puts ""
-    AccountPicklistExtension.new(driver).details_onrubyoarding_tasks_add
-    puts ""
 
 
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    puts "Complete contract types - return to picklist"
+
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_holiday_years
+    puts "Navigate to Abscence settings - holidays years"
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_company_holidays
+    puts "Navigate to Abscence settings - company holidays"
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_company_blackout
+    puts "Navigate to Abscence settings - company blackouts"
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_api_setup
+    puts "Navigate to Integrations - API setup"
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_calendar_subscriptions
+    puts "Navigate to Integrations - calendar subscriptions"
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_rota_cloud
+    puts "Navigate to Integrations - Rotacloud"
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     
-    
-    
-
-#absence
-    AccountConfigExtension.absence_other_leave_reasons_add
-    AccountConfigExtension.absence_sickness_types_new
-#training
-    AccountConfigExtension.training_categories_new
-    AccountConfigExtension.training_providers_new
-    AccountConfigExtension.training_types_new
-#company organisation
-    AccountConfigExtension.company_organisation_department_new
-    AccountConfigExtension.company_organisation_division_new
-#pay and benefits
-    AccountConfigExtension.pay_and_benefits_additional_payment_types_new
-    AccountConfigExtension.pay_and_benefits_benefit_types_new
-    AccountConfigExtension.pay_and_benefits_expense_types_new
-    AccountConfigExtension.pay_and_benefits_mileage_rates_new
-#recruitment
-    AccountConfigExtension.recruitment_applicant_stages_new
-    AccountConfigExtension.recruitment_applicant_source_new
-#performance 
-    AccountConfigExtension.performance_management_disciplinary_outcomes_new
-    AccountConfigExtension.performance_management_grievance_outcomes_new
-    AccountConfigExtension.performance_management_one_to_one_types_new
-    puts "Picklist details add"
-    AccountConfigExtension.details_contract_types_edit
-    AccountConfigExtension.details_equipment_types_edit
-    AccountConfigExtension.details_ethnicities_edit
-    AccountConfigExtension.details_genders_edit
-    AccountConfigExtension.details_id_documents_types_edit
-    AccountConfigExtension.details_kudos_types_edit
-    AccountConfigExtension.details_notice_periods_edit
-    AccountConfigExtension.details_pronouns_edit
-    AccountConfigExtension.details_reason_for_leaving_edit
-    AccountConfigExtension.details_onboarding_tasks_edit
-#absence
-    AccountConfigExtension.absence_other_leave_reasons_edit
-    AccountConfigExtension.absence_sickness_types_edit
-#training
-    AccountConfigExtension.training_categories_edit
-    AccountConfigExtension.training_providers_edit
-    AccountConfigExtension.training_types_edit
-#company organisation
-    AccountConfigExtension.company_organisation_department_edit
-    AccountConfigExtension.company_organisation_division_edit
-#pay and benefits
-    AccountConfigExtension.pay_and_benefits_additional_payment_types_edit
-    AccountConfigExtension.pay_and_benefits_benefit_types_edit
-    AccountConfigExtension.pay_and_benefits_expense_types_edit
-    AccountConfigExtension.pay_and_benefits_mileage_rates_edit
-#recruitment
-    AccountConfigExtension.recruitment_applicant_stages_edit
-    AccountConfigExtension.recruitment_applicant_source_edit
-#performance 
-    AccountConfigExtension.performance_management_disciplinary_outcomes_edit
-    AccountConfigExtension.performance_management_grievance_outcomes_edit
-    AccountConfigExtension.performance_management_one_to_one_types_edit
-    puts "Picklist details edit"
-    AccountConfigExtension.details_contract_types_search
-    AccountConfigExtension.details_equipment_types_search
-    AccountConfigExtension.details_ethnicities_search
-    AccountConfigExtension.details_genders_search
-    AccountConfigExtension.details_id_documents_types_search
-    AccountConfigExtension.details_kudos_types_search
-    AccountConfigExtension.details_notice_periods_search
-    AccountConfigExtension.details_pronouns_search
-    AccountConfigExtension.details_reason_for_leaving_search
-    AccountConfigExtension.details_onboarding_tasks_search
-#absence
-    AccountConfigExtension.absence_other_leave_reasons_search
-    AccountConfigExtension.absence_sickness_types_search
-#training
-    AccountConfigExtension.training_categories_search
-    AccountConfigExtension.training_providers_search
-    AccountConfigExtension.training_types_search
-#company organisation
-    AccountConfigExtension.company_organisation_department_search
-    AccountConfigExtension.company_organisation_division_search
-#pay and benefits
-    AccountConfigExtension.pay_and_benefits_additional_payment_types_search
-    AccountConfigExtension.pay_and_benefits_benefit_types_search
-    AccountConfigExtension.pay_and_benefits_expense_types_search
-    AccountConfigExtension.pay_and_benefits_mileage_rates_search
-#recruitment
-    AccountConfigExtension.recruitment_applicant_stages_search
-    AccountConfigExtension.recruitment_applicant_source_search
-#performance 
-    AccountConfigExtension.performance_management_disciplinary_outcomes_search
-    AccountConfigExtension.performance_management_grievance_outcomes_search
-    AccountConfigExtension.performance_management_one_to_one_types_search
-    Puts "Picklist details search"
-    AccountConfigExtension.details_contract_types_delete
-    AccountConfigExtension.details_equipment_types_delete
-    AccountConfigExtension.details_ethnicities_delete
-    AccountConfigExtension.details_genders_delete
-    AccountConfigExtension.details_id_documents_types_delete
-    AccountConfigExtension.details_kudos_types_delete
-    AccountConfigExtension.details_notice_periods_delete
-    AccountConfigExtension.details_pronouns_delete
-    AccountConfigExtension.details_reason_for_leaving_delete
-    AccountConfigExtension.details_onboarding_tasks_delete
-#absence
-    AccountConfigExtension.absence_other_leave_reasons_delete
-    AccountConfigExtension.absence_sickness_types_delete
-#training
-    AccountConfigExtension.training_categories_delete
-    AccountConfigExtension.training_providers_delete
-    AccountConfigExtension.training_types_delete
-#company organisation
-    AccountConfigExtension.company_organisation_department_delete
-    AccountConfigExtension.company_organisation_division_delete
-#pay and benefits
-    AccountConfigExtension.pay_and_benefits_additional_payment_types_delete
-    AccountConfigExtension.pay_and_benefits_benefit_types_delete
-    AccountConfigExtension.pay_and_benefits_expense_types_delete
-    AccountConfigExtension.pay_and_benefits_mileage_rates_delete
-#recruitment
-    AccountConfigExtension.recruitment_applicant_stages_delete
-    AccountConfigExtension.recruitment_applicant_source_delete
-#performance 
-    AccountConfigExtension.performance_management_disciplinary_outcomes_delete
-    AccountConfigExtension.performance_management_grievance_outcomes_delete
-    AccountConfigExtension.performance_management_one_to_one_types_delete
-    Puts "Picklist details delete"
-    AccountConfigExtension.details_contract_types_breadcrumb
-    AccountConfigExtension.details_equipment_types_breadcrumb
-    AccountConfigExtension.details_ethnicities_breadcrumb
-    AccountConfigExtension.details_genders_breadcrumb
-    AccountConfigExtension.details_id_documents_types_breadcrumb
-    AccountConfigExtension.details_kudos_types_breadcrumb
-    AccountConfigExtension.details_notice_periods_breadcrumb
-    AccountConfigExtension.details_pronouns_breadcrumb
-    AccountConfigExtension.details_reason_for_leaving_breadcrumb
-    AccountConfigExtension.details_onboarding_tasks_breadcrumb
-#absence
-    AccountConfigExtension.absence_other_leave_reasons_breadcrumb
-    AccountConfigExtension.absence_sickness_types_breadcrumb
-#training
-    AccountConfigExtension.training_categories_breadcrumb
-    AccountConfigExtension.training_providers_breadcrumb
-    AccountConfigExtension.training_types_breadcrumb
-#company organisation
-    AccountConfigExtension.company_organisation_department_breadcrumb
-    AccountConfigExtension.company_organisation_division_breadcrumb
-#pay and benefits
-    AccountConfigExtension.pay_and_benefits_additional_payment_types_breadcrumb
-    AccountConfigExtension.pay_and_benefits_benefit_types_breadcrumb
-    AccountConfigExtension.pay_and_benefits_expense_types_breadcrumb
-    AccountConfigExtension.pay_and_benefits_mileage_rates_breadcrumb
-#recruitment
-    AccountConfigExtension.recruitment_applicant_stages_breadcrumb
-    AccountConfigExtension.recruitment_applicant_source_breadcrumb
-#performance 
-    AccountConfigExtension.performance_management_disciplinary_outcomes_breadcrumb
-    AccountConfigExtension.performance_management_grievance_outcomes_breadcrumb
-    AccountConfigExtension.performance_management_one_to_one_types_breadcrumb
-    Puts "Picklist details breadcrumb"
-    AccountConfigExtension.details_contract_types_cancel_new
-    AccountConfigExtension.details_equipment_types_cancel_new
-    AccountConfigExtension.details_ethnicities_cancel_new
-    AccountConfigExtension.details_genders_cancel_new
-    AccountConfigExtension.details_id_documents_types_cancel_new
-    AccountConfigExtension.details_kudos_types_cancel_new
-    AccountConfigExtension.details_notice_periods_cancel_new
-    AccountConfigExtension.details_pronouns_cancel_new
-    AccountConfigExtension.details_reason_for_leaving_cancel_new
-    AccountConfigExtension.details_onboarding_tasks_cancel_new
-#absence
-    AccountConfigExtension.absence_other_leave_reasons_cancel_new
-    AccountConfigExtension.absence_sickness_types_cancel_new
-#training
-    AccountConfigExtension.training_categories_cancel_new
-    AccountConfigExtension.training_providers_cancel_new
-    AccountConfigExtension.training_types_cancel_new
-#company organisation
-    AccountConfigExtension.company_organisation_department_cancel_new
-    AccountConfigExtension.company_organisation_division_cancel_new
-#pay and benefits
-    AccountConfigExtension.pay_and_benefits_additional_payment_types_cancel_new
-    AccountConfigExtension.pay_and_benefits_benefit_types_cancel_new
-    AccountConfigExtension.pay_and_benefits_expense_types_cancel_new
-    AccountConfigExtension.pay_and_benefits_mileage_rates_cancel_new
-#recruitment
-    AccountConfigExtension.recruitment_applicant_stages_cancel_new
-    AccountConfigExtension.recruitment_applicant_source_cancel_new
-#performance 
-    AccountConfigExtension.performance_management_disciplinary_outcomes_cancel_new
-    AccountConfigExtension.performance_management_grievance_outcomes_cancel_new
-    AccountConfigExtension.performance_management_one_to_one_types_cancel_new
-    puts "Picklist Cancel New"
-    AccountConfigExtension.navigate_to_email_notifications
-    AccountConfigExtension.system_notifications_on
-    puts "Email notification On"
-    AccountConfigExtension.navigate_to_email_notifications
-    AccountConfigExtension.system_notifications_off
-    puts "Email notification Off"
-    AccountConfigExtension.navigate_to_email_notifications
-    AccountConfigExtension.third_party_email_invoice
-    puts "Email notification thid party invoice email"
-    AccountConfigExtension.navigate_to_email_notifications
-    AccountConfigExtension.third_party_email_leave_request_approval
-    puts "Email notification thid party leave requests email"
-    AccountConfigExtension.navigate_to_email_notifications
-    AccountConfigExtension.third_party_email_approved_expenses
-    puts "Email notification thid party expenses email"
-    AccountConfigExtension.navigate_to_two_factor_authentication
-    AccountConfigExtension.twofa_everyone_on
-    AccountConfigExtension.navigate_back_to_settings_breadcrumb
-    puts "security 2fa everyone"
-    AccountConfigExtension.navigate_to_change_what_hr_users_can_do
-    AccountConfigExtension.hr_user_configuration_leave_needs_approval_on
-    AccountConfigExtension.hr_user_configuration_use_gravatar_on
-    AccountConfigExtension.hr_user_configuration_disable_welcome_page_on
-    AccountConfigExtension.hr_user_configuration_use_bradford_factor_on
-    AccountConfigExtension.hr_user_configuration_remind_line_manager_to_give_121_on
-    AccountConfigExtension.hr_user_configuration_grapevine_label
-    AccountConfigExtension.update_hr_settings
-    AccountConfigExtension.navigate_back_to_settings_breadcrumb
-    puts "Permissions and approvals - check what people can do - HR user"
-#view
-    AccountConfigExtension.navigate_to_change_what_line_managers_can_do
-    AccountConfigExtension.line_manager_configuration_on_personal_profile_view
-    AccountConfigExtension.line_manager_configuration_on_leave_view
-    AccountConfigExtension.line_manager_configuration_on_adjustments_and_toil_view
-    AccountConfigExtension.line_manager_configuration_on_sickness_view
-    AccountConfigExtension.line_manager_configuration_on_training_view
-    AccountConfigExtension.line_manager_configuration_on_one_to_ones_view
-    AccountConfigExtension.line_manager_configuration_on_objectives_view
-    AccountConfigExtension.line_manager_configuration_on_deliverables_view
-    AccountConfigExtension.line_manager_configuration_on_job_details_view
-    AccountConfigExtension.line_manager_configuration_on_remuneration_view
-    AccountConfigExtension.line_manager_configuration_on_emergency_contacts_view
-    AccountConfigExtension.line_manager_configuration_on_medical_facts_view
-    AccountConfigExtension.line_manager_configuration_on_personal_history_view
-    AccountConfigExtension.line_manager_configuration_on_notes_view
-    AccountConfigExtension.line_manager_configuration_on_equipment_view
-    AccountConfigExtension.line_manager_configuration_on_id_documents_view
-    AccountConfigExtension.line_manager_configuration_on_dbs_checks_view
-    AccountConfigExtension.line_manager_configuration_on_grievances_and_disciplinaries_view
-    AccountConfigExtension.line_manager_configuration_on_time_logs_view
-    AccountConfigExtension.line_manager_configurations_update
-    # to return to settings if required - one to think about in the process when we run the script
-    AccountConfigExtension.navigate_back_to_settings_breadcrumb
-    puts "Permissions and approvals - Line manager can view all employee areas"
-#manage
-    AccountConfigExtension.navigate_to_change_what_line_managers_can_do
-    AccountConfigExtension.line_manager_configuration_on_profile_manage
-    AccountConfigExtension.line_manager_configuration_on_personal_profile_manage
-    AccountConfigExtension.line_manager_configuration_on_leave_manage
-    AccountConfigExtension.line_manager_configuration_on_adjustments_and_toil_manage
-    AccountConfigExtension.line_manager_configuration_on_sickness_manage
-    AccountConfigExtension.line_manager_configuration_on_training_manage
-    AccountConfigExtension.line_manager_configuration_on_one_to_ones_manage
-    AccountConfigExtension.line_manager_configuration_on_objectives_manage
-    AccountConfigExtension.line_manager_configuration_on_deliverables_manage
-    AccountConfigExtension.line_manager_configuration_on_job_details_manage
-    AccountConfigExtension.line_manager_configuration_on_remuneration_manage
-    AccountConfigExtension.line_manager_configuration_on_emergency_contacts_manage
-    AccountConfigExtension.line_manager_configuration_on_medical_facts_manage
-    AccountConfigExtension.line_manager_configuration_on_personal_history_manage
-    AccountConfigExtension.line_manager_configuration_on_notes_manage
-    AccountConfigExtension.line_manager_configuration_on_equipment_manage
-    AccountConfigExtension.line_manager_configuration_on_id_documents_manage
-    AccountConfigExtension.line_manager_configuration_on_dbs_checks_manage
-    AccountConfigExtension.line_manager_configuration_on_grievances_and_disciplinaries_manage
-    AccountConfigExtension.line_manager_configuration_on_time_logs_manage
-    AccountConfigExtension.line_manager_configurations_update
-    puts "Permissions and approvals - Line manager can manage all employee areas"
-    AccountConfigExtension.navigate_back_to_settings_breadcrumb
-#delete
-    AccountConfigExtension.navigate_to_change_what_line_managers_can_do
-    AccountConfigExtension.line_manager_configuration_on_profile_delete_docs_only
-    AccountConfigExtension.line_manager_configuration_on_leave_delete
-    AccountConfigExtension.line_manager_configuration_on_sickness_delete
-    AccountConfigExtension.line_manager_configuration_on_training_delete
-    AccountConfigExtension.line_manager_configuration_on_one_to_ones_delete
-    AccountConfigExtension.line_manager_configuration_on_objectives_delete
-    AccountConfigExtension.line_manager_configuration_on_deliverables_delete
-    AccountConfigExtension.line_manager_configuration_on_job_details_delete
-    AccountConfigExtension.line_manager_configuration_on_remuneration_delete
-    AccountConfigExtension.line_manager_configuration_on_emergency_contacts_delete
-    AccountConfigExtension.line_manager_configuration_on_medical_facts_delete
-    AccountConfigExtension.line_manager_configuration_on_personal_history_delete
-    AccountConfigExtension.line_manager_configuration_on_notes_delete
-    AccountConfigExtension.line_manager_configuration_on_equipment_delete
-    AccountConfigExtension.line_manager_configuration_on_id_documents_delete
-    AccountConfigExtension.line_manager_configuration_on_dbs_checks_delete
-    AccountConfigExtension.line_manager_configuration_on_grievances_and_disciplinaries_delete
-    AccountConfigExtension.line_manager_configuration_on_time_logs_delete
-    AccountConfigExtension.line_manager_configurations_update
-    puts "Permissions and approvals - Line manager can delete all employee areas"
-    AccountConfigExtension.navigate_back_to_settings_breadcrumb
-#Add line manager view of peoples, people and bank details
-    AccountConfigExtension.navigate_to_change_what_line_managers_can_do
-    AccountConfigExtension.line_manager_able_to_see_their_peoples_people
-    AccountConfigExtension.line_manage_able_to_see_their_peoples_bank_details
-    AccountConfigExtension.line_manager_configurations_update
-    puts "Permissions and approvals - Line manager has all access to personal profile details"
-    AccountConfigExtension.navigate_to_change_what_employees_can_do
-    AccountConfigExtension.employee_congifuration_what_can_see_remunerations
-    AccountConfigExtension.employee_congifuration_what_can_see_performance_metrics
-    AccountConfigExtension.employee_congifuration_what_can_see_custom_fields
-    AccountConfigExtension.employee_congifuration_what_can_see_directory
-    AccountConfigExtension.employee_congifuration_what_can_see_calendar
-    AccountConfigExtension.employee_congifuration_what_can_see_kudus_leaderboard
-    AccountConfigExtension.employee_congifuration_what_can_see_location_booking_report
-    AccountConfigExtension.employee_congifuration_what_can_do_update_profile_picture
-    AccountConfigExtension.employee_congifuration_what_can_do_request_toil
-    AccountConfigExtension.employee_congifuration_what_can_do_report_sickness
-    AccountConfigExtension.employee_congifuration_what_can_do_request_one_to_ones
-    AccountConfigExtension.employee_congifuration_what_can_do_enter_traiining_record
-    AccountConfigExtension.employee_congifuration_what_can_do_booking_locations
-    AccountConfigExtension.employee_congifuration_update
-    AccountConfigExtension.navigate_back_to_settings_breadcrumb
-    puts "Permissions and approvals - Employee check what people can see and do"
-    
-    AccountConfigExtension.navigate_to_woking_patterns
-    puts "Abscence settings - working patterns (adding new and editing away from the default)"
-    AccountConfigExtension.navigate_back_to_settings_breadcrumb
-
-    AccountConfigExtension.navigate_to_holiday_allowances
-    puts "Abscence settings - holidays allowances"
-    AccountConfigExtension.navigate_back_to_settings_breadcrumb
-
-    AccountConfigExtension.navigate_to_holiday_years
-    puts "Abscence settings - holidays years"
-    AccountConfigExtension.navigate_back_to_settings_breadcrumb
-
-    AccountConfigExtension.navigate_to_company_holidays
-    puts "Abscence settings - company holidays"
-    AccountConfigExtension.navigate_back_to_settings_breadcrumb
-
-    AccountConfigExtension.navigate_to_company_blackout
-    puts "Abscence settings - company blackouts"
-    AccountConfigExtension.navigate_back_to_settings_breadcrumb
-
-    AccountConfigExtension.navigate_to_api_setup
-    puts "Integrations - API setup"
-    AccountConfigExtension.navigate_back_to_settings_breadcrumb
-
-    AccountConfigExtension.navigate_to_calendar_subscriptions
-    puts "Integrations - calendar subscriptions"
-    AccountConfigExtension.navigate_back_to_settings_breadcrumb
-
-    AccountConfigExtension.navigate_to_rota_cloud
-    puts "Integrations - Rotacloud"
-    AccountConfigExtension.navigate_back_to_settings_breadcrumb
-    
+    puts "add HR to account"    
     puts "add line manager to account"
-
     puts "add employee to account"
+    puts "assign HR permissions to employee"
+    puts "assign line managers to employee"
+    puts "assign permissions to employee"
 
-    puts "assign permissions to employees"
-
-    puts "assign line managers to employees"
     sleep 10
     driver.close
   end

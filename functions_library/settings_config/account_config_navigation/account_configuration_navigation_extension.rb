@@ -10,6 +10,11 @@ class NavigationAroundAccountConfiguration < Base
     driver.find_element(css: 'body > section.content.container.p-4 > div.breadcrumb.mb-2 > a').click
   end
 
+  def navigate_back_to_settings_breadcrumb_email_notification
+    driver.find_element(css: 'body > section.content.container.p-4 > div.row > div > div > a').click
+  end
+  
+
   def navigate_to_modules_chargable
     driver.find_element(xpath: '/html/body/section[2]/div[2]/div[1]/div[1]/a[2]').click
   end
@@ -27,7 +32,7 @@ class NavigationAroundAccountConfiguration < Base
   end
 
   def navigate_to_email_notifications
-    driver.find_element(css: 'href="/account/edit_email_configuration"').click
+    driver.find_element(xpath: '/html/body/section[2]/div[2]/div[1]/div[1]/a[4]').click
   end
 
   def navigate_to_two_factor_authentication
@@ -47,7 +52,7 @@ class NavigationAroundAccountConfiguration < Base
   end
 
   def navigate_to_woking_patterns
-    driver.find_element(css: 'href="/account_working_patterns"').click
+    driver.find_element(xpath: '/html/body/section[2]/div[2]/div[2]/div[1]/a[1]/svg/path').click
   end
 
   def navigate_to_holiday_allowances
