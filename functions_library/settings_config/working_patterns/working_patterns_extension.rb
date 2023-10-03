@@ -2,22 +2,22 @@ require File.expand_path('../../../base.rb', __FILE__)
 
 class AccountWorkingPatternExtension < Base
   def working_pattern_add
-    driver.find_element(css: 'href="/account_working_patterns/new"').click
-    driver.find_element(id: 'working_pattern_name').sendkeys "Reggression Add Working Pattern"
-    driver.find_element(id: 'working_pattern_mon_hr_hours').sendkeys "7"
-    driver.find_element(id: 'working_pattern_mon_hr_minutes').sendkeys "30"
-    driver.find_element(id: 'working_pattern_tue_hr_hours').sendkeys "7"
-    driver.find_element(id: 'working_pattern_tue_hr_minutes').sendkeys "30"
-    driver.find_element(id: 'working_pattern_wed_hr_hours').sendkeys "7"
-    driver.find_element(id: 'working_pattern_wed_hr_minutes').sendkeys "30"
-    driver.find_element(id: 'working_pattern_thu_hr_hours').sendkeys "7"
-    driver.find_element(id: 'working_pattern_thu_hr_minutes').sendkeys "30"
-    driver.find_element(id: 'working_pattern_fri_hr_hours').sendkeys "7"
-    driver.find_element(id: 'working_pattern_fri_hr_minutes').sendkeys "30"
-    driver.find_element(id: 'working_pattern_sat_hr_hours').sendkeys "7"
-    driver.find_element(id: 'working_pattern_sat_hr_minutes').sendkeys "30"
-    driver.find_element(id: 'working_pattern_sun_hr_hours').sendkeys "7"
-    driver.find_element(id: 'working_pattern_sun_hr_minutes').sendkeys "30"
+    driver.find_element(xpath: '/html/body/section[2]/div[2]/a').click
+    driver.find_element(id: 'working_pattern_name').send_keys "Reggression Add Working Pattern"
+    driver.find_element(id: 'working_pattern_mon_hr_hours').send_keys "7"
+    driver.find_element(id: 'working_pattern_mon_hr_minutes').send_keys "30"
+    driver.find_element(id: 'working_pattern_tue_hr_hours').send_keys "7"
+    driver.find_element(id: 'working_pattern_tue_hr_minutes').send_keys "30"
+    driver.find_element(id: 'working_pattern_wed_hr_hours').send_keys "7"
+    driver.find_element(id: 'working_pattern_wed_hr_minutes').send_keys "30"
+    driver.find_element(id: 'working_pattern_thu_hr_hours').send_keys "7"
+    driver.find_element(id: 'working_pattern_thu_hr_minutes').send_keys "30"
+    driver.find_element(id: 'working_pattern_fri_hr_hours').send_keys "7"
+    driver.find_element(id: 'working_pattern_fri_hr_minutes').send_keys "30"
+    driver.find_element(id: 'working_pattern_sat_hr_hours').send_keys "7"
+    driver.find_element(id: 'working_pattern_sat_hr_minutes').send_keys "30"
+    driver.find_element(id: 'working_pattern_sun_hr_hours').send_keys "7"
+    driver.find_element(id: 'working_pattern_sun_hr_minutes').send_keys "30"
     driver.find_element(xpath: '//*[@id="new_working_pattern"]/p/input').click
   end
 
@@ -29,8 +29,11 @@ class AccountWorkingPatternExtension < Base
   end
 
   def working_pattern_edit
-    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[5]/a[1]/svg').click
-    driver.find_element(id: 'working_pattern_sun_hr_hours').sendkeys "10"
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[5]/a[1]').click
+    driver.find_element(id: 'working_pattern_name').clear
+    driver.find_element(id: 'working_pattern_name').send_keys "Edited on " + todays_date_string
+    driver.find_element(id: 'working_pattern_sun_hr_hours').clear
+    driver.find_element(id: 'working_pattern_sun_hr_hours').send_keys "10"
     driver.find_element(xpath: '//*[@id="edit_working_pattern"]/p/input').click
   end
 
@@ -40,7 +43,7 @@ class AccountWorkingPatternExtension < Base
   end
 
   def working_pattern_search
-    driver.find_element(xpath: '//*[@id="DataTables_Table_0_filter"]/label/input').sendkeys "Auto Regression"
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0_filter"]/label/input').send_keys "Auto Regression"
     sleep 1
   end
 
