@@ -1,4 +1,6 @@
-require File.expand_path('../base.rb', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('base.rb', __dir__)
 require 'Benchmark'
 
 class NavigateBrowserExtension < Base
@@ -7,11 +9,11 @@ class NavigateBrowserExtension < Base
       driver.navigate.to('https://login.breathehrstaging.com/login')
       puts 'Test Navigate to URl'
     end
-    puts timer.total*1000
+    puts timer.total * 1000
 
-    if timer.total > 3
-      puts 'URL load time over performance requirement'
-    end
+    return unless timer.total > 3
+
+    puts 'URL load time over performance requirement'
   end
 
   def breathe_signup
@@ -19,7 +21,7 @@ class NavigateBrowserExtension < Base
   end
 
   def cookie_modal_accept
-    driver.find_element(id:'CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll').click
+    driver.find_element(id: 'CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll').click
   end
 
   def breathe_login
@@ -29,5 +31,4 @@ class NavigateBrowserExtension < Base
   def breathe_signup_buy_now
     driver.navigate.to('https://hr.breathehrstaging.com/signup?type=buy-now')
   end
-  
 end

@@ -1,7 +1,9 @@
-require File.expand_path('../../../base.rb', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('../../base.rb', __dir__)
 
 class NavigationAroundAccountConfiguration < Base
-#Navigation
+  # Navigation
   def navigate_to_company_details
     driver.find_element(xpath: '/html/body/section[2]/div[2]/div[1]/div[1]/a[1]').click
   end
@@ -13,7 +15,6 @@ class NavigationAroundAccountConfiguration < Base
   def navigate_back_to_settings_breadcrumb_email_notification
     driver.find_element(css: 'body > section.content.container.p-4 > div.row > div > div > a').click
   end
-  
 
   def navigate_to_modules_chargable
     driver.find_element(xpath: '/html/body/section[2]/div[2]/div[1]/div[1]/a[2]').click

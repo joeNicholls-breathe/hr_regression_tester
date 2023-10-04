@@ -1,13 +1,15 @@
-require File.expand_path('../../../base.rb', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('../../base.rb', __dir__)
 
 class HrUserConfigExtension < Base
   def hr_user_configuration_leave_needs_approval_on
     driver.find_element(id: 'account_hr_leave_needs_approval').click
   end
 
-  #def hr_user_configuration_leave_needs_approval_off
+  # def hr_user_configuration_leave_needs_approval_off
   #  driver.find_element(: '').click
-  #end
+  # end
 
   def hr_user_configuration_use_gravatar_on
     driver.find_element(id: 'account_use_gravatar').click
@@ -35,7 +37,7 @@ class HrUserConfigExtension < Base
 
   def hr_user_configuration_remind_line_manager_to_give_121_on
     driver.find_element(id: 'one-to-one-frequency-checkbox').click
-    driver.find_element(id: 'account_one_to_one_frequency').sendkeys "5"
+    driver.find_element(id: 'account_one_to_one_frequency').sendkeys '5'
   end
 
   def hr_user_configuration_remind_line_manager_to_give_121_off
@@ -43,7 +45,7 @@ class HrUserConfigExtension < Base
   end
 
   def hr_user_configuration_grapevine_label
-    driver.find_element(id: 'account_grapevine_label').senkeys "Regression Test add value DATE TODAY"
+    driver.find_element(id: 'account_grapevine_label').senkeys 'Regression Test add value DATE TODAY'
   end
 
   def update_hr_settings
