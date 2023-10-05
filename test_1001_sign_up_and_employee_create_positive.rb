@@ -29,8 +29,6 @@ class TestSignUp < Base
   def test_sign_up_with_bulk
     NavigateBrowserExtension.new(driver).breathe_signup
     puts 'Navigate to breathe sign up screen - Pass'
-    NavigateBrowserExtension.new(driver).cookie_modal_accept
-    puts 'Pop Up - Cookies - Accept - Pass'
     SignUpExtension.new(driver).sign_up_std_positive
     puts 'Sign Up Std form - Pass'
     BulkImportExtension.new(driver).navigate_to_bulk_upload
@@ -78,8 +76,6 @@ class TestSignUp < Base
   def test_sign_up_with_add_employee_manually
     NavigateBrowserExtension.new(driver).breathe_signup
     puts 'Navigate to breathe sign up screen - Pass'
-    NavigateBrowserExtension.new(driver).cookie_modal_accept
-    puts 'Pop Up - Cookies - Accept - Pass'
     SignUpExtension.new(driver).sign_up_std_positive
     puts 'Sign Up Std form - Pass'
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
