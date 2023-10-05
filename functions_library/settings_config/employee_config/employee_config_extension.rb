@@ -1,4 +1,6 @@
-require File.expand_path('../../../base.rb', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('../../base.rb', __dir__)
 
 class EmployeeConfigExtension < Base
   def employee_congifuration_what_can_see_remunerations

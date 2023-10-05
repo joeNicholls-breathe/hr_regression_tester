@@ -1,5 +1,8 @@
-require File.expand_path('../../../base.rb', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('../../base.rb', __dir__)
 
 class RotaCloudExtension < Base
-	#at this time no tests being run as not all users can use will need to do this manually if we need to regression test.
-end 
+  # at this time no tests being run as not all users can use
+  # will need to do this manually if we need to regression test.
+end

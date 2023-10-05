@@ -6,7 +6,7 @@ require './functions_library/navigate_around_app_manager'
 require './functions_library/test_page_check'
 require './functions_library/test_reference_extension'
 
-class TestEmployee
+class TestLineManager
   attr_accessor :driver
 
   def initialize
@@ -14,9 +14,9 @@ class TestEmployee
     Selenium::WebDriver.logger.level = :info
   end
 
-  def test_employee
+  def test_line_manager
     driver.close
   end
 end
 
-TestEmployee.new.test_employee
+TestLineManager.new.test_line_manager

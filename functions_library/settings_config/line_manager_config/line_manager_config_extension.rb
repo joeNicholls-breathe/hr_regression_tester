@@ -1,5 +1,8 @@
-require File.expand_path('../../../base.rb', __FILE__)
+# frozen_string_literal: true
 
+require File.expand_path('../../base.rb', __dir__)
+
+# rubocop:disable Metrics/ClassLength
 class LineManagerConfigExtension < Base
   def line_manager_configuration_on_profile_manage
     driver.find_element(id: 'account_line_manager_privilege_profile_save').click
@@ -62,11 +65,11 @@ class LineManagerConfigExtension < Base
   end
 
   def line_manager_configuration_on_one_to_ones_view
-    driver.find_element(id:'account_line_manager_privilege_one_to_ones_show').click
+    driver.find_element(id: 'account_line_manager_privilege_one_to_ones_show').click
   end
 
   def line_manager_configuration_on_one_to_ones_manage
-    driver.find_element(id:'account_line_manager_privilege_one_to_ones_save').click
+    driver.find_element(id: 'account_line_manager_privilege_one_to_ones_save').click
   end
 
   def line_manager_configuration_on_one_to_ones_delete
@@ -160,7 +163,7 @@ class LineManagerConfigExtension < Base
   def line_manager_configuration_on_notes_view
     driver.find_element(id: 'account_line_manager_privilege_notes_show').click
   end
-  
+
   def line_manager_configuration_on_notes_manage
     driver.find_element(id: 'account_line_manager_privilege_notes_save').click
   end
@@ -184,7 +187,7 @@ class LineManagerConfigExtension < Base
   def line_manager_configuration_on_id_documents_view
     driver.find_element(id: 'account_line_manager_privilege_id_documents_show').click
   end
-  
+
   def line_manager_configuration_on_id_documents_manage
     driver.find_element(id: 'account_line_manager_privilege_id_documents_save').click
   end
@@ -244,4 +247,5 @@ class LineManagerConfigExtension < Base
   def line_manage_able_to_see_their_peoples_bank_details
     driver.find_element(id: 'line_managers_see_bank').click
   end
-end 
+end
+# rubocop:enable Metrics/ClassLength

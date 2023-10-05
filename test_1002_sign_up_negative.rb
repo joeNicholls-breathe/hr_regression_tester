@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'selenium-webdriver'
 require 'logger'
-require './functions_library/navigate_browser_extension.rb'
-require './functions_library/sign_up_extension.rb'
-require './functions_library/ui_page_element_check.rb'
-require './functions_library/test_reference_extension.rb'
+require './functions_library/navigate_browser_extension'
+require './functions_library/sign_up_extension'
+require './functions_library/ui_page_element_check'
+require './functions_library/test_reference_extension'
 
 class TestSignUpNegative < Base
   attr_accessor :driver
@@ -19,7 +21,7 @@ class TestSignUpNegative < Base
     SignUpExtension.new(driver).sign_up_negative_no_email
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
-    puts "NT - No email - test run"
+    puts 'NT - No email - test run'
     driver.close
   end
 
@@ -29,7 +31,7 @@ class TestSignUpNegative < Base
     SignUpExtension.new(driver).sign_up_negative_no_account_name
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
-    puts "NT - No account name - test run"
+    puts 'NT - No account name - test run'
     driver.close
   end
 
@@ -39,7 +41,7 @@ class TestSignUpNegative < Base
     SignUpExtension.new(driver).sign_up_negative_no_account_employees
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
-    puts "NT - No plan size chosen - test run"
+    puts 'NT - No plan size chosen - test run'
     driver.close
   end
 
@@ -49,27 +51,27 @@ class TestSignUpNegative < Base
     SignUpExtension.new(driver).sign_up_negative_no_telephone_number
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
-    puts "NT - No telepone number entered - test run"
+    puts 'NT - No telepone number entered - test run'
     driver.close
   end
 
-  def sign_up_negative_no_password_1
+  def sign_up_negative_no_password_one
     NavigateBrowserExtension.new(driver).breathe_signup
     NavigateBrowserExtension.new(driver).cookie_modal_accept
-    SignUpExtension.new(driver).sign_up_negative_no_password_1
+    SignUpExtension.new(driver).sign_up_negative_no_password_one
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
-    puts "NT - No password (1) entered - test run"
+    puts 'NT - No password (1) entered - test run'
     driver.close
   end
 
-  def sign_up_negative_no_password_2
+  def sign_up_negative_no_password_two
     NavigateBrowserExtension.new(driver).breathe_signup
     NavigateBrowserExtension.new(driver).cookie_modal_accept
-    SignUpExtension.new(driver).sign_up_negative_no_password_2
+    SignUpExtension.new(driver).sign_up_negative_no_password_two
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
-    puts "NT - No password (2) entered - test run"
+    puts 'NT - No password (2) entered - test run'
     driver.close
   end
 end
@@ -78,5 +80,5 @@ TestSignUpNegative.new.test_sign_up_negative_email
 TestSignUpNegative.new.test_sign_up_negative_no_account_name
 TestSignUpNegative.new.test_sign_up_negative_no_account_employees
 TestSignUpNegative.new.sign_up_negative_no_telephone_number
-TestSignUpNegative.new.sign_up_negative_no_password_1
-TestSignUpNegative.new.sign_up_negative_no_password_2
+TestSignUpNegative.new.sign_up_negative_no_password_one
+TestSignUpNegative.new.sign_up_negative_no_password_two

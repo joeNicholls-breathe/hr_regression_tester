@@ -1,14 +1,17 @@
-require File.expand_path('../../../base.rb', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('../../base.rb', __dir__)
 
 class PicklistGenderExtension < Base
-#gender
+  # gender
+  # rubocop:disable Metrics/AbcSize
   def navigate_to_gender
     driver.find_element(xpath: '/html/body/section[2]/div[3]/div[1]/div[3]/a[2]').click
   end
 
   def details_genders_add
     driver.find_element(xpath: '/html/body/section[2]/div[2]/a').click
-    driver.find_element(id: 'gender_name').send_keys "Other"
+    driver.find_element(id: 'gender_name').send_keys 'Other'
     driver.find_element(xpath: '//*[@id="new_gender"]/p/input').click
   end
 
@@ -19,7 +22,7 @@ class PicklistGenderExtension < Base
     selector = "#edit_gender_#{split_value} > p > input"
     driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[3]/td[2]/a[1]').click
     driver.find_element(id: 'gender_name').clear
-    driver.find_element(id: 'gender_name').send_keys "Other Edit"
+    driver.find_element(id: 'gender_name').send_keys 'Other Edit'
     driver.find_element(css: selector).click
   end
 
@@ -35,4 +38,5 @@ class PicklistGenderExtension < Base
   def details_genders_return_breadcrumb
     driver.find_element(css: 'body > section.content.container.p-4 > div.breadcrumb.mb-2 > a').click
   end
+  # rubocop:enable Metrics/AbcSize
 end

@@ -1,4 +1,6 @@
-require File.expand_path('../base.rb', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('base.rb', __dir__)
 
 class AppNavigationExtensionManager < Base
   def navigate_to_employee_dashboard_as_manager
@@ -28,7 +30,7 @@ class AppNavigationExtensionManager < Base
   end
 
   def navigate_to_plan_and_billing
-    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[7]').click 
+    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[7]').click
     driver.find_element(css: 'href="/account/plan_and_billing"').click
   end
 

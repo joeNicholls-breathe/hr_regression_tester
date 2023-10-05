@@ -1,4 +1,6 @@
-require File.expand_path('../base.rb', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('base.rb', __dir__)
 
 class LoginAppExtension < Base
   def select_hr

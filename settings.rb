@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
+# rubocop:disable Metrics/MethodLength
 module Settings
   def settings
-     {
+    {
       staging: {
         name: 'UK Regression',
         breathe_url_login: 'https://login.breathehrstaging.com',
@@ -17,3 +20,4 @@ module Settings
     }
   end
 end
+# rubocop:enable Metrics/MethodLength

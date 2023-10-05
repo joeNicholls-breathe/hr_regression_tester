@@ -1,4 +1,6 @@
-require File.expand_path('../base.rb', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('base.rb', __dir__)
 
 class HolidayExtension < Base
   def holiday_request_dashboard_navigate_employee
@@ -49,9 +51,9 @@ class HolidayExtension < Base
 
   def purge_holiday_data_holiday_employee
     driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
-    drop = driver.find_element(:id, "employee_id")
+    drop = driver.find_element(:id, 'employee_id')
     choose = Selenium::WebDriver::Support::Select.new(drop)
-    choose.select_by(:text, "Holiday employee")
+    choose.select_by(:text, 'Holiday employee')
     driver.find_element(xpath: '/html/body/section[2]/div/div[3]/div/form/div/div[3]/input').click
     driver.find_element(id: 'continue-purge').click
     driver.find_element(xpath: '//*[@id="purge_data_modal"]/div/div/div[3]/button[2]').click
@@ -59,9 +61,9 @@ class HolidayExtension < Base
 
   def purge_holiday_data_holiday_carry_over_employee
     driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
-    drop = driver.find_element(:id, "employee_id")
+    drop = driver.find_element(:id, 'employee_id')
     choose = Selenium::WebDriver::Support::Select.new(drop)
-    choose.select_by(:text, "Carry-over Employee ")
+    choose.select_by(:text, 'Carry-over Employee ')
     driver.find_element(xpath: '/html/body/section[2]/div/div[3]/div/form/div/div[3]/input').click
     driver.find_element(id: 'continue-purge').click
     driver.find_element(xpath: '//*[@id="purge_data_modal"]/div/div/div[3]/button[2]').click
@@ -83,14 +85,14 @@ class HolidayExtension < Base
   def holiday_manager_reject
     driver.find_element(xpath: '//*[@id="tab-hr-dashboard"]/div/div[1]/div[3]/div[2]/div[1]/div[1]').click
     driver.find_element(xpath: '/html/body/section[2]/div[4]/div[2]/button[1]').click
-    driver.find_element(xpath: 'leave_request_rejection_reason').send_keys "manager rejects leave test DATE"
-    driver.find_element(xpath: '//*[@id="edit_leave_request_10374"]/div[3]/input').click #need to find request no from ui
+    driver.find_element(xpath: 'leave_request_rejection_reason').send_keys 'manager rejects leave test DATE'
+    driver.find_element(xpath: '//*[@id="edit_leave_request_10374"]/div[3]/input').click
   end
 
   def holiday_manager_reject_modal_cancel
     driver.find_element(xpath: '//*[@id="tab-hr-dashboard"]/div/div[1]/div[3]/div[2]/div[1]/div[1]').click
     driver.find_element(xpath: '/html/body/section[2]/div[4]/div[2]/button[1]').click
-    driver.find_element(xpath: '//*[@id="edit_leave_request_10374"]/div[3]/button').click #need to find request no from ui
+    driver.find_element(xpath: '//*[@id="edit_leave_request_10374"]/div[3]/button').click
   end
 
   def holiday_show_employee
@@ -104,6 +106,8 @@ class HolidayExtension < Base
 
   def holiday_employee_profile_delete
     driver.find_element(xpath: '/html/body/section[2]/div[7]/div[1]/div/table/tbody/tr/td[7]/svg').click
-    driver.find_element(xpath: '/html/body/section[2]/div[7]/div[1]/div/table/tbody/tr/td[7]/div/div/div/div[3]/button[2]').click
+    driver.find_element(
+      xpath: '/html/body/section[2]/div[7]/div[1]/div/table/tbody/tr/td[7]/div/div/div/div[3]/button[2]'
+    ).click
   end
 end

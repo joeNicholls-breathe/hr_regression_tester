@@ -1,5 +1,7 @@
-require File.expand_path('../base.rb', __FILE__)
-require file_path = File.join(__dir__,'./account_employee_setup/positive_imports/employee_full.xlsx')
+# frozen_string_literal: true
+
+require File.expand_path('base.rb', __dir__)
+require File.join(__dir__, './account_employee_setup/positive_imports/employee_full.xlsx')
 
 class BulkImportExtension < Base
   def navigate_to_bulk_upload
@@ -13,7 +15,7 @@ class BulkImportExtension < Base
     driver.find_element(xpath: '/html/body/section/div/div/div[1]/a').click
   end
 
-  def add_new_import 
+  def add_new_import
     driver.find_element(css: 'body > section.content.container > div.float-right > a').click
   end
 
@@ -24,19 +26,18 @@ class BulkImportExtension < Base
     choose.select_by(:text, 'Import new people')
     file_input = driver.find_element(id: 'employees_data_import_import')
     file_path = './account_employee_setup/positive_imports/employee_full.xlsx'
-    binding.pry
     file_input.send_keys(file_path)
     sleep 5
     driver.find_element(id: 'submit-import').click
     sleep 5
   end
-    
+
   def bulk_upload_employee_basic
     driver.find_element(id: 'employees_data_import_type').click
     drop = driver.find_element(id: 'employees_data_import_type')
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:text, 'Import new people (basic)')
-    driver.find_element(id: 'employees_data_import_import').send_keys "employee_basic.xlsx"
+    driver.find_element(id: 'employees_data_import_import').send_keys 'employee_basic.xlsx'
     driver.find_element(id: 'submit-import').click
   end
 
@@ -45,7 +46,7 @@ class BulkImportExtension < Base
     drop = driver.find_element(id: 'employees_data_import_type')
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:text, 'Update existing people')
-    driver.find_element(id: 'employees_data_import_import').send_keys ".xlsx"
+    driver.find_element(id: 'employees_data_import_import').send_keys '.xlsx'
     driver.find_element(id: 'submit-import').click
   end
 
@@ -54,7 +55,7 @@ class BulkImportExtension < Base
     drop = driver.find_element(id: 'employees_data_import_type')
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:text, '')
-    driver.find_element(id: 'employees_data_import_import').send_keys "jobs_details.xlsx"
+    driver.find_element(id: 'employees_data_import_import').send_keys 'jobs_details.xlsx'
     driver.find_element(id: 'submit-import').click
   end
 
@@ -63,16 +64,16 @@ class BulkImportExtension < Base
     drop = driver.find_element(id: 'employees_data_import_type')
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:text, 'Salaries')
-    driver.find_element(id: 'employees_data_import_import').send_keys "salary.xlsx"
+    driver.find_element(id: 'employees_data_import_import').send_keys 'salary.xlsx'
     driver.find_element(id: 'submit-import').click
   end
-  
+
   def bulk_upload_benefits
     driver.find_element(id: 'employees_data_import_type').click
-    drop = driver.find_element(id:'employees_data_import_type')
+    drop = driver.find_element(id: 'employees_data_import_type')
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:text, 'Benefits')
-    driver.find_element(id: 'employees_data_import_import').send_keys "benefits.xlsx"
+    driver.find_element(id: 'employees_data_import_import').send_keys 'benefits.xlsx'
     driver.find_element(id: 'submit-import').click
   end
 
@@ -81,8 +82,7 @@ class BulkImportExtension < Base
     drop = driver.find_element(id: 'employees_data_import_type')
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:text, 'Additional payments')
-    driver.find_element(id: 'employees_data_import_import').send_keys "additional_payments.xlsx"
+    driver.find_element(id: 'employees_data_import_import').send_keys 'additional_payments.xlsx'
     driver.find_element(id: 'submit-import').click
   end
-
 end
