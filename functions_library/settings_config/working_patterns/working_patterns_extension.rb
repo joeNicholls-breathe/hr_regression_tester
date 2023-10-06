@@ -25,6 +25,10 @@ class AccountWorkingPatternExtension < Base
     driver.find_element(xpath: '//*[@id="new_working_pattern"]/p/input').click
   end
 
+  def working_pattern_breadcrumb
+    driver.find_element(css: 'body > section.content.container.p-4 > div.breadcrumb > a').click
+  end
+
   def working_pattern_set_new_default
     drop = driver.find_element(id: 'account_working_pattern_id')
     choose = Selenium::WebDriver::Support::Select.new(drop)
@@ -33,26 +37,35 @@ class AccountWorkingPatternExtension < Base
   end
 
   def working_pattern_edit
+    a = driver.find_element(css: '#DataTables_Table_0 > tbody > tr.even > td.actions > a:nth-child(1)')
+    attribute_value = a.attribute('href')
+    split_value = attribute_value.split('/')[4]
+    selector = "#edit_working_pattern_#{split_value} > p > input"
     driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[5]/a[1]').click
     driver.find_element(id: 'working_pattern_name').clear
     driver.find_element(id: 'working_pattern_name').send_keys "Edited on #{todays_date_string}"
     driver.find_element(id: 'working_pattern_sun_hr_hours').clear
-    driver.find_element(id: 'working_pattern_sun_hr_hours').send_keys '10'
-    driver.find_element(xpath: '//*[@id="edit_working_pattern"]/p/input').click
+    driver.find_element(id: 'working_pattern_sun_hr_hours').send_keys "10"
+    driver.find_element(css: selector).click
   end
 
   def working_pattern_delete
-    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[5]/svg/path').click
-    driver.find_element(xpath: '//*[@id="delete_pattern"]/div/div/div[3]/button[2]:').click
+    a = driver.find_element(css: '#DataTables_Table_0 > tbody > tr.even > td.actions > svg')
+    attribute_value = a.attribute('href')
+    split_value = attribute_value.split('/')[4]
+    selector = "#delete_pattern_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr.even > td.actions > svg').click
+    driver.find_element(css: selector).click
   end
 
   def working_pattern_search
-    driver.find_element(xpath: '//*[@id="DataTables_Table_0_filter"]/label/input').send_keys 'Auto Regression'
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0_filter"]/label/input').send_keys "Z"
     sleep 1
   end
 
   def working_pattern_show_inactive
     driver.find_element(id: 'show-inactive-patterns').click
+    driver.find_element(css: 'body > section.content.container.p-4 > form.form.mb-1 > div > div > div.form-group.buttons > input').click
   end
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize

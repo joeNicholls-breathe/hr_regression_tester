@@ -19,10 +19,6 @@ class NavigateBrowserExtension < Base
   def breathe_signup
     driver.navigate.to('https://hr.breathehrstaging.com/signup')
   end
-  
-  def cookie_modal_accept
-    driver.find_element(id: 'CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll').click
-  end
 
   def breathe_login
     driver.navigate.to('https://login.breathehrstaging.com/login')

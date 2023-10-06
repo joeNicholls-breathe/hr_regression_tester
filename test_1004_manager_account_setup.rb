@@ -119,58 +119,107 @@ class AccountSetup < Base
     EmailNotificationConfigExtension.new(driver).third_party_email_invoice
     puts '18c. Email notification thid party invoice email'
     EmailNotificationConfigExtension.new(driver).third_party_email_leave_request_approval
-    puts '18d. Email notification thid party leave requests email'
+    puts "18d. Email notification thid party leave requests email"
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb_email_notification
     NavigationAroundAccountConfiguration.new(driver).navigate_to_woking_patterns
     puts '19. Navigate to Abscence settings - Working Patterns'
     AccountWorkingPatternExtension.new(driver).working_pattern_add
-    puts '20a. Working Pattern'
+    puts "20a. Working Pattern add"
+    AccountWorkingPatternExtension.new(driver).working_pattern_breadcrumb
+    puts "20b. Working Pattern breadcrumb return to view"
     AccountWorkingPatternExtension.new(driver).working_pattern_set_new_default
-    puts '20b. Working Pattern'
+    puts "20c. Working Pattern set new default"
     AccountWorkingPatternExtension.new(driver).working_pattern_edit
-    puts '20c. Working Pattern'
+    puts "20d. Working Pattern edit"
     AccountWorkingPatternExtension.new(driver).working_pattern_delete
-    puts '20d. Working Pattern'
-    AccountWorkingPatternExtension.new(driver).working_pattern_search
-    puts '20e. Working Pattern'
+    puts "20e. Working Pattern delete"
     AccountWorkingPatternExtension.new(driver).working_pattern_show_inactive
-    puts '20f. Working Pattern'
+    puts "20f. Working Pattern inactivate"
+    AccountWorkingPatternExtension.new(driver).working_pattern_search
+    puts "20g. Working Pattern search"
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_to_holiday_allowances
     puts '21 Navigate to Abscence settings - holidays allowances'
-
+    AccountHolidayAllowanceExtension.new(driver).holiday_allowances_add
+    puts "22a. Holiday allowance add"
+    AccountHolidayAllowanceExtension.new(driver).holiday_allowances_edit
+    puts "22b. Holiday allowance edit"
+    AccountHolidayAllowanceExtension.new(driver).holiday_allowances_select_default
+    puts "22c. Holiday allowance select default"
+    AccountHolidayAllowanceExtension.new(driver).holiday_allowance_search
+    puts "22d. Holiday allowance search"
+    AccountHolidayAllowanceExtension.new(driver).holiday_allowances_delete
+    puts "22e. Holiday allowance delete"
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-
     NavigationAroundAccountConfiguration.new(driver).navigate_to_holiday_years
     puts 'Navigate to Abscence settings - holidays years'
+    puts "23. Navigate to Abscence settings - holidays years"
+    HolidayYearExtension.new(driver).edit_holiday_years_now
+    puts "24. Holiday year edit year now"
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-
     NavigationAroundAccountConfiguration.new(driver).navigate_to_company_holidays
     puts 'Navigate to Abscence settings - company holidays'
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-
+    puts "25. Navigate to Abscence settings - company holidays"
+    CompanyHolidaysExtension.new(driver).company_holiday_add
+    puts "26a. Company holiday add"
+    CompanyHolidaysExtension.new(driver).
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     NavigationAroundAccountConfiguration.new(driver).navigate_to_company_blackout
     puts 'Navigate to Abscence settings - company blackouts'
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-
+    puts "Navigate to Abscence settings - company blackouts"
+    puts ""
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     NavigationAroundAccountConfiguration.new(driver).navigate_to_api_setup
     puts 'Navigate to Integrations - API setup'
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-
+    puts "Navigate to Integrations - API setup"
+    puts ""
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     NavigationAroundAccountConfiguration.new(driver).navigate_to_calendar_subscriptions
     puts 'Navigate to Integrations - calendar subscriptions'
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-
+    puts "Navigate to Integrations - calendar subscriptions"
+    puts ""
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     NavigationAroundAccountConfiguration.new(driver).navigate_to_rota_cloud
     puts 'Navigate to Integrations - Rotacloud'
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-
-    puts 'add HR to account'
-    puts 'add line manager to account'
-    puts 'add employee to account'
-    puts 'assign HR permissions to employee'
-    puts 'assign line managers to employee'
-    puts 'assign permissions to employee'
+    puts "add HR to account"
+    puts "add line manager to account"
+    puts "add employee to account"
+    puts "assign HR permissions to employee"
+    puts "assign line managers to employee"
+    puts "assign permissions to employee"
+    puts "Navigate to Integrations - Rotacloud"
+    puts ""
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+    NavigationAroundAccountConfiguration.new(driver).
+    puts ""
+    puts "add HR to account"
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+    NavigationAroundAccountConfiguration.new(driver).
+    puts ""
+    puts "add line manager to account"
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+    NavigationAroundAccountConfiguration.new(driver).
+    puts ""
+    puts "add employee to account"
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+    NavigationAroundAccountConfiguration.new(driver).
+    puts ""
+    puts "assign HR permissions to employee"
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+    NavigationAroundAccountConfiguration.new(driver).
+    puts ""
+    puts "assign line managers to employee"
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+    NavigationAroundAccountConfiguration.new(driver).
+    puts ""
+    puts "assign permissions to employee"
 
     sleep 10
     driver.close

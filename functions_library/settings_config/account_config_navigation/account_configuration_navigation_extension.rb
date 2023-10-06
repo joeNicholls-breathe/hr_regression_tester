@@ -53,19 +53,19 @@ class NavigationAroundAccountConfiguration < Base
   end
 
   def navigate_to_woking_patterns
-    driver.find_element(xpath: '/html/body/section[2]/div[2]/div[2]/div[1]/a[1]/svg/path').click
+    driver.find_element(css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > a:nth-child(2) > svg').click
   end
 
   def navigate_to_holiday_allowances
-    driver.find_element(css: 'href="/account_holiday_allowances"').click
+    driver.find_element(css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > a:nth-child(3)').click
   end
 
   def navigate_to_holiday_years
-    driver.find_element(css: 'href="/account/holiday_years"').click
+    driver.find_element(css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > a:nth-child(4)').click
   end
 
   def navigate_to_company_holidays
-    driver.find_element(css: 'href="/company_holidays"').click
+    driver.find_element(css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > a:nth-child(4)').click
   end
 
   def navigate_to_company_blackout
