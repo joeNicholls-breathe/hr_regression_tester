@@ -23,6 +23,14 @@ class AccountSetupLMUser < Base
   end
 
   def test_line_manger_permisssions_setup
+    NavigateBrowserExtension.new(driver).breathe_login
+    puts '1. navigate to breathe login url'
+    LoginExtension.new(driver).login_setup_acc_admin
+    LoginAppExtension.new(driver).select_hr
+    puts '2. login'
+    puts "add Line manager to account"
+    puts "assign Line manager permissions to employee"
+    puts "navigate to line settings - assign account settings to HR user"
     # view
     AccountConfigExtension.new(driver).navigate_to_change_what_line_managers_can_do
     AccountConfigExtension.new(driver).line_manager_configuration_on_personal_profile_view

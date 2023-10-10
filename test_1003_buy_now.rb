@@ -22,16 +22,16 @@ class TestBuyNow < Base
 
   def test_buy_now
     NavigateBrowserExtension.new(driver).breathe_signup_buy_now
-    puts 'Navigate to Sign Up Buy Now URL - Pass'
+    puts '1. Navigate to Sign Up Buy Now URL - Pass'
     sleep 0.5
     NavigateBrowserExtension.new(driver).cookie_modal_accept
-    puts 'Pop Up - Cookies - Accept - Pass'
+    puts '2. Pop Up - Cookies - Accept - Pass'
     sleep 1
     SignUpExtension.new(driver).sign_up_std_positive
-    puts 'Sign Up Buy Now Std form - Pass'
+    puts '3. Sign Up Buy Now Std form - Pass'
     sleep 5
     BuyNowExtension.new(driver).buy_now_monthly_micro_no_modules_positive
-    puts 'Buy Now account becomes active (Micro / Monthly / No modules) - Pass'
+    puts '4. Buy Now account becomes active (Micro / Monthly / No modules) - Pass'
     # PageValueCheck.new(driver).account_active
   end
 end

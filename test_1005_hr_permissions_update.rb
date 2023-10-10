@@ -22,6 +22,14 @@ class AccountSetupHRUser < Base
   end
 
   def test_hr_user_setup
+    NavigateBrowserExtension.new(driver).breathe_login
+    puts '1. navigate to breathe login url'
+    LoginExtension.new(driver).login_setup_acc_admin
+    LoginAppExtension.new(driver).select_hr
+    puts '2. login'
+    puts "add HR to account"
+    puts "assign HR permissions to employee"
+    puts "navigate to HR settings - assign account settings to HR user"
     AccountConfigExtension.new(driver).hr_user_configuration_leave_needs_approval_on
     AccountConfigExtension.new(driver).hr_user_configuration_use_gravatar_on
     AccountConfigExtension.new(driver).hr_user_configuration_disable_welcome_page_on
@@ -29,7 +37,7 @@ class AccountSetupHRUser < Base
     AccountConfigExtension.new(driver).hr_user_configuration_remind_line_manager_to_give_121_on
     AccountConfigExtension.new(driver).hr_user_configuration_grapevine_label
     AccountConfigExtension.new(driver).update_hr_settings
-    AccountConfigExtension.new(driver).navigate_back_to_settings_breadcrumb
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     puts 'Permissions and approvals - check what people can do - HR user'
     sleep 10
     driver.close

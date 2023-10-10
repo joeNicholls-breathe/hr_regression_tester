@@ -165,67 +165,42 @@ class AccountSetup < Base
     puts "25. Navigate to Abscence settings - company holidays"
     CompanyHolidaysExtension.new(driver).company_holiday_add
     puts "26a. Company holiday add"
-    CompanyHolidaysExtension.new(driver).
+    CompanyHolidaysExtension.new(driver).company_holiday_edit
+    puts "26b. Company holiday edit"
+    CompanyHolidaysExtension.new(driver).company_holiday_delete
+    puts "26c. Company holiday delete"
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     NavigationAroundAccountConfiguration.new(driver).navigate_to_company_blackout
-    puts 'Navigate to Abscence settings - company blackouts'
-    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    puts "Navigate to Abscence settings - company blackouts"
-    puts ""
+    puts "27. Navigate to Abscence settings - company blackouts"
+    CompanyBlackoutsExtension.new(driver).company_blakout_add_new
+    puts "28a. Company blackouts add"
+    CompanyBlackoutsExtension.new(driver).company_blackout_delete
+    puts "28b. Company blackouts delete"
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     NavigationAroundAccountConfiguration.new(driver).navigate_to_api_setup
-    puts 'Navigate to Integrations - API setup'
-    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    puts "Navigate to Integrations - API setup"
-    puts ""
+    puts '29. Navigate to Integrations - API setup'
+    APIExtenion.new(driver).api_key_switch_on
+    puts "30a Api switch on"
+    APIExtenion.new(driver).api_key_switch_reset
+    puts "30b. Api reset api key"
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     NavigationAroundAccountConfiguration.new(driver).navigate_to_calendar_subscriptions
-    puts 'Navigate to Integrations - calendar subscriptions'
-    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    puts "Navigate to Integrations - calendar subscriptions"
-    puts ""
+    puts "31. Navigate to Integrations - calendar subscriptions"
+    CalendarSubscriptionExtension.new(driver).calendar_central_setting_on
+    CalendarSubscriptionExtension.new(driver).add_department_list_item_one
+    CalendarSubscriptionExtension.new(driver).amend_calendar_revert_settings
+    puts "32a. Calendar subscription managed centrally, added department and reset"
+    CalendarSubscriptionExtension.new(driver).calendar_allow_manage_own
+    CalendarSubscriptionExtension.new(driver).amend_calendar_revert_settings
+    puts "32b. Calendar subscription managed by employees, added can see own calendar only and reset"
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     NavigationAroundAccountConfiguration.new(driver).navigate_to_rota_cloud
-    puts 'Navigate to Integrations - Rotacloud'
+    puts '33. Navigate to Integrations - Rotacloud - Test manually if we need to cover this'
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    puts "add HR to account"
-    puts "add line manager to account"
-    puts "add employee to account"
-    puts "assign HR permissions to employee"
-    puts "assign line managers to employee"
-    puts "assign permissions to employee"
-    puts "Navigate to Integrations - Rotacloud"
-    puts ""
-    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    NavigationAroundAccountConfiguration.new(driver).
-    puts ""
-    puts "add HR to account"
-    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    NavigationAroundAccountConfiguration.new(driver).
-    puts ""
-    puts "add line manager to account"
-    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    NavigationAroundAccountConfiguration.new(driver).
-    puts ""
-    puts "add employee to account"
-    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    NavigationAroundAccountConfiguration.new(driver).
-    puts ""
-    puts "assign HR permissions to employee"
-    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    NavigationAroundAccountConfiguration.new(driver).
-    puts ""
-    puts "assign line managers to employee"
-    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    NavigationAroundAccountConfiguration.new(driver).
-    puts ""
-    puts "assign permissions to employee"
-
     sleep 10
     driver.close
   end
 end
-# rubocop:enable Metrics/ClassLength
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
 
