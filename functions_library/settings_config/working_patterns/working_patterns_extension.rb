@@ -50,7 +50,7 @@ class AccountWorkingPatternExtension < Base
   end
 
   def working_pattern_delete
-    a = driver.find_element(css: '#DataTables_Table_0 > tbody > tr.even > td.actions > svg')
+    a = driver.find_element(css: '#DataTables_Table_0 > tbody > tr.even > td.actions > a:nth-child(4)')
     attribute_value = a.attribute('href')
     split_value = attribute_value.split('/')[4]
     selector = "#delete_pattern_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"

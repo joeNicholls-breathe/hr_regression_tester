@@ -10,14 +10,29 @@ module TestRefExtension
   end
 
   def todays_date
-    Time.zone.today
+    Date.today
   end
 
   def todays_date_string
-    Time.zone.today.strftime('%d-%m-%Y')
+    Date.today.strftime('%d-%m-%Y')
   end
 
   def tomorrow
-    Time.zone.today + 1
+    Date.today + 1
   end
+
+  def one_week_date_string
+    tomorrow = Date.today + 7
+    tomorrow.strftime('%d/%m/%Y')
+  end
+
+  def one_month
+    Date.today + 30
+  end
+
+  def one_month_date_string
+    one_month = Date.today + 30
+    one_month.strftime('%d/%m/%Y')
+  end
+
 end

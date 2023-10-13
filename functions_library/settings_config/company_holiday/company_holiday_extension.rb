@@ -4,7 +4,7 @@ require File.expand_path('../../base.rb', __dir__)
 
 class CompanyHolidaysExtension < Base
   def company_holiday_add
-    driver.find_element(xpath: '/html/body/section[2]/div[2]/a/span/svg[1]').click
+    driver.find_element(css: 'body > section.content.container.p-4 > div.float-right > a').click
     driver.find_element(id: 'company_holiday_name').send_keys "Test Holiday #{todays_date}"
     driver.find_element(id: '#company_holiday_day_on_react').send_keys todays_date
     driver.find_element(id: 'company_holiday_half').click
@@ -12,15 +12,25 @@ class CompanyHolidaysExtension < Base
   end
 
   def company_holiday_edit
-    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[3]/a[1]/svg/path').click
-    driver.find_element(id: 'company_holiday_name').send_keys "Test Holiday #{tomorrow}"
-    driver.find_element(id: '#company_holiday_day_on_react').send_keys tomorrow
-    driver.find_element(xpath: '//*[@id="new_company_holiday"]/p/input').click
-    # no half day
+    a = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(1)')
+    attribute_value = a.attribute('href')
+    split_value = attribute_value.split('/')[4]
+    selector = "#edit_company_holiday_#{split_value} > p > input"
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(1)').click
+    driver.find_element(id: 'company_holiday_name').clear
+    driver.find_element(id: 'company_holiday_name').send_keys "Edited Company Test Holiday #{todays_date}"
+    driver.find_element(id: '#company_holiday_day_on_react').clear
+    driver.find_element(id: '#company_holiday_day_on_react').send_keys one_month
+    driver.find_element(id: 'company_holiday_half').click
+    driver.find_element(css: selector).click
   end
 
   def company_holiday_delete
-    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[3]/svg/path').click
-    driver.find_element(xpath: '//*[@id="delete_company_holiday"]/div/div/div[3]/button[2]').click
+    a = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(1)')
+    attribute_value = a.attribute('href')
+    split_value = attribute_value.split('/')[4]
+    selector = "#delete_company_holiday_#{split_value}> div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click    
+    driver.find_element(css: selector).click
   end
 end

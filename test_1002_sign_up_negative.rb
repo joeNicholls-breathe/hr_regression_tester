@@ -17,7 +17,7 @@ class TestSignUpNegative < Base
 
   def test_sign_up_negative_email
     NavigateBrowserExtension.new(driver).breathe_signup
-    NavigateBrowserExtension.new(driver).cookie_modal_accept
+    #NavigateBrowserExtension.new(driver).cookie_modal_accept
     SignUpExtension.new(driver).sign_up_negative_no_email
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
@@ -27,7 +27,7 @@ class TestSignUpNegative < Base
 
   def test_sign_up_negative_no_account_name
     NavigateBrowserExtension.new(driver).breathe_signup
-    NavigateBrowserExtension.new(driver).cookie_modal_accept
+    #NavigateBrowserExtension.new(driver).cookie_modal_accept
     SignUpExtension.new(driver).sign_up_negative_no_account_name
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
@@ -37,7 +37,7 @@ class TestSignUpNegative < Base
 
   def test_sign_up_negative_no_account_employees
     NavigateBrowserExtension.new(driver).breathe_signup
-    NavigateBrowserExtension.new(driver).cookie_modal_accept
+    #NavigateBrowserExtension.new(driver).cookie_modal_accept
     SignUpExtension.new(driver).sign_up_negative_no_account_employees
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
@@ -47,7 +47,7 @@ class TestSignUpNegative < Base
 
   def sign_up_negative_no_telephone_number
     NavigateBrowserExtension.new(driver).breathe_signup
-    NavigateBrowserExtension.new(driver).cookie_modal_accept
+    #NavigateBrowserExtension.new(driver).cookie_modal_accept
     SignUpExtension.new(driver).sign_up_negative_no_telephone_number
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
@@ -57,7 +57,7 @@ class TestSignUpNegative < Base
 
   def sign_up_negative_no_password_one
     NavigateBrowserExtension.new(driver).breathe_signup
-    NavigateBrowserExtension.new(driver).cookie_modal_accept
+    #NavigateBrowserExtension.new(driver).cookie_modal_accept
     SignUpExtension.new(driver).sign_up_negative_no_password_one
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
@@ -67,7 +67,7 @@ class TestSignUpNegative < Base
 
   def sign_up_negative_no_password_two
     NavigateBrowserExtension.new(driver).breathe_signup
-    NavigateBrowserExtension.new(driver).cookie_modal_accept
+    #NavigateBrowserExtension.new(driver).cookie_modal_accept
     SignUpExtension.new(driver).sign_up_negative_no_password_two
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
