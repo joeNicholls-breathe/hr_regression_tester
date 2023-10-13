@@ -21,7 +21,7 @@ class TestSignUpNegative < Base
     SignUpExtension.new(driver).sign_up_negative_no_email
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
-    puts 'NT - No email - test run'
+    puts '1. NT - No email - test run'
     driver.close
   end
 
@@ -31,7 +31,7 @@ class TestSignUpNegative < Base
     SignUpExtension.new(driver).sign_up_negative_no_account_name
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
-    puts 'NT - No account name - test run'
+    puts '2. NT - No account name - test run'
     driver.close
   end
 
@@ -41,7 +41,7 @@ class TestSignUpNegative < Base
     SignUpExtension.new(driver).sign_up_negative_no_account_employees
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
-    puts 'NT - No plan size chosen - test run'
+    puts '3. NT - No plan size chosen - test run'
     driver.close
   end
 
@@ -51,7 +51,7 @@ class TestSignUpNegative < Base
     SignUpExtension.new(driver).sign_up_negative_no_telephone_number
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
-    puts 'NT - No telepone number entered - test run'
+    puts '4. NT - No telepone number entered - test run'
     driver.close
   end
 
@@ -61,7 +61,7 @@ class TestSignUpNegative < Base
     SignUpExtension.new(driver).sign_up_negative_no_password_one
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
-    puts 'NT - No password (1) entered - test run'
+    puts '5. NT - No password (1) entered - test run'
     driver.close
   end
 
@@ -71,7 +71,7 @@ class TestSignUpNegative < Base
     SignUpExtension.new(driver).sign_up_negative_no_password_two
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
-    puts 'NT - No password (2) entered - test run'
+    puts '6. NT - No password (2) entered - test run'
     driver.close
   end
 end

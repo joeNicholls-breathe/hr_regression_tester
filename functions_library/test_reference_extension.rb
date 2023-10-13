@@ -2,6 +2,7 @@
 
 require File.expand_path('base.rb', __dir__)
 require 'date'
+require 'Time'
 
 module TestRefExtension
   def random_number_string
