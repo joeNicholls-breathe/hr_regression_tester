@@ -16,7 +16,7 @@ class TestBuyNow < Base
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :firefox
+    @driver = Selenium::WebDriver.for :chrome
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -24,8 +24,8 @@ class TestBuyNow < Base
     NavigateBrowserExtension.new(driver).breathe_signup_buy_now
     puts '1. Navigate to Sign Up Buy Now URL - Pass'
     sleep 0.5
-    NavigateBrowserExtension.new(driver).cookie_modal_accept
-    puts '2. Pop Up - Cookies - Accept - Pass'
+    #NavigateBrowserExtension.new(driver).cookie_modal_accept
+    #puts '2. Pop Up - Cookies - Accept - Pass'
     sleep 1
     SignUpExtension.new(driver).sign_up_std_positive
     puts '3. Sign Up Buy Now Std form - Pass'

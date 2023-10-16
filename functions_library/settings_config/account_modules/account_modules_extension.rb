@@ -25,6 +25,7 @@ class AccountModulesExtension < Base
     driver.find_element(id: 'account_use_covid_result').click
     driver.find_element(id: 'account_use_dbs').click
     driver.find_element(id: 'account_use_contacts').click # emergency contacts
+    driver.find_element(id: 'account_use_employee_nps').click
     driver.find_element(id: 'account_use_edi').click
     driver.find_element(id: 'account_use_assets').click # equipment
     driver.find_element(id: 'account_use_grievances').click
@@ -43,6 +44,7 @@ class AccountModulesExtension < Base
     driver.find_element(id: 'account_use_covid_result').click
     driver.find_element(id: 'account_use_dbs').click
     driver.find_element(id: 'account_use_contacts').click
+    driver.find_element(id: 'account_use_employee_nps').click
     driver.find_element(id: 'account_use_edi').click
     driver.find_element(id: 'account_use_assets').click
     driver.find_element(id: 'account_use_grievances').click
@@ -60,7 +62,7 @@ class AccountModulesExtension < Base
     element = driver.find_element(id: 'account_use_payslip_imports')
     driver.execute_script('arguments[0].scrollIntoView(true);', element)
     sleep 1.5
-    driver.find_element(xpath: '//*/div/div[1]/div/div[15]/a').click
+    driver.find_element(xpath: '//*/div/div[1]/div/div[16]/a').click
     sleep 1
     driver.navigate.back
     sleep 1
