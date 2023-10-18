@@ -27,9 +27,9 @@ class AccountSetupHRUser < Base
     LoginExtension.new(driver).login_setup_acc_admin
     LoginAppExtension.new(driver).select_hr
     puts '2. login'
-    puts "add HR to account"
-    puts "assign HR permissions to employee"
-    puts "navigate to HR settings - assign account settings to HR user"
+    puts 'add HR to account'
+    puts 'assign HR permissions to employee'
+    puts 'navigate to HR settings - assign account settings to HR user'
     AccountConfigExtension.new(driver).hr_user_configuration_leave_needs_approval_on
     AccountConfigExtension.new(driver).hr_user_configuration_use_gravatar_on
     AccountConfigExtension.new(driver).hr_user_configuration_disable_welcome_page_on

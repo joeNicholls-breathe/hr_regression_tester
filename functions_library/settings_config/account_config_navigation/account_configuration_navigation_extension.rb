@@ -41,46 +41,79 @@ class NavigationAroundAccountConfiguration < Base
   end
 
   def navigate_to_change_what_hr_users_can_do
-    driver.find_element(css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) > a:nth-child(2)').click
+    driver.find_element(
+      css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(1) >
+            div:nth-child(3) > a:nth-child(2)'
+    ).click
   end
 
   def navigate_to_change_what_line_managers_can_do
-    driver.find_element(css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) > a:nth-child(3)').click
+    driver.find_element(
+      css: 'body > section.content.container.p-4 > div:nth-child(2) >
+            div:nth-child(1) > div:nth-child(3) > a:nth-child(3)'
+    ).click
   end
 
   def navigate_to_change_what_employees_can_do
-    driver.find_element(css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) > a:nth-child(4)').click
+    driver.find_element(
+      css: 'body > section.content.container.p-4 > div:nth-child(2) >
+            div:nth-child(1) > div:nth-child(3) > a:nth-child(4)'
+    ).click
   end
 
   def navigate_to_woking_patterns
-    driver.find_element(css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > a:nth-child(2) > svg').click
+    driver.find_element(
+      css: 'body > section.content.container.p-4 > div:nth-child(2) >
+            div:nth-child(2) > div:nth-child(1) > a:nth-child(2) > svg'
+    ).click
   end
 
   def navigate_to_holiday_allowances
-    driver.find_element(css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > a:nth-child(3)').click
+    driver.find_element(
+      css: 'body > section.content.container.p-4 > div:nth-child(2) >
+            div:nth-child(2) > div:nth-child(1) > a:nth-child(3)'
+    ).click
   end
 
   def navigate_to_holiday_years
-    driver.find_element(css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > a:nth-child(4)').click
+    driver.find_element(
+      css: 'body > section.content.container.p-4 > div:nth-child(2) >
+            div:nth-child(2) > div:nth-child(1) > a:nth-child(4)'
+    ).click
   end
 
   def navigate_to_company_holidays
-    driver.find_element(css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > a:nth-child(5)').click
+    driver.find_element(
+      css: 'body > section.content.container.p-4 >
+            div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > a:nth-child(5)'
+    ).click
   end
 
   def navigate_to_company_blackout
-    driver.find_element(css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > a:nth-child(6)').click
+    driver.find_element(
+      css: 'body > section.content.container.p-4 > div:nth-child(2) >
+            div:nth-child(2) > div:nth-child(1) > a:nth-child(6)'
+    ).click
   end
 
   def navigate_to_api_setup
-    driver.find_element(css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > a:nth-child(2)').click
+    driver.find_element(
+      css: 'body > section.content.container.p-4 > div:nth-child(2) >
+            div:nth-child(2) > div:nth-child(2) > a:nth-child(2)'
+    ).click
   end
 
   def navigate_to_calendar_subscriptions
-    driver.find_element(css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > a:nth-child(3)').click
+    driver.find_element(
+      css: 'body > section.content.container.p-4 > div:nth-child(2) >
+            div:nth-child(2) > div:nth-child(2) > a:nth-child(3)'
+    ).click
   end
 
   def navigate_to_rota_cloud
-    driver.find_element(css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > a:nth-child(4)').click
+    driver.find_element(
+      css: 'body > section.content.container.p-4 > div:nth-child(2) >
+            div:nth-child(2) > div:nth-child(2) > a:nth-child(4)'
+    ).click
   end
 end

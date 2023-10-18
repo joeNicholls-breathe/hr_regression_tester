@@ -26,14 +26,14 @@ class PageValueCheck < Base
   end
 
   def calendar_subscription_manage_centrally_url
-    calendar_check = driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[2]')
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[2]')
     calendar_url = url_check.attribute('innerHTML')
     s = calendar_url.to_s
     puts s
   end
 
   def calendar_subscription_manage_own_leave_url
-    calendar_check = driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[2]')
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[2]/td[2]')
     calendar_url = url_check.attribute('innerHTML')
     s = calendar_url.to_s
     puts s
@@ -47,15 +47,14 @@ class PageValueCheck < Base
   end
 
   def signup_fail_check
-    return driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[1]/a')
-    puts 'Dashboard reached'
+    return puts 'Dashboard reached' if driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[1]/a')
   rescue Selenium::WebDriver::Error::NoSuchElementError
     puts 'Account was not Signed Up - TEST PASS Pass - Element not Found'
   end
 
   def account_active
-    buy_now_check = driver.find_element(css: 'div.row:nth-child(1)')
-    buy_now_positive = buy_now_check('innerHTML')
+    buy_now_positive = driver.find_element(css: 'div.row:nth-child(1)')
+    buy_now_positive('innerHTML')
     puts buy_now_positive
   end
 end
