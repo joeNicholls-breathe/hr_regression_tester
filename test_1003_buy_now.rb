@@ -10,8 +10,6 @@ require './functions_library/test_reference_extension'
 require './functions_library/settings_config/account_config_navigation/account_configuration_navigation_extension'
 require './functions_library/buy_now_extension'
 
-# rubocop:disable Metrics/MethodLength
-# rubocop:disable Metrics/AbcSize
 class TestBuyNow < Base
   attr_accessor :driver
 
@@ -24,8 +22,8 @@ class TestBuyNow < Base
     NavigateBrowserExtension.new(driver).breathe_signup_buy_now
     puts '1. Navigate to Sign Up Buy Now URL - Pass'
     sleep 0.5
-    #NavigateBrowserExtension.new(driver).cookie_modal_accept
-    #puts '2. Pop Up - Cookies - Accept - Pass'
+    # NavigateBrowserExtension.new(driver).cookie_modal_accept
+    # puts '2. Pop Up - Cookies - Accept - Pass'
     sleep 1
     SignUpExtension.new(driver).sign_up_std_positive
     puts '3. Sign Up Buy Now Std form - Pass'
@@ -35,7 +33,5 @@ class TestBuyNow < Base
     # PageValueCheck.new(driver).account_active
   end
 end
-# rubocop:enable Metrics/MethodLength
-# rubocop:enable Metrics/AbcSize
 
 TestBuyNow.new.test_buy_now

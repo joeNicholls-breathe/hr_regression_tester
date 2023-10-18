@@ -14,6 +14,7 @@ require './functions_library/settings_config/line_manager_config/line_manager_co
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/ClassLength
 class AccountSetupLMUser < Base
   attr_accessor :driver
 
@@ -28,9 +29,9 @@ class AccountSetupLMUser < Base
     LoginExtension.new(driver).login_setup_acc_admin
     LoginAppExtension.new(driver).select_hr
     puts '2. login'
-    puts "add Line manager to account"
-    puts "assign Line manager permissions to employee"
-    puts "navigate to line settings - assign account settings to HR user"
+    puts 'add Line manager to account'
+    puts 'assign Line manager permissions to employee'
+    puts 'navigate to line settings - assign account settings to HR user'
     # view
     AccountConfigExtension.new(driver).navigate_to_change_what_line_managers_can_do
     AccountConfigExtension.new(driver).line_manager_configuration_on_personal_profile_view
@@ -131,6 +132,7 @@ class AccountSetupLMUser < Base
     driver.close
   end
 end
+# rubocop:enable Metrics/ClassLength
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
 AccountSetupLMUser.new.test_line_manger_permisssions_setup

@@ -9,7 +9,6 @@ require './functions_library/settings_config/account_config_navigation/account_c
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
-# rubocop:disable Metrics/ClassLength
 class EmployeeInputs < Base
   attr_accessor :driver
 
@@ -25,17 +24,17 @@ class EmployeeInputs < Base
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
     AppNavigationExtensionManager.new(driver).navigate_to_people_list
     AppNavigationExtensionManager.new(driver).navigate_to_people_screen_pill
-    CreateEmployeeExtension.new(driver).create_employee_pending_starter_from_people_page #need to amend to make the employee start today???
+    CreateEmployeeExtension.new(driver).create_employee_pending_starter_from_people_page
+    # need to amend to make the employee start today???
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
-    LogoutExtension.new(driver).
+    LogoutExtension.new(driver).user_logout
     puts '1. HR user adds a new employee joining today'
     puts '2. Employee login'
-    puts "assign permissions to employee"
+    puts 'assign permissions to employee'
     sleep 10
     driver.close
   end
 end
-# rubocop:enable Metrics/ClassLength
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
 

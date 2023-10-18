@@ -45,7 +45,7 @@ class AccountWorkingPatternExtension < Base
     driver.find_element(id: 'working_pattern_name').clear
     driver.find_element(id: 'working_pattern_name').send_keys "Edited on #{todays_date_string}"
     driver.find_element(id: 'working_pattern_sun_hr_hours').clear
-    driver.find_element(id: 'working_pattern_sun_hr_hours').send_keys "10"
+    driver.find_element(id: 'working_pattern_sun_hr_hours').send_keys '10'
     driver.find_element(css: selector).click
   end
 
@@ -59,13 +59,15 @@ class AccountWorkingPatternExtension < Base
   end
 
   def working_pattern_search
-    driver.find_element(xpath: '//*[@id="DataTables_Table_0_filter"]/label/input').send_keys "Z"
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0_filter"]/label/input').send_keys 'Z'
     sleep 1
   end
 
   def working_pattern_show_inactive
     driver.find_element(id: 'show-inactive-patterns').click
-    driver.find_element(css: 'body > section.content.container.p-4 > form.form.mb-1 > div > div > div.form-group.buttons > input').click
+    driver.find_element(
+      css: 'body > section.content.container.p-4 > form.form.mb-1 > div > div > div.form-group.buttons > input'
+    ).click
   end
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require File.expand_path('base.rb', __dir__)
+require 'active_support/isolated_execution_state'
+require 'active_support/time'
 require 'date'
 require 'Time'
 
@@ -10,29 +12,28 @@ module TestRefExtension
   end
 
   def todays_date
-    Date.today
+    Time.now.utc
   end
 
   def todays_date_string
-    Date.today.strftime('%d-%m-%Y')
+    Time.now.utc.strftime('%d-%m-%Y')
   end
 
   def tomorrow
-    Date.today + 1
+    todays_date + 1
   end
 
   def one_week_date_string
-    tomorrow = Date.today + 7
+    tomorrow = todays_date + 7
     tomorrow.strftime('%d/%m/%Y')
   end
 
   def one_month
-    Date.today + 30
+    todays_date + 30
   end
 
   def one_month_date_string
-    one_month = Date.today + 30
+    one_month = todays_date + 30
     one_month.strftime('%d/%m/%Y')
   end
-
 end
