@@ -58,6 +58,15 @@ class LoginExtension < Base
     sleep 1
   end
 
+  def login_negative_carry_over_holiday_employee
+    driver.find_element(id: 'email-input').send_keys settings[:staging][:nagative_carry_over_holiday_email]
+    sleep 1
+    driver.find_element(name: 'password').send_keys settings[:staging][:login_password]
+    sleep 1
+    driver.find_element(css: 'form button[type=submit]').click
+    sleep 1
+  end
+
   def login_setup_acc_admin
     driver.find_element(id: 'email-input').send_keys settings[:staging][:setup_acc_email]
     sleep 0.5
