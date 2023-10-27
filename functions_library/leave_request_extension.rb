@@ -47,5 +47,19 @@ class LeaveRequestExtension < Base
     driver.find_element(id: 'leave_request_notes').send_keys 'Testing leave request uses carry over' # note
     driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
   end
+
+  def negative_carry_over_employee_holiday_leave_this_year
+    driver.find_element(css: '#\#leave_request_start_date_react').send_keys '16/10/2023' # start date
+    driver.find_element(css: '#\#leave_request_end_date_react').send_keys '27/10/2023' # end date
+    driver.find_element(id: 'leave_request_notes').send_keys 'Testing leave request uses carry over' # note
+    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
+  end
+
+  def negative_carry_over_employee_holiday_next_years_allowance
+    driver.find_element(css: '#\#leave_request_start_date_react').send_keys '20/11/2023' # start date
+    driver.find_element(css: '#\#leave_request_end_date_react').send_keys '24/11/2023' # end date
+    driver.find_element(id: 'leave_request_notes').send_keys 'Testing leave request uses carry over' # note
+    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
+  end
   # rubocop:enable Metrics/AbcSize
 end

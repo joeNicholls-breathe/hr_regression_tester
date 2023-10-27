@@ -22,17 +22,17 @@ class TestLeaveRequest
   end
 
   # this will test an employee making a holiday request
-  # that uses their carry over amount
+  # that uses their negative carry over amount
   # it will check for the taken and remaining totals being correct
   # and also the carry over amount
   # and finish by deleting the absence and checking the totals
 
   def test_leave_request
-    puts 'Running - test_employee_holiday_carry_over.rb'
+    puts 'Running - test_employee_holiday_negative_carry_over.rb'
     test_01_employee_makes_request
     test_02_check_allowance_totals
     test_03_delete_holiday_data
-    puts 'Complete - test_employee_holiday_carry_over.rb'
+    puts 'Complete - test_employee_holiday_negative_carry_over.rb'
   end
 
   def test_01_employee_makes_request
@@ -46,28 +46,28 @@ class TestLeaveRequest
     LoginAppExtension.new(driver).select_hr
     puts 'Pass - Selects HR'
     sleep 1
-    HolidayExtension.new(driver).add_leave_request_for_carry_over_employee
+    HolidayExtension.new(driver).add_leave_request_for_negative_carry_over_employee
     puts 'Pass - opens add absence record'
     sleep 1
-    LeaveRequestExtension.new(driver).employee_holiday_leave_request_last_year
-    puts 'Pass - creates absence last year to create carry over period'
+    LeaveRequestExtension.new(driver).negative_carry_over_employee_holiday_leave_this_year
+    puts 'Pass - creates absence to use this years allowance'
     sleep 1
-    HolidayExtension.new(driver).add_leave_request_for_carry_over_employee
+    HolidayExtension.new(driver).add_leave_request_for_negative_carry_over_employee
     puts 'Pass - opens add absence record'
     sleep 1
-    LeaveRequestExtension.new(driver).employee_holiday_leave_in_carry_over
-    puts 'Pass - creates absence in carry over period'
+    LeaveRequestExtension.new(driver).negative_carry_over_employee_holiday_next_years_allowance
+    puts 'Pass - creates absence in this year to use next years allowance'
     sleep 1
   end
 
   def test_02_check_allowance_totals
     puts 'Start test - Check totals'
-    if HolidayExtension.new(driver).booked_amount == '1.0 day'
+    if HolidayExtension.new(driver).booked_amount == '15.0 days'
       puts 'Pass - booked_amount total correct'
     else
       puts 'FAIL - booked_amount total incorrect'
     end
-    if HolidayExtension.new(driver).available_amount == '20.0 days'
+    if HolidayExtension.new(driver).available_amount == '0.0 days'
       puts 'Pass - available_amount total correct'
     else
       puts 'FAIL - available_amount total incorrect'
@@ -76,22 +76,22 @@ class TestLeaveRequest
   end
 
   def test_03_delete_holiday_data
-    puts 'Start test - Deletes holiday information for carry over employee'
-    HolidayExtension.new(driver).purge_holiday_data_for_carry_over_employee
+    puts 'Start test - Deletes holiday information for Negative carry over employee'
+    HolidayExtension.new(driver).purge_holiday_data_for_negative_carry_over_employee
     puts 'Pass - purge holday data'
-    HolidayExtension.new(driver).holiday_employee_absence_index
+    HolidayExtension.new(driver).negative_carry_over_holiday_employee_absence_index
     if HolidayExtension.new(driver).booked_amount == '0.0 days'
       puts 'Pass - booked_amount total correct'
     else
       puts 'FAIL - booked_amount total incorrect'
     end
-    puts 'Test complete - Holiday employees holiday deleted'
-    if HolidayExtension.new(driver).available_amount == '20.0 days'
+    puts 'Test complete - Negative Carry-Over holiday deleted'
+    if HolidayExtension.new(driver).available_amount == '10.0 days'
       puts 'Pass - available_amount total correct'
     else
       puts 'FAIL - available_amount total incorrect'
     end
-    puts 'Test complete - Holiday employees holiday deleted'
+    puts 'Test complete - Negative Carry-Over holiday deleted'
   end
 end
 # rubocop:enable Metrics/MethodLength
