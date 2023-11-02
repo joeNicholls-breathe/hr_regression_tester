@@ -48,6 +48,14 @@ class AppNavigationExtensionManager < Base
     driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[7]/div/a').click
   end
 
+  def navigate_to_company_holidays
+    driver.navigate.to('https://hr.breathehrstaging.com/company_holidays')
+  end
+
+  def navigate_to_company_blackouts
+    driver.navigate.to('https://hr.breathehrstaging.com/company_blackouts')
+  end
+
   def navigate_to_plan_and_billing
     driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[7]').click
     driver.find_element(css: 'href="/account/plan_and_billing"').click

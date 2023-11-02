@@ -1,0 +1,142 @@
+# frozen_string_literal: true
+
+require 'selenium-webdriver'
+require './functions_library/navigate_browser_extension'
+require './functions_library/login_extension'
+require './functions_library/logout_extension'
+require './functions_library/login_app_extension'
+require './functions_library/employee_dashboard_extension'
+require './functions_library/holiday_extension'
+require './functions_library/leave_request_extension'
+require './functions_library/navigate_around_app_employee'
+require './functions_library/navigate_around_app_manager'
+require './functions_library/settings_config/company_blackouts/company_blackouts_extension'
+require './functions_library/test_reference_extension'
+require './functions_library/ui_page_element_check'
+
+# rubocop:disable Metrics/ClassLength
+# rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/AbcSize
+class TestLeaveRequest
+  attr_accessor :driver
+
+  def initialize
+    @driver = Selenium::WebDriver.for :chrome
+    # driver.manage.timeout.implicit_wait = 3
+    Selenium::WebDriver.logger.level = :info
+  end
+
+  # this will test an employee making a holiday request
+  # that is on a company blackout
+
+  def test_leave_request
+    puts 'Running - test_employee_holiday_company_blackout_clash.rb'
+    test_01_create_company_blackout
+    test_02_create_holiday_clash
+    test_03_check_allowance_totals
+    test_04_create_holiday_overrides_clash
+    test_05_check_allowance_totals
+    test_06_delete_records
+    puts 'Complete - test_employee_holiday_company_blackout_clash.rb'
+  end
+
+  def test_01_create_company_blackout
+    puts 'START test 01 - Employee creates leave request'
+    NavigateBrowserExtension.new(driver).breathe_login
+    puts 'Pass - Navigate to Login Screen'
+    sleep 1
+    LoginExtension.new(driver).login_admin
+    puts 'Pass - Login as admin'
+    sleep 1
+    LoginAppExtension.new(driver).select_hr
+    puts 'Pass - Selects HR'
+    sleep 1
+    AppNavigationExtensionManager.new(driver).navigate_to_company_blackouts
+    puts 'Pass - Navigate to company blackouts'
+    CompanyBlackoutsExtension.new(driver).company_blackout_add_new
+    puts 'Pass - Added company blackout'
+    puts 'TEST 01 complete'
+  end
+
+  def test_02_create_holiday_clash
+    puts 'START test 02 - Create absence that clashes with company blackout'
+    HolidayExtension.new(driver).add_leave_request_for_holiday_employee
+    puts 'Pass - opens add absence record'
+    LeaveRequestExtension.new(driver).employee_leave_request_in_two_weeks
+    puts 'Pass - creates absence to clash with company blackout'
+    PageValueCheck.new(driver).leave_request_clashes_with_blackout_check
+    puts 'TEST 02 complete - Absence not created that clashes with company blackout'
+  end
+
+  def test_03_check_allowance_totals
+    puts 'START test 03 - Check totals'
+    HolidayExtension.new(driver).holiday_employee_absence_index
+    if HolidayExtension.new(driver).booked_amount == '0.0 days'
+      puts 'Pass - booked_amount total correct'
+    else
+      puts 'FAIL - booked_amount total incorrect'
+    end
+    if HolidayExtension.new(driver).available_amount == '20.0 days'
+      puts 'Pass - available_amount total correct'
+    else
+      puts 'FAIL - available_amount total incorrect'
+    end
+    puts 'TEST 03 complete - No absences to change allowance'
+  end
+
+  def test_04_create_holiday_overrides_clash
+    puts 'START test 04 - Create absence that clashes with company blackout'
+    HolidayExtension.new(driver).add_leave_request_for_holiday_employee
+    puts 'Pass - opens add absence record'
+    LeaveRequestExtension.new(driver).employee_leave_request_in_two_weeks
+    puts 'Pass - creates absence to clash with company blackout'
+    sleep 2
+    LeaveRequestExtension.new(driver).employee_leave_request_overides_blackout
+    puts 'Pass - creates absence that overrides company blackout'
+    puts 'TEST 04 complete'
+  end
+
+  def test_05_check_allowance_totals
+    puts 'START test 05 - Check totals'
+    HolidayExtension.new(driver).holiday_employee_absence_index
+    if HolidayExtension.new(driver).booked_amount == '1.0 day'
+      puts 'Pass - booked_amount total correct'
+    else
+      puts 'FAIL - booked_amount total incorrect'
+    end
+    if HolidayExtension.new(driver).available_amount == '19.0 days'
+      puts 'Pass - available_amount total correct'
+    else
+      puts 'FAIL - available_amount total incorrect'
+    end
+    puts 'TEST 05 complete - Absence does not remove allowance from employee'
+  end
+
+  def test_06_delete_records
+    puts 'START test 06 - Deletes holiday and company blackout'
+    HolidayExtension.new(driver).purge_holiday_data_holiday_employee
+    puts 'Pass - purge holday data'
+    HolidayExtension.new(driver).holiday_employee_absence_index
+    if HolidayExtension.new(driver).booked_amount == '0.0 days'
+      puts 'Pass - booked_amount total correct'
+    else
+      puts 'FAIL - booked_amount total incorrect'
+    end
+    puts 'Pass Negative Carry-Over holiday deleted'
+    if HolidayExtension.new(driver).available_amount == '20.0 days'
+      puts 'Pass - available_amount total correct'
+    else
+      puts 'FAIL - available_amount total incorrect'
+    end
+    AppNavigationExtensionManager.new(driver).navigate_to_company_blackouts
+    puts 'Pass - Navigate to company blackouts'
+    CompanyBlackoutsExtension.new(driver).company_blackout_delete
+    puts 'Pass - deleted company blackout'
+    puts 'TEST 06 complete - Deleted blackout and company blackout'
+  end
+end
+# rubocop:enable Metrics/ClassLength
+# rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/AbcSize
+
+TestLeaveRequest.new.test_leave_request
