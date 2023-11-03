@@ -7,8 +7,8 @@ class CompanyBlackoutsExtension < Base
   def company_blakout_add_new
     driver.find_element(css: 'body > section.content.container.p-4 > div.float-right > a').click
     driver.find_element(id: 'company_blackout_name').send_keys "Blackout test #{todays_date}"
-    driver.find_element(id: '#company_blackout_start_date_react').send_keys todays_date + 14
-    driver.find_element(id: '#company_blackout_end_date_react').send_keys todays_date + 14
+    driver.find_element(id: '#company_blackout_start_date_react').send_keys two_week_date_string
+    driver.find_element(id: '#company_blackout_end_date_react').send_keys two_week_date_string
     driver.find_element(id: 'company_blackout_whole_company').click
     driver.find_element(xpath: '//*[@id="new_company_blackout"]/p/input').click
     driver.find_element(xpath: '/html/body/section[2]/div[1]/a').click
@@ -23,15 +23,15 @@ class CompanyBlackoutsExtension < Base
     driver.find_element(id: 'company_blackout_name').clear
     driver.find_element(id: 'company_blackout_name').send_keys 'Edited Blackout test'
     driver.find_element(id: '#company_blackout_start_date_react').clear
-    driver.find_element(id: '#company_blackout_start_date_react').send_keys todays_date + 16
+    driver.find_element(id: '#company_blackout_start_date_react').send_keys sixteen_days_date_string
     driver.find_element(id: '#company_blackout_end_date_react').clear
-    driver.find_element(id: '#company_blackout_end_date_react').send_keys todays_date + 16
+    driver.find_element(id: '#company_blackout_end_date_react').send_keys sixteen_days_date_string
     # driver.find_element(id: 'company_blackout_whole_company').click
     driver.find_element(css: selector).click
   end
 
   def company_blackout_delete
-    a = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg')
+    a = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(1)')
     attribute_value = a.attribute('href')
     split_value = attribute_value.split('/')[4]
     selector = "#delete_company_blackout_#{split_value} > div > div >

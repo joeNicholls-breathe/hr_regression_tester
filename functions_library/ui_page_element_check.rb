@@ -49,12 +49,20 @@ class PageValueCheck < Base
   def signup_fail_check
     return puts 'Dashboard reached' if driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[1]/a')
   rescue Selenium::WebDriver::Error::NoSuchElementError
-    puts 'Account was not Signed Up - TEST PASS Pass - Element not Found'
+    puts 'Account was not Signed Up - TEST Pass - Element not Found'
   end
 
   def account_active
     buy_now_positive = driver.find_element(css: 'div.row:nth-child(1)')
     buy_now_positive('innerHTML')
     puts buy_now_positive
+  end
+
+  def check_leave_has_ben_requested
+    hrleaverequest = driver.find_element(css: '#DataTables_Table_0 > tbody > tr')
+    hrleaverequest('innerHTML')
+    puts hrleaverequest
+    lr = '0.5 day requested'
+    puts lr == hrleaverequest
   end
 end

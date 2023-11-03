@@ -72,6 +72,7 @@ class TestSignUpNegative < Base
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
     puts '6. NT - No password (2) entered - test run'
+    puts 'Test 1002 complete'
     driver.close
   end
 end

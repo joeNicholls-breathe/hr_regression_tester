@@ -76,6 +76,15 @@ class LoginExtension < Base
     sleep 0.5
   end
 
+  def login_setup_acc_hr_user
+    driver.find_element(id: 'email-input').send_keys settings[:staging][:setup_acc_email_hr_user]
+    sleep 0.5
+    driver.find_element(name: 'password').send_keys settings[:staging][:login_password]
+    sleep 0.5
+    driver.find_element(css: 'form button[type=submit]').click
+    sleep 0.5
+  end
+
   def login_as_saas_admin
     driver.find_element(id: 'email-input').send_keys settings[:staging][:saas_admin_email]
     sleep 0.5

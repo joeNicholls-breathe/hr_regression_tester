@@ -34,8 +34,33 @@ class CreateEmployeeExtension < Base
     driver.find_element(xpath: '//*[@id="permissions"]').click
     # edit
     driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a > span').click
-
     driver.find_element(id: 'employee_finance_true').click
+    # may need to scroll page
+    driver.find_element(xpath: '//*[@id="update-employee-button"]').click
+  end
+
+  def create_hr_user
+    driver.find_element(id: 'employee_first_name').send_keys 'HR'
+    driver.find_element(id: 'employee_last_name').send_keys 'User'
+    driver.find_element(id: 'employee_email').send_keys "hr#{random_number_string}@regressionaccount.com"
+    driver.find_element(id: 'employee_jobs_attributes_0_title').send_keys 'HR User on account'
+    driver.find_element(id: 'employee_employee_ref').send_keys("HR User #{todays_date_string}")
+    driver.find_element(id: '#employee_join_date_react').send_keys yesterday
+    driver.find_element(id: 'employee_gets_statutory_true').click
+    driver.find_element(id: 'employee_statutory_holiday_country_id').click
+    drop = driver.find_element(id: 'employee_statutory_holiday_country_id')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:value, '1')
+    driver.find_element(xpath: '//*[@id="new_employee"]/p/input').click
+  end
+
+  def make_hr_user
+    # profile more - permissions
+    driver.find_element(xpath: '//*[@id="more-link"]/span').click
+    driver.find_element(xpath: '//*[@id="permissions"]').click
+    # edit
+    driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a > span').click
+    driver.find_element(id: 'employee_hr_true').click
     # may need to scroll page
     driver.find_element(xpath: '//*[@id="update-employee-button"]').click
   end

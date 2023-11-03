@@ -10,13 +10,13 @@ class CalendarSubscriptionExtension < Base
   end
 
   def add_department_list_item_one
-    driver.find_element(xpath: '/html/body/section[2]/div[2]/a/span/svg[2]').click
+    driver.find_element(css: 'body > section.content.container.p-4 > div.float-right > a').click
     driver.find_element(css: '#departments_').click
     driver.find_element(xpath: '//*[@id="new_calendar_subscription"]/div[3]/input').click
   end
 
   def amend_calendar_revert_settings
-    driver.find_element(xpath: '/html/body/section[2]/div[2]/span/span/svg[2]').click
+    driver.find_element(css: 'body > section.content.container.p-4 > div.float-right > span > span').click
     driver.find_element(xpath: '//*[@id="reset_setup_modal"]/div/div/div[3]/a').click
   end
 
@@ -32,5 +32,10 @@ class CalendarSubscriptionExtension < Base
     driver.find_element(xpath: '/html/body/section[2]/div[3]/div/a[1]').click
     driver.find_element(xpath: '//*[@id="new_calendar_subscription"]/input[3]').click
     # see page check
+  end
+
+  def amend_calendar_revert_settings_from_own
+    driver.find_element(css: 'body > section.content.container.p-4 > div.float-right > span > span').click
+    driver.find_element(xpath: '//*[@id="reset_setup_modal"]/div/div/div[3]/a').click
   end
 end

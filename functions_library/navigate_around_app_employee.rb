@@ -17,11 +17,25 @@ class NavigateAroundAppEmployee < Base
     driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[2]/a').click
   end
 
+  def navigate_to_my_profile_leave_requested
+    driver.find_element(css: '#leave').click
+    driver.find_element(css: '#tabs-0 > li:nth-child(1) > a').click
+  end
+
+  def navigate_to_my_profile_leave_booked
+    driver.find_element(css: '#leave').click
+    driver.find_element(css: '#tabs-0 > li:nth-child(2) > a').click
+  end
+
   def navigate_to_company_dropdown_employee
     driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[3]/a').click
   end
 
   def navigate_to_calendar_employee
     driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[4]/a').click
+  end
+
+  def navigate_to_leave_request_widget
+    driver.find_element(css: '#tab-my-dashboard > div > div:nth-child(1) > div.card-footer > a').click
   end
 end

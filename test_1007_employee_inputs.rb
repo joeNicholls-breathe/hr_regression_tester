@@ -32,6 +32,7 @@ class EmployeeInputs < Base
     puts '2. Employee login'
     puts 'assign permissions to employee'
     sleep 10
+    puts 'Test 1007 complete'
     driver.close
   end
 end

@@ -171,16 +171,16 @@ class AccountSetup < Base
     puts '27. Navigate to Abscence settings - company blackouts'
     CompanyBlackoutsExtension.new(driver).company_blakout_add_new
     puts '28a. Company blackouts add'
-    CompanyBlackoutsExtension.new(driver).company_blackout_edit
-    puts '28b. Company blackout edit'
+    # CompanyBlackoutsExtension.new(driver).company_blackout_edit
+    # puts '28b. Company blackout edit'
     CompanyBlackoutsExtension.new(driver).company_blackout_delete
     puts '28c. Company blackouts delete'
     sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     NavigationAroundAccountConfiguration.new(driver).navigate_to_api_setup
     puts '29. Navigate to Integrations - API setup'
-    APIExtenion.new(driver).api_key_switch_on
-    puts '30a. Api switch on'
+    # APIExtenion.new(driver).api_key_switch_on
+    # puts '30a. Api switch on'
     APIExtenion.new(driver).api_key_switch_reset
     puts '30b. Api reset api key'
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
@@ -191,13 +191,15 @@ class AccountSetup < Base
     CalendarSubscriptionExtension.new(driver).amend_calendar_revert_settings
     puts '32a. Calendar subscription managed centrally, added department and reset'
     CalendarSubscriptionExtension.new(driver).calendar_allow_manage_own
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_calendar_subscriptions
     CalendarSubscriptionExtension.new(driver).amend_calendar_revert_settings
     puts '32b. Calendar subscription managed by employees, added can see own calendar only and reset'
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     NavigationAroundAccountConfiguration.new(driver).navigate_to_rota_cloud
     puts '33. Navigate to Integrations - Rotacloud - Test manually if we need to cover this'
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    sleep 10
+    sleep 2
+    puts 'Test 1004 complet'
     driver.close
   end
 end

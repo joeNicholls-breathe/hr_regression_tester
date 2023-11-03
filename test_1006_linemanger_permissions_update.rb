@@ -129,6 +129,7 @@ class AccountSetupLMUser < Base
     AccountConfigExtension.new(driver).navigate_back_to_settings_breadcrumb
     puts 'Permissions and approvals - Employee check what people can see and do'
     sleep 10
+    puts 'Test 1006 complete'
     driver.close
   end
 end
