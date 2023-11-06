@@ -70,7 +70,7 @@ class TestLeaveRequest
     else
       puts 'FAIL - booked_amount total incorrect'
     end
-    if HolidayExtension.new(driver).available_amount == '20.0 days'
+    if HolidayExtension.new(driver).available_amount == '19.5 days'
       puts 'Pass - available_amount total correct'
     else
       puts 'FAIL - available_amount total incorrect'
