@@ -3,7 +3,6 @@
 require File.expand_path('../../base.rb', __dir__)
 
 class NavigationAroundAccountConfiguration < Base
-  # Navigation
   def navigate_to_company_details
     driver.find_element(xpath: '/html/body/section[2]/div[2]/div[1]/div[1]/a[1]').click
   end
@@ -44,6 +43,13 @@ class NavigationAroundAccountConfiguration < Base
     driver.find_element(
       css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(1) >
             div:nth-child(3) > a:nth-child(2)'
+    ).click
+  end
+
+  def navigate_to_change_what_hr_users_can_do_as_hr
+    driver.find_element(
+      css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(1) >
+            div:nth-child(2) > a:nth-child(2)'
     ).click
   end
 

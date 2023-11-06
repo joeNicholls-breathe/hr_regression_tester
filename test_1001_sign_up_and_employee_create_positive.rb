@@ -115,6 +115,8 @@ class TestSignUp < Base
     LoginExtension.new(driver).login_setup_acc_admin
     PageValueCheck.new(driver).signup_fail_check
     puts '1. Login from sign up page - Pass'
+    sleep 1
+    puts 'Test 1001 complete'
     driver.close
   end
 end

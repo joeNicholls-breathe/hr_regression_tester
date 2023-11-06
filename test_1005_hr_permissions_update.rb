@@ -7,7 +7,13 @@ require './functions_library/test_reference_extension'
 require './functions_library/navigate_browser_extension'
 require './functions_library/login_extension'
 require './functions_library/login_app_extension'
+require './functions_library/logout_extension'
+require './functions_library/holiday_extension'
 require './functions_library/navigate_around_app_manager'
+require './functions_library/navigate_around_app_employee'
+require './functions_library/create_employee_extension'
+require './functions_library/delete_employee_extension'
+require './functions_library/leave_request_extension'
 require './functions_library/settings_config/account_config_navigation/account_configuration_navigation_extension'
 require './functions_library/settings_config/hr_user_config/hr_user_config_extension'
 
@@ -27,19 +33,74 @@ class AccountSetupHRUser < Base
     LoginExtension.new(driver).login_setup_acc_admin
     LoginAppExtension.new(driver).select_hr
     puts '2. login'
-    puts 'add HR to account'
-    puts 'assign HR permissions to employee'
-    puts 'navigate to HR settings - assign account settings to HR user'
-    AccountConfigExtension.new(driver).hr_user_configuration_leave_needs_approval_on
-    AccountConfigExtension.new(driver).hr_user_configuration_use_gravatar_on
-    AccountConfigExtension.new(driver).hr_user_configuration_disable_welcome_page_on
-    AccountConfigExtension.new(driver).hr_user_configuration_use_bradford_factor_on
-    AccountConfigExtension.new(driver).hr_user_configuration_remind_line_manager_to_give_121_on
-    AccountConfigExtension.new(driver).hr_user_configuration_grapevine_label
-    AccountConfigExtension.new(driver).update_hr_settings
-    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    puts 'Permissions and approvals - check what people can do - HR user'
-    sleep 10
+    AppNavigationExtensionManager.new(driver).navigate_to_add_new_employee
+    CreateEmployeeExtension.new(driver).create_hr_user
+    puts '3. add HR to account'
+    CreateEmployeeExtension.new(driver).make_hr_user
+    puts '4. assign HR permissions to employee'
+    AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_change_what_hr_users_can_do
+    puts '5. navigate to HR settings - assign account settings to HR user'
+    HrUserConfigExtension.new(driver).hr_user_configuration_use_gravatar
+    HrUserConfigExtension.new(driver).hr_user_configuration_use_bradford_factor
+    HrUserConfigExtension.new(driver).hr_user_configuration_remind_line_manager_to_give_121_off
+    HrUserConfigExtension.new(driver).hr_user_configuration_grapevine_label_clear
+    HrUserConfigExtension.new(driver).update_hr_settings
+    puts '6. remove settings from HR user/account - (gravatar/bradford/121 reminders/grapevine)'
+    sleep 0.50
+    LogoutExtension.new(driver).logout_admin
+    puts '7. logout'
+    NavigateBrowserExtension.new(driver).breathe_login
+    LoginExtension.new(driver).login_setup_acc_hr_user
+    LoginAppExtension.new(driver).select_hr
+    puts '8. login as hr user'
+    AppNavigationExtensionManager.new(driver).navigate_to_my_dashboard
+    NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget
+    LeaveRequestExtension.new(driver).employee_holiday_leave_request_one
+    puts '9. create holiday request'
+    # AppNavigationExtensionManager.new(driver).navigate_to_my_dashboard
+    # PageValueCheck.new(driver).check_leave_has_ben_requested
+    # puts '10. check that user can not self approve leave'
+    AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active_hr_user
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_change_what_hr_users_can_do_as_hr
+    HrUserConfigExtension.new(driver).hr_user_configuration_leave_needs_approval
+    HrUserConfigExtension.new(driver).hr_user_configuration_use_gravatar
+    HrUserConfigExtension.new(driver).hr_user_configuration_use_bradford_factor
+    HrUserConfigExtension.new(driver).hr_user_configuration_remind_line_manager_to_give_121_on
+    HrUserConfigExtension.new(driver).hr_user_configuration_grapevine_label
+    HrUserConfigExtension.new(driver).update_hr_settings
+    sleep 0.25
+    puts '11. adds settings back to HR user/account
+            (use gravatar/approve own leave/bradford factor/121 reminders/grapevine)'
+    NavigateAroundAppEmployee.new(driver).navigate_to_profile_employee
+    AppNavigationExtensionManager.new(driver).navigate_to_my_dashboard
+    NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget
+    LeaveRequestExtension.new(driver).employee_holiday_leave_request_two
+    sleep 0.50
+    puts '12. create holiday request'
+    LogoutExtension.new(driver).logout_admin
+    puts '13. logout'
+    LoginExtension.new(driver).login_setup_acc_admin
+    puts '14. login as admin'
+    AppNavigationExtensionManager.new(driver).search_employee_hr
+    DeleteEmployeeExtension.new(driver).delete_employee__hr_user
+    puts '15. delete hr user'
+    AppNavigationExtensionManager.new(driver).search_employee_harold
+    NavigateAroundAppEmployee.new(driver).navigate_to_my_profile_leave_booked
+    LeaveRequestExtension.new(driver).delete_leave_request_booked
+    NavigateAroundAppEmployee.new(driver).navigate_to_my_profile_leave_requested
+    LeaveRequestExtension.new(driver).delete_leave_request_requested
+    puts '16. delete leave requests'
+    AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_change_what_hr_users_can_do
+    HrUserConfigExtension.new(driver).hr_user_configuration_leave_needs_approval
+    HrUserConfigExtension.new(driver).update_hr_settings
+    sleep 0.50
+    puts '17. test maintanence - reinstate hr users need approval for leave requests'
+    LogoutExtension.new(driver).logout_admin
+    puts '18. logout'
+    sleep 1
+    puts 'Test 1005 complete'
     driver.close
   end
 end

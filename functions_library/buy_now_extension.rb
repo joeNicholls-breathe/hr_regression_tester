@@ -11,7 +11,7 @@ class BuyNowExtension < Base
     driver.find_element(id: 'submit-modal-button').click
     # modals
     driver.find_element(id: 'account_use_expenses_0').click
-    driver.find_element(id: 'account_recruitment_none').click
+    driver.find_element(id: 'account_use_recruitment_0').click
     driver.find_element(id: 'account_use_rta_0').click
     driver.find_element(id: 'account_use_learn_0').click
     driver.find_element(id: 'update-chargeable-modules-btn').click
@@ -34,17 +34,19 @@ class BuyNowExtension < Base
     sleep 0.25
     # submit form
     driver.find_element(css: 'input.btn:nth-child(1)').click
-    # subscription breakdown - check total £80.40
+    # subscription breakdown - check total £21.60
     subs_check = driver.find_element(xpath: '/html/body/section[2]/div[1]/div/div[2]/table[3]/tbody/tr[3]/td')
     total_cost = subs_check.attribute('innerHTML')
     s = total_cost.to_s
     puts s
+    puts 'Compare to check - number from sire should be £21.60'
     driver.find_element(id: 'open-stripe-card-details-modal').click
     # stripe modal
     driver.find_element(id: 'account_payment_contact_name').send_keys 'AdminBuyNow'
     driver.find_element(id: 'account_payment_contact_email')
           .send_keys("admin#{random_number_string}@regressionaccount.com")
-    driver.find_element(id: 'account_payment_contact_phone').send_keys '123'
+    sleep 1
+    driver.find_element(id: 'account_payment_contact_phone').send_keys '01342 777666'
     driver.switch_to.frame(driver.find_element(css: '#card-element iframe'))
     driver.find_element(name: 'cardnumber').send_keys '4242424242424242'
     driver.find_element(name: 'exp-date').send_keys '0927'
@@ -52,8 +54,8 @@ class BuyNowExtension < Base
     driver.find_element(name: 'postal').send_keys '45691'
     driver.switch_to.default_content
     driver.find_element(id: 'card-button').click
-    sleep 1
-    driver.find_element(id: '/html/body/section[2]/div[1]/div/a').click
+    sleep 2
+    driver.find_element(css: 'body > section.content.container.p-4 > div.row > div > a').click
   end
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize

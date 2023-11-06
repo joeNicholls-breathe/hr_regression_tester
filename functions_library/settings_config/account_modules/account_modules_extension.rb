@@ -21,6 +21,8 @@ class AccountModulesExtension < Base
 
   def modules_free_switch_on_off
     # on
+    # burnout behind featire flag
+    driver.find_element(id: 'account_use_burnout_indicators').click
     driver.find_element(id: 'account_use_company_suggestions').click
     driver.find_element(id: 'account_use_covid_result').click
     driver.find_element(id: 'account_use_dbs').click
@@ -40,6 +42,7 @@ class AccountModulesExtension < Base
     driver.find_element(css: '#edit_account_3899 > p > input').click
     sleep 0.5
     # off
+    driver.find_element(id: 'account_use_burnout_indicators').click
     driver.find_element(id: 'account_use_company_suggestions').click
     driver.find_element(id: 'account_use_covid_result').click
     driver.find_element(id: 'account_use_dbs').click
@@ -62,7 +65,8 @@ class AccountModulesExtension < Base
     element = driver.find_element(id: 'account_use_payslip_imports')
     driver.execute_script('arguments[0].scrollIntoView(true);', element)
     sleep 1.5
-    driver.find_element(xpath: '//*/div/div[1]/div/div[16]/a').click
+    # driver.find_element(xpath: '//*/div/div[1]/div/div[16]/a').click
+    driver.find_element(xpath: '//*/div/div[1]/div/div[17]/a').click
     sleep 1
     driver.navigate.back
     sleep 1

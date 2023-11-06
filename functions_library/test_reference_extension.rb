@@ -19,12 +19,31 @@ module TestRefExtension
     Time.now.utc.strftime('%d-%m-%Y')
   end
 
+  def yesterday
+    yesterday = todays_date - 1
+    yesterday.strftime('%d/%m/%Y')
+  end
+
+  def todays_date_string_slash
+    Time.now.utc.strftime('%d/%m/%Y')
+  end
+
   def tomorrow
     todays_date + 1
   end
 
   def one_week_date_string
     tomorrow = todays_date + 7
+    tomorrow.strftime('%d/%m/%Y')
+  end
+
+  def two_week_date_string
+    tomorrow = todays_date + 14
+    tomorrow.strftime('%d/%m/%Y')
+  end
+
+  def sixteen_days_date_string
+    tomorrow = todays_date + 16
     tomorrow.strftime('%d/%m/%Y')
   end
 
