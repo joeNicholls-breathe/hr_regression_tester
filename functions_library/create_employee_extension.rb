@@ -64,6 +64,32 @@ class CreateEmployeeExtension < Base
     # may need to scroll page
     driver.find_element(xpath: '//*[@id="update-employee-button"]').click
   end
+
+  def create_line_manager_user
+    driver.find_element(id: 'employee_first_name').send_keys 'Line'
+    driver.find_element(id: 'employee_last_name').send_keys 'Manager'
+    driver.find_element(id: 'employee_email').send_keys "lm#{random_number_string}@regressionaccount.com"
+    driver.find_element(id: 'employee_jobs_attributes_0_title').send_keys 'LM User on account'
+    driver.find_element(id: 'employee_employee_ref').send_keys("LM User #{todays_date_string}")
+    driver.find_element(id: '#employee_join_date_react').send_keys yesterday
+    driver.find_element(id: 'employee_gets_statutory_true').click
+    driver.find_element(id: 'employee_statutory_holiday_country_id').click
+    drop = driver.find_element(id: 'employee_statutory_holiday_country_id')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:value, '1')
+    driver.find_element(xpath: '//*[@id="new_employee"]/p/input').click
+  end
+
+  def make_lm_user
+    # profile more - permissions
+    driver.find_element(xpath: '//*[@id="more-link"]/span').click
+    driver.find_element(xpath: '//*[@id="permissions"]').click
+    # edit
+    driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a > span').click
+    driver.find_element(id: 'employee_line_manager_true').click
+    # may need to scroll page
+    driver.find_element(xpath: '//*[@id="update-employee-button"]').click
+  end
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
 end
