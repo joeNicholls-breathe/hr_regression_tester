@@ -24,7 +24,7 @@ module TestRefExtension
     yesterday.strftime('%d/%m/%Y')
   end
 
-  def todays_date_string_2
+  def todays_date_string_slash
     Time.now.utc.strftime('%d/%m/%Y')
   end
 

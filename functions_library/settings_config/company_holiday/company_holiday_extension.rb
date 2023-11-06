@@ -8,7 +8,7 @@ class CompanyHolidaysExtension < Base
   def company_holiday_add
     driver.find_element(css: 'body > section.content.container.p-4 > div.float-right > a').click
     driver.find_element(id: 'company_holiday_name').send_keys "Test Holiday #{todays_date_string}"
-    driver.find_element(id: '#company_holiday_day_on_react').send_keys todays_date_string_2
+    driver.find_element(id: '#company_holiday_day_on_react').send_keys todays_date_string_slash
     driver.find_element(id: 'company_holiday_half').click
     driver.find_element(xpath: '//*[@id="new_company_holiday"]/p/input').click
   end

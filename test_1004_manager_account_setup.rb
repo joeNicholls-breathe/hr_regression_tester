@@ -199,7 +199,7 @@ class AccountSetup < Base
     puts '33. Navigate to Integrations - Rotacloud - Test manually if we need to cover this'
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     sleep 2
-    puts 'Test 1004 complet'
+    puts 'Test 1004 complete'
     driver.close
   end
 end
