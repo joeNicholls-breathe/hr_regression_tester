@@ -84,5 +84,24 @@ class LeaveRequestExtension < Base
                 > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
     driver.find_element(css: selector).click
   end
+
+  def employee_leave_request_today
+    driver.find_element(css: '#\#leave_request_start_date_react').send_keys todays_date_string
+    driver.find_element(css: '#\#leave_request_end_date_react').send_keys todays_date_string
+    driver.find_element(id: 'leave_request_notes').send_keys 'Testing leave request uses carry over' # note
+    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
+  end
+
+  def employee_leave_request_in_two_weeks
+    driver.find_element(css: '#\#leave_request_start_date_react').send_keys two_week_date_string
+    driver.find_element(css: '#\#leave_request_end_date_react').send_keys two_week_date_string
+    driver.find_element(id: 'leave_request_notes').send_keys 'Testing leave request uses carry over' # note
+    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
+  end
+
+  def employee_leave_request_overides_blackout
+    driver.find_element(id: 'leave_request_ignore_blackout_clashes').click
+    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
+  end
   # rubocop:enable Metrics/AbcSize
 end

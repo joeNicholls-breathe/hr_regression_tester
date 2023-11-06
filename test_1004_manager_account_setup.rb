@@ -169,7 +169,7 @@ class AccountSetup < Base
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     NavigationAroundAccountConfiguration.new(driver).navigate_to_company_blackout
     puts '27. Navigate to Abscence settings - company blackouts'
-    CompanyBlackoutsExtension.new(driver).company_blakout_add_new
+    CompanyBlackoutsExtension.new(driver).company_blackout_add_new
     puts '28a. Company blackouts add'
     # CompanyBlackoutsExtension.new(driver).company_blackout_edit
     # puts '28b. Company blackout edit'
