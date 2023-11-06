@@ -171,8 +171,8 @@ class AccountSetup < Base
     puts '27. Navigate to Abscence settings - company blackouts'
     CompanyBlackoutsExtension.new(driver).company_blackout_add_new
     puts '28a. Company blackouts add'
-    # CompanyBlackoutsExtension.new(driver).company_blackout_edit
-    # puts '28b. Company blackout edit'
+    CompanyBlackoutsExtension.new(driver).company_blackout_edit
+    puts '28b. Company blackout edit'
     CompanyBlackoutsExtension.new(driver).company_blackout_delete
     puts '28c. Company blackouts delete'
     sleep 1

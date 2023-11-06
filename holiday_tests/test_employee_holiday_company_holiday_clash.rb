@@ -65,12 +65,12 @@ class TestLeaveRequest
 
   def test_03_check_allowance_totals
     puts 'Start test - Check totals'
-    if HolidayExtension.new(driver).booked_amount == '0.0 days'
+    if HolidayExtension.new(driver).booked_amount == '0.5 days'
       puts 'Pass - booked_amount total correct'
     else
       puts 'FAIL - booked_amount total incorrect'
     end
-    if HolidayExtension.new(driver).available_amount == '20.0 days'
+    if HolidayExtension.new(driver).available_amount == '19.5 days'
       puts 'Pass - available_amount total correct'
     else
       puts 'FAIL - available_amount total incorrect'

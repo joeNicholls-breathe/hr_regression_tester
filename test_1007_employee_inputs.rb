@@ -30,6 +30,22 @@ class EmployeeInputs < Base
     LogoutExtension.new(driver).user_logout
     puts '1. HR user adds a new employee joining today'
     puts '2. Employee login'
+    EmployeeConfigExtension.new(driver).employee_congifuration_what_can_see_remunerations
+    EmployeeConfigExtension.new(driver).employee_congifuration_what_can_see_performance_metrics
+    EmployeeConfigExtension.new(driver).employee_congifuration_what_can_see_custom_fields
+    EmployeeConfigExtension.new(driver).employee_congifuration_what_can_see_directory
+    EmployeeConfigExtension.new(driver).employee_congifuration_what_can_see_calendar
+    EmployeeConfigExtension.new(driver).employee_congifuration_what_can_see_kudus_leaderboard
+    EmployeeConfigExtension.new(driver).employee_congifuration_what_can_see_location_booking_report
+    EmployeeConfigExtension.new(driver).employee_congifuration_what_can_do_update_profile_picture
+    EmployeeConfigExtension.new(driver).employee_congifuration_what_can_do_request_toil
+    EmployeeConfigExtension.new(driver).employee_congifuration_what_can_do_report_sickness
+    EmployeeConfigExtension.new(driver).employee_congifuration_what_can_do_request_one_to_ones
+    EmployeeConfigExtension.new(driver).employee_congifuration_what_can_do_enter_traiining_record
+    EmployeeConfigExtension.new(driver).employee_congifuration_what_can_do_booking_locations
+    EmployeeConfigExtension.new(driver).employee_congifuration_update
+    EmployeeConfigExtension.new(driver).navigate_back_to_settings_breadcrumb
+    puts 'Permissions and approvals - Employee check what people can see and do'
     puts 'assign permissions to employee'
     sleep 10
     puts 'Test 1007 complete'
