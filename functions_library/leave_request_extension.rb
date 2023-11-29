@@ -99,6 +99,13 @@ class LeaveRequestExtension < Base
     driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
   end
 
+  def employee_leave_request_overlapping_in_two_weeks
+    driver.find_element(css: '#\#leave_request_start_date_react').send_keys todays_date + 12.days
+    driver.find_element(css: '#\#leave_request_end_date_react').send_keys todays_date + 15.days
+    driver.find_element(id: 'leave_request_notes').send_keys 'Testing leave request uses carry over' # note
+    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
+  end
+
   def employee_leave_request_overides_blackout
     driver.find_element(id: 'leave_request_ignore_blackout_clashes').click
     driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
