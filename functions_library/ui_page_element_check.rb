@@ -66,6 +66,12 @@ class PageValueCheck < Base
     puts lr == hrleaverequest
   end
 
+  def leave_request_clashes_with_existing_absence
+    return puts 'absence created' if driver.find_element(css: "a[href='/employees/20717/absences']")
+  rescue Selenium::WebDriver::Error::NoSuchElementError
+    puts 'Pass - Absence not created - Clashes with existing absence'
+  end
+
   def leave_request_clashes_with_blackout_check
     return puts 'absence created' if driver.find_element(css: "a[href='/employees/20717/absences']")
   rescue Selenium::WebDriver::Error::NoSuchElementError
