@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require File.expand_path('base.rb', __dir__)
-
+# rubocop:disable Layout/LineLength
 class PageValueCheck < Base
   def checking_pending_starter
     pending_starter = driver.find_element(xpath: '//*[@id="tab-hr-dashboard"]/div[2]/div[2]/div[3]/div[2]/div[2]')
@@ -77,4 +77,12 @@ class PageValueCheck < Base
   rescue Selenium::WebDriver::Error::NoSuchElementError
     puts 'Pass - Absence not created - Clashes with company blackout'
   end
+
+  def employee_leave_remaining
+    a = driver.find_element(css: 'body > section.content.container > div.row > div > div > table > tbody > tr:nth-child(3) > td')
+    # leave_deduction = driver.find_element(xpath: '/html/body/section[2]/div[5]/div/div/table/tbody/tr[3]/td')
+    leave_remaining = a.attribute('innerHTML')
+    puts "#{leave_remaining} remain available"
+  end
+  # rubocop:enable Layout/LineLength
 end

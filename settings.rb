@@ -17,7 +17,9 @@ module Settings
         negative_carry_over_holiday_email: 'negative.carryover@hr-regression.com',
         setup_acc_email: 'admin@auto-reg.co.uk',
         setup_acc_email_hr_user: 'hr@auto-reg.co.uk',
+        setup_acc_email_lm_user: 'lm@auto-reg.co.uk',
         saas_admin_email: 'antiqueruby0@nllessons.com'
+
       }
     }
   end

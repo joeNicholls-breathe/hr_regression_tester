@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require File.expand_path('base.rb', __dir__)
-
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Metrics/ClassLength
