@@ -90,7 +90,7 @@ class AppNavigationExtensionLM < Base
     driver.find_element(xpath: '/html/body/section[2]/div[3]/div/a').click
   end
 
-   def navigate_to_sickness
+  def navigate_to_sickness
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/sicknesses')
   end
 
