@@ -61,7 +61,7 @@ class TestLeaveRequest
   def test_02_employee_makes_request_on_same_day
     puts 'Start test 2 - Employee creates leave request'
     NavigateBrowserExtension.new(driver).breathe_login
-    puts 'Pass - Navigate to Login Screen"'
+    puts 'Pass - Navigate to Login Screen'
     sleep 1
     LoginExtension.new(driver).login_holiday_employee
     puts 'Pass - Login as employee'
@@ -70,10 +70,10 @@ class TestLeaveRequest
     puts 'Pass - Selects HR" '
     sleep 1
     EmployeeDashboardExtension.new(driver).make_holiday_request
-    puts 'Pass - Opens leave request"'
+    puts 'Pass - Opens leave request'
     sleep 1
     LeaveRequestExtension.new(driver).employee_leave_request_in_two_weeks
-    puts 'Pass - requests leave request"'
+    puts 'Pass - requests leave request'
     sleep 1
     PageValueCheck.new(driver).leave_request_clashes_with_existing_absence
     sleep 1
@@ -96,10 +96,10 @@ class TestLeaveRequest
     HolidayExtension.new(driver).holiday_employee_absence_index
     puts 'Pass- back to leave screen'
     HolidayExtension.new(driver).add_leave_request_for_holiday_employee
-    puts 'Pass - Opens leave request"'
+    puts 'Pass - Opens leave request'
     sleep 1
     LeaveRequestExtension.new(driver).employee_leave_request_overlapping_in_two_weeks
-    puts 'Pass - requests leave request"'
+    puts 'Pass - requests leave request'
     sleep 1
     PageValueCheck.new(driver).leave_request_clashes_with_existing_absence
     sleep 1
