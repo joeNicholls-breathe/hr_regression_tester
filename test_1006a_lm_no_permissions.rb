@@ -48,49 +48,49 @@ class LMUserNoAccess < Base
     begin
       AppNavigationExtensionLM.new(driver).add_toil
       puts 'user added toil adjustment - this user shouldnt have this permissions - Fail'
-    rescue
+    rescue StandardError
       puts 'did not add toil user has not got permissions - Pass'
     end
     puts '7. try to add toil'
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_sickness
       puts 'sickness - user navigated to pages not accessible due to permissions - Fail'
-    rescue
+    rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
       puts 'sickness - user was unable to access the page due to current permissions set up - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_learn
       puts 'learn - user navigated to pages not accessible due to permissions - Fail'
-    rescue
+    rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
       puts 'learn - user was unable to access the page due to current permissions set up - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_performance
       puts 'performance - user navigated to pages not accessible due to permissions - Fail'
-    rescue
+    rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
       puts 'performance - user was unable to access the page due to current permissions set up - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_documents
       puts 'documents - user navigated to pages not accessible due to permissions - Fail'
-    rescue
+    rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
       puts 'documents - user was unable to access the page due to current permissions set up - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_jobs
       puts 'jobs - user navigated to pages not accessible due to permissions - Fail'
-    rescue
+    rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
       puts 'jobs - user was unable to access the page due to current permissions set up - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_remuneration
       puts 'remunerations - user navigated to pages not accessible due to permissions - Fail'
-    rescue
+    rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
       puts 'remunerations - user was unable to access the page due to current permissions set up - Pass'
     end
