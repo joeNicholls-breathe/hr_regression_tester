@@ -87,11 +87,18 @@ class AppNavigationExtensionLM < Base
 
   def create_a_sickness
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/sicknesses')
-    driver.find_element(xpath: '/html/body/section[2]/div[3]/div/a').click
+    driver.find_element(xpath: '/html/body/section[2]/div[3]/div/a[2]/span/svg[2]').click
   end
 
   def navigate_to_sickness
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/sicknesses')
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[7]/a').click
+    a = driver.find_element(css: 'body > section.content.container.p-4 > div.employee-section-header > div > a:nth-child(1)')
+    attribute_value = a.attribute('href')
+    split_value = attribute_value.split('/')[4]
+    selector = "#edit_sickness_#{split_value} > p > input"
+    driver.find_element(id: 'complete-sickness').click
+    driver.find_element(css: selector).click
   end
 
   def navigate_to_learn

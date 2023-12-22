@@ -84,5 +84,11 @@ class PageValueCheck < Base
     leave_remaining = a.attribute('innerHTML')
     puts "#{leave_remaining} remain available"
   end
+
+  def sickness_current_state_view_only
+    a = driver.find_element(css:'body > section.content.container > div.row > div > div > table > tbody > tr:nth-child(1) > td')
+    current_state = a.attribute('innerHTML')
+    puts "#{current_state} should still be Return to Work"
+  end
   # rubocop:enable Layout/LineLength
 end

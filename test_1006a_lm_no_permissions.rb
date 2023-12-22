@@ -96,7 +96,6 @@ class LMUserNoAccess < Base
     end
     puts '8. attempt to navigate to other employee profile pages by url'
     puts 'Test 1006a complete'
-    puts 'maintanence make sure the employee record is returned to run again'
     driver.close
   end
 end

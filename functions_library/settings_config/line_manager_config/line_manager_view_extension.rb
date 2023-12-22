@@ -59,6 +59,10 @@ class LineManagerViewConfigExtension < Base
     driver.find_element(id: 'account_line_manager_privilege_grievances_show').click
   end
 
+  def line_manager_configuration_on_company_tasks_view
+    driver.find_element(id: 'account_line_manager_privilege_employee_tasks_show').click
+  end
+
   def line_manager_configuration_on_notes_view
     driver.find_element(id: 'account_line_manager_privilege_notes_show').click
   end
@@ -80,7 +84,7 @@ class LineManagerViewConfigExtension < Base
   end
 
   def line_manager_configurations_update
-    driver.find_element(xpath: '//*[@id="edit_account_line_manager_privilege_2827"]/div[2]/div/p/input').click
+    driver.find_element(css: '#edit_account_line_manager_privilege_3857 > div:nth-child(4) > div > p > input').click
   end
 
   def line_manager_configurations_cancel

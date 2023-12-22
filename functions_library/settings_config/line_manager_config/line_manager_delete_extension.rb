@@ -75,7 +75,7 @@ class LineManagerDeleteConfigExtension < Base
   end
 
   def line_manager_configurations_update
-    driver.find_element(xpath: '//*[@id="edit_account_line_manager_privilege_2827"]/div[2]/div/p/input').click
+    driver.find_element(css: '#edit_account_line_manager_privilege_3857 > div:nth-child(4) > div > p > input').click
   end
 
   def line_manager_configurations_cancel
