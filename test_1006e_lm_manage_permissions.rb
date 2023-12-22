@@ -11,6 +11,7 @@ require './functions_library/navigate_around_app_manager'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/CyclomaticComplexity
 class LMUserManageAccess < Base
   attr_accessor :driver
 
@@ -114,4 +115,5 @@ class LMUserManageAccess < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
+# rubocop:enable Metrics/CyclomaticComplexity
 LMUserManageAccess.new.test_line_manger_manage_permisssions

@@ -12,6 +12,7 @@ require './functions_library/leave_request_extension'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/CyclomaticComplexity
 class LMUserViewAccess < Base
   attr_accessor :driver
 
@@ -104,4 +105,5 @@ class LMUserViewAccess < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
+# rubocop:enable Metrics/CyclomaticComplexity
 LMUserViewAccess.new.test_line_view_manage_permisssions

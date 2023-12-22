@@ -86,7 +86,7 @@ class PageValueCheck < Base
   end
 
   def sickness_current_state_view_only
-    a = driver.find_element(css:'body > section.content.container > div.row > div > div > table > tbody > tr:nth-child(1) > td')
+    a = driver.find_element(css: 'body > section.content.container > div.row > div > div > table > tbody > tr:nth-child(1) > td')
     current_state = a.attribute('innerHTML')
     puts "#{current_state} should still be Return to Work"
   end

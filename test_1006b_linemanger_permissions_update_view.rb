@@ -10,7 +10,6 @@ require './functions_library/login_app_extension'
 require './functions_library/navigate_around_app_manager'
 require './functions_library/settings_config/line_manager_config/line_manager_view_extension'
 
-
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
 class AccountSetupLMUserView < Base

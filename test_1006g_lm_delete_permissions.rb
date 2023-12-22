@@ -11,6 +11,7 @@ require './functions_library/navigate_around_app_manager'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/CyclomaticComplexity
 class LMUserDeleteAccess < Base
   attr_accessor :driver
 
@@ -114,4 +115,5 @@ class LMUserDeleteAccess < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
+# rubocop:enable Metrics/CyclomaticComplexity
 LMUserDeleteAccess.new.test_line_delete_permisssions

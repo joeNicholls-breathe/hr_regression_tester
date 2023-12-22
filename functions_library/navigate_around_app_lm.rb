@@ -3,6 +3,8 @@
 require File.expand_path('base.rb', __dir__)
 
 # rubocop:disable Metrics/AbcSize
+# rubocop:disable Layout/LineLength
+
 class AppNavigationExtensionLM < Base
   def lm_dashboard
     driver.find_element(css: '#tab-hr-dashboard-link > span:nth-child(1)').click
@@ -126,4 +128,5 @@ class AppNavigationExtensionLM < Base
     driver.find_element(xpath: '//*[@id="tab-pay"]/div/a').click
   end
   # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Layout/LineLength
 end
