@@ -33,18 +33,23 @@ module TestRefExtension
   end
 
   def one_week_date_string
-    tomorrow = todays_date + 7.days
-    tomorrow.strftime('%d/%m/%Y')
+    oneweek = todays_date + 7.days
+    oneweek.strftime('%d/%m/%Y')
+  end
+
+  def one_week_ago_string
+    weekago = todays_date + 7.days
+    weekago.strftime('%d/%m/%Y')
   end
 
   def two_week_date_string
-    tomorrow = todays_date + 14.days
-    tomorrow.strftime('%d/%m/%Y')
+    twoweeks = todays_date + 14.days
+    twoweeks.strftime('%d/%m/%Y')
   end
 
   def sixteen_days_date_string
-    tomorrow = todays_date + 16.days
-    tomorrow.strftime('%d/%m/%Y')
+    sexteendays = todays_date + 16.days
+    sexteendays.strftime('%d/%m/%Y')
   end
 
   def one_month
