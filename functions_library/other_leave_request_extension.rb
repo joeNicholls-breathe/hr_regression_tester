@@ -9,8 +9,8 @@ class OtherLeaveRequestExtension < Base
     drop = driver.find_element(id: 'leave_request_company_leave_reason_id')
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:text, 'Compassionate')
-    driver.find_element(css: '#\#leave_request_start_date_react').send_keys '15/12/2023' # start date
-    driver.find_element(css: '#\#leave_request_end_date_react').send_keys '15/12/2023' # end date
+    driver.find_element(css: '#\#leave_request_start_date_react').send_keys '15/12/2024' # start date
+    driver.find_element(css: '#\#leave_request_end_date_react').send_keys '15/12/2024' # end date
     driver.find_element(id: 'leave_request_notes').send_keys 'Test other leave request' # note
     driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
   end

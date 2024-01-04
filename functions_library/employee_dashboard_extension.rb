@@ -15,9 +15,6 @@ class EmployeeDashboardExtension < Base
   end
 
   def view_holiday_request
-    leave_request_button = driver.find_element(css: '#tab-my-dashboard > div > div:nth-child(1) > div.card-footer > a')
-    button_href = leave_request_button.property('href')
-    employee_id = button_href.split('/')[-3]
-    driver.find_element(css: "a[href='/employees/#{employee_id}/holidays']").click
+    driver.find_element(css: "a[href='/employees/20717/holidays']").click
   end
 end

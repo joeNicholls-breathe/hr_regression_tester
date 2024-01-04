@@ -14,5 +14,10 @@ class HolidayYearExtension < Base
       > button.btn.btn-success.modal-confirm').click
     driver.find_element(css: 'body > section > div > div > div.breadcrumb > a').click
   end
+
+  def complete_holiday_year
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr[3]/td[3]/button').click
+    driver.find_element(xpath: '//*[@id="finish_holiday_year_4416"]/div/div/div[3]/button[2]').click
+  end
   # rubocop:enable Metrics/AbcSize
 end
