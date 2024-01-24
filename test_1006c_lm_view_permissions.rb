@@ -98,7 +98,6 @@ class LMUserViewAccess < Base
       AppNavigationExtensionLM.new(driver).return_to_dashboard
       puts '13P. user was unable to access the page due to current permissions set up - Pass'
     end
-    binding.pry
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_jobs
       puts '14F. jobs - user navigated to pages not accessible due to permissions - Fail'

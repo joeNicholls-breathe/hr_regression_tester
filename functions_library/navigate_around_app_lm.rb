@@ -12,8 +12,8 @@ class AppNavigationExtensionLM < Base
   end
 
   def lm_logout
-    driver.find_element(css:'body > div.container > div > div.app-header__for_updated_switcher > div.app-header__user').click
-    driver.find_element(css:'body > div.container > div > div.app-header__for_updated_switcher > div.app-header__user.show > ul > li:nth-child(5)').click
+    driver.find_element(css: 'body > div.container > div > div.app-header__for_updated_switcher > div.app-header__user').click
+    driver.find_element(css: 'body > div.container > div > div.app-header__for_updated_switcher > div.app-header__user.show > ul > li:nth-child(5)').click
   end
 
   def my_people
