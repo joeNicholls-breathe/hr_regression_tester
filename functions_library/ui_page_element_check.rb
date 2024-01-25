@@ -49,7 +49,7 @@ class PageValueCheck < Base
   def signup_fail_check
     return puts 'Dashboard reached' if driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[1]/a')
   rescue Selenium::WebDriver::Error::NoSuchElementError
-    puts 'Account was not Signed Up - TEST Pass - Element not Found'
+    puts 'Check - Account was not Signed Up - TEST Pass - Element not Found'
   end
 
   def account_active
@@ -69,26 +69,26 @@ class PageValueCheck < Base
   def leave_request_clashes_with_existing_absence
     return puts 'absence created' if driver.find_element(css: "a[href='/employees/20717/absences']")
   rescue Selenium::WebDriver::Error::NoSuchElementError
-    puts 'Pass - Absence not created - Clashes with existing absence'
+    puts 'Check - Pass - Absence not created - Clashes with existing absence'
   end
 
   def leave_request_clashes_with_blackout_check
     return puts 'absence created' if driver.find_element(css: "a[href='/employees/20717/absences']")
   rescue Selenium::WebDriver::Error::NoSuchElementError
-    puts 'Pass - Absence not created - Clashes with company blackout'
+    puts 'Check - Pass - Absence not created - Clashes with company blackout'
   end
 
   def employee_leave_remaining
     a = driver.find_element(css: 'body > section.content.container > div.row > div > div > table > tbody > tr:nth-child(3) > td')
     # leave_deduction = driver.find_element(xpath: '/html/body/section[2]/div[5]/div/div/table/tbody/tr[3]/td')
     leave_remaining = a.attribute('innerHTML')
-    puts "#{leave_remaining} remain available"
+    puts "Check - #{leave_remaining} remain available"
   end
 
   def sickness_current_state_view_only
     a = driver.find_element(css: 'body > section.content.container > div.row > div > div > table > tbody > tr:nth-child(1) > td')
     current_state = a.attribute('innerHTML')
-    puts "#{current_state} should still be Return to Work"
+    puts "Check - #{current_state} should still be Return to Work"
   end
   # rubocop:enable Layout/LineLength
 end

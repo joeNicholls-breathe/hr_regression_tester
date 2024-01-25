@@ -15,8 +15,8 @@ class LeaveRequestExtension < Base
   end
 
   def employee_holiday_leave_request_two
-    driver.find_element(css: '#\#leave_request_start_date_react').send_keys '11/01/2024' # start date
-    driver.find_element(css: '#\#leave_request_end_date_react').send_keys '12/01/2024' # end date
+    driver.find_element(css: '#\#leave_request_start_date_react').send_keys '11/02/2024' # start date
+    driver.find_element(css: '#\#leave_request_end_date_react').send_keys '12/02/2024' # end date
     driver.find_element(id: 'leave_request_notes').send_keys 'Test Leave request as employee reference no. DATE' # note
     driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
   end
