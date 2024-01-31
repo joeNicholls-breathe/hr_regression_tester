@@ -29,12 +29,12 @@ class TestLeaveRequest
   # This test id for hoiliday employee id = 20717
 
   def test_leave_request
-    puts 'Running - test_employee_holiday_process.rb'
+    puts 'Running - test_employee_holiday_clash.rb'
     test_01_create_employee_holiday
     test_02_employee_makes_request_on_same_day
     test_03_employee_makes_request_overlapping_absence
     test_04_delete_holiday_data
-    puts 'Complete - test_employee_holiday_process.rb'
+    puts 'Complete - test_employee_holiday_clash.rb'
   end
 
   def test_01_create_employee_holiday
@@ -67,7 +67,7 @@ class TestLeaveRequest
     puts 'Pass - Login as employee'
     sleep 1
     LoginAppExtension.new(driver).select_hr
-    puts 'Pass - Selects HR" '
+    puts 'Pass - Selects HR'
     sleep 1
     EmployeeDashboardExtension.new(driver).make_holiday_request
     puts 'Pass - Opens leave request'

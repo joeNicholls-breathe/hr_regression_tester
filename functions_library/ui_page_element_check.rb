@@ -90,5 +90,12 @@ class PageValueCheck < Base
     current_state = a.attribute('innerHTML')
     puts "Check - #{current_state} should still be Return to Work"
   end
+
+  def more_than_one_open_sickness_record
+    return puts 'Pass - Sickness not created - Employee can only have one open sickness' if
+      driver.find_element(css: '#new_sickness > fieldset > div.start-section > div.form-group.has-error')
+  rescue Selenium::WebDriver::Error::NoSuchElementError
+    puts 'Sickness created'
+  end
   # rubocop:enable Layout/LineLength
 end

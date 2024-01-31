@@ -31,12 +31,12 @@ class TestLeaveRequest
   end
 
   def test_leave_sickness_request
-    puts 'Running - test_employee_holiday_process.rb'
+    puts 'Running - test_employee_leave_sickness_clash.rb'
     test_01_create_employee_sickness
     test_02_employee_makes_request_on_same_day
     test_03_employee_makes_request_overlapping_absence
     test_04_delete_holiday_and_sickness_data
-    puts 'Complete - test_employee_holiday_process.rb'
+    puts 'Complete - test_employee_leave_sickness_clash.rb'
   end
 
   def test_01_create_employee_sickness
@@ -71,7 +71,7 @@ class TestLeaveRequest
     puts 'Pass - Login as employee'
     sleep 1
     LoginAppExtension.new(driver).select_hr
-    puts 'Pass - Selects HR" '
+    puts 'Pass - Selects HR'
     sleep 1
     EmployeeDashboardExtension.new(driver).make_holiday_request
     puts 'Pass - Opens leave request'
@@ -131,10 +131,10 @@ class TestLeaveRequest
     puts 'Pass - Login as admin'
     sleep 1
     SicknessExtension.new(driver).holiday_employee_sickness_index
-    puts 'navigates to sickness index'
+    puts 'Pass - navigates to sickness index'
     sleep 1
     SicknessExtension.new(driver).delete_sickness_record
-    puts 'deletes sickness record'
+    puts 'Pass - deletes sickness record'
     sleep 1
     HolidayExtension.new(driver).purge_holiday_data_holiday_employee
     puts 'Pass - Purge holday data'
