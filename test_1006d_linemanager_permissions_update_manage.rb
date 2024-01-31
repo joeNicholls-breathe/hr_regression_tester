@@ -30,19 +30,19 @@ class AccountSetupLMUserManage < Base
     puts '2. login'
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     NavigationAroundAccountConfiguration.new(driver).navigate_to_change_what_line_managers_can_do
-    puts 'navigate to line settings - assign account settings to LM user'
+    puts '3. navigate to line settings - assign account settings to LM user'
     # std manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_profile_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_personal_profile_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_leave_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_adjustments_and_toil_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_sickness_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_training_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_one_to_ones_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_objectives_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_deliverables_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_job_details_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_remuneration_manage
+    LineManagerManageConfigExtension.new(driver).line_manager_configuration_onboarding_manage
     # enhanced account permissions
     # LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_emergency_contacts_manage
     # LineManagerManageConfigExtension.new(driver).ine_manager_configuration_on_medical_facts_manage
@@ -54,8 +54,8 @@ class AccountSetupLMUserManage < Base
     # LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_grievances_and_disciplinaries_manage
     # LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_time_logs_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configurations_update
-    puts '4. permissions and approvals - Line manager can manage all employee areas'
-    sleep 10
+    puts '4. permissions and approvals - Line manager can manage employee areas'
+    sleep 3
     puts 'Test 1006d complete'
     driver.close
   end

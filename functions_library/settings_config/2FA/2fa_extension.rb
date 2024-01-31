@@ -39,9 +39,12 @@ class MultiFactorExtension < Base
 
   def twofa_financeusers_on
     driver.find_element(
-      css: 'body > section.content.container > div:nth-child(7) > div > div > div:nth-child(10) >
-            div.col-md-5.email-toggle-container.align-self-center.text-center.mt-2 > div > div >
-            label.btn.btn-danger.toggle-off'
+      css: 'body > section.content.container.p-4 > div:nth-child(6) > div > div > div:nth-child(10) >
+      div.col-md-5.email-toggle-container.align-self-center.text-center.mt-2 > div > div'
     ).click
+    sleep 0.25
+    driver.find_element(id: 'enable-submit').click
+    sleep 0.25
+    driver.find_element(id: 'confirm-enable').click
   end
 end

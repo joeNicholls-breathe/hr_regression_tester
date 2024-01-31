@@ -5,6 +5,7 @@ require File.expand_path('base.rb', __dir__)
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Layout/LineLength
 # rubocop:disable Metrics/ClassLength
+# rubocop:disable Metrics/MethodLength
 
 class AppNavigationExtensionLM < Base
   def lm_dashboard
@@ -99,12 +100,12 @@ class AppNavigationExtensionLM < Base
 
   def create_a_sickness
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/sicknesses')
-    puts 'User view sickness'
     driver.find_element(xpath: '/html/body/section[2]/div[3]/div/a[2]/span/svg[2]').click
   end
 
   def navigate_to_sickness
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/sicknesses')
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(1)')
     puts 'user can view sickness'
     driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[7]/a').click
     a = driver.find_element(css: 'body > section.content.container.p-4 > div.employee-section-header > div > a:nth-child(1)')
@@ -158,6 +159,7 @@ class AppNavigationExtensionLM < Base
     puts 'User navigated to employees jobs'
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a > svg').click
     puts 'User can view employees jobs'
+    binding.pry
     driver.find_element(css: 'body > section.content.container.p-4 > div.employee-section-header > div > a:nth-child(1) > span').click
     driver.find_element(css: '#employee_job_title').send_keys 'Employee Of LM'
     driver.find_element(css: '#edit_employee_job_4471 > fieldset > p > input').click
@@ -182,4 +184,5 @@ class AppNavigationExtensionLM < Base
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Layout/LineLength
   # rubocop:enable Metrics/ClassLength
+  # rubocop:enable Metrics/MethodLength
 end
