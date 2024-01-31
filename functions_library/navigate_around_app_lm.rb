@@ -159,7 +159,6 @@ class AppNavigationExtensionLM < Base
     puts 'User navigated to employees jobs'
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a > svg').click
     puts 'User can view employees jobs'
-    binding.pry
     driver.find_element(css: 'body > section.content.container.p-4 > div.employee-section-header > div > a:nth-child(1) > span').click
     driver.find_element(css: '#employee_job_title').send_keys 'Employee Of LM'
     driver.find_element(css: '#edit_employee_job_4471 > fieldset > p > input').click
