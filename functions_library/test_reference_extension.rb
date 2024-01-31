@@ -29,7 +29,8 @@ module TestRefExtension
   end
 
   def tomorrow
-    todays_date + 1.day
+    tomorrow = todays_date + 1.day
+    tomorrow.strftime('%d/%m/%Y')
   end
 
   def one_week_date_string

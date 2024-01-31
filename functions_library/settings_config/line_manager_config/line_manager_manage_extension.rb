@@ -83,6 +83,10 @@ class LineManagerManageConfigExtension < Base
     driver.find_element(id: 'account_line_manager_privilege_time_logs_save').click
   end
 
+  def line_manager_configuration_onboarding_manage
+    driver.find_element(id: 'account_line_manager_privilege_employee_tasks_save').click
+  end
+
   def line_manager_able_to_see_their_peoples_people
     driver.find_element(id: 'line_manager_levels').click
   end

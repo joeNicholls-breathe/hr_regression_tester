@@ -63,7 +63,6 @@ class AccountSetupHRUser < Base
     # puts '10. check that user can not self approve leave'
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active_hr_user
     NavigationAroundAccountConfiguration.new(driver).navigate_to_change_what_hr_users_can_do_as_hr
-    HrUserConfigExtension.new(driver).hr_user_configuration_leave_needs_approval
     HrUserConfigExtension.new(driver).hr_user_configuration_use_gravatar
     HrUserConfigExtension.new(driver).hr_user_configuration_use_bradford_factor
     HrUserConfigExtension.new(driver).hr_user_configuration_remind_line_manager_to_give_121_on
@@ -86,14 +85,14 @@ class AccountSetupHRUser < Base
     DeleteEmployeeExtension.new(driver).delete_employee__hr_user
     puts '15. delete hr user'
     AppNavigationExtensionManager.new(driver).search_employee_harold
-    NavigateAroundAppEmployee.new(driver).navigate_to_my_profile_leave_booked
-    LeaveRequestExtension.new(driver).delete_leave_request_booked
+    # NavigateAroundAppEmployee.new(driver).navigate_to_my_profile_leave_booked
+    # LeaveRequestExtension.new(driver).delete_leave_request_booked
     NavigateAroundAppEmployee.new(driver).navigate_to_my_profile_leave_requested
+    LeaveRequestExtension.new(driver).delete_leave_request_requested
     LeaveRequestExtension.new(driver).delete_leave_request_requested
     puts '16. delete leave requests'
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     NavigationAroundAccountConfiguration.new(driver).navigate_to_change_what_hr_users_can_do
-    HrUserConfigExtension.new(driver).hr_user_configuration_leave_needs_approval
     HrUserConfigExtension.new(driver).update_hr_settings
     sleep 0.50
     puts '17. test maintanence - reinstate hr users need approval for leave requests'

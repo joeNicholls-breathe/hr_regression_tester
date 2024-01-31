@@ -31,6 +31,8 @@ class TestSignUp < Base
     puts '1. Navigate to breathe sign up screen - Pass'
     SignUpExtension.new(driver).sign_up_std_positive
     puts '2. Sign Up Std form - Pass'
+    # time to deal with the recapthca if pressent
+    sleep 30
     BulkImportExtension.new(driver).navigate_to_bulk_upload
     puts '3. Navigate to bulk upload form - Pass'
     BulkImportExtension.new(driver).bulk_upload_employee_full
@@ -78,12 +80,15 @@ class TestSignUp < Base
     puts '1. Navigate to breathe sign up screen - Pass'
     SignUpExtension.new(driver).sign_up_std_positive
     puts '2. Sign Up Std form - Pass'
+    # time to deal with the recapthca if pressent
+    sleep 30
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
     puts '3. Return to Manager Dashboard - Pass'
     AppNavigationExtensionManager.new(driver).navigate_to_people_screen_pill
     puts '4. Navigate to People screen via pill - Pass'
     CreateEmployeeExtension.new(driver).create_employee_pending_starter_from_people_page
     puts '5. Create new employee via people page, that will start tomorrow - Pass'
+    sleep 0.25
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
     puts '6. Return to Manager Dashboard - Pass'
     PageValueCheck.new(driver).checking_pending_starter
@@ -110,7 +115,8 @@ class TestSignUp < Base
 
   def signup_login_path
     NavigateBrowserExtension.new(driver).breathe_signup
-    NavigateBrowserExtension.new(driver).cookie_modal_accept
+    # Feature flag dependent
+    # NavigateBrowserExtension.new(driver).cookie_modal_accept
     SignUpExtension.new(driver).sign_up_login_button
     LoginExtension.new(driver).login_setup_acc_admin
     PageValueCheck.new(driver).signup_fail_check

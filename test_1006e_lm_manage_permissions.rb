@@ -7,11 +7,13 @@ require './functions_library/test_reference_extension'
 require './functions_library/navigate_browser_extension'
 require './functions_library/login_extension'
 require './functions_library/login_app_extension'
-require './functions_library/navigate_around_app_manager'
+require './functions_library/navigate_around_app_lm'
+require './functions_library/leave_request_extension'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
 class LMUserManageAccess < Base
   attr_accessor :driver
 
@@ -46,69 +48,78 @@ class LMUserManageAccess < Base
     puts '6. cancel booked leave - Pass'
     begin
       AppNavigationExtensionLM.new(driver).add_toil
-      puts 'user added toil adjustment - this user shouldnt have this permissions - Fail'
+      AppNavigationExtensionLM.new(driver).add_adjustment_additional
+      AppNavigationExtensionLM.new(driver).subtract_ajustment_subtrack
+      puts '7F. user added toil adjustment - this user shouldnt have this permissions - Fail'
     rescue StandardError
-      puts 'did not add toil user has not got permissions - Pass'
+      puts '7P. Could not add toil user has not got permissions - Pass'
     end
-    puts '7. Could not add toil as user must have manage permissions'
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_sickness
-      puts 'sickness - user navigated to page and could manage the record due to permissions - Fail'
+      puts '8F. sickness - user navigated to page and could manage the record due to permissions - Fail'
     rescue StandardError
       PageValueCheck.new(driver).sickness_current_state_view_only
-      puts 'sickness - user was able to view the sickness record but could not manage - Pass'
+      puts '8P. Could not manage sickness record - user unable to manage sickness record - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_learn
-      puts 'learn - user navigated to pages not accessible due to permissions - Fail'
+      puts '9F. learn - user navigated to pages not accessible due to permissions - Fail'
     rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
-      puts 'learn - user was unable to access the page due to current permissions set up - Pass'
+      puts '9P. Could not access the learn page due to current permissions set up - Pass'
     end
-    # current location in build
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_performance
-      puts 'performance - user navigated to pages not accessible due to permissions - Fail'
+      puts '10F. performance - user can edit the 121 record which they should not have permissions - Fail'
     rescue StandardError
-      AppNavigationExtensionLM.new(driver).return_to_dashboard
-      puts 'performance - user was unable to access the page due to current permissions set up - Pass'
+      AppNavigationExtensionLM.new(driver).breadcrumb_to_performance_home
+      puts '10P. performance - user was unable to edit due to current permissions set up - Pass'
     end
-    puts 'view objectives'
-    puts 'view deliverables'
+    begin
+      AppNavigationExtensionLM.new(driver).navigate_to_objectives
+      puts '11F. objectives - user was able to manage the record - Fail'
+    rescue StandardError
+      AppNavigationExtensionLM.new(driver).breadcrumb_to_performance_home
+      puts '11P. User had permission to view objectives - Pass'
+    end
+    sleep 0.25
+    # Currently not in test due to button has been found not to be consistent with the other performance tabs
+    # begin
+    #   AppNavigationExtensionLM.new(driver).navigate_to_deliverables
+    #   puts '12P. deliverables - user was able to manage the record - Fail'
+    # rescue StandardError
+    #   AppNavigationExtensionLM.new(driver).breadcrumb_to_performance_home
+    #   puts '12P. user had permission to view view deliverables - Pass'
+    # end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_documents
-      puts 'documents - user navigated to pages not accessible due to permissions - Fail'
+      puts '13F. user navigated to document page - Fail'
     rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
-      puts 'documents - user was unable to access the page due to current permissions set up - Pass'
+      puts '13P. user was unable to access the page due to current permissions set up - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_jobs
-      puts 'jobs - user navigated to pages not accessible due to permissions - Fail'
+      puts '14F. jobs - user navigated to pages not accessible due to permissions - Fail'
     rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
-      puts 'jobs - user was unable to access the page due to current permissions set up - Pass'
+      puts '14P. jobs - user was unable to access the page due to current permissions set up - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_remuneration
-      puts 'remunerations - user navigated to pages not accessible due to permissions - Fail'
+      puts '15F. remunerations - user navigated to pages not accessible due to permissions - Fail'
     rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
-      puts 'remunerations - user was unable to access the page due to current permissions set up - Pass'
+      puts '15P. remunerations - user was unable to access the page due to current permissions set up - Pass'
     end
-    puts 'view employees remunerations package (salary/additional payments/benefits/bank details)'
-    puts '8. attempt to navigate to other employee profile pages by url'
-    puts 'try to delete request'
-    puts 'try to add toil or make an adjustment'
-    puts 'delete the employees sickness record'
-    puts 'try to delete'
-    puts 'manage 121 meetings'
-    puts 'manage objectives'
-    puts 'manage deliverables'
-    puts 'manage employees job details'
-    puts 'manage employees remunerations package (salary/additional payments/benefits/bank details)'
-    puts 'manage any notes made on the employee'
-    puts 'manage id documentation'
+    begin
+      AppNavigationExtensionLM.new(driver).navigate_to_employees_employee
+      puts '16F. attempt to navigate to other employee profile pages by url'
+    rescue StandardError
+      AppNavigationExtensionLM.new(driver).lm_dashboard
+      puts '16P. Could not navigate to other employee profile pages by url'
+    end
+    AppNavigationExtensionLM.new(driver).lm_logout
     puts 'Test 1006e complete'
     driver.close
   end
@@ -116,4 +127,5 @@ end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
 LMUserManageAccess.new.test_line_manger_manage_permisssions

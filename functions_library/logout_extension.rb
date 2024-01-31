@@ -9,7 +9,7 @@ class LogoutExtension < Base
   end
 
   def logout_admin
-    driver.find_element(css: '#user-menu-dropdown').click
+    driver.find_element(id: 'user-menu-dropdown').click
     driver.find_element(css: 'body > div.container > div > div.app-header__user.show > ul > li:nth-child(5)').click
   end
 end

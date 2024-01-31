@@ -5,6 +5,7 @@ require File.expand_path('base.rb', __dir__)
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Layout/LineLength
 # rubocop:disable Metrics/ClassLength
+# rubocop:disable Metrics/MethodLength
 
 class AppNavigationExtensionLM < Base
   def lm_dashboard
@@ -99,14 +100,14 @@ class AppNavigationExtensionLM < Base
 
   def create_a_sickness
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/sicknesses')
-    puts 'User view sickness'
     driver.find_element(xpath: '/html/body/section[2]/div[3]/div/a[2]/span/svg[2]').click
   end
 
   def navigate_to_sickness
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/sicknesses')
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(1)')
     puts 'user can view sickness'
-    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[7]/a').click
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(2) > svg').click
     a = driver.find_element(css: 'body > section.content.container.p-4 > div.employee-section-header > div > a:nth-child(1)')
     attribute_value = a.attribute('href')
     split_value = attribute_value.split('/')[4]
@@ -127,7 +128,9 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: '#DataTables_Table_0 > thead > tr > th.sort-desc.sorting_desc').click
     puts 'User navigated to view performance 121'
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > a:nth-child(2) > svg').click
-    driver.find_element(css: 'body > section.content.container.p-4 > div.employee-section-header > div > a:nth-child(2) > span').click
+    driver.find_element(id: 'one_to_one_employee_summary').send_keys("Edited on #{todays_date_string}")
+    driver.find_element(css: '#edit_one_to_one_140298 > p > input').click
+    driver.find_element(css: 'body > section.content.container.p-4 > div.employee-section-header > div > span > span').click
     puts 'User can manage(edit) 121 record'
   end
 
@@ -135,8 +138,11 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: '#tabs-0 > li:nth-child(2) > a').click
     driver.find_element(css: '#DataTables_Table_1 > tbody > tr > td.actions > a > svg').click
     puts 'User navigated to view performance objective'
-    driver.find_element(css: 'body > section.content.container.p-4 > div.employee-section-header > div > a:nth-child(2) > span').click
+    driver.find_element(css: '#objective_notes').send_keys("Edited on #{todays_date_string}")
+    driver.find_element(css: '#edit_objective_203 > p > input').click
     puts 'User can manage(edit) objective record'
+    driver.find_element(css: 'body > section.content.container.p-4 > div.employee-section-header > div > span > span > svg.svg-inline--fa.fa-trash-alt.fa-w-14.fa-inverse.fa-stack-1x').click
+    puts 'User can delete objective record'
   end
 
   def navigate_to_deliverables
@@ -150,7 +156,12 @@ class AppNavigationExtensionLM < Base
 
   def navigate_to_documents
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/documents')
-    driver.find_element(xpath: '//*[@id="tab-my-documents"]/div/a').click
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(3) > svg').click
+    driver.find_element(css: '#employee_document_title').send_keys '1'
+    driver.find_element(css: '#edit_employee_document_1035 > p > input').click
+    sleep 0.50
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[7]/svg/path').click
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg > path').click
   end
 
   def navigate_to_jobs
@@ -158,6 +169,7 @@ class AppNavigationExtensionLM < Base
     puts 'User navigated to employees jobs'
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a > svg').click
     puts 'User can view employees jobs'
+    sleep 0.25
     driver.find_element(css: 'body > section.content.container.p-4 > div.employee-section-header > div > a:nth-child(1) > span').click
     driver.find_element(css: '#employee_job_title').send_keys 'Employee Of LM'
     driver.find_element(css: '#edit_employee_job_4471 > fieldset > p > input').click
@@ -182,4 +194,5 @@ class AppNavigationExtensionLM < Base
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Layout/LineLength
   # rubocop:enable Metrics/ClassLength
+  # rubocop:enable Metrics/MethodLength
 end

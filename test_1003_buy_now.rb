@@ -27,7 +27,7 @@ class TestBuyNow < Base
     sleep 1
     SignUpExtension.new(driver).sign_up_std_positive
     puts '2. Sign Up Buy Now Std form - Pass'
-    sleep 5
+    sleep 30 # for the recapatcha
     BuyNowExtension.new(driver).buy_now_monthly_micro_no_modules_positive
     puts '3. Buy Now account becomes active (Micro / Monthly / No modules) - Pass'
     puts 'Test 1003 complete'

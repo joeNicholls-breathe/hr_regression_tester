@@ -96,7 +96,7 @@ class LMUserViewAccess < Base
       puts '13F. user navigated to document page - Fail'
     rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
-      puts '13P. user was unable to access the page due to current permissions set up - Pass'
+      puts '13P. User was unable to edit and manage documents - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_jobs

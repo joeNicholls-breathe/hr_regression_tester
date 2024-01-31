@@ -47,54 +47,54 @@ class LMUserNoAccess < Base
     puts '6. cancel booked leave - Pass'
     begin
       AppNavigationExtensionLM.new(driver).add_toil
-      puts 'user added toil adjustment - this user shouldnt have this permissions - Fail'
+      puts '7F. user added toil adjustment - this user shouldnt have this permissions - Fail'
     rescue StandardError
-      puts 'did not add toil user has not got permissions - Pass'
+      puts '7P. Did not add toil user has not got permissions - Pass'
     end
-    puts '7. try to add toil'
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_sickness
-      puts 'sickness - user navigated to pages not accessible due to permissions - Fail'
+      puts '8F. sickness - user navigated to pages not accessible due to permissions - Fail'
     rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
-      puts 'sickness - user was unable to access the page due to current permissions set up - Pass'
+      puts '8P. sickness - user was unable to access the page due to current permissions set up - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_learn
-      puts 'learn - user navigated to pages not accessible due to permissions - Fail'
+      puts '9F. learn - user navigated to pages not accessible due to permissions - Fail'
     rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
-      puts 'learn - user was unable to access the page due to current permissions set up - Pass'
+      puts '9P. learn - user was unable to access the page due to current permissions set up - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_performance
-      puts 'performance - user navigated to pages not accessible due to permissions - Fail'
+      puts '10F. performance - user navigated to pages not accessible due to permissions - Fail'
     rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
-      puts 'performance - user was unable to access the page due to current permissions set up - Pass'
+      puts '10P. performance - user was unable to access the page due to current permissions set up - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_documents
-      puts 'documents - user navigated to pages not accessible due to permissions - Fail'
+      puts '11F. documents - user navigated to pages not accessible due to permissions - Fail'
     rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
-      puts 'documents - user was unable to access the page due to current permissions set up - Pass'
+      puts '11P. documents - user was unable to access the page due to current permissions set up - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_jobs
-      puts 'jobs - user navigated to pages not accessible due to permissions - Fail'
+      puts '12F. jobs - user navigated to pages not accessible due to permissions - Fail'
     rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
-      puts 'jobs - user was unable to access the page due to current permissions set up - Pass'
+      puts '12P. jobs - user was unable to access the page due to current permissions set up - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_remuneration
-      puts 'remunerations - user navigated to pages not accessible due to permissions - Fail'
+      puts '13F. remunerations - user navigated to pages not accessible due to permissions - Fail'
     rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
-      puts 'remunerations - user was unable to access the page due to current permissions set up - Pass'
+      puts '13P. remunerations - user was unable to access the page due to current permissions set up - Pass'
     end
-    puts '8. attempt to navigate to other employee profile pages by url'
+    AppNavigationExtensionLM.new(driver).lm_logout
+    puts '14. user menu and logout - Pass'
     puts 'Test 1006a complete'
     driver.close
   end
