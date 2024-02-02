@@ -43,7 +43,7 @@ class TestLeaveRequest
     puts 'Pass - Login as employee'
     sleep 1
     LoginAppExtension.new(driver).select_hr
-    puts 'Pass - Selects HR" '
+    puts 'Pass - Selects HR'
     sleep 1
     EmployeeDashboardExtension.new(driver).make_holiday_request
     puts 'Pass - Opens leave request'

@@ -17,4 +17,15 @@ class EmployeeDashboardExtension < Base
   def view_holiday_request
     driver.find_element(css: "a[href='/employees/20717/holidays']").click
   end
+
+  def create_sickness_record
+    sickness_button = driver.find_element(css: '#tab-my-dashboard > div > div:nth-child(2) > div.card-footer > a')
+    button_href = sickness_button.property('href')
+    employee_id = button_href.split('/')[-3]
+    driver.find_element(css: "a[href='/employees/#{employee_id}/sicknesses/open']").click
+  end
+
+  def view_sicknesses
+    driver.find_element(css: "a[href='/employees/20717/sicknesses']").click
+  end
 end
