@@ -50,16 +50,21 @@ class TestLeaveRequest
     sleep 1
     AppNavigationExtensionManager.new(driver).navigate_to_company_holidays
     puts 'Pass - Navigate to company holidays'
+    sleep 1
     CompanyHolidaysExtension.new(driver).company_holiday_add
     puts 'Pass - Added company holiday'
+    sleep 1
+    puts 'Test 01 complete'
   end
 
   def test_02_create_holiday_clash
     puts 'Start test - Create absence that clashes with company holiday'
     HolidayExtension.new(driver).add_leave_request_for_holiday_employee
     puts 'Pass - opens add absence record'
+    sleep 1
     LeaveRequestExtension.new(driver).employee_leave_request_today
     puts 'Pass - creates absence to clash with company holiday'
+    sleep 1
     puts 'Test complete - Absence created that clashes with company holiday'
   end
 
@@ -75,13 +80,15 @@ class TestLeaveRequest
     else
       puts 'FAIL - available_amount total incorrect'
     end
-    puts 'Test complete - Absence does not remove allowance from employee'
+    sleep 1
+    puts 'Test 02 complete - Absence does not remove allowance from employee'
   end
 
   def test_04_delete_records
     puts 'Start test - Deletes holiday and company holiday'
     HolidayExtension.new(driver).purge_holiday_data_holiday_employee
     puts 'Pass - purge holday data'
+    sleep 1
     HolidayExtension.new(driver).holiday_employee_absence_index
     if HolidayExtension.new(driver).booked_amount == '0.0 days'
       puts 'Pass - booked_amount total correct'
@@ -94,10 +101,13 @@ class TestLeaveRequest
     else
       puts 'FAIL - available_amount total incorrect'
     end
+    sleep 1
     AppNavigationExtensionManager.new(driver).navigate_to_company_holidays
     puts 'Pass - Navigate to company holidays'
+    sleep 1
     CompanyHolidaysExtension.new(driver).company_holiday_delete
     puts 'Pass - deleted company holiday'
+    sleep 1
     puts 'Test complete - Deleted holiday and company holiday'
   end
 end
