@@ -3,6 +3,7 @@
 require File.expand_path('base.rb', __dir__)
 
 # rubocop:disable Metrics/ClassLength
+# rubocop:disable Metrics/AbcSize:
 class HolidayExtension < Base
   def holiday_request_dashboard_navigate_employee
     leave_request_button = driver.find_element(css: '#tab-my-dashboard > div > div:nth-child(1) > div.card-footer > a')
@@ -76,6 +77,17 @@ class HolidayExtension < Base
     driver.find_element(xpath: '//*[@id="purge_data_modal"]/div/div/div[3]/button[2]').click
   end
 
+  def purge_other_leave_data_holiday_employee
+    driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
+    drop = driver.find_element(:id, 'employee_id')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:text, 'Holiday employee')
+    driver.find_element(xpath: '//*[@id="area"]/option[2]').click
+    driver.find_element(xpath: '/html/body/section[2]/div/div[3]/div/form/div/div[3]/input').click
+    driver.find_element(id: 'continue-purge').click
+    driver.find_element(xpath: '//*[@id="purge_data_modal"]/div/div/div[3]/button[2]').click
+  end
+
   def purge_holiday_data_for_carry_over_employee
     driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
     drop = driver.find_element(:id, 'employee_id')
@@ -139,3 +151,4 @@ class HolidayExtension < Base
   end
 end
 # rubocop:enable Metrics/ClassLength
+# rubocop:enable Metrics/AbcSize:
