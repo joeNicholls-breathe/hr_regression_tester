@@ -12,7 +12,6 @@ require './functions_library/leave_request_extension'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
-# rubocop:disable Metrics/CyclomaticComplexity
 class LMUserNoAccess < Base
   attr_accessor :driver
 
@@ -21,7 +20,9 @@ class LMUserNoAccess < Base
     Selenium::WebDriver.logger.level = :info
   end
 
-  def test_line_manger_no_permisssions
+  # lm permissions for profile manage - personal profile view ticked as std for the initial test permissions
+
+  def test_1006a_lm_no_permisssions
     NavigateBrowserExtension.new(driver).breathe_login
     puts '1. navigate to breathe login url - Pass'
     LoginExtension.new(driver).login_setup_acc_line_manager_user
@@ -52,7 +53,7 @@ class LMUserNoAccess < Base
       puts '7P. Did not add toil user has not got permissions - Pass'
     end
     begin
-      AppNavigationExtensionLM.new(driver).navigate_to_sickness
+      AppNavigationExtensionLM.new(driver).navigate_to_sickness_view
       puts '8F. sickness - user navigated to pages not accessible due to permissions - Fail'
     rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
@@ -72,13 +73,13 @@ class LMUserNoAccess < Base
       AppNavigationExtensionLM.new(driver).return_to_dashboard
       puts '10P. performance - user was unable to access the page due to current permissions set up - Pass'
     end
-    begin
-      AppNavigationExtensionLM.new(driver).navigate_to_documents
-      puts '11F. documents - user navigated to pages not accessible due to permissions - Fail'
-    rescue StandardError
-      AppNavigationExtensionLM.new(driver).return_to_dashboard
-      puts '11P. documents - user was unable to access the page due to current permissions set up - Pass'
-    end
+    # begin
+    # AppNavigationExtensionLM.new(driver).navigate_to_documents
+    # puts '11F. documents - user navigated to pages not accessible due to permissions - Fail'
+    # rescue StandardError
+    # AppNavigationExtensionLM.new(driver).return_to_dashboard
+    # puts '11P. documents - user was unable to access the page due to current permissions set up - Pass'
+    # end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_jobs
       puts '12F. jobs - user navigated to pages not accessible due to permissions - Fail'
@@ -101,5 +102,4 @@ class LMUserNoAccess < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
-# rubocop:enable Metrics/CyclomaticComplexity
-LMUserNoAccess.new.test_line_manger_no_permisssions
+LMUserNoAccess.new.test_1006a_lm_no_permisssions

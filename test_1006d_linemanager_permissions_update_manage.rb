@@ -22,7 +22,7 @@ class AccountSetupLMUserManage < Base
     Selenium::WebDriver.logger.level = :info
   end
 
-  def test_line_manger_manage_permisssions_setup
+  def test_1006d_linemanger_permisssions_update_manage
     NavigateBrowserExtension.new(driver).breathe_login
     puts '1. navigate to breathe login url'
     LoginExtension.new(driver).login_setup_acc_admin
@@ -33,7 +33,6 @@ class AccountSetupLMUserManage < Base
     puts '3. navigate to line settings - assign account settings to LM user'
     # std manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_profile_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_personal_profile_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_leave_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_adjustments_and_toil_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_sickness_manage
@@ -62,4 +61,4 @@ class AccountSetupLMUserManage < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
-AccountSetupLMUserManage.new.test_line_manger_manage_permisssions_setup
+AccountSetupLMUserManage.new.test_1006d_linemanger_permisssions_update_manage
