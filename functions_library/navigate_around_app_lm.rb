@@ -61,8 +61,8 @@ class AppNavigationExtensionLM < Base
   end
 
   def delete_leave_request
-    delete_leave_request = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(1)')
-    button_href = delete_leave_request('href')
+    leave_request = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(1)')
+    button_href = leave_request.attribute('href')
     leave_id = button_href.split('/')[5]
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click
     driver.find_element(css: "#delete_pending_leave_request_#{leave_id} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm").click
@@ -74,18 +74,18 @@ class AppNavigationExtensionLM < Base
 
   def add_toil
     # doesnt appear to be interactible although the other buttons are??
-    driver.find_element(:xpath, '//*[text() = \"TOIL\"]').click
+    driver.find_element(:xpath, '//*[text() = "TOIL"]').click
     puts 'user can see toil button'
-    driver.find_element(:xpath, '//input[@id=string(//label[text() = \"Amount of days to remove\"])]').send_keys '1'
+    driver.find_element(:xpath, '//input[@id=string(//label[text() = "Amount of days to remove"])]').send_keys '1'
     # using xpath
-    driver.find_element(:xpath, '//input[@placeholder = \"Date\"]').click
-    driver.find_element(:xpath, '(//*[text() = \"1\"])[2]').click
-    driver.find_element(:xpath, '(//input[@placeholder = \"Date\"])[2]').click
-    driver.find_element(:xpath, '(//*[text() = \"1\"])[2]').click
-    driver.find_element(:xpath, '//input[@id=string(//label[text() = \"Reason\"])]').click
-    driver.find_element(:xpath, '//input[@id=string(//label[text() = \"Reason\"])]').clear
-    driver.find_element(:xpath, '//input[@id=string(//label[text() = \"Reason\"])]').send_keys '1'
-    driver.find_element(:xpath, '//input[@value = \"log TOIL\"]').click
+    driver.find_element(:xpath, '//input[@placeholder = "Date"]').click
+    driver.find_element(:xpath, '(//*[text() = "1"])[2]').click
+    driver.find_element(:xpath, '(//input[@placeholder = "Date"])[2]').click
+    driver.find_element(:xpath, '(//*[text() = "1"])[2]').click
+    driver.find_element(:xpath, '//input[@id=string(//label[text() = "Reason"])]').click
+    driver.find_element(:xpath, '//input[@id=string(//label[text() = "Reason"])]').clear
+    driver.find_element(:xpath, '//input[@id=string(//label[text() = "Reason"])]').send_keys '1'
+    driver.find_element(:xpath, '//input[@value = "log TOIL"]').click
     # using ids
     # driver.find_element(css: '#employee_holiday_year_adjustment_adjustment_hours').send_keys '1'
     # driver.find_element(css: '#employee_holiday_year_adjustment_adjustment_minutes').send_keys '30'
@@ -108,13 +108,13 @@ class AppNavigationExtensionLM < Base
     driver.find_element(:css, '#increase-leave-allowance-modal > div.modal-dialog > div.modal-content >
       #new_employee_holiday_year_adjustment > div.modal-body.text-left > div.form-group >
       #employee_holiday_year_adjustment_reason').send_keys 'Test added 2 additional days leave'
-    driver.find_element(:xpath, '//input[@value = \"Increase allowance\"]').click
+    driver.find_element(:xpath, '//input[@value = "Increase allowance"]').click
     puts 'User added Adjustment +'
   end
 
   def subtract_adjustment_subtrack
-    driver.find_element(:css, 'div.card-body > #decrease > svg.svg-inline--fa.fa-minus.fa-w-14 > path").click
-    driver.find_element(:css, "#decrease-leave-allowance-modal > div.modal-dialog > div.modal-content >
+    driver.find_element(:css, 'div.card-body > #decrease > svg.svg-inline--fa.fa-minus.fa-w-14 > path').click
+    driver.find_element(:css, '#decrease-leave-allowance-modal > div.modal-dialog > div.modal-content >
       #new_employee_holiday_year_adjustment > div.modal-body.text-left > div.form-group >
       #employee_holiday_year_adjustment_adjustment').clear
     driver.find_element(:css, '#decrease-leave-allowance-modal > div.modal-dialog > div.modal-content >
@@ -123,7 +123,7 @@ class AppNavigationExtensionLM < Base
     driver.find_element(:css, '#decrease-leave-allowance-modal > div.modal-dialog > div.modal-content >
       #new_employee_holiday_year_adjustment > div.modal-body.text-left > div.form-group >
       #employee_holiday_year_adjustment_reason').send_keys 'Test reduced by 1 days leave'
-    driver.find_element(:xpath, '//input[@value = \"Decrease allowance\"]').click
+    driver.find_element(:xpath, '//input[@value = "Decrease allowance"]').click
     puts 'User added Adjustment -'
   end
 
@@ -216,7 +216,13 @@ class AppNavigationExtensionLM < Base
   end
 
   def document_delete
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/documents')
+    a = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(3)')
+    attribute_value = a.attribute('href')
+    split_value = attribute_value.split('/')[6]
+    selector = "#delete_employee_document_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg > path').click
+    driver.find_element(css: selector).click
   end
 
   def navigate_to_jobs
@@ -234,17 +240,29 @@ class AppNavigationExtensionLM < Base
 
   def delete_job
     driver.find_element(xpath: '/html/body/section[2]/div[3]/div/span/span').click
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(4)').click
   end
 
   def navigate_to_remuneration
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/pay_and_benefits')
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a > svg').click
     puts 'User can view pay salary'
-    driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/salaries/660/edit')
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/salaries/712/edit')
     driver.find_element(xpath: '//*[@id="employee_salary_amount"]').clear
     driver.find_element(xpath: '//*[@id="employee_salary_amount"]').send_keys '25000.00'
-    driver.find_element(xpath: '//*[@id="edit_employee_salary_660"]/p/input').click
+    driver.find_element(xpath: '//*[@id="edit_employee_salary_712"]/p/input').click
     puts 'User can manage pay salary'
+  end
+
+  def delete_remuneration
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/pay_and_benefits')
+    delete_pay = driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a:nth-child(1)')
+    attribute_value = delete_pay.attribute('href')
+    split_value = attribute_value.split('/')[6]
+    selector = "#delete_salary_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
+    driver.find_element(css: 'body > section.content.container > div.employee-section-header >
+      div > span > span > svg.svg-inline--fa.fa-circle.fa-w-16.fa-stack-2x').click
+    driver.find_element(css: selector).click
   end
 
   def breadcrumb_to_performance_home
