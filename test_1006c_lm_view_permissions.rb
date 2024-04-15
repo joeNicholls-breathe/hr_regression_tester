@@ -22,7 +22,7 @@ class LMUserViewAccess < Base
     Selenium::WebDriver.logger.level = :info
   end
 
-  def test_line_view_manage_permisssions
+  def test_1006c_lm_view_permisssions
     NavigateBrowserExtension.new(driver).breathe_login
     puts '1. navigate to breathe login url - Pass'
     LoginExtension.new(driver).login_setup_acc_line_manager_user
@@ -55,9 +55,10 @@ class LMUserViewAccess < Base
       puts '7P. Could not add toil user has not got permissions - Pass'
     end
     begin
-      AppNavigationExtensionLM.new(driver).navigate_to_sickness
+      AppNavigationExtensionLM.new(driver).navigate_to_sickness_manage
       puts '8F. sickness - user navigated to page and could manage the record due to permissions - Fail'
     rescue StandardError
+      AppNavigationExtensionLM.new(driver).navigate_to_sickness_view
       PageValueCheck.new(driver).sickness_current_state_view_only
       puts '8P. Could not manage sickness record - user unable to manage sickness record - Pass'
     end
@@ -82,7 +83,7 @@ class LMUserViewAccess < Base
       AppNavigationExtensionLM.new(driver).breadcrumb_to_performance_home
       puts '11P. User had permission to view objectives - Pass'
     end
-    sleep 0.25
+    sleep 0.5
     # Currently not in test due to button has been found not to be consistent with the other performance tabs
     # begin
     #   AppNavigationExtensionLM.new(driver).navigate_to_deliverables
@@ -100,6 +101,7 @@ class LMUserViewAccess < Base
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_jobs
+      AppNavigationExtensionLM.new(driver).manage_employee_job
       puts '14F. jobs - user navigated to pages not accessible due to permissions - Fail'
     rescue StandardError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
@@ -114,13 +116,13 @@ class LMUserViewAccess < Base
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_employees_employee
-      puts '16F. attempt to navigate to other employee profile pages by url'
+      puts '16F. Lm navigates to employees, employee profile pages by url - Fail'
     rescue StandardError
-      AppNavigationExtensionLM.new(driver).lm_dashboard
-      puts '16P. Could not navigate to other employee profile pages by url'
+      AppNavigationExtensionLM.new(driver).return_to_dashboard
+      puts '16P. Could not navigate to other employee profile pages by url- Pass'
     end
     AppNavigationExtensionLM.new(driver).lm_logout
-    puts '17 user menu and logout - Pass'
+    puts '17. user menu and logout - Pass'
     puts 'Test 1006c complete'
     driver.close
   end
@@ -129,4 +131,4 @@ end
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
-LMUserViewAccess.new.test_line_view_manage_permisssions
+LMUserViewAccess.new.test_1006c_lm_view_permisssions

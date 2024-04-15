@@ -30,55 +30,67 @@ class LineManagerDeleteConfigExtension < Base
     driver.find_element(id: 'account_line_manager_privilege_deliverables_delete').click
   end
 
-  def line_manager_configuration_on_job_details_delete
+  def line_manager_job_details_delete
     driver.find_element(id: 'account_line_manager_privilege_job_details_delete').click
   end
 
-  def line_manager_configuration_on_remuneration_delete
+  def line_manager_remuneration_delete
     driver.find_element(id: 'account_line_manager_privilege_remuneration_delete').click
   end
 
-  def line_manager_configuration_on_emergency_contacts_delete
+  def line_manager_emergency_contacts_delete
     driver.find_element(id: 'account_line_manager_privilege_emergency_contacts_delete').click
   end
 
-  def line_manager_configuration_on_medical_facts_delete
+  def line_manager_medical_facts_delete
     driver.find_element(id: 'account_line_manager_privilege_medical_facts_delete').click
   end
 
-  def line_manager_configuration_on_personal_history_delete
+  def line_manager_personal_history_delete
     driver.find_element(id: 'account_line_manager_privilege_personal_history_delete').click
   end
 
-  def line_manager_configuration_on_notes_delete
+  def line_manager_on_notes_delete
     driver.find_element(id: 'account_line_manager_privilege_notes_delete').click
   end
 
-  def line_manager_configuration_on_equipment_delete
+  def line_manager_equipment_delete
     driver.find_element(id: 'account_line_manager_privilege_assets_delete').click
   end
 
-  def line_manager_configuration_on_id_documents_delete
+  def line_manager_id_documents_delete
     driver.find_element(id: 'account_line_manager_privilege_id_documents_delete').click
   end
 
-  def line_manager_configuration_on_dbs_checks_delete
+  def line_manager_dbs_checks_delete
     driver.find_element(id: 'account_line_manager_privilege_crb_checks_delete').click
   end
 
-  def line_manager_configuration_on_grievances_and_disciplinaries_delete
+  def line_manager_grievances_and_disciplinaries_delete
     driver.find_element(id: 'account_line_manager_privilege_grievances_delete').click
   end
 
-  def line_manager_configuration_on_time_logs_delete
+  def line_manager_time_logs_delete
     driver.find_element(id: 'account_line_manager_privilege_time_logs_delete').click
   end
 
-  def line_manager_configurations_update
+  def line_manager_onbarding_tasks
+    driver.find_element(id: 'account_line_manager_privilege_employee_tasks_delete').click
+  end
+
+  def line_manager_update
     driver.find_element(css: '#edit_account_line_manager_privilege_3857 > div:nth-child(4) > div > p > input').click
   end
 
-  def line_manager_configurations_cancel
+  def line_manager_cancel
     driver.find_element(css: 'href="/account/settings"').click
+  end
+
+  def line_manager_able_to_see_their_peoples_people
+    driver.find_element(id: 'line_manager_levels').click
+  end
+
+  def line_manage_able_to_see_their_peoples_bank_details
+    driver.find_element(id: 'line_managers_see_bank').click
   end
 end

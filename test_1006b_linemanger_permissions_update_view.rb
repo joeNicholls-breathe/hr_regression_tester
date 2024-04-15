@@ -21,7 +21,7 @@ class AccountSetupLMUserView < Base
     Selenium::WebDriver.logger.level = :info
   end
 
-  def test_line_manger_view_permisssions_setup
+  def test_1006b_linemanager_view_permisssions_update_view
     NavigateBrowserExtension.new(driver).breathe_login
     puts '1. navigate to breathe login url'
     LoginExtension.new(driver).login_setup_acc_admin
@@ -59,4 +59,4 @@ class AccountSetupLMUserView < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
-AccountSetupLMUserView.new.test_line_manger_view_permisssions_setup
+AccountSetupLMUserView.new.test_1006b_linemanager_view_permisssions_update_view

@@ -22,7 +22,7 @@ class AccountSetupLMUserReturnOriginStatus < Base
     Selenium::WebDriver.logger.level = :info
   end
 
-  def test_line_manger_permisssions_return_setup
+  def test_1006h_linemanager_permisssions_reset
     NavigateBrowserExtension.new(driver).breathe_login
     puts '1. navigate to breathe login url'
     LoginExtension.new(driver).login_setup_acc_admin
@@ -101,4 +101,4 @@ class AccountSetupLMUserReturnOriginStatus < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
-AccountSetupLMUserReturnOriginStatus.new.test_line_manger_permisssions_return_setup
+AccountSetupLMUserReturnOriginStatus.new.test_1006h_linemanager_permisssions_reset

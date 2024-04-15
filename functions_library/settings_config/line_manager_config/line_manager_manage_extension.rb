@@ -87,14 +87,6 @@ class LineManagerManageConfigExtension < Base
     driver.find_element(id: 'account_line_manager_privilege_employee_tasks_save').click
   end
 
-  def line_manager_able_to_see_their_peoples_people
-    driver.find_element(id: 'line_manager_levels').click
-  end
-
-  def line_manage_able_to_see_their_peoples_bank_details
-    driver.find_element(id: 'line_managers_see_bank').click
-  end
-
   def line_manager_configurations_update
     driver.find_element(css: '#edit_account_line_manager_privilege_3857 > div:nth-child(4) > div > p > input').click
   end
