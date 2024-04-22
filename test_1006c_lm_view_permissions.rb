@@ -92,6 +92,7 @@ class LMUserViewAccess < Base
     #   AppNavigationExtensionLM.new(driver).breadcrumb_to_performance_home
     #   puts '12P. user had permission to view view deliverables - Pass'
     # end
+    p "12. Currently not in test due to button has been found not to be consistent with the other performance tabs"
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_documents
       puts '13F. user navigated to document page - Fail'
