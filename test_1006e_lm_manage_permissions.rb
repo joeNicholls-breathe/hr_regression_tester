@@ -51,12 +51,11 @@ class LMUserManageAccess < Base
     AppNavigationExtensionLM.new(driver).subtract_adjustment_subtrack
     puts '7b P. User can made adjustments - Pass'
     begin
-      AppNavigationExtensionLM.new(driver).delete_sickness
+      AppNavigationExtensionLM.new(driver).delete_sickness_direct_employee
       puts '8F. sickness - user deleted the record due to permissions - Fail'
     rescue Selenium::WebDriver::Error::NoSuchElementError
-      # can now chahe this outcome
+      # can now catch this outcome
       AppNavigationExtensionLM.new(driver).navigate_to_sickness_view
-      PageValueCheck.new(driver).sickness_current_state_view_only
       AppNavigationExtensionLM.new(driver).navigate_to_sickness_manage
       puts '8P. Manage sickness record - user able to manage sickness record - Pass'
     end
@@ -75,7 +74,7 @@ class LMUserManageAccess < Base
       puts '10P. User had permission to edit the objectives - Pass'
     end
     sleep 0.25
-    # Currently not in test due to button has been found not to be consistent with the other performance tabs
+    # not in test as button found not to be consistent with other performance tabs
     # begin
     #   AppNavigationExtensionLM.new(driver).navigate_to_deliverables
     #   puts '11P. deliverables - user was able to manage the record - Fail'

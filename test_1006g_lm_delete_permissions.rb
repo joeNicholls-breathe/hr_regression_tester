@@ -22,20 +22,27 @@ class LMUserDeleteAccess < Base
   end
 
   def test_1006g_lm_delete_permisssions
+    # Employee login and request holiday
     NavigateBrowserExtension.new(driver).breathe_login
     LoginExtension.new(driver).login_setup_acc_lm_employee_user
     LoginAppExtension.new(driver).select_hr
+    p '1a - employee - login'
     HolidayExtension.new(driver).holiday_request_dashboard_navigate_employee
     LeaveRequestExtension.new(driver).employee_holiday_leave_request_one
-    sleep 0.50
+    p '1b - employee - holiday leave request'
+    # might want to add more items to delete from user they i wont have to clear from other user - might be cleaner
+    sleep 1
     AppNavigationExtensionLM.new(driver).lm_logout
-    puts '1. Request leave as Employees, employee'
+    puts '1. Request leave as Employees, employee - Pass'
+    sleep 0.50
+    # Line Manager (LM) Login
     NavigateBrowserExtension.new(driver).breathe_login
     LoginExtension.new(driver).login_setup_acc_line_manager_user
     LoginAppExtension.new(driver).select_hr
     puts '2. login as Line manager - Pass'
     AppNavigationExtensionLM.new(driver).lm_dashboard
     puts '3. navigate to a member of the team that the lm manages - Pass'
+    # LM can work on employees, employee
     AppNavigationExtensionLM.new(driver).my_people
     AppNavigationExtensionLM.new(driver).my_employee
     AppNavigationExtensionLM.new(driver).my_employee_leave
@@ -44,81 +51,54 @@ class LMUserDeleteAccess < Base
     AppNavigationExtensionLM.new(driver).my_people
     AppNavigationExtensionLM.new(driver).my_employee
     AppNavigationExtensionLM.new(driver).my_employee_leave
-    sleep 1
-    AppNavigationExtensionLM.new(driver).view_leave_record
-    PageValueCheck.new(driver).employee_leave_remaining
-    puts '4a. view the employees leave record - Pass'
-    AppNavigationExtensionLM.new(driver).approve_employee_leave_request
-    puts '4b. approve employee leave request'
-    AppNavigationExtensionLM.new(driver).return_to_employee_leave_index # can remove once work out the above issue.
     AppNavigationExtensionLM.new(driver).add_leave_for_my_employee
     LeaveRequestExtension.new(driver).employee_holiday_leave_request_two
-    puts '5. add new leave request for employee - Pass'
-    sleep 0.50
-    AppNavigationExtensionLM.new(driver).cancel_employee_leave_request
-    puts '6. cancel booked leave - Pass'
-    AppNavigationExtensionLM.new(driver).add_toil
+    puts '5. add new leave request for Employees, employee - Pass'
+    AppNavigationExtensionLM.new(driver).cancel_employee_booked_leave
+    puts '6. cancels booked leave for Employees, employee - Pass'
+    # AppNavigationExtensionLM.new(driver).add_toil #as per 1006e
     AppNavigationExtensionLM.new(driver).add_adjustment_additional
-    AppNavigationExtensionLM.new(driver).subtract_ajustment_subtrack
-    puts '7. User added toil adjustment - Pass'
-    AppNavigationExtensionLM.new(driver).navigate_to_sickness_view
-    PageValueCheck.new(driver).sickness_current_state_view_only
-    puts '8. User able to manage sickness record - Pass'
-    AppNavigationExtensionLM.new(driver).navigate_to_learn
-    puts '9. Learn page visible - Pass'
-    begin
-      AppNavigationExtensionLM.new(driver).navigate_to_performance
-      puts '10F. performance - user can edit the 121 record which they should not have permissions - Fail'
-    rescue StandardError
-      AppNavigationExtensionLM.new(driver).breadcrumb_to_performance_home
-      puts '10P. performance - user was unable to edit due to current permissions set up - Pass'
-    end
-    begin
-      AppNavigationExtensionLM.new(driver).navigate_to_objectives
-      puts '11F. objectives - user was able to manage the record - Fail'
-    rescue StandardError
-      AppNavigationExtensionLM.new(driver).breadcrumb_to_performance_home
-      puts '11P. User had permission to view objectives - Pass'
-    end
-    sleep 0.25
-    # Currently not in test due to button has been found not to be consistent with the other performance tabs
-    # begin
-    #   AppNavigationExtensionLM.new(driver).navigate_to_deliverables
-    #   puts '12P. deliverables - user was able to manage the record - Fail'
-    # rescue StandardError
-    #   AppNavigationExtensionLM.new(driver).breadcrumb_to_performance_home
-    #   puts '12P. user had permission to view view deliverables - Pass'
-    # end
-    begin
-      AppNavigationExtensionLM.new(driver).navigate_to_documents
-      puts '13F. user navigated to document page - Fail'
-    rescue StandardError
-      AppNavigationExtensionLM.new(driver).return_to_dashboard
-      puts '13P. user was unable to access the page due to current permissions set up - Pass'
-    end
-    begin
-      AppNavigationExtensionLM.new(driver).navigate_to_jobs
-      puts '14F. jobs - user navigated to pages not accessible due to permissions - Fail'
-    rescue StandardError
-      AppNavigationExtensionLM.new(driver).return_to_dashboard
-      puts '14P. jobs - user was unable to access the page due to current permissions set up - Pass'
-    end
-    begin
-      AppNavigationExtensionLM.new(driver).navigate_to_remuneration
-      puts '15F. remunerations - user navigated to pages not accessible due to permissions - Fail'
-    rescue StandardError
-      AppNavigationExtensionLM.new(driver).return_to_dashboard
-      puts '15P. remunerations - user was unable to access the page due to current permissions set up - Pass'
-    end
-    begin
-      AppNavigationExtensionLM.new(driver).navigate_to_employees_employee
-      puts '16F. attempt to navigate to other employee profile pages by url'
-    rescue StandardError
-      AppNavigationExtensionLM.new(driver).lm_dashboard
-      puts '16P. Could not navigate to other employee profile pages by url'
-    end
+    AppNavigationExtensionLM.new(driver).subtract_adjustment_subtrack
+    puts '7. LM adds toil adjustment to Employees, employee - Pass'
+    AppNavigationExtensionLM.new(driver).navigate_to_sickness_edit
+    AppNavigationExtensionLM.new(driver).delete_sickness_employees_employee
+    AppNavigationExtensionLM.new(driver).create_a_sickness
+    puts '8. User able to delete sickness record - Pass'
+    # delete
+    # performance items
+    AppNavigationExtensionLM.new(driver).performance_121_delete_e_of_e
+    puts 'delete 121'
+    AppNavigationExtensionLM.new(driver).performance_objective_delete_e_of_e
+    puts 'delete objective'
+    AppNavigationExtensionLM.new(driver).performance_deliverable_delete_e_of_e
+    puts 'delete deliverable'
+    # document
+    # AppNavigationExtensionLM.new(driver).document_delete_e_of_e
+    # puts 'delete document'
+    # job
+    AppNavigationExtensionLM.new(driver).job_delete_e_of_e
+    puts 'delete job'
+    # remuneration - pay
+    AppNavigationExtensionLM.new(driver).pay_delete_e_of_e
+    puts 'delete pay'
+    # create
+    # performance items
+    AppNavigationExtensionLM.new(driver).performance_121_create_e_of_e
+    puts 'create 121'
+    AppNavigationExtensionLM.new(driver).performance_objective_create_e_of_e
+    puts 'create objective'
+    AppNavigationExtensionLM.new(driver).performance_deliverable_create_e_of_e
+    puts 'create deliverable'
+    # document
+    # AppNavigationExtensionLM.new(driver).document_create_e_of_e
+    # puts 'create document'
+    # job
+    AppNavigationExtensionLM.new(driver).job_create_e_of_e
+    puts 'create job'
+    # remuneration - pay
+    AppNavigationExtensionLM.new(driver).pay_create_e_of_e
+    puts 'create pay'
     AppNavigationExtensionLM.new(driver).lm_logout
-    puts 'delete any notes made on the employee'
     puts 'Test 1006g complete'
     driver.close
   end

@@ -57,7 +57,7 @@ class LMUserViewAccess < Base
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_sickness_manage
       puts '8F. sickness - user navigated to page and could manage the record due to permissions - Fail'
-    rescue StandardError
+    rescue Selenium::WebDriver::Error::NoSuchElementError
       AppNavigationExtensionLM.new(driver).navigate_to_sickness_view
       PageValueCheck.new(driver).sickness_current_state_view_only
       puts '8P. Could not manage sickness record - user unable to manage sickness record - Pass'
@@ -84,15 +84,15 @@ class LMUserViewAccess < Base
       puts '11P. User had permission to view objectives - Pass'
     end
     sleep 0.5
-    # Currently not in test due to button has been found not to be consistent with the other performance tabs
     # begin
+    # Not in test as button found not to be consistent with other performance tabs
     #   AppNavigationExtensionLM.new(driver).navigate_to_deliverables
-    #   puts '12P. deliverables - user was able to manage the record - Fail'
+    #   puts '12F. deliverables - user was able to manage the record - Fail'
     # rescue StandardError
     #   AppNavigationExtensionLM.new(driver).breadcrumb_to_performance_home
     #   puts '12P. user had permission to view view deliverables - Pass'
     # end
-    p "12. Currently not in test due to button has been found not to be consistent with the other performance tabs"
+    p '12. Performance deliverables test, not in use as button is not presenton form'
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_documents
       puts '13F. user navigated to document page - Fail'
@@ -104,7 +104,8 @@ class LMUserViewAccess < Base
       AppNavigationExtensionLM.new(driver).navigate_to_jobs
       AppNavigationExtensionLM.new(driver).manage_employee_job
       puts '14F. jobs - user navigated to pages not accessible due to permissions - Fail'
-    rescue StandardError
+    # rescue StandardError
+    rescue Selenium::WebDriver::Error::NoSuchElementError
       AppNavigationExtensionLM.new(driver).return_to_dashboard
       puts '14P. jobs - user was unable to access the page due to current permissions set up - Pass'
     end

@@ -60,10 +60,17 @@ class AppNavigationExtensionLM < Base
     driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
   end
 
+  def cancel_employee_booked_leave
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(2) > svg').click
+    driver.find_element(id: 'leave_request_cancellation_reason')
+          .send_keys("Cancelled by Line managers LM on #{todays_date_string}")
+    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
+  end
+
   def delete_leave_request
     leave_request = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(1)')
     button_href = leave_request.attribute('href')
-    leave_id = button_href.split('/')[5]
+    leave_id = button_href.split('/')[6]
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click
     driver.find_element(css: "#delete_pending_leave_request_#{leave_id} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm").click
   end
@@ -133,16 +140,31 @@ class AppNavigationExtensionLM < Base
   end
 
   def create_a_sickness
-    driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/sicknesses')
-    driver.find_element(xpath: '/html/body/section[2]/div[3]/div/a[2]/span/svg[2]').click
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/sicknesses/new')
+    driver.find_element(id: '#sickness_start_date_react').send_keys yesterday
+    driver.find_element(id: '#sickness_end_date_react').send_keys yesterday
+    sleep 1
+    drop = driver.find_element(id: 'sickness_company_sicknesstype_id')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:text, 'Other')
+    driver.find_element(xpath: '//*[@id="new_sickness"]/p/input').click
   end
 
   def navigate_to_sickness_view
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/sicknesses')
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a > svg').click
     puts 'user can view sickness'
-    driver.find_element(css: '#sickness_reason').send_keys("Edited on #{todays_date_string}")
-    driver.find_element(css: '#edit_sickness_1466 > p > input').click
+  end
+
+  def navigate_to_sickness_edit
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/sicknesses')
+    a = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(1)')
+    attribute_value = a.attribute('href')
+    split_value = attribute_value.split('/')[6]
+    selector = "#edit_sickness_#{split_value} > p > input"
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a > svg').click
+    driver.find_element(css: '#sickness_reason').send_keys("Edited by LMs LM on #{todays_date_string}")
+    driver.find_element(css: selector).click
     puts 'user edited sickness record'
   end
 
@@ -158,15 +180,27 @@ class AppNavigationExtensionLM < Base
     puts 'User can manage sickness'
   end
 
-  def delete_sickness
+  def delete_sickness_direct_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/sicknesses')
-    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[7]/svg').click
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(2) > svg').click
     a = driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a')
     attribute_value = a.attribute('href')
     split_value = attribute_value.split('/')[6]
     selector = "#delete_sickness_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
     driver.find_element(css: 'body > section.content.container.p-4 > div.employee-section-header >
       div > span > span > svg.svg-inline--fa.fa-circle.fa-w-16.fa-stack-2x').click
+    driver.find_element(css: selector).click
+  end
+
+  def delete_sickness_employees_employee
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/sicknesses')
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(2) > svg').click
+    a = driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a')
+    attribute_value = a.attribute('href')
+    split_value = attribute_value.split('/')[6]
+    selector = "#delete_sickness_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
+    driver.find_element(css: 'body > section.content.container > div.employee-section-header >
+     div > span > span > svg.svg-inline--fa.fa-trash-alt.fa-w-14.fa-inverse.fa-stack-1x').click
     driver.find_element(css: selector).click
   end
 
@@ -274,6 +308,81 @@ class AppNavigationExtensionLM < Base
     driver.find_element(xpath: '//*[@id="tab-summary"]/div[1]/a').click
   end
 
+  def performance_121_delete_e_of_e
+  end
+
+  def performance_objective_delete_e_of_e
+  end
+
+  def performance_deliverable_delete_e_of_e
+  end
+
+  def document_delete_e_of_e
+  end
+
+  def job_delete_e_of_e
+  end
+
+  def pay_delete_e_of_e
+  end
+
+  def performance_121_create_e_of_e
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/one_to_ones/new?employee_id=22271')
+    driver.find_element(id: 'undefined_react').send_keys one_month_date_string
+    # all drop downs
+    drop = driver.find_element(css: '#new_one_to_one > fieldset:nth-child(2) > div:nth-child(3) >
+     div:nth-child(2) > div > div.mobile-time-picker-row.d-flex.align-items-stretch >
+      select:nth-child(2)')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:text, '14')
+    drop = driver.find_element(css: '#new_one_to_one > fieldset:nth-child(2) > div:nth-child(3) >
+     div:nth-child(2) > div > div.mobile-time-picker-row.d-flex.align-items-stretch >
+      select:nth-child(4)')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:text, '15')
+    drop = driver.find_element(id: 'one_to_one_company_one_to_one_type_id')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:text, 'Informal')
+    drop = driver.find_element(id: 'one_to_one_reviewer_id')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:text, 'LM Employee User')
+    drop = driver.find_element(id: 'one_to_one_company_location_id')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:text, 'Auto Regression Setup Test')
+    driver.find_element(css: '#recurring-one-to-one_recurring-one-to-one_false').click
+    driver.find_element(css: '#new_one_to_one > p > input').click
+  end
+  
+  def performance_objective_create_e_of_e
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/objectives/new')
+    driver.find_element(id: 'objective_subject').send_keys "LM taest input #{todays_date_string}"
+    driver.find_element(id: 'objective_description').send_keys 'Test'
+    driver.find_element(css: '#new_objective > fieldset > div:nth-child(4) > div:nth-child(2) >
+     div > div > div > div > div').send_keys {one_month_date_string
+    drop = driver.find_element(id: 'objective_state')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:text, 'confirmed')
+    driver.find_element(css: '#new_objective > p > input').click
+  end
+
+  def performance_deliverable_create_e_of_e
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/deliverables/new')
+    driver.find_element(id: 'employee_deliverable_description').send_keys "Deliverable description #{todays_date_string}"
+    driver.find_element(id: '#employee_deliverable_delivery_date_react').send_keys one_month_date_string
+    driver.find_element(css: '#new_employee_deliverable > p > input').click
+  end
+  
+  def document_create_e_of_e
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/documents/new?from_section=documents')
+    driver.find_element(id: 'employee_document_title').send_keys 'LM added new document for employees employee'
+    # need to work out how to insert documents
+  end
+
+  def job_create_e_of_e
+  end
+
+  def pay_create_e_of_e
+  end
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Layout/LineLength
   # rubocop:enable Metrics/ClassLength
