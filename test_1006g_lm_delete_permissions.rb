@@ -64,38 +64,32 @@ class LMUserDeleteAccess < Base
     AppNavigationExtensionLM.new(driver).delete_sickness_employees_employee
     AppNavigationExtensionLM.new(driver).create_a_sickness
     puts '8. User able to delete sickness record - Pass'
-    # delete
-    # performance items
+    # delete existing records
     AppNavigationExtensionLM.new(driver).performance_121_delete_e_of_e
     puts 'delete 121'
     AppNavigationExtensionLM.new(driver).performance_objective_delete_e_of_e
     puts 'delete objective'
     AppNavigationExtensionLM.new(driver).performance_deliverable_delete_e_of_e
     puts 'delete deliverable'
-    # document
+    # need to figure out how to upload a document with ruby(issues)
     # AppNavigationExtensionLM.new(driver).document_delete_e_of_e
     # puts 'delete document'
-    # job
     AppNavigationExtensionLM.new(driver).job_delete_e_of_e
     puts 'delete job'
-    # remuneration - pay
     AppNavigationExtensionLM.new(driver).pay_delete_e_of_e
     puts 'delete pay'
-    # create
-    # performance items
+    # recreate ready for next test run
     AppNavigationExtensionLM.new(driver).performance_121_create_e_of_e
     puts 'create 121'
     AppNavigationExtensionLM.new(driver).performance_objective_create_e_of_e
     puts 'create objective'
     AppNavigationExtensionLM.new(driver).performance_deliverable_create_e_of_e
     puts 'create deliverable'
-    # document
     # AppNavigationExtensionLM.new(driver).document_create_e_of_e
     # puts 'create document'
     # job
     AppNavigationExtensionLM.new(driver).job_create_e_of_e
     puts 'create job'
-    # remuneration - pay
     AppNavigationExtensionLM.new(driver).pay_create_e_of_e
     puts 'create pay'
     AppNavigationExtensionLM.new(driver).lm_logout

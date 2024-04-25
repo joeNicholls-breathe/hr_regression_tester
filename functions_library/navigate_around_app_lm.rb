@@ -309,21 +309,63 @@ class AppNavigationExtensionLM < Base
   end
 
   def performance_121_delete_e_of_e
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/performance#one-to-ones')
+    delete_pay = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(3)')
+    attribute_value = delete_pay.attribute('href')
+    split_value = attribute_value.split('/')[6]
+    selector = "#delete_one_to_one_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click
+    driver.find_element(css: selector).click
   end
 
   def performance_objective_delete_e_of_e
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/performance#objectives')
+    delete_pay = driver.find_element(css: '#DataTables_Table_1 > tbody > tr > td.actions > a:nth-child(2)')
+    attribute_value = delete_pay.attribute('href')
+    split_value = attribute_value.split('/')[6]
+    selector = "#delete_objective_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
+    driver.find_element(css: '#DataTables_Table_1 > tbody > tr > td.actions > svg').click
+    driver.find_element(css: selector).click
   end
 
   def performance_deliverable_delete_e_of_e
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/performance#deliverables')
+    delete_pay = driver.find_element(css: '#DataTables_Table_2 > tbody > tr > td.actions > a:nth-child(3)')
+    attribute_value = delete_pay.attribute('href')
+    split_value = attribute_value.split('/')[6]
+    selector = "#delete_deliverables_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm#{split_value}"
+    driver.find_element(css: '#DataTables_Table_2 > tbody > tr > td.actions > svg').click
+    driver.find_element(css: selector).click
   end
 
   def document_delete_e_of_e
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/documents#')
+    delete_pay = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(3)')
+    attribute_value = delete_pay.attribute('href')
+    split_value = attribute_value.split('/')[6]
+    selector = "#{split_value}"
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click
+    driver.find_element(css: selector).click
   end
 
   def job_delete_e_of_e
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/jobs')
+    delete_pay = driver.find_element(css: '#DataTables_Table_0 > tbody > tr.odd > td.actions > a:nth-child(2) > svg')
+    attribute_value = delete_pay.attribute('href')
+    split_value = attribute_value.split('/')[6]
+    selector = "#delete_job_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr.odd > td.actions > svg').click
+    driver.find_element(css: selector).click
   end
 
   def pay_delete_e_of_e
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/pay_and_benefits')
+    delete_pay = driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a:nth-child(1)')
+    attribute_value = delete_pay.attribute('href')
+    split_value = attribute_value.split('/')[6]
+    selector = "#delete_salary_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click
+    driver.find_element(css: selector).click
   end
 
   def performance_121_create_e_of_e
@@ -379,12 +421,31 @@ class AppNavigationExtensionLM < Base
   end
 
   def job_create_e_of_e
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/jobs/new')
+    driver.find_element(id: 'employee_job_title').send_keys "New Job #{todays_date_string}"
+    driver.find_element(id: '#employee_job_start_date_react').send_keys one_month_date_string
+    drop = driver.find_element(id: 'employee_job_fulltime_parttime')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:text, 'Full-Time')
+    driver.find_element(css: '#new_employee_job > fieldset > p > input').click
   end
 
   def pay_create_e_of_e
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/salaries/new')
+    driver.find_element(id: 'employee_salary_amount').send_keys '35000.00'
+    driver.find_element(id: 'employee_salary_reason_for_change').send_keys "New Pay test #{todays_date_string}"
+    drop = driver.find_element(id: 'employee_salary_basis')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:text, 'per annum')
+    drop = driver.find_element(id: 'employee_salary_pay_frequency')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:text, 'monthly')
+    driver.find_element(id: '#employee_salary_start_date_react').send_keys one_month_date_string
+    driver.find_element(css: '#new_employee_salary > p > input').click
   end
+end
+
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Layout/LineLength
   # rubocop:enable Metrics/ClassLength
   # rubocop:enable Metrics/MethodLength
-end
