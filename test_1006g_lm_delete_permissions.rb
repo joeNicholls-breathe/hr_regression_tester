@@ -65,42 +65,42 @@ class LMUserDeleteAccess < Base
     AppNavigationExtensionLM.new(driver).create_a_sickness
     puts '8. User able to delete sickness record - Pass'
     # delete existing records
-    AppNavigationExtensionLM.new(driver).performance_121_delete_e_of_e
+    AppNavigationExtensionLM.new(driver).performance_121_delete_employee_of_employee
     puts 'delete 121'
     sleep 1.5
     AppNavigationExtensionLM.new(driver).homepage_logo
-    AppNavigationExtensionLM.new(driver).performance_objective_delete_e_of_e
+    AppNavigationExtensionLM.new(driver).performance_objective_delete_employee_of_employee
     puts 'delete objective'
     sleep 1.5
     AppNavigationExtensionLM.new(driver).homepage_logo
-    AppNavigationExtensionLM.new(driver).performance_deliverable_delete_e_of_e
+    AppNavigationExtensionLM.new(driver).performance_deliverable_delete_employee_of_employee
     puts 'delete deliverable'
     sleep 1.5
     # need to figure out how to upload a document with ruby(issues)
     # AppNavigationExtensionLM.new(driver).homepage_logo
-    # AppNavigationExtensionLM.new(driver).document_delete_e_of_e
+    # AppNavigationExtensionLM.new(driver).document_delete_employee_of_employee
     # puts 'delete document'
-    AppNavigationExtensionLM.new(driver).job_delete_e_of_e
+    AppNavigationExtensionLM.new(driver).job_delete_employee_of_employee
     puts 'delete job'
-    AppNavigationExtensionLM.new(driver).pay_delete_e_of_e
+    AppNavigationExtensionLM.new(driver).pay_delete_employee_of_employee
     puts 'delete pay'
     # recreate ready for next test run
-    AppNavigationExtensionLM.new(driver).performance_121_create_e_of_e
+    AppNavigationExtensionLM.new(driver).performance_121_create_employee_of_employee
     puts 'create 121'
     AppNavigationExtensionLM.new(driver).homepage_logo
     sleep 1.5
-    AppNavigationExtensionLM.new(driver).performance_objective_create_e_of_e
+    AppNavigationExtensionLM.new(driver).performance_objective_create_employee_of_employee
     puts 'create objective'
     AppNavigationExtensionLM.new(driver).homepage_logo
     sleep 1.5
-    AppNavigationExtensionLM.new(driver).performance_deliverable_create_e_of_e
+    AppNavigationExtensionLM.new(driver).performance_deliverable_create_employee_of_employee
     puts 'create deliverable'
-    # AppNavigationExtensionLM.new(driver).document_create_e_of_e
+    # AppNavigationExtensionLM.new(driver).document_create_employee_of_employee
     # puts 'create document'
     # job
-    AppNavigationExtensionLM.new(driver).job_create_e_of_e
+    AppNavigationExtensionLM.new(driver).job_create_employee_of_employee
     puts 'create job'
-    AppNavigationExtensionLM.new(driver).pay_create_e_of_e
+    AppNavigationExtensionLM.new(driver).pay_create_employee_of_employee
     puts 'create pay'
     AppNavigationExtensionLM.new(driver).lm_logout
     puts 'Test 1006g complete'
