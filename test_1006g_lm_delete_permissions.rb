@@ -67,11 +67,17 @@ class LMUserDeleteAccess < Base
     # delete existing records
     AppNavigationExtensionLM.new(driver).performance_121_delete_e_of_e
     puts 'delete 121'
+    sleep 1.5
+    AppNavigationExtensionLM.new(driver).homepage_logo
     AppNavigationExtensionLM.new(driver).performance_objective_delete_e_of_e
     puts 'delete objective'
+    sleep 1.5
+    AppNavigationExtensionLM.new(driver).homepage_logo
     AppNavigationExtensionLM.new(driver).performance_deliverable_delete_e_of_e
     puts 'delete deliverable'
+    sleep 1.5
     # need to figure out how to upload a document with ruby(issues)
+    # AppNavigationExtensionLM.new(driver).homepage_logo
     # AppNavigationExtensionLM.new(driver).document_delete_e_of_e
     # puts 'delete document'
     AppNavigationExtensionLM.new(driver).job_delete_e_of_e
@@ -81,8 +87,12 @@ class LMUserDeleteAccess < Base
     # recreate ready for next test run
     AppNavigationExtensionLM.new(driver).performance_121_create_e_of_e
     puts 'create 121'
+    AppNavigationExtensionLM.new(driver).homepage_logo
+    sleep 1.5
     AppNavigationExtensionLM.new(driver).performance_objective_create_e_of_e
     puts 'create objective'
+    AppNavigationExtensionLM.new(driver).homepage_logo
+    sleep 1.5
     AppNavigationExtensionLM.new(driver).performance_deliverable_create_e_of_e
     puts 'create deliverable'
     # AppNavigationExtensionLM.new(driver).document_create_e_of_e

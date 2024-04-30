@@ -310,8 +310,9 @@ class AppNavigationExtensionLM < Base
 
   def performance_121_delete_e_of_e
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/performance#one-to-ones')
-    delete_pay = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(3)')
-    attribute_value = delete_pay.attribute('href')
+    sleep 0.25
+    delete_oto = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(3)')
+    attribute_value = delete_oto.attribute('href')
     split_value = attribute_value.split('/')[6]
     selector = "#delete_one_to_one_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click
@@ -319,19 +320,22 @@ class AppNavigationExtensionLM < Base
   end
 
   def performance_objective_delete_e_of_e
-    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/performance#objectives')
-    delete_pay = driver.find_element(css: '#DataTables_Table_1 > tbody > tr > td.actions > a:nth-child(2)')
-    attribute_value = delete_pay.attribute('href')
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/performance?objective_state=suggested&active_tab=objectives')
+    sleep 0.25
+    delete_objective = driver.find_element(css: '#DataTables_Table_1 > tbody > tr > td.actions > a:nth-child(2)')
+    attribute_value = delete_objective.attribute('href')
     split_value = attribute_value.split('/')[6]
     selector = "#delete_objective_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
-    driver.find_element(css: '#DataTables_Table_1 > tbody > tr > td.actions > svg').click
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click
+    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[10]/svg/path').click
     driver.find_element(css: selector).click
   end
 
   def performance_deliverable_delete_e_of_e
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/performance#deliverables')
-    delete_pay = driver.find_element(css: '#DataTables_Table_2 > tbody > tr > td.actions > a:nth-child(3)')
-    attribute_value = delete_pay.attribute('href')
+    sleep 0.25
+    delete_deliverable = driver.find_element(css: '#DataTables_Table_2 > tbody > tr > td.actions > a:nth-child(3)')
+    attribute_value = delete_deliverable.attribute('href')
     split_value = attribute_value.split('/')[6]
     selector = "#delete_deliverables_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm#{split_value}"
     driver.find_element(css: '#DataTables_Table_2 > tbody > tr > td.actions > svg').click
@@ -339,19 +343,21 @@ class AppNavigationExtensionLM < Base
   end
 
   def document_delete_e_of_e
-    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/documents#')
-    delete_pay = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(3)')
-    attribute_value = delete_pay.attribute('href')
-    split_value = attribute_value.split('/')[6]
-    selector = "#{split_value}"
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click
-    driver.find_element(css: selector).click
+    # driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/documents#')
+    # sleep 0.25
+    # delete_document = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(3)')
+    # attribute_value = delete_document.attribute('href')
+    # split_value = attribute_value.split('/')[6]
+    # selector = "#{split_value}"
+    # driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click
+    # driver.find_element(css: selector).click
   end
 
   def job_delete_e_of_e
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/jobs')
-    delete_pay = driver.find_element(css: '#DataTables_Table_0 > tbody > tr.odd > td.actions > a:nth-child(2) > svg')
-    attribute_value = delete_pay.attribute('href')
+    sleep 0.25
+    delete_job = driver.find_element(css: '#DataTables_Table_0 > tbody > tr.odd > td.actions > a:nth-child(2) > svg')
+    attribute_value = delete_job.attribute('href')
     split_value = attribute_value.split('/')[6]
     selector = "#delete_job_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr.odd > td.actions > svg').click
@@ -360,6 +366,7 @@ class AppNavigationExtensionLM < Base
 
   def pay_delete_e_of_e
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/pay_and_benefits')
+    sleep 0.25
     delete_pay = driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a:nth-child(1)')
     attribute_value = delete_pay.attribute('href')
     split_value = attribute_value.split('/')[6]
@@ -370,6 +377,7 @@ class AppNavigationExtensionLM < Base
 
   def performance_121_create_e_of_e
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/one_to_ones/new?employee_id=22271')
+    sleep 0.25
     driver.find_element(id: 'undefined_react').send_keys one_month_date_string
     # all drop downs
     drop = driver.find_element(css: '#new_one_to_one > fieldset:nth-child(2) > div:nth-child(3) >
@@ -394,13 +402,14 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: '#recurring-one-to-one_recurring-one-to-one_false').click
     driver.find_element(css: '#new_one_to_one > p > input').click
   end
-  
+
   def performance_objective_create_e_of_e
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/objectives/new')
+    sleep 0.25
     driver.find_element(id: 'objective_subject').send_keys "LM taest input #{todays_date_string}"
     driver.find_element(id: 'objective_description').send_keys 'Test'
     driver.find_element(css: '#new_objective > fieldset > div:nth-child(4) > div:nth-child(2) >
-     div > div > div > div > div').send_keys {one_month_date_string
+     div > div > div > div > div').send_keys one_month_date_string
     drop = driver.find_element(id: 'objective_state')
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:text, 'confirmed')
@@ -409,19 +418,22 @@ class AppNavigationExtensionLM < Base
 
   def performance_deliverable_create_e_of_e
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/deliverables/new')
+    sleep 0.25
     driver.find_element(id: 'employee_deliverable_description').send_keys "Deliverable description #{todays_date_string}"
     driver.find_element(id: '#employee_deliverable_delivery_date_react').send_keys one_month_date_string
     driver.find_element(css: '#new_employee_deliverable > p > input').click
   end
-  
+
   def document_create_e_of_e
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/documents/new?from_section=documents')
+    sleep 0.25
     driver.find_element(id: 'employee_document_title').send_keys 'LM added new document for employees employee'
     # need to work out how to insert documents
   end
 
   def job_create_e_of_e
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/jobs/new')
+    sleep 0.25
     driver.find_element(id: 'employee_job_title').send_keys "New Job #{todays_date_string}"
     driver.find_element(id: '#employee_job_start_date_react').send_keys one_month_date_string
     drop = driver.find_element(id: 'employee_job_fulltime_parttime')
@@ -432,6 +444,7 @@ class AppNavigationExtensionLM < Base
 
   def pay_create_e_of_e
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/salaries/new')
+    sleep 0.25
     driver.find_element(id: 'employee_salary_amount').send_keys '35000.00'
     driver.find_element(id: 'employee_salary_reason_for_change').send_keys "New Pay test #{todays_date_string}"
     drop = driver.find_element(id: 'employee_salary_basis')
@@ -443,9 +456,14 @@ class AppNavigationExtensionLM < Base
     driver.find_element(id: '#employee_salary_start_date_react').send_keys one_month_date_string
     driver.find_element(css: '#new_employee_salary > p > input').click
   end
+
+  def homepage_logo
+    driver.find_element(css: 'body > div.container > div > div.app-header__for_updated_switcher >
+     div.app-header__logo_switcher > a > img.header-logo.d-none.d-lg-block').click
+  end
 end
 
-  # rubocop:enable Metrics/AbcSize
-  # rubocop:enable Layout/LineLength
-  # rubocop:enable Metrics/ClassLength
-  # rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/AbcSize
+# rubocop:enable Layout/LineLength
+# rubocop:enable Metrics/ClassLength
+# rubocop:enable Metrics/MethodLength
