@@ -308,7 +308,7 @@ class AppNavigationExtensionLM < Base
     driver.find_element(xpath: '//*[@id="tab-summary"]/div[1]/a').click
   end
 
-  def performance_121_delete_e_of_e
+  def performance_121_delete_employee_of_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/performance#one-to-ones')
     sleep 0.25
     delete_oto = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(3)')
@@ -319,7 +319,7 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: selector).click
   end
 
-  def performance_objective_delete_e_of_e
+  def performance_objective_delete_employee_of_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/performance?objective_state=suggested&active_tab=objectives')
     sleep 0.25
     delete_objective = driver.find_element(css: '#DataTables_Table_1 > tbody > tr > td.actions > a:nth-child(2)')
@@ -331,7 +331,7 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: selector).click
   end
 
-  def performance_deliverable_delete_e_of_e
+  def performance_deliverable_delete_employee_of_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/performance#deliverables')
     sleep 0.25
     delete_deliverable = driver.find_element(css: '#DataTables_Table_2 > tbody > tr > td.actions > a:nth-child(3)')
@@ -342,7 +342,7 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: selector).click
   end
 
-  def document_delete_e_of_e
+  def document_delete_employee_of_employee
     # driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/documents#')
     # sleep 0.25
     # delete_document = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(3)')
@@ -353,7 +353,7 @@ class AppNavigationExtensionLM < Base
     # driver.find_element(css: selector).click
   end
 
-  def job_delete_e_of_e
+  def job_delete_employee_of_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/jobs')
     sleep 0.25
     delete_job = driver.find_element(css: '#DataTables_Table_0 > tbody > tr.odd > td.actions > a:nth-child(2) > svg')
@@ -364,7 +364,7 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: selector).click
   end
 
-  def pay_delete_e_of_e
+  def pay_delete_employee_of_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/pay_and_benefits')
     sleep 0.25
     delete_pay = driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a:nth-child(1)')
@@ -375,7 +375,7 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: selector).click
   end
 
-  def performance_121_create_e_of_e
+  def performance_121_create_employee_of_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/one_to_ones/new?employee_id=22271')
     sleep 0.25
     driver.find_element(id: 'undefined_react').send_keys one_month_date_string
@@ -403,7 +403,7 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: '#new_one_to_one > p > input').click
   end
 
-  def performance_objective_create_e_of_e
+  def performance_objective_create_employee_of_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/objectives/new')
     sleep 0.25
     driver.find_element(id: 'objective_subject').send_keys "LM taest input #{todays_date_string}"
@@ -416,7 +416,7 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: '#new_objective > p > input').click
   end
 
-  def performance_deliverable_create_e_of_e
+  def performance_deliverable_create_employee_of_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/deliverables/new')
     sleep 0.25
     driver.find_element(id: 'employee_deliverable_description').send_keys "Deliverable description #{todays_date_string}"
@@ -424,14 +424,14 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: '#new_employee_deliverable > p > input').click
   end
 
-  def document_create_e_of_e
+  def document_create_employee_of_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/documents/new?from_section=documents')
     sleep 0.25
     driver.find_element(id: 'employee_document_title').send_keys 'LM added new document for employees employee'
     # need to work out how to insert documents
   end
 
-  def job_create_e_of_e
+  def job_create_employee_of_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/jobs/new')
     sleep 0.25
     driver.find_element(id: 'employee_job_title').send_keys "New Job #{todays_date_string}"
@@ -442,7 +442,7 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: '#new_employee_job > fieldset > p > input').click
   end
 
-  def pay_create_e_of_e
+  def pay_create_employee_of_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/salaries/new')
     sleep 0.25
     driver.find_element(id: 'employee_salary_amount').send_keys '35000.00'
