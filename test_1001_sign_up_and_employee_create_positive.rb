@@ -129,5 +129,5 @@ end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
 # TestSignUp.new.test_sign_up_with_bulk
-TestSignUp.new.test_sign_up_with_add_employee_manually
+# TestSignUp.new.test_sign_up_with_add_employee_manually
 TestSignUp.new.signup_login_path

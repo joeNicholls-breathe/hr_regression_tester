@@ -16,9 +16,16 @@ class SignUpExtension < Base
     driver.find_element(id: 'contactNumber').send_keys '01342 717123'
     driver.find_element(id: 'password').send_keys 'Password1'
     driver.find_element(id: 'confirmPassword').send_keys 'Password1'
-    driver.find_element(id: 'account-terms-read').click
-    sleep 0.5
-    driver.find_element(id: 'submit').click
+    begin
+      driver.find_element(id: 'account-terms-read').click
+    rescue Selenium::WebDriver::Error::ElementClickInterceptedError
+      driver.find_element(id: 'account-terms-read').click
+    end
+    begin
+      driver.find_element(id: 'submit').click
+    rescue Selenium::WebDriver::Error::ElementClickInterceptedError
+      driver.find_element(id: 'submit').click
+    end
   end
 
   def sign_up_negative_no_email
@@ -31,9 +38,16 @@ class SignUpExtension < Base
     driver.find_element(id: 'contactNumber').send_keys '01342 717123'
     driver.find_element(id: 'password').send_keys 'Password1'
     driver.find_element(id: 'confirmPassword').send_keys 'Password1'
-    driver.find_element(id: 'account-terms-read').click
-    sleep 0.5
-    driver.find_element(id: 'submit').click
+    begin
+      driver.find_element(id: 'account-terms-read').click
+    rescue Selenium::WebDriver::Error::ElementClickInterceptedError
+      driver.find_element(id: 'account-terms-read').click
+    end
+    begin
+      driver.find_element(id: 'submit').click
+    rescue Selenium::WebDriver::Error::ElementClickInterceptedError
+      driver.find_element(id: 'submit').click
+    end
   end
 
   def sign_up_negative_no_account_name
@@ -46,9 +60,16 @@ class SignUpExtension < Base
     driver.find_element(id: 'contactNumber').send_keys '01342 717123'
     driver.find_element(id: 'password').send_keys 'Password1'
     driver.find_element(id: 'confirmPassword').send_keys 'Password1'
-    driver.find_element(id: 'account-terms-read').click
-    sleep 0.5
-    driver.find_element(id: 'submit').click
+    begin
+      driver.find_element(id: 'account-terms-read').click
+    rescue Selenium::WebDriver::Error::ElementClickInterceptedError
+      driver.find_element(id: 'account-terms-read').click
+    end
+    begin
+      driver.find_element(id: 'submit').click
+    rescue Selenium::WebDriver::Error::ElementClickInterceptedError
+      driver.find_element(id: 'submit').click
+    end
   end
 
   def sign_up_negative_no_account_employees
@@ -59,9 +80,16 @@ class SignUpExtension < Base
     driver.find_element(id: 'contactNumber').send_keys '01342 717123'
     driver.find_element(id: 'password').send_keys 'Password1'
     driver.find_element(id: 'confirmPassword').send_keys 'Password1'
-    driver.find_element(id: 'account-terms-read').click
-    sleep 0.5
-    driver.find_element(id: 'submit').click
+    begin
+      driver.find_element(id: 'account-terms-read').click
+    rescue Selenium::WebDriver::Error::ElementClickInterceptedError
+      driver.find_element(id: 'account-terms-read').click
+    end
+    begin
+      driver.find_element(id: 'submit').click
+    rescue Selenium::WebDriver::Error::ElementClickInterceptedError
+      driver.find_element(id: 'submit').click
+    end
   end
 
   def sign_up_negative_no_telephone_number
@@ -74,9 +102,16 @@ class SignUpExtension < Base
     choose.select_by(:text, '21-50')
     driver.find_element(id: 'password').send_keys 'Password1'
     driver.find_element(id: 'confirmPassword').send_keys 'Password1'
-    driver.find_element(id: 'account-terms-read').click
-    sleep 0.5
-    driver.find_element(id: 'submit').click
+    begin
+      driver.find_element(id: 'account-terms-read').click
+    rescue Selenium::WebDriver::Error::ElementClickInterceptedError
+      driver.find_element(id: 'account-terms-read').click
+    end
+    begin
+      driver.find_element(id: 'submit').click
+    rescue Selenium::WebDriver::Error::ElementClickInterceptedError
+      driver.find_element(id: 'submit').click
+    end
   end
 
   def sign_up_negative_no_password_one
@@ -89,9 +124,16 @@ class SignUpExtension < Base
     choose.select_by(:text, '21-50')
     driver.find_element(id: 'contactNumber').send_keys '01342 717123'
     driver.find_element(id: 'confirmPassword').send_keys 'Password1'
-    driver.find_element(id: 'account-terms-read').click
-    sleep 0.5
-    driver.find_element(id: 'submit').click
+    begin
+      driver.find_element(id: 'account-terms-read').click
+    rescue Selenium::WebDriver::Error::ElementClickInterceptedError
+      driver.find_element(id: 'account-terms-read').click
+    end
+    begin
+      driver.find_element(id: 'submit').click
+    rescue Selenium::WebDriver::Error::ElementClickInterceptedError
+      driver.find_element(id: 'submit').click
+    end
   end
 
   def sign_up_negative_no_password_two
@@ -104,13 +146,24 @@ class SignUpExtension < Base
     choose.select_by(:text, '21-50')
     driver.find_element(id: 'contactNumber').send_keys '01342 717123'
     driver.find_element(id: 'password').send_keys 'Password1'
-    driver.find_element(id: 'account-terms-read').click
-    sleep 0.5
-    driver.find_element(id: 'submit').click
+    begin
+      driver.find_element(id: 'account-terms-read').click
+    rescue Selenium::WebDriver::Error::ElementClickInterceptedError
+      driver.find_element(id: 'account-terms-read').click
+    end
+    begin
+      driver.find_element(id: 'submit').click
+    rescue Selenium::WebDriver::Error::ElementClickInterceptedError
+      driver.find_element(id: 'submit').click
+    end
   end
 
   def sign_up_login_button
-    driver.find_element(css: 'body > div.page--wrapper > nav > div > div > div.login--btn').click
+    begin
+      driver.find_element(xpath: '//*[@id="hs_cos_wrapper_widget_1709911502283"]/section/div[1]/div/div/div[3]/div/p/a').click
+    rescue Selenium::WebDriver::Error::ElementClickInterceptedError
+      driver.find_element(xpath: '//*[@id="hs_cos_wrapper_widget_1709911502283"]/section/div[1]/div/div/div[3]/div/p/a').click
+    end
   end
 
   def logo_to_website
