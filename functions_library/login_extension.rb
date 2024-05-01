@@ -68,7 +68,6 @@ class LoginExtension < Base
   end
 
   def login_setup_acc_admin
-    binding.pry
     driver.find_element(id: 'email-input').send_keys settings[:staging][:setup_acc_email]
     sleep 0.5
     driver.find_element(name: 'password').send_keys settings[:staging][:login_password]

@@ -159,11 +159,11 @@ class SignUpExtension < Base
   end
 
   def sign_up_login_button
-    begin
-      driver.find_element(xpath: '//*[@id="hs_cos_wrapper_widget_1709911502283"]/section/div[1]/div/div/div[3]/div/p/a').click
-    rescue Selenium::WebDriver::Error::ElementClickInterceptedError
-      driver.find_element(xpath: '//*[@id="hs_cos_wrapper_widget_1709911502283"]/section/div[1]/div/div/div[3]/div/p/a').click
-    end
+    driver.find_element(xpath: '//*[@id="hs_cos_wrapper_widget_1709911502283"]/section
+      /div[1]/div/div/div[3]/div/p/a').click
+  rescue Selenium::WebDriver::Error::ElementClickInterceptedError
+    driver.find_element(xpath: '//*[@id="hs_cos_wrapper_widget_1709911502283"]/section
+      /div[1]/div/div/div[3]/div/p/a').click
   end
 
   def logo_to_website
