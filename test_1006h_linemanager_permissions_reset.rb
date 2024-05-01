@@ -31,67 +31,36 @@ class AccountSetupLMUserReturnOriginStatus < Base
     NavigationAroundAccountConfiguration.new(driver).navigate_to_change_what_line_managers_can_do
     puts '3. navigate to line settings - assign account settings to LM user'
     # remove all permissions
-    # view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_personal_profile_view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_leave_view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_adjustments_and_toil_view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_sickness_view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_training_view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_one_to_ones_view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_objectives_view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_deliverables_view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_job_details_view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_remuneration_view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_emergency_contacts_view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_medical_facts_view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_personal_history_view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_notes_view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_equipment_view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_id_documents_view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_dbs_checks_view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_grievances_and_disciplinaries_view
-    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_time_logs_view
-    # manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_profile_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_personal_profile_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_leave_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_adjustments_and_toil_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_sickness_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_training_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_one_to_ones_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_objectives_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_deliverables_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_job_details_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_remuneration_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_emergency_contacts_manage
-    LineManagerManageConfigExtension.new(driver).ine_manager_configuration_on_medical_facts_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_personal_history_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_notes_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_equipment_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_id_documents_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_dbs_checks_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_grievances_and_disciplinaries_manage
-    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_time_logs_manage
-    # delete
+    # delete permissions removed
     LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_profile_delete_docs_only
     LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_leave_delete
     LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_sickness_delete
-    LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_training_delete
     LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_one_to_ones_delete
     LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_objectives_delete
     LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_deliverables_delete
     LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_job_details_delete
     LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_remuneration_delete
-    LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_emergency_contacts_delete
-    LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_medical_facts_delete
-    LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_personal_history_delete
-    LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_notes_delete
-    LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_equipment_delete
-    LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_id_documents_delete
-    LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_dbs_checks_delete
-    LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_grievances_and_disciplinaries_delete
-    LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_time_logs_delete
-    LineManagerDeleteConfigExtension.new(driver).line_manager_configurations_update
+    LineManagerDeleteConfigExtension.new(driver).line_manager_onbarding_tasks
+    # manage permissions removed
+    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_leave_manage
+    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_adjustments_and_toil_manage
+    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_sickness_manage
+    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_one_to_ones_manage
+    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_objectives_manage
+    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_deliverables_manage
+    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_job_details_manage
+    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_remuneration_manage
+    LineManagerManageConfigExtension.new(driver).line_manager_configuration_onboarding_manage
+    # view permissions removed
+    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_leave_view
+    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_adjustments_and_toil_view
+    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_sickness_view
+    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_one_to_ones_view
+    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_objectives_view
+    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_deliverables_view
+    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_job_details_view
+    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_remuneration_view
+    LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_company_tasks_view
     puts '4. Permissions and approvals - Line manager can delete all employee areas'
     LineManagerConfigExtension.new(driver).navigate_back_to_settings_breadcrumb
     sleep 10

@@ -31,7 +31,6 @@ class AccountSetupLMUserDelete < Base
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     NavigationAroundAccountConfiguration.new(driver).navigate_to_change_what_line_managers_can_do
     puts '3.navigate to line settings - assign account settings to LM user'
-    # std delete
     LineManagerDeleteConfigExtension.new(driver).line_manager_profile_delete_docs_only
     LineManagerDeleteConfigExtension.new(driver).line_manager_leave_delete
     LineManagerDeleteConfigExtension.new(driver).line_manager_sickness_delete
@@ -41,17 +40,6 @@ class AccountSetupLMUserDelete < Base
     LineManagerDeleteConfigExtension.new(driver).line_manager_job_details_delete
     LineManagerDeleteConfigExtension.new(driver).line_manager_remuneration_delete
     LineManagerDeleteConfigExtension.new(driver).line_manager_onbarding_tasks
-    # enhanced account permissions
-    # LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_emergency_contacts_delete
-    # LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_medical_facts_delete
-    # LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_personal_history_delete
-    # LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_notes_delete
-    # LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_equipment_delete
-    # LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_id_documents_delete
-    # LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_dbs_checks_delete
-    # LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_grievances_and_disciplinaries_delete
-    # LineManagerDeleteConfigExtension.new(driver).line_manager_configuration_on_time_logs_delete
-    # Add line manager view of peoples, people and bank details
     LineManagerDeleteConfigExtension.new(driver).line_manager_update
     puts '4. permissions and approvals - Line manager can delete all employee areas'
     LineManagerDeleteConfigExtension.new(driver).line_manager_able_to_see_their_peoples_people

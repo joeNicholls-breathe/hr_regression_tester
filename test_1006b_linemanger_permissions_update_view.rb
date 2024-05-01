@@ -30,7 +30,6 @@ class AccountSetupLMUserView < Base
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     NavigationAroundAccountConfiguration.new(driver).navigate_to_change_what_line_managers_can_do
     puts '3. navigate to line settings - assign account settings to LM user'
-    # std view
     LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_leave_view
     LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_adjustments_and_toil_view
     LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_sickness_view
@@ -40,17 +39,7 @@ class AccountSetupLMUserView < Base
     LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_job_details_view
     LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_remuneration_view
     LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_company_tasks_view
-    # enhanced account permissions
-    # LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_emergency_contacts_view
-    # LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_medical_facts_view
-    # LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_personal_history_view
-    # LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_notes_view
-    # LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_equipment_view
-    # LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_id_documents_view
-    # LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_dbs_checks_view
-    # LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_time_logs_view
     LineManagerViewConfigExtension.new(driver).line_manager_configurations_update
-    # to return to settings if required - one to think about in the process when we run the script
     puts '4. permissions and approvals - Line manager can view employee areas'
     sleep 10
     puts 'Test 1006b complete'
