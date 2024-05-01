@@ -342,17 +342,6 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: selector).click
   end
 
-  def document_delete_employee_of_employee
-    # driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/documents#')
-    # sleep 0.25
-    # delete_document = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(3)')
-    # attribute_value = delete_document.attribute('href')
-    # split_value = attribute_value.split('/')[6]
-    # selector = "#{split_value}"
-    # driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click
-    # driver.find_element(css: selector).click
-  end
-
   def job_delete_employee_of_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/jobs')
     sleep 0.25
@@ -422,13 +411,6 @@ class AppNavigationExtensionLM < Base
     driver.find_element(id: 'employee_deliverable_description').send_keys "Deliverable description #{todays_date_string}"
     driver.find_element(id: '#employee_deliverable_delivery_date_react').send_keys one_month_date_string
     driver.find_element(css: '#new_employee_deliverable > p > input').click
-  end
-
-  def document_create_employee_of_employee
-    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/documents/new?from_section=documents')
-    sleep 0.25
-    driver.find_element(id: 'employee_document_title').send_keys 'LM added new document for employees employee'
-    # need to work out how to insert documents
   end
 
   def job_create_employee_of_employee
