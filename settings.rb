@@ -19,8 +19,12 @@ module Settings
         setup_acc_email_hr_user: 'hr@auto-reg.co.uk',
         setup_acc_email_lm_user: 'lm@auto-reg.co.uk',
         setup_acc_email_lm_employee: 'empstd@auto-reg.co.uk',
-        saas_admin_email: 'antiqueruby0@nllessons.com'
-
+        saas_admin_email: 'antiqueruby0@nllessons.com',
+        admin_auto_approval_email: 'auto.approval@hr-regression.com',
+        auto_approved_one_email: 'autoapproved.one@hr-regression.com',
+        auto_approved_two_email: 'autoapproved.two@hr-regression.com',
+        auto_approved_three_email: 'autoapproved.three@hr-regression.com',
+        auto_approved_four_email: 'autoapproved.off@hr-regression.com'
       }
     }
   end

@@ -2,6 +2,7 @@
 
 require File.expand_path('base.rb', __dir__)
 
+# rubocop:disable Metrics/ClassLength
 class LoginExtension < Base
   # rubocop:disable Metrics/AbcSize
   def login_pass
@@ -103,6 +104,51 @@ class LoginExtension < Base
     sleep 0.5
   end
 
+  def login_auto_approval_admin
+    driver.find_element(id: 'email-input').send_keys settings[:staging][:admin_auto_approval_email]
+    sleep 0.5
+    driver.find_element(name: 'password').send_keys settings[:staging][:login_password]
+    sleep 0.5
+    driver.find_element(css: 'form button[type=submit]').click
+    sleep 0.5
+  end
+
+  def login_auto_approval_employee_one
+    driver.find_element(id: 'email-input').send_keys settings[:staging][:auto_approved_one_email]
+    sleep 0.5
+    driver.find_element(name: 'password').send_keys settings[:staging][:login_password]
+    sleep 0.5
+    driver.find_element(css: 'form button[type=submit]').click
+    sleep 0.5
+  end
+
+  def login_auto_approval_employee_two
+    driver.find_element(id: 'email-input').send_keys settings[:staging][:auto_approved_two_email]
+    sleep 0.5
+    driver.find_element(name: 'password').send_keys settings[:staging][:login_password]
+    sleep 0.5
+    driver.find_element(css: 'form button[type=submit]').click
+    sleep 0.5
+  end
+
+  def login_auto_approval_employee_three
+    driver.find_element(id: 'email-input').send_keys settings[:staging][:auto_approved_three_email]
+    sleep 0.5
+    driver.find_element(name: 'password').send_keys settings[:staging][:login_password]
+    sleep 0.5
+    driver.find_element(css: 'form button[type=submit]').click
+    sleep 0.5
+  end
+
+  def login_auto_approval_employee_four
+    driver.find_element(id: 'email-input').send_keys settings[:staging][:auto_approved_four_email]
+    sleep 0.5
+    driver.find_element(name: 'password').send_keys settings[:staging][:login_password]
+    sleep 0.5
+    driver.find_element(css: 'form button[type=submit]').click
+    sleep 0.5
+  end
+
   def login_as_saas_admin
     driver.find_element(id: 'email-input').send_keys settings[:staging][:saas_admin_email]
     sleep 0.5
@@ -113,3 +159,4 @@ class LoginExtension < Base
   end
   # rubocop:enable Metrics/AbcSize
 end
+# rubocop:enable Metrics/ClassLength

@@ -9,6 +9,7 @@ require './functions_library/employee_dashboard_extension'
 require './functions_library/holiday_extension'
 require './functions_library/leave_request_extension'
 require './functions_library/navigate_around_app_employee'
+require './functions_library/test_reference_extension'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
@@ -67,12 +68,30 @@ class TestLeaveRequest
     else
       puts 'FAIL - booked_amount total incorrect'
     end
+    if Time.now.utc.strftime('%d/%m/%Y') < '31/03/2024'
+      puts 'Holiday year after carry over period'
+      after_carry_over_period
+    else
+      puts 'Holiday year within carry over period'
+      during_carry_over_period
+    end
+    puts 'Test complete - Approver can approve holiday request'
+  end
+
+  def after_carry_over_period
+    if HolidayExtension.new(driver).available_amount == '20.0 days'
+      puts 'Pass - available_amount total correct'
+    else
+      puts 'FAIL - available_amount total incorrect'
+    end
+  end
+
+  def during_carry_over_period
     if HolidayExtension.new(driver).available_amount == '24.0 days'
       puts 'Pass - available_amount total correct'
     else
       puts 'FAIL - available_amount total incorrect'
     end
-    puts 'Test complete - Approver can approve holiday request'
   end
 
   def test_03_delete_holiday_data
