@@ -103,4 +103,5 @@ class LMUserDeleteAccess < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
+
 LMUserDeleteAccess.new.test_1006g_lm_delete_permisssions
