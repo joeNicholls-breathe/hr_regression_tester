@@ -26,14 +26,14 @@ class LMUserDeleteAccess < Base
     NavigateBrowserExtension.new(driver).breathe_login
     LoginExtension.new(driver).login_setup_acc_lm_employee_user
     LoginAppExtension.new(driver).select_hr
-    p '1a - employee - login'
+    puts '1a - employee - login'
     HolidayExtension.new(driver).holiday_request_dashboard_navigate_employee
     LeaveRequestExtension.new(driver).employee_holiday_leave_request_one
-    p '1b - employee - holiday leave request'
+    puts '1b - employee - holiday leave request'
     # might want to add more items to delete from user they i wont have to clear from other user - might be cleaner
     sleep 1
     AppNavigationExtensionLM.new(driver).lm_logout
-    puts '1. Request leave as Employees, employee - Pass'
+    puts '1c. Employees, employee logout- Pass'
     sleep 0.50
     # Line Manager (LM) Login
     NavigateBrowserExtension.new(driver).breathe_login
@@ -63,8 +63,7 @@ class LMUserDeleteAccess < Base
     AppNavigationExtensionLM.new(driver).navigate_to_sickness_edit
     AppNavigationExtensionLM.new(driver).delete_sickness_employees_employee
     AppNavigationExtensionLM.new(driver).create_a_sickness
-    puts '8. User able to delete sickness record - Pass'
-    # delete existing records
+    puts '8. Lm able to delete sickness record - Pass'
     AppNavigationExtensionLM.new(driver).performance_121_delete_employee_of_employee
     puts '9. Delete 121 - Pass'
     sleep 1.5
@@ -76,19 +75,15 @@ class LMUserDeleteAccess < Base
     AppNavigationExtensionLM.new(driver).performance_deliverable_delete_employee_of_employee
     puts '11. Delete deliverable - Pass'
     sleep 1.5
-    # need to figure out how to upload a document with ruby
     AppNavigationExtensionLM.new(driver).job_delete_employee_of_employee
     puts '12. Delete job - Pass'
     AppNavigationExtensionLM.new(driver).pay_delete_employee_of_employee
     puts '13. Delete pay - Pass'
-    # recreate ready for next test run
     AppNavigationExtensionLM.new(driver).performance_121_create_employee_of_employee
     puts '14. Create 121 - Pass'
-    AppNavigationExtensionLM.new(driver).homepage_logo
     sleep 1.5
     AppNavigationExtensionLM.new(driver).performance_objective_create_employee_of_employee
     puts '15. Create objective - Pass'
-    AppNavigationExtensionLM.new(driver).homepage_logo
     sleep 1.5
     AppNavigationExtensionLM.new(driver).performance_deliverable_create_employee_of_employee
     puts '16. Create deliverable - Pass'
@@ -96,6 +91,7 @@ class LMUserDeleteAccess < Base
     puts '17. Create job - Pass'
     AppNavigationExtensionLM.new(driver).pay_create_employee_of_employee
     puts '18. Create pay - Pass'
+    sleep 1
     AppNavigationExtensionLM.new(driver).lm_logout
     puts 'Test 1006g complete'
     driver.close
