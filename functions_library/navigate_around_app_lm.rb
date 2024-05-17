@@ -267,8 +267,8 @@ class AppNavigationExtensionLM < Base
   end
 
   def manage_employee_job
-    driver.find_element(css: '#employee_job_title').clear
-    driver.find_element(css: '#employee_job_title').send_keys("Employee Of LM #{todays_date_string}")
+    driver.find_element(id: 'employee_job_title').clear
+    driver.find_element(id: 'employee_job_title').send_keys("Employee Of LM #{todays_date_string}")
     driver.find_element(xpath: '//*[@id="edit_employee_job_4471"]/fieldset/p/input').click
   end
 
@@ -444,6 +444,13 @@ class AppNavigationExtensionLM < Base
   def homepage_logo
     driver.find_element(css: 'body > div.container > div > div.app-header__for_updated_switcher >
      div.app-header__logo_switcher > a > img.header-logo.d-none.d-lg-block').click
+  end
+
+  def reset_sickness_emp_return_to_work
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/sicknesses/1466/edit')
+    sleep 0.25
+    driver.find_element(id: 'sickness_status_returned').click
+    driver.find_element(css: '#edit_sickness_1466 > p > input').click
   end
 end
 

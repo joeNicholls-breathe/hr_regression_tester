@@ -75,6 +75,8 @@ class AccountSetupLMUserReturnOriginStatus < Base
     LineManagerViewConfigExtension.new(driver).line_manager_configurations_update
     sleep 1
     puts '6. permissions to view removed'
+    AppNavigationExtensionLM.new(driver).reset_sickness_emp_return_to_work
+    puts '7. Returns sickness of employee to status - Return to Work'
     sleep 1
     puts 'Test 1006h complete'
     driver.close
