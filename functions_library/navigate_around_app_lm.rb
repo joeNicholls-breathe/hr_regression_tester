@@ -270,6 +270,7 @@ class AppNavigationExtensionLM < Base
     driver.find_element(id: 'employee_job_title').clear
     driver.find_element(id: 'employee_job_title').send_keys("Employee Of LM #{todays_date_string}")
     driver.find_element(xpath: '//*[@id="edit_employee_job_4471"]/fieldset/p/input').click
+    puts 'If hits in test_1006c then - FAIL'
   end
 
   def delete_job

@@ -103,10 +103,8 @@ class LMUserViewAccess < Base
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_jobs
       AppNavigationExtensionLM.new(driver).manage_employee_job
-      puts '14F. jobs - user navigated to pages not accessible due to permissions - Fail'
     rescue Selenium::WebDriver::Error::NoSuchElementError
-      AppNavigationExtensionLM.new(driver).return_to_dashboard
-      puts '14P. jobs - user was unable to access the page due to current permissions set up - Pass'
+      puts '14P. jobs - user was only able to view employee job - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_remuneration
