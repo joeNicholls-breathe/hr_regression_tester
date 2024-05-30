@@ -47,7 +47,7 @@ class EmployeeConfigExtension < Base
     driver.find_element(id: 'account_employees_can_request_one_to_ones').click
   end
 
-  def employee_congifuration_what_can_do_enter_traiining_record
+  def employee_congifuration_what_can_do_enter_training_record
     driver.find_element(id: 'account_employees_can_enter_training').click
   end
 
@@ -56,7 +56,7 @@ class EmployeeConfigExtension < Base
   end
 
   def employee_congifuration_update
-    driver.find_element(id: '//*[@id="edit_account_2869"]/p/input').click
+    driver.find_element(css: '#edit_account_3899 > p > input').click
   end
 
   def employee_congifuration_cancel

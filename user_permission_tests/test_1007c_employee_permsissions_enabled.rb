@@ -2,11 +2,13 @@
 
 require 'selenium-webdriver'
 require 'logger'
+require './functions_library/ui_page_element_check'
 require './functions_library/test_reference_extension'
+require './functions_library/navigate_browser_extension'
 require './functions_library/login_extension'
 require './functions_library/login_app_extension'
 require './functions_library/settings_config/account_config_navigation/account_configuration_navigation_extension'
-
+require './functions_library/settings_config/employee_config/employee_config_extension'
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
 class EmployeeInputs < Base
@@ -17,42 +19,25 @@ class EmployeeInputs < Base
     Selenium::WebDriver.logger.level = :info
   end
 
-  def test_employee_inputs
+  def test_1007c_employee_permissions_enabled
     NavigateBrowserExtension.new(driver).breathe_login
     LoginExtension.new(driver).login_setup_acc_admin
     LoginAppExtension.new(driver).select_hr
-    AppNavigationExtensionManager.new(driver).navigate_to_dashboard
-    AppNavigationExtensionManager.new(driver).navigate_to_people_list
-    AppNavigationExtensionManager.new(driver).navigate_to_people_screen_pill
-    CreateEmployeeExtension.new(driver).create_employee_pending_starter_from_people_page
-    # need to amend to make the employee start today???
-    AppNavigationExtensionManager.new(driver).navigate_to_dashboard
-    LogoutExtension.new(driver).user_logout
-    puts '1. HR user adds a new employee joining today'
-    puts '2. Employee login'
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_change_what_employees_can_do
     EmployeeConfigExtension.new(driver).employee_congifuration_what_can_see_remunerations
     EmployeeConfigExtension.new(driver).employee_congifuration_what_can_see_performance_metrics
     EmployeeConfigExtension.new(driver).employee_congifuration_what_can_see_custom_fields
     EmployeeConfigExtension.new(driver).employee_congifuration_what_can_see_directory
     EmployeeConfigExtension.new(driver).employee_congifuration_what_can_see_calendar
-    EmployeeConfigExtension.new(driver).employee_congifuration_what_can_see_kudus_leaderboard
-    EmployeeConfigExtension.new(driver).employee_congifuration_what_can_see_location_booking_report
     EmployeeConfigExtension.new(driver).employee_congifuration_what_can_do_update_profile_picture
     EmployeeConfigExtension.new(driver).employee_congifuration_what_can_do_request_toil
     EmployeeConfigExtension.new(driver).employee_congifuration_what_can_do_report_sickness
     EmployeeConfigExtension.new(driver).employee_congifuration_what_can_do_request_one_to_ones
-    EmployeeConfigExtension.new(driver).employee_congifuration_what_can_do_enter_traiining_record
-    EmployeeConfigExtension.new(driver).employee_congifuration_what_can_do_booking_locations
     EmployeeConfigExtension.new(driver).employee_congifuration_update
-    EmployeeConfigExtension.new(driver).navigate_back_to_settings_breadcrumb
-    puts 'Permissions and approvals - Employee check what people can see and do'
-    puts 'assign permissions to employee'
-    sleep 10
-    puts 'Test 1007 complete'
+    puts 'Test 1007c complete'
     driver.close
   end
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
-
-EmployeeInputs.new.test_employee_inputs
+EmployeeInputs.new.test_1007c_employee_permissions_enabled

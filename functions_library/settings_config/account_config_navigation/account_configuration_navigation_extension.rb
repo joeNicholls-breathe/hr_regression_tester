@@ -61,10 +61,7 @@ class NavigationAroundAccountConfiguration < Base
   end
 
   def navigate_to_change_what_employees_can_do
-    driver.find_element(
-      css: 'body > section.content.container.p-4 > div:nth-child(2) >
-            div:nth-child(1) > div:nth-child(3) > a:nth-child(4)'
-    ).click
+    driver.navigate.to('https://hr.breathehrstaging.com/account/edit_employee_configuration')
   end
 
   def navigate_to_woking_patterns
