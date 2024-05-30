@@ -5,7 +5,8 @@ require 'logger'
 require './functions_library/test_reference_extension'
 require './functions_library/login_extension'
 require './functions_library/login_app_extension'
-
+# rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/AbcSize
 class EmployeePermissions < Base
   attr_accessor :driver
 
@@ -35,5 +36,6 @@ class EmployeePermissions < Base
     driver.close
   end
 end
-
+# rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/AbcSize
 EmployeePermissions.new.test_1007d_employee_permissions_testing

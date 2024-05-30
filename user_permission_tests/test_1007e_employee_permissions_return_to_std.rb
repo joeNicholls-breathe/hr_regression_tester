@@ -9,7 +9,6 @@ require './functions_library/login_extension'
 require './functions_library/login_app_extension'
 require './functions_library/settings_config/account_config_navigation/account_configuration_navigation_extension'
 require './functions_library/settings_config/employee_config/employee_config_extension'
-# rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
 class EmployeeInputs < Base
   attr_accessor :driver
@@ -31,6 +30,5 @@ class EmployeeInputs < Base
     driver.close
   end
 end
-# rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
 EmployeeInputs.new.test_1007e_employee_permissions_return_to_std

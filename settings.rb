@@ -24,7 +24,11 @@ module Settings
         auto_approved_one_email: 'autoapproved.one@hr-regression.com',
         auto_approved_two_email: 'autoapproved.two@hr-regression.com',
         auto_approved_three_email: 'autoapproved.three@hr-regression.com',
-        auto_approved_four_email: 'autoapproved.off@hr-regression.com'
+        auto_approved_four_email: 'autoapproved.off@hr-regression.com',
+        setup_acc_email_perms_employee: 'emp_perms@auto-reg.co.uk',
+        setup_acc_email_perms_finance: 'finance@auto-reg.co.uk',
+        setup_acc_email_perms_holiday: 'ha@auto-reg.co.uk',
+        setup_acc_email_perms_expenses: 'expenses@auto-reg.co.uk'
       }
     }
   end
