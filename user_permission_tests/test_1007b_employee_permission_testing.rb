@@ -12,6 +12,8 @@ require './functions_library/sickness_extension'
 require './functions_library/logout_extension'
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
 class EmployeePermissions < Base
   attr_accessor :driver
 
@@ -31,21 +33,21 @@ class EmployeePermissions < Base
     puts '3. edit profile summary - change request submitted - Pass'
     begin
       NavigateAroundAppEmployee.new(driver).navigate_to_pay
-    rescue
+    rescue StandardError
       puts 'return to dashboard after rescue'
       NavigateAroundAppEmployee.new(driver).navigate_to_dashboard_employee
       puts '4. no access to view pay - Pass'
     end
     begin
       NavigateAroundAppEmployee.new(driver).navigate_to_benefits
-    rescue
+    rescue StandardError
       puts 'return to dashboard after rescue'
       NavigateAroundAppEmployee.new(driver).navigate_to_dashboard_employee
       puts '5. no access to view benefits - Pass'
     end
-    begin    
+    begin
       NavigateAroundAppEmployee.new(driver).navigate_to_additional_payments
-    rescue
+    rescue StandardError
       NavigateAroundAppEmployee.new(driver).navigate_to_dashboard_employee
       puts '6. no access to view additional payments - Pass'
     end
@@ -54,7 +56,7 @@ class EmployeePermissions < Base
       NavigateAroundAppEmployee.new(driver).navigate_to_performance_onetoone
       NavigateAroundAppEmployee.new(driver).navigate_to_performance_objectives
       NavigateAroundAppEmployee.new(driver).navigate_to_performance_deliverables
-    rescue
+    rescue StandardError
       puts 'return to dashboard after rescue'
       NavigateAroundAppEmployee.new(driver).navigate_to_dashboard_employee
       puts '7. no access to view performance metrics - Pass'
@@ -62,21 +64,21 @@ class EmployeePermissions < Base
     # page doesnt fail it just returns profile?/ not sure what to do here
     begin
       NavigateAroundAppEmployee.new(driver).navigate_to_custom_fields
-    rescue
+    rescue StandardError
       puts 'return to dashboard after rescue'
       NavigateAroundAppEmployee.new(driver).navigate_to_dashboard_employee
       puts '8. no access to view custom fields - Pass'
     end
     begin
       NavigateAroundAppEmployee.new(driver).navigate_to_directory
-    rescue
+    rescue StandardError
       puts 'return to dashboard after rescue'
       NavigateAroundAppEmployee.new(driver).navigate_to_dashboard_employee
       puts '9. no access to view directory - Pass'
     end
     begin
       NavigateAroundAppEmployee.new(driver).navigate_to_calendar
-    rescue
+    rescue StandardError
       puts 'return to dashboard after rescue'
       NavigateAroundAppEmployee.new(driver).navigate_to_dashboard_employee
       puts '10. no access to view calendar - Pass'
@@ -84,7 +86,7 @@ class EmployeePermissions < Base
     begin
       NavigateAroundAppEmployee.new(driver).navigate_to_holidays
       NavigateAroundAppEmployee.new(driver).request_toil
-    rescue
+    rescue StandardError
       puts 'return to dashboard after rescue'
       NavigateAroundAppEmployee.new(driver).navigate_to_dashboard_employee
       puts '11. not able to request TOIL - Pass'
@@ -92,7 +94,7 @@ class EmployeePermissions < Base
     begin
       NavigateAroundAppEmployee.new(driver).open_sickness_new
       SicknessExtension.new(driver).employee_sickness_create
-    rescue
+    rescue StandardError
       puts 'return to dashboard after rescue'
       NavigateAroundAppEmployee.new(driver).navigate_to_dashboard_employee
       puts '12. not able to request sickness - form - Pass'
@@ -100,7 +102,7 @@ class EmployeePermissions < Base
     begin
       NavigateAroundAppEmployee.new(driver).open_request_onetoeone_new
       NavigateAroundAppEmployee.new(driver).one_to_one_request
-    rescue
+    rescue StandardError
       puts 'return to dashboard after rescue'
       NavigateAroundAppEmployee.new(driver).navigate_to_dashboard_employee
       puts '13. not able to request one to one - dashboard - Pass'
@@ -112,4 +114,6 @@ class EmployeePermissions < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
 EmployeePermissions.new.test_1007b_employee_permissions_testing
