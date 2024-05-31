@@ -10,7 +10,8 @@ class NavigateAroundAppEmployee < Base
   end
 
   def navigate_to_dashboard_employee
-    driver.find_element(css: 'href="/dashboard"').click
+    driver.navigate.to('https://hr.breathehrstaging.com/#tab-my-dashboard')
+    # driver.find_element(css: 'href="/dashboard"').click
   end
 
   def navigate_to_profile_employee
@@ -53,14 +54,26 @@ class NavigateAroundAppEmployee < Base
 
   def navigate_to_pay
     driver.navigate.to('https://hr.breathehrstaging.com/employees/24848/pay_and_benefits#tab-pay')
+    driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a').click
+    driver.switch_to.window(driver.window_handles.last)
+    driver.close
+    driver.switch_to.window(driver.window_handles.first)
   end
 
   def navigate_to_benefits
     driver.navigate.to('https://hr.breathehrstaging.com/employees/24848/pay_and_benefits#tab-benefits')
+    driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a').click
+    driver.switch_to.window(driver.window_handles.last)
+    driver.close
+    driver.switch_to.window(driver.window_handles.first)
   end
 
   def navigate_to_additional_payments
     driver.navigate.to('https://hr.breathehrstaging.com/employees/24848/pay_and_benefits#tab-bonuses')
+    driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a').click
+    driver.switch_to.window(driver.window_handles.last)
+    driver.close
+    driver.switch_to.window(driver.window_handles.first)
   end
 
   def navigate_to_performance_onetoone
@@ -81,10 +94,12 @@ class NavigateAroundAppEmployee < Base
 
   def navigate_to_directory
     driver.navigate.to('https://hr.breathehrstaging.com/employees/directory')
+    driver.find_element(id: 'health-and-safety').click
   end
 
   def navigate_to_calendar
     driver.navigate.to('https://hr.breathehrstaging.com/calendar')
+    driver.find_element(css: '#calendar_dates > div > a.ml-2.next').click
   end
 
   def navigate_to_holidays
@@ -93,7 +108,7 @@ class NavigateAroundAppEmployee < Base
 
   # rubocop:disable Metrics/AbcSize
   def request_toil
-    driver.find_element(id: 'toil').click
+    driver.execute_script("$('#toil').click()")
     driver.find_element(id: 'employee_holiday_year_adjustment_adjustment').send_keys '2'
     driver.find_element(id: '#employee_holiday_year_adjustment_earned_from_date_react').send_keys one_week_ago_string
     driver.find_element(id: '#employee_holiday_year_adjustment_earned_to_date_react').send_keys one_week_ago_string + 3
