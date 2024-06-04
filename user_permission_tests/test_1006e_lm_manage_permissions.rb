@@ -54,7 +54,6 @@ class LMUserManageAccess < Base
       AppNavigationExtensionLM.new(driver).delete_sickness_direct_employee
       puts '8F. sickness - user deleted the record due to permissions - Fail'
     rescue Selenium::WebDriver::Error::NoSuchElementError
-      # can now catch this outcome
       AppNavigationExtensionLM.new(driver).navigate_to_sickness_view
       AppNavigationExtensionLM.new(driver).navigate_to_sickness_manage
       puts '8P. Manage sickness record - user able to manage sickness record - Pass'

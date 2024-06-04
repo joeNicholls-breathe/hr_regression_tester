@@ -92,7 +92,7 @@ class LMUserViewAccess < Base
     #   AppNavigationExtensionLM.new(driver).breadcrumb_to_performance_home
     #   puts '12P. user had permission to view view deliverables - Pass'
     # end
-    p '12. Performance deliverables test, not in use as button is not presenton form'
+    puts '12. Performance deliverables test, not in use as button is not presenton form'
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_documents
       puts '13F. user navigated to document page - Fail'
@@ -103,11 +103,8 @@ class LMUserViewAccess < Base
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_jobs
       AppNavigationExtensionLM.new(driver).manage_employee_job
-      puts '14F. jobs - user navigated to pages not accessible due to permissions - Fail'
-    # rescue StandardError
     rescue Selenium::WebDriver::Error::NoSuchElementError
-      AppNavigationExtensionLM.new(driver).return_to_dashboard
-      puts '14P. jobs - user was unable to access the page due to current permissions set up - Pass'
+      puts '14P. jobs - user was only able to view employee job - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_remuneration

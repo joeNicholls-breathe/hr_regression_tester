@@ -267,9 +267,10 @@ class AppNavigationExtensionLM < Base
   end
 
   def manage_employee_job
-    driver.find_element(css: '#employee_job_title').clear
-    driver.find_element(css: '#employee_job_title').send_keys("Employee Of LM #{todays_date_string}")
+    driver.find_element(id: 'employee_job_title').clear
+    driver.find_element(id: 'employee_job_title').send_keys("Employee Of LM #{todays_date_string}")
     driver.find_element(xpath: '//*[@id="edit_employee_job_4471"]/fieldset/p/input').click
+    puts 'If hits in test_1006c then - FAIL'
   end
 
   def delete_job
@@ -320,35 +321,38 @@ class AppNavigationExtensionLM < Base
   end
 
   def performance_objective_delete_employee_of_employee
-    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/performance?objective_state=suggested&active_tab=objectives')
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/performance#objectives')
+    # driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/performance?objective_state=suggested&active_tab=objectives')
     sleep 0.25
-    delete_objective = driver.find_element(css: '#DataTables_Table_1 > tbody > tr > td.actions > a:nth-child(2)')
+    footer = driver.find_element(css: 'body > footer > div > div.col-md-6.text-center.text-md-left')
+    driver.execute_script('arguments[0].scrollIntoView(true);', footer)
+    sleep 0.25
+    delete_objective = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(2)')
     attribute_value = delete_objective.attribute('href')
     split_value = attribute_value.split('/')[6]
     selector = "#delete_objective_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click
-    driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[10]/svg/path').click
     driver.find_element(css: selector).click
   end
 
   def performance_deliverable_delete_employee_of_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/performance#deliverables')
     sleep 0.25
-    delete_deliverable = driver.find_element(css: '#DataTables_Table_2 > tbody > tr > td.actions > a:nth-child(3)')
+    delete_deliverable = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(3)')
     attribute_value = delete_deliverable.attribute('href')
     split_value = attribute_value.split('/')[6]
-    selector = "#delete_deliverables_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm#{split_value}"
-    driver.find_element(css: '#DataTables_Table_2 > tbody > tr > td.actions > svg').click
+    selector = "#delete_deliverables_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click
     driver.find_element(css: selector).click
   end
 
   def job_delete_employee_of_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/jobs')
     sleep 0.25
-    delete_job = driver.find_element(css: '#DataTables_Table_0 > tbody > tr.odd > td.actions > a:nth-child(2) > svg')
-    attribute_value = delete_job.attribute('href')
-    split_value = attribute_value.split('/')[6]
-    selector = "#delete_job_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
+    delete_job = driver.find_element(css: '#DataTables_Table_0 > tbody > tr.odd > td.actions > a:nth-child(2)')
+    value = delete_job.attribute('href')
+    job_value = value.split('/')[6]
+    selector = "#delete_job_#{job_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr.odd > td.actions > svg').click
     driver.find_element(css: selector).click
   end
@@ -356,7 +360,7 @@ class AppNavigationExtensionLM < Base
   def pay_delete_employee_of_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/pay_and_benefits')
     sleep 0.25
-    delete_pay = driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a:nth-child(1)')
+    delete_pay = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(2)')
     attribute_value = delete_pay.attribute('href')
     split_value = attribute_value.split('/')[6]
     selector = "#delete_salary_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
@@ -397,8 +401,7 @@ class AppNavigationExtensionLM < Base
     sleep 0.25
     driver.find_element(id: 'objective_subject').send_keys "LM taest input #{todays_date_string}"
     driver.find_element(id: 'objective_description').send_keys 'Test'
-    driver.find_element(css: '#new_objective > fieldset > div:nth-child(4) > div:nth-child(2) >
-     div > div > div > div > div').send_keys one_month_date_string
+    driver.find_element(id: '#objective_target_date_on_react').send_keys one_month_date_string
     drop = driver.find_element(id: 'objective_state')
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:text, 'confirmed')
@@ -417,7 +420,7 @@ class AppNavigationExtensionLM < Base
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/jobs/new')
     sleep 0.25
     driver.find_element(id: 'employee_job_title').send_keys "New Job #{todays_date_string}"
-    driver.find_element(id: '#employee_job_start_date_react').send_keys one_month_date_string
+    # driver.find_element(id: '#employee_job_start_date_react').send_keys one_month_date_string
     drop = driver.find_element(id: 'employee_job_fulltime_parttime')
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:text, 'Full-Time')
@@ -442,6 +445,13 @@ class AppNavigationExtensionLM < Base
   def homepage_logo
     driver.find_element(css: 'body > div.container > div > div.app-header__for_updated_switcher >
      div.app-header__logo_switcher > a > img.header-logo.d-none.d-lg-block').click
+  end
+
+  def reset_sickness_emp_return_to_work
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/sicknesses/1466/edit')
+    sleep 0.25
+    driver.find_element(id: 'sickness_status_returned').click
+    driver.find_element(css: '#edit_sickness_1466 > p > input').click
   end
 end
 
