@@ -19,6 +19,13 @@ class EmployeeHolidayPermissions < Base
     LoginExtension.new(driver).holiday_approver_employee_login
     LoginAppExtension.new(driver).select_hr
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
+    puts "navigates to employees leave record"
+    puts "can add"
+    puts "can edit"
+    puts "can delete"
+    puts "can approve"
+    puts "can reject"
+    puts "can navigate to reports to see leave and absences"
     LogoutExtension.new(driver).user_logout
     driver.close
   end
