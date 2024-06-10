@@ -5,7 +5,8 @@ require 'logger'
 require './functions_library/test_reference_extension'
 require './functions_library/login_extension'
 require './functions_library/login_app_extension'
-
+# rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/MethodLength
 class FinancePermissions < Base
   attr_accessor :driver
 
@@ -19,19 +20,20 @@ class FinancePermissions < Base
     LoginExtension.new(driver).finance_login
     LoginAppExtension.new(driver).select_hr
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
-    puts "finance user log in"
-    puts "access people list"
-    puts "filters on people list"
-    puts "bulk assign - benefit - pension"
-    puts "bulk assign - people type"
-    puts "change plan"
-    puts "update billing details"
-    puts "check billing history - last invoice open and viewable"
-    puts "reports view and check"
-    puts "data imports ??"
+    puts 'finance user log in'
+    puts 'access people list'
+    puts 'filters on people list'
+    puts 'bulk assign - benefit - pension'
+    puts 'bulk assign - people type'
+    puts 'change plan'
+    puts 'update billing details'
+    puts 'check billing history - last invoice open and viewable'
+    puts 'reports view and check'
+    puts 'data imports ??'
     LogoutExtension.new(driver).user_logout
     driver.close
   end
 end
-
+# rubocop:enable Metrics/AbcSize
+# rubocop:enable Metrics/MethodLength
 FinancePermissions.new.test_1008_finance_permissions
