@@ -2,8 +2,8 @@
 
 require File.expand_path('base.rb', __dir__)
 
+# rubocop:disable Metrics/AbcSize
 class LeaveRequestExtension < Base
-  # rubocop:disable Metrics/AbcSize
   def employee_holiday_leave_request_one
     driver.find_element(css: '#\#leave_request_start_date_react').send_keys '16/12/2024' # start date
     driver.find_element(id: 'leave_request_half_start_true').click # half day
@@ -85,6 +85,14 @@ class LeaveRequestExtension < Base
     driver.find_element(css: selector).click
   end
 
+  def employee_ignore_wp_holiday_record
+    driver.find_element(css: '#\#leave_request_start_date_react').send_keys '22/12/2024' # start date
+    driver.find_element(css: '#\#leave_request_end_date_react').send_keys '31/12/2024' # start date
+    driver.find_element(id: 'leave_request_notes').send_keys 'Test absence for ignoring work pattern' # note
+    driver.find_element(id: 'leave_request_deducted').send_keys 10
+    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
+  end
+
   def employee_leave_request_today
     driver.find_element(css: '#\#leave_request_start_date_react').send_keys todays_date_string
     driver.find_element(css: '#\#leave_request_end_date_react').send_keys todays_date_string
@@ -110,5 +118,5 @@ class LeaveRequestExtension < Base
     driver.find_element(id: 'leave_request_ignore_blackout_clashes').click
     driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
   end
-  # rubocop:enable Metrics/AbcSize
 end
+# rubocop:enable Metrics/AbcSize

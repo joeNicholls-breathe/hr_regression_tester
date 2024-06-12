@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
+require './holiday_tests/test_employee_auto_approved_holiday'
+require './holiday_tests/test_employee_carry_over'
+require './holiday_tests/test_employee_holiday_clash'
+require './holiday_tests/test_employee_holiday_company_blackout_clash'
+require './holiday_tests/test_employee_holiday_company_holiday_clash'
 require './holiday_tests/test_employee_holiday_process'
 require './holiday_tests/test_employee_holiday_totals_on_non_working_days'
 require './holiday_tests/test_employee_holiday_two_years'
-require './holiday_tests/test_employee_carry_over'
 require './holiday_tests/test_employee_leave_sickness_clash'
 require './holiday_tests/test_employee_negative_carry_over'
-require './holiday_tests/test_employee_holiday_company_holiday_clash'
-require './holiday_tests/test_employee_holiday_company_blackout_clash'
-require './holiday_tests/test_employee_holiday_clash'
 require './holiday_tests/test_employee_other_leave_deductions'
