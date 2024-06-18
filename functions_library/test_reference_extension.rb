@@ -66,4 +66,14 @@ module TestRefExtension
     one_month = todays_date + 30.days
     one_month.strftime('%d/%m/%Y')
   end
+
+  def one_year_date_string
+    one_year = todays_date + 365.days
+    one_year.strftime('%d/%m/%Y')
+  end
+
+  def five_year_date_string
+    five_year = todays_date + 1825.days
+    five_year.strftime('%d/%m/%Y')
+  end
 end
