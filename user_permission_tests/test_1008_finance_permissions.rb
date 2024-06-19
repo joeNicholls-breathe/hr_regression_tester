@@ -8,6 +8,7 @@ require './functions_library/test_reference_extension'
 require './functions_library/login_extension'
 require './functions_library/login_app_extension'
 require './functions_library/navigate_around_app_finance_user'
+require './functions_library/logout_extension'
 
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Metrics/MethodLength

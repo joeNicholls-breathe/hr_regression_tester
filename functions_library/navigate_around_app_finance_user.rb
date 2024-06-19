@@ -3,6 +3,7 @@
 require File.expand_path('base.rb', __dir__)
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/ClassLength
 class AppNavigationExtensionFinance < Base
   def finance_people_list
     driver.navigate.to('https://hr.breathehrstaging.com/employees')
@@ -79,7 +80,7 @@ class AppNavigationExtensionFinance < Base
 
   def finance_return_to_previous_plan
     driver.navigate.to('https://hr.breathehrstaging.com/account/plan#monthly')
-    driver.find_element(css: '#monthly > div > div:nth-child(3) > div > div.plan-select > input').click
+    driver.find_element(css: '#monthly > div > div:nth-child(5) > div > div.plan-select > input').click
     driver.find_element(css: '#submit-modal-button').click
     sleep 0.50
     driver.find_element(css: '#plan_change_modal > div > div >
@@ -88,19 +89,22 @@ class AppNavigationExtensionFinance < Base
 
   def update_billing_details
     driver.navigate.to('https://hr.breathehrstaging.com/account/billing')
-    driver.find_element(css: '#open-stripe-card-details-modal > path:nth-child(1)').click
-    # driver.find_element(id: 'account_payment_contact_name').send_keys 'Finance User'
-    # driver.find_element(id: 'account_payment_contact_email').send_keys 'finance@auto-reg.com'
-    # driver.find_element(id: 'account_payment_contact_phone').send_keys '0208 654 2008'
+    sleep 0.50
+    driver.find_element(css: 'body > section.content.container > div.row > div:nth-child(1)
+      > div > table > tbody > tr:nth-child(1) > td:nth-child(3) > a').click
+    sleep 0.50
+    driver.find_element(id: 'account_payment_contact_name').send_keys 'Finance User'
+    driver.find_element(id: 'account_payment_contact_email').send_keys 'finance@auto-reg.com'
+    driver.find_element(id: 'account_payment_contact_phone').send_keys '0208 654 2008'
     driver.switch_to.frame(driver.find_element(css: '#card-element iframe'))
-    binding.pry
-    driver.find_element(xpath: '//input[@placeholder = \"Card number\"]').send_keys '4242424242424242'
-    driver.find_element(xpath: '//input[@placeholder = \"MM / YY\"]').send_keys '09/28'
-    driver.find_element(xpath: '//input[@placeholder = \"CVC\"]').send_keys '123'
-    driver.find_element(xpath: '//input[@placeholder = \"ZIP\"]').send_keys '90210'
+    driver.find_element(xpath: '//*[@id="root"]/form/div/div[2]/span[1]/span[2]/div/div[2]/span/input')
+          .send_keys '4242424242424242'
+    driver.find_element(xpath: '//*[@id="root"]/form/div/div[2]/span[2]/span[1]/span/span/input').send_keys '09/28'
+    driver.find_element(xpath: '//*[@id="root"]/form/div/div[2]/span[2]/span[2]/span/span/input').send_keys '123'
+    driver.find_element(xpath: '//*[@id="root"]/form/div/div[2]/span[2]/span[3]/span/span/input').send_keys '90210'
     driver.switch_to.default_content
-    
-    driver.find_element(xpath: '').click
+    driver.find_element(xpath: '//*[@id="card-button"]').click
+    sleep 0.50
   end
 
   def check_billing_history
@@ -113,3 +117,4 @@ class AppNavigationExtensionFinance < Base
 end
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/ClassLength
