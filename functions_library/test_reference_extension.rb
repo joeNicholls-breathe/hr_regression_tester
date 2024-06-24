@@ -73,7 +73,7 @@ module TestRefExtension
   end
 
   def five_year_date_string
-    five_year = todays_date + 5.year
+    five_year = todays_date + 5.years
     five_year.strftime('%d/%m/%Y')
   end
 end
