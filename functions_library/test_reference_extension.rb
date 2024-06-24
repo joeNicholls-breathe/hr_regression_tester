@@ -68,12 +68,12 @@ module TestRefExtension
   end
 
   def one_year_date_string
-    one_year = todays_date + 365.days
+    one_year = todays_date + 1.year
     one_year.strftime('%d/%m/%Y')
   end
 
   def five_year_date_string
-    five_year = todays_date + 1825.days
+    five_year = todays_date + 5.year
     five_year.strftime('%d/%m/%Y')
   end
 end
