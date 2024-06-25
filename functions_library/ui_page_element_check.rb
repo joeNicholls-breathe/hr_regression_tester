@@ -97,5 +97,17 @@ class PageValueCheck < Base
   rescue Selenium::WebDriver::Error::NoSuchElementError
     puts 'Sickness created'
   end
+
+  def show_number_of_employees_on_people_list
+    a = driver.find_element(css: '#DataTables_Table_0_info')
+    number_employees = a.attribute('innerHTML')
+    puts number_employees
+    req_output = 'Showing 1 to 7 of 7 entries'
+    puts req_output == number_employees
+  end
+
+  def billing_history
+    driver.save_screenshot('billing history screenshot.png')
+  end
   # rubocop:enable Layout/LineLength
 end

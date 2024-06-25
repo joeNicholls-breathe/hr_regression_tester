@@ -193,6 +193,15 @@ class LoginExtension < Base
     driver.find_element(css: 'form button[type=submit]').click
     sleep 0.5
   end
+
+  def finance_login
+    driver.find_element(id: 'email-input').send_keys settings[:staging][:setup_acc_email_perms_finance]
+    sleep 0.5
+    driver.find_element(name: 'password').send_keys settings[:staging][:login_password]
+    sleep 0.5
+    driver.find_element(css: 'form button[type=submit]').click
+    sleep 0.5
+  end
   # rubocop:enable Metrics/AbcSize
 end
 # rubocop:enable Metrics/ClassLength
