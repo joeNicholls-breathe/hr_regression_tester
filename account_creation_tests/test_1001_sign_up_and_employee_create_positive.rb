@@ -95,7 +95,6 @@ class TestSignUp < Base
     puts '7. Employee create - new pending starter is present on account dashboard - Pass'
     CreateEmployeeExtension.new(driver).make_pending_starter_a_finance_user
     puts '8. Make Pending Starter a Finance User - Pass'
-    binding.pry
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     NavigationAroundAccountConfiguration.new(driver).navigate_to_two_factor_authentication
     MultiFactorExtension.new(driver).twofa_financeusers_on

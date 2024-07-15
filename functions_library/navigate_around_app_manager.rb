@@ -83,7 +83,7 @@ class AppNavigationExtensionManager < Base
   end
 
   def search_employee_harold
-    #driver.find_element(id: 'quicksearch').send_keys 'Harold Rasputin'
+    # driver.find_element(id: 'quicksearch').send_keys 'Harold Rasputin'
     driver.find_element(css: 'input[data-element-id=header-employee-search]').send_keys 'Harold Rasputin'
     sleep 0.5
     driver.find_element(css: 'div[class=popover-content]').click
