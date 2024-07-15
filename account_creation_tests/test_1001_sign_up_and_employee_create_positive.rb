@@ -80,10 +80,10 @@ class TestSignUp < Base
     puts '1. Navigate to breathe sign up screen - Pass'
     SignUpExtension.new(driver).sign_up_std_positive
     puts '2. Sign Up Std form - Pass'
-    # time to deal with the recapthca if pressent
+    # time to deal with the recapthca if pressent and remove gravatar setting in settings
     sleep 30
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
-    puts '3. Return to Manager Dashboard - Pass'
+    puts '3. Navigate to Manager Dashboard - Pass'
     AppNavigationExtensionManager.new(driver).navigate_to_people_screen_pill
     puts '4. Navigate to People screen via pill - Pass'
     CreateEmployeeExtension.new(driver).create_employee_pending_starter_from_people_page
@@ -95,6 +95,7 @@ class TestSignUp < Base
     puts '7. Employee create - new pending starter is present on account dashboard - Pass'
     CreateEmployeeExtension.new(driver).make_pending_starter_a_finance_user
     puts '8. Make Pending Starter a Finance User - Pass'
+    binding.pry
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     NavigationAroundAccountConfiguration.new(driver).navigate_to_two_factor_authentication
     MultiFactorExtension.new(driver).twofa_financeusers_on
@@ -118,6 +119,7 @@ class TestSignUp < Base
     # Feature flag dependent
     # NavigateBrowserExtension.new(driver).cookie_modal_accept
     SignUpExtension.new(driver).sign_up_login_button
+    sleep 1
     LoginExtension.new(driver).login_setup_acc_admin
     PageValueCheck.new(driver).signup_fail_check
     puts '1. Login from sign up page - Pass'
@@ -129,5 +131,5 @@ end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
 # TestSignUp.new.test_sign_up_with_bulk
-# TestSignUp.new.test_sign_up_with_add_employee_manually
+TestSignUp.new.test_sign_up_with_add_employee_manually
 TestSignUp.new.signup_login_path
