@@ -36,7 +36,7 @@ class NavigationAroundAccountConfiguration < Base
   end
 
   def navigate_to_two_factor_authentication
-    driver.find_element(xpath: '/html/body/section[2]/div[3]/div[1]/div[2]/a').click
+    driver.find_element(css: 'a[href="/account/edit_mfa_configuration"]').click
   end
 
   def navigate_to_change_what_hr_users_can_do

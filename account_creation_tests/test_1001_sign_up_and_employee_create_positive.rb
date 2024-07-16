@@ -63,11 +63,9 @@ class TestSignUp < Base
     LoginAppExtension.new(driver).select_saas
     SaasExtension.new(driver).delete_account_from_direct_search_account_page # if trial
     puts '13. SAAS delete account - Pass'
-
     # SaasExtension.new(driver).search_direct_trial_account #user if account is active status
     # SaasExtension.new(driver).add_the_ability_for_the_account_to_cancel #user if account is active status
     # puts "SAAS allow account to cancel"
-
     SaasExtension.new(driver).saas_user_logout
     puts '14. Saas User Logout - Pass'
     Puts 'Test Complete - Positive journey'
@@ -97,8 +95,8 @@ class TestSignUp < Base
     puts '8. Make Pending Starter a Finance User - Pass'
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     NavigationAroundAccountConfiguration.new(driver).navigate_to_two_factor_authentication
-    MultiFactorExtension.new(driver).twofa_financeusers_on
-    puts '9. Switch on 2FA to Finance User - Pass'
+    MultiFactorExtension.new(driver).twofa_everyone_on
+    puts '9. Switch on 2FA for all users - Pass'
     AppNavigationExtensionManager.new(driver).manager_logout
     puts '10. Logout of direct account admin - Pass'
     NavigateBrowserExtension.new(driver).breathe_login
