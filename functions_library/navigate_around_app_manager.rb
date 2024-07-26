@@ -12,7 +12,7 @@ class AppNavigationExtensionManager < Base
   end
 
   def navigate_to_my_dashboard
-    driver.find_element(id: 'tab-my-dashboard-link').click
+    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-dashboard]').click
   end
 
   def navigate_to_people_list

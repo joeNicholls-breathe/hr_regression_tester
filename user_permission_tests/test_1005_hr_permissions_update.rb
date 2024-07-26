@@ -41,12 +41,13 @@ class AccountSetupHRUser < Base
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     NavigationAroundAccountConfiguration.new(driver).navigate_to_change_what_hr_users_can_do
     puts '5. navigate to HR settings - assign account settings to HR user'
-    HrUserConfigExtension.new(driver).hr_user_configuration_use_gravatar
+    # HrUserConfigExtension.new(driver).hr_user_configuration_use_gravatar
+    # removed as chrome takes to long to load pages in automation script run
     HrUserConfigExtension.new(driver).hr_user_configuration_use_bradford_factor
     HrUserConfigExtension.new(driver).hr_user_configuration_remind_line_manager_to_give_121_off
     HrUserConfigExtension.new(driver).hr_user_configuration_grapevine_label_clear
     HrUserConfigExtension.new(driver).update_hr_settings
-    puts '6. remove settings from HR user/account - (gravatar/bradford/121 reminders/grapevine)'
+    puts '6. remove settings from HR user/account - (bradford/121 reminders/grapevine)'
     sleep 0.50
     LogoutExtension.new(driver).logout_admin
     puts '7. logout'
@@ -63,16 +64,17 @@ class AccountSetupHRUser < Base
     # puts '10. check that user can not self approve leave'
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active_hr_user
     NavigationAroundAccountConfiguration.new(driver).navigate_to_change_what_hr_users_can_do_as_hr
-    HrUserConfigExtension.new(driver).hr_user_configuration_use_gravatar
+    # HrUserConfigExtension.new(driver).hr_user_configuration_use_gravatar
     HrUserConfigExtension.new(driver).hr_user_configuration_use_bradford_factor
     HrUserConfigExtension.new(driver).hr_user_configuration_remind_line_manager_to_give_121_on
     HrUserConfigExtension.new(driver).hr_user_configuration_grapevine_label
     HrUserConfigExtension.new(driver).update_hr_settings
     sleep 0.25
     puts '11. adds settings back to HR user/account
-            (use gravatar/approve own leave/bradford factor/121 reminders/grapevine)'
+            (approve own leave/bradford factor/121 reminders/grapevine)'
     NavigateAroundAppEmployee.new(driver).navigate_to_profile_employee
     AppNavigationExtensionManager.new(driver).navigate_to_my_dashboard
+binding.pry
     NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget
     LeaveRequestExtension.new(driver).employee_holiday_leave_request_two
     sleep 0.50

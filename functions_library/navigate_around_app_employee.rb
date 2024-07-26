@@ -17,7 +17,7 @@ class NavigateAroundAppEmployee < Base
   end
 
   def navigate_to_profile_employee
-    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[2]/a').click
+    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-my_profile]').click
   end
 
   def navigate_to_my_profile_leave_requested

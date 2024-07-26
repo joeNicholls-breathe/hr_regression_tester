@@ -9,7 +9,9 @@ require './functions_library/ui_page_element_check'
 require './functions_library/test_reference_extension'
 require './functions_library/settings_config/account_config_navigation/account_configuration_navigation_extension'
 require './functions_library/buy_now_extension'
-
+require './functions_library/cancel_extension'
+# rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/AbcSize
 class TestBuyNow < Base
   attr_accessor :driver
 
@@ -27,12 +29,15 @@ class TestBuyNow < Base
     sleep 1
     SignUpExtension.new(driver).sign_up_std_positive
     puts '2. Sign Up Buy Now Std form - Pass'
-    sleep 30 # for the recapatcha
+    sleep 30 # for the recapatcha and remove gravatar use from account
     BuyNowExtension.new(driver).buy_now_monthly_micro_no_modules_positive
     puts '3. Buy Now account becomes active (Micro / Monthly / No modules) - Pass'
+    CancelPLanExtension.new(driver).cancel_account
+    driver.close
     puts 'Test 1003 complete'
     # PageValueCheck.new(driver).account_active
   end
 end
-
+# rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/AbcSize
 TestBuyNow.new.test_buy_now
