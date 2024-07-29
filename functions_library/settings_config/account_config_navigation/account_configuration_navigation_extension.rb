@@ -55,8 +55,8 @@ class NavigationAroundAccountConfiguration < Base
 
   def navigate_to_change_what_line_managers_can_do
     driver.find_element(
-      css: 'body > section.content.container.p-4 > div:nth-child(2) >
-            div:nth-child(1) > div:nth-child(3) > a:nth-child(3)'
+      css: 'body > div.hr-main-container > div > section > div:nth-child(2) >
+      div:nth-child(1) > div:nth-child(3) > a:nth-child(3)'
     ).click
   end
 

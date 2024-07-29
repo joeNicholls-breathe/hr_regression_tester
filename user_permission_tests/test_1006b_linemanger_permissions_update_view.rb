@@ -41,8 +41,8 @@ class AccountSetupLMUserView < Base
     LineManagerViewConfigExtension.new(driver).line_manager_configuration_on_company_tasks_view
     LineManagerViewConfigExtension.new(driver).line_manager_configurations_update
     puts '4. permissions and approvals - Line manager can view employee areas'
-    sleep 10
     puts 'Test 1006b complete'
+    sleep 3
     driver.close
   end
 end
