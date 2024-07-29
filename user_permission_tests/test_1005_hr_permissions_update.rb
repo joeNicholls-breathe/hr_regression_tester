@@ -48,7 +48,7 @@ class AccountSetupHRUser < Base
     HrUserConfigExtension.new(driver).hr_user_configuration_grapevine_label_clear
     HrUserConfigExtension.new(driver).update_hr_settings
     puts '6. remove settings from HR user/account - (bradford/121 reminders/grapevine)'
-    sleep 0.50
+    sleep 1
     LogoutExtension.new(driver).logout_admin
     puts '7. logout'
     NavigateBrowserExtension.new(driver).breathe_login
@@ -74,7 +74,6 @@ class AccountSetupHRUser < Base
             (approve own leave/bradford factor/121 reminders/grapevine)'
     NavigateAroundAppEmployee.new(driver).navigate_to_profile_employee
     AppNavigationExtensionManager.new(driver).navigate_to_my_dashboard
-binding.pry
     NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget
     LeaveRequestExtension.new(driver).employee_holiday_leave_request_two
     sleep 0.50
@@ -87,8 +86,6 @@ binding.pry
     DeleteEmployeeExtension.new(driver).delete_employee__hr_user
     puts '15. delete hr user'
     AppNavigationExtensionManager.new(driver).search_employee_harold
-    # NavigateAroundAppEmployee.new(driver).navigate_to_my_profile_leave_booked
-    # LeaveRequestExtension.new(driver).delete_leave_request_booked
     NavigateAroundAppEmployee.new(driver).navigate_to_my_profile_leave_requested
     LeaveRequestExtension.new(driver).delete_leave_request_requested
     LeaveRequestExtension.new(driver).delete_leave_request_requested

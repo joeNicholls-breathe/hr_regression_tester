@@ -39,7 +39,8 @@ class NavigateAroundAppEmployee < Base
   end
 
   def navigate_to_leave_request_widget
-    driver.find_element(css: '#tab-my-dashboard > div > div:nth-child(1) > div.card-footer > a').click
+    driver.find_element(id: 'tab-my-dashboard-link').click
+    driver.find_element(css: 'div.widget-card:nth-child(1) > div:nth-child(3) > a:nth-child(1)').click
   end
 
   # permissions employee testing methods

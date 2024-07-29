@@ -48,7 +48,7 @@ class NavigationAroundAccountConfiguration < Base
 
   def navigate_to_change_what_hr_users_can_do_as_hr
     driver.find_element(
-      css: 'body > div.hr-main-container > div > section > div:nth-child(2) > 
+      css: 'body > div.hr-main-container > div > section > div:nth-child(2) >
        div:nth-child(1) > div:nth-child(2) > a:nth-child(2)'
     ).click
   end
