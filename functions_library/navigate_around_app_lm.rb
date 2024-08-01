@@ -171,11 +171,11 @@ class AppNavigationExtensionLM < Base
 
   def navigate_to_sickness_manage
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/sicknesses')
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a').click
-    a = driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a')
+    a = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(1)')
     attribute_value = a.attribute('href')
     split_value = attribute_value.split('/')[6]
     selector = "#edit_sickness_#{split_value} > p > input"
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(2) > svg').click
     driver.find_element(id: 'complete-sickness').click
     driver.find_element(css: selector).click
     puts 'User can manage sickness'
@@ -219,7 +219,7 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > a:nth-child(2) > svg').click
     driver.find_element(id: 'one_to_one_employee_summary').send_keys("Edited on #{todays_date_string}")
     driver.find_element(css: '#edit_one_to_one_140298 > p > input').click
-    driver.find_element(css: 'body > section.content.container.p-4 > div.employee-section-header > div > span > span').click
+    # driver.find_element(css: 'body > section.content.container.p-4 > div.employee-section-header > div > span > span').click
     puts 'User can manage(edit) 121 record'
   end
 
@@ -302,7 +302,7 @@ class AppNavigationExtensionLM < Base
   end
 
   def breadcrumb_to_performance_home
-    driver.find_element(xpath: '/html/body/section[2]/div[2]/a').click
+    driver.find_element(xpath: '/html/body/div[4]/div[1]/section/div[2]/a').click
   end
 
   def navigate_to_employees_employee

@@ -211,7 +211,6 @@ class LoginExtension < Base
     driver.find_element(css: 'form button[type=submit]').click
     sleep 0.5
   end
-
-  # rubocop:enable Metrics/AbcSize
 end
+# rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/ClassLength

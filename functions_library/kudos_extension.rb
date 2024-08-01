@@ -7,17 +7,16 @@ class KudosExtension < Base
   def create_kudos_individual
     driver.find_element(css: 'a[data-element-id=header-menu-button-star]').click
     sleep 0.50
-    dropdown_trigger = driver.find_element(css: 'button[data-element-id=kudos-modal-given-to-individual]')
-    dropdown_trigger.click
+    driver.find_element(css: 'button[data-element-id=kudos-modal-given-to-individual]').click
     sleep 0.25
-    option = driver.find_element(xpath: '//option[text()="admin user"]')
-    option.click
-    sleep 0.25
-    option.click
-    # driver.find_element(xpath: '//option[text()="admin user"]').click
+    driver.find_element(css: '#radix-2 > div > div:nth-child(3) > form >
+      div.kudos-modal__select-buttons > select:nth-child(2) > option').click
     sleep 0.25
     driver.find_element(css: 'button[data-element-id=kudos-modal-type-dropdown]').click
-    driver.find_element(xpath: '//option[text()=Job well done').click
+    sleep 0.25
+    driver.find_element(css: '#radix-2 > div > div:nth-child(3) > form >
+      div.kudos-modal__select-buttons > select:nth-child(4) > option:nth-child(3)').click
+    sleep 0.25
     driver.find_element(css: 'textarea[data-element-id=kudos-modal-message]').send_keys 'Test for individual kudos'
     driver.find_element(css: 'button[data-element-id=kudos-modal-submit-button]').click
   end
