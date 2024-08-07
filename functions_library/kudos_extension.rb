@@ -9,13 +9,11 @@ class KudosExtension < Base
     sleep 0.50
     driver.find_element(css: 'button[data-element-id=kudos-modal-given-to-individual]').click
     sleep 0.25
-    driver.find_element(css: '#radix-2 > div > div:nth-child(3) > form >
-      div.kudos-modal__select-buttons > select:nth-child(2) > option').click
+    driver.find_element(css: '[data-radix-popper-content-wrapper] .select-content > div:nth-child(1)').click
     sleep 0.25
     driver.find_element(css: 'button[data-element-id=kudos-modal-type-dropdown]').click
     sleep 0.25
-    driver.find_element(css: '#radix-2 > div > div:nth-child(3) > form >
-      div.kudos-modal__select-buttons > select:nth-child(4) > option:nth-child(3)').click
+    driver.find_element(css: '[data-radix-popper-content-wrapper] .select-content > div:nth-child(5)').click
     sleep 0.25
     driver.find_element(css: 'textarea[data-element-id=kudos-modal-message]').send_keys 'Test for individual kudos'
     driver.find_element(css: 'button[data-element-id=kudos-modal-submit-button]').click
