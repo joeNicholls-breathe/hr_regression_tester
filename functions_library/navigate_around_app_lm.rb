@@ -19,7 +19,7 @@ class AppNavigationExtensionLM < Base
 
   def my_people
     driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-people]').click
-    sleep 0.1
+    sleep 0.5
     driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-my_people]').click
   end
 
@@ -140,6 +140,10 @@ class AppNavigationExtensionLM < Base
     sleep 0.25
   end
 
+  def return_to_dashboard_error_page_not_found
+    driver.find_element(css: '#wrapper > div > p:nth-child(3) > a').click
+  end
+
   def create_a_sickness
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/sicknesses/new')
     driver.find_element(id: '#sickness_start_date_react').send_keys yesterday
@@ -216,7 +220,9 @@ class AppNavigationExtensionLM < Base
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/performance')
     driver.find_element(css: '#DataTables_Table_0 > thead > tr > th.sort-desc.sorting_desc').click
     puts 'User navigated to view performance 121'
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > a:nth-child(2) > svg').click
+    # driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > a:nth-child(2) > svg').click
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/one_to_ones/140298/edit')
+    # can not user URl as line managers currently have permissions to access this via the URL 
     driver.find_element(id: 'one_to_one_employee_summary').send_keys("Edited on #{todays_date_string}")
     driver.find_element(css: '#edit_one_to_one_140298 > p > input').click
     # driver.find_element(css: 'body > section.content.container.p-4 > div.employee-section-header > div > span > span').click
@@ -225,6 +231,7 @@ class AppNavigationExtensionLM < Base
 
   def navigate_to_objectives
     driver.find_element(css: '#tabs-0 > li:nth-child(2) > a').click
+    binding.pry
     driver.find_element(css: '#DataTables_Table_1 > tbody > tr > td.actions > a > svg').click
     puts 'User navigated to view performance objective'
     driver.find_element(css: '#objective_notes').send_keys("Edited on #{todays_date_string}")
