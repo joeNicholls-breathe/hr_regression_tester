@@ -67,6 +67,7 @@ class LMUserManageAccess < Base
       puts '9P. performance - user was able to edit the record - Pass'
     end
     begin
+      AppNavigationExtensionLM.new(driver).return_to_performance_home
       AppNavigationExtensionLM.new(driver).navigate_to_objectives
       puts '10F. objectives - user was able to delete the record - Fail'
     rescue StandardError
@@ -106,7 +107,7 @@ class LMUserManageAccess < Base
       AppNavigationExtensionLM.new(driver).navigate_to_employees_employee
       puts '15F. Lm navigates to employees, employee profile pages by url - Fail'
     rescue StandardError
-      AppNavigationExtensionLM.new(driver).return_to_dashboard
+      AppNavigationExtensionLM.new(driver).return_to_dashboard_error_page_not_found
       puts '15P. Could not navigate to other employee profile pages by url - Pass'
     end
     AppNavigationExtensionLM.new(driver).lm_logout

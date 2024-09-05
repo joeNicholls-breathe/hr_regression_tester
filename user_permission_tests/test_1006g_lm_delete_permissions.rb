@@ -44,12 +44,12 @@ class LMUserDeleteAccess < Base
     puts '3. navigate to a member of the team that the lm manages - Pass'
     # LM can work on employees, employee
     AppNavigationExtensionLM.new(driver).my_people
-    AppNavigationExtensionLM.new(driver).my_employee
+    AppNavigationExtensionLM.new(driver).my_employees_employee
     AppNavigationExtensionLM.new(driver).my_employee_leave
     AppNavigationExtensionLM.new(driver).delete_leave_request
     puts '4. delete leave request from Employees, employee'
     AppNavigationExtensionLM.new(driver).my_people
-    AppNavigationExtensionLM.new(driver).my_employee
+    AppNavigationExtensionLM.new(driver).my_employees_employee
     AppNavigationExtensionLM.new(driver).my_employee_leave
     AppNavigationExtensionLM.new(driver).add_leave_for_my_employee
     LeaveRequestExtension.new(driver).employee_holiday_leave_request_two

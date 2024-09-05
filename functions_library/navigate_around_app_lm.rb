@@ -27,6 +27,10 @@ class AppNavigationExtensionLM < Base
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270')
   end
 
+  def my_employees_employee
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271')
+  end
+
   def my_employee_leave
     driver.find_element(id: 'leave').click
   end
@@ -200,12 +204,12 @@ class AppNavigationExtensionLM < Base
   def delete_sickness_employees_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/sicknesses')
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(2) > svg').click
-    a = driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a')
+    a = driver.find_element(css: 'body > div.hr-main-container > div.hr-main > section > div.employee-section-header > div > a:nth-child(1)')
     attribute_value = a.attribute('href')
     split_value = attribute_value.split('/')[6]
     selector = "#delete_sickness_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
-    driver.find_element(css: 'body > section.content.container > div.employee-section-header >
-     div > span > span > svg.svg-inline--fa.fa-trash-alt.fa-w-14.fa-inverse.fa-stack-1x').click
+    driver.find_element(css: 'body > div.hr-main-container > div.hr-main > section > div.employee-section-header > div > span > span >
+     svg.svg-inline--fa.fa-trash-alt.fa-w-14.fa-inverse.fa-stack-1x').click
     driver.find_element(css: selector).click
   end
 
@@ -227,6 +231,10 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: '#edit_one_to_one_140298 > p > input').click
     # driver.find_element(css: 'body > section.content.container.p-4 > div.employee-section-header > div > span > span').click
     puts 'User can manage(edit) 121 record'
+  end
+
+  def return_to_performance_home
+    driver.find_element(css: 'body > div.hr-main-container > div.hr-main > section > div.breadcrumb > a').click
   end
 
   def navigate_to_objectives
@@ -262,7 +270,7 @@ class AppNavigationExtensionLM < Base
     attribute_value = a.attribute('href')
     split_value = attribute_value.split('/')[6]
     selector = "#delete_employee_document_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg > path').click
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click
     driver.find_element(css: selector).click
   end
 
@@ -450,8 +458,8 @@ class AppNavigationExtensionLM < Base
   end
 
   def homepage_logo
-    driver.find_element(css: 'body > div.container > div > div.app-header__for_updated_switcher >
-     div.app-header__logo_switcher > a > img.header-logo.d-none.d-lg-block').click
+    driver.find_element(css: 'body > div.hr-nav-container > div:nth-child(2) > div > div > nav >
+     div > div:nth-child(1) > div.sidenav__logo > a').click
   end
 
   def reset_sickness_emp_return_to_work
