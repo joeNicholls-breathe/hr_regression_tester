@@ -193,7 +193,7 @@ class LoginExtension < Base
     driver.find_element(css: 'form button[type=submit]').click
     sleep 0.5
   end
-  
+
   def login_functionality_admin
     driver.find_element(id: 'email-input').send_keys settings[:staging][:functionality_admin_user]
     sleep 0.5
