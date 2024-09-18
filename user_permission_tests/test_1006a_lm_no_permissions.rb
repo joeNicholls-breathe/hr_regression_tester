@@ -55,22 +55,22 @@ class LMUserNoAccess < Base
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_sickness_view
       puts '8F. sickness - user navigated to pages not accessible due to permissions - Fail'
-    rescue StandardError
-      AppNavigationExtensionLM.new(driver).return_to_dashboard
+    rescue Selenium::WebDriver::Error::NoSuchElementError
+      AppNavigationExtensionLM.new(driver).return_to_dashboard_error_page_not_found
       puts '8P. sickness - user was unable to access the page due to current permissions set up - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_learn
       puts '9F. learn - user navigated to pages not accessible due to permissions - Fail'
     rescue StandardError
-      AppNavigationExtensionLM.new(driver).return_to_dashboard
+      AppNavigationExtensionLM.new(driver).return_to_dashboard_error_page_not_found
       puts '9P. learn - user was unable to access the page due to current permissions set up - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_performance
       puts '10F. performance - user navigated to pages not accessible due to permissions - Fail'
     rescue StandardError
-      AppNavigationExtensionLM.new(driver).return_to_dashboard
+      AppNavigationExtensionLM.new(driver).return_to_dashboard_error_page_not_found
       puts '10P. performance - user was unable to access the page due to current permissions set up - Pass'
     end
     # begin
@@ -84,14 +84,14 @@ class LMUserNoAccess < Base
       AppNavigationExtensionLM.new(driver).navigate_to_jobs
       puts '12F. jobs - user navigated to pages not accessible due to permissions - Fail'
     rescue StandardError
-      AppNavigationExtensionLM.new(driver).return_to_dashboard
+      AppNavigationExtensionLM.new(driver).return_to_dashboard_error_page_not_found
       puts '12P. jobs - user was unable to access the page due to current permissions set up - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_remuneration
       puts '13F. remunerations - user navigated to pages not accessible due to permissions - Fail'
     rescue StandardError
-      AppNavigationExtensionLM.new(driver).return_to_dashboard
+      AppNavigationExtensionLM.new(driver).return_to_dashboard_error_page_not_found
       puts '13P. remunerations - user was unable to access the page due to current permissions set up - Pass'
     end
     AppNavigationExtensionLM.new(driver).lm_logout

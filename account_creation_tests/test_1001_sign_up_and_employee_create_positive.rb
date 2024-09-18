@@ -63,11 +63,9 @@ class TestSignUp < Base
     LoginAppExtension.new(driver).select_saas
     SaasExtension.new(driver).delete_account_from_direct_search_account_page # if trial
     puts '13. SAAS delete account - Pass'
-
     # SaasExtension.new(driver).search_direct_trial_account #user if account is active status
     # SaasExtension.new(driver).add_the_ability_for_the_account_to_cancel #user if account is active status
     # puts "SAAS allow account to cancel"
-
     SaasExtension.new(driver).saas_user_logout
     puts '14. Saas User Logout - Pass'
     Puts 'Test Complete - Positive journey'
@@ -80,10 +78,10 @@ class TestSignUp < Base
     puts '1. Navigate to breathe sign up screen - Pass'
     SignUpExtension.new(driver).sign_up_std_positive
     puts '2. Sign Up Std form - Pass'
-    # time to deal with the recapthca if pressent
+    # time to deal with the recapthca if pressent and remove gravatar setting in settings
     sleep 30
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
-    puts '3. Return to Manager Dashboard - Pass'
+    puts '3. Navigate to Manager Dashboard - Pass'
     AppNavigationExtensionManager.new(driver).navigate_to_people_screen_pill
     puts '4. Navigate to People screen via pill - Pass'
     CreateEmployeeExtension.new(driver).create_employee_pending_starter_from_people_page
@@ -97,8 +95,8 @@ class TestSignUp < Base
     puts '8. Make Pending Starter a Finance User - Pass'
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     NavigationAroundAccountConfiguration.new(driver).navigate_to_two_factor_authentication
-    MultiFactorExtension.new(driver).twofa_financeusers_on
-    puts '9. Switch on 2FA to Finance User - Pass'
+    MultiFactorExtension.new(driver).twofa_everyone_on
+    puts '9. Switch on 2FA for all users - Pass'
     AppNavigationExtensionManager.new(driver).manager_logout
     puts '10. Logout of direct account admin - Pass'
     NavigateBrowserExtension.new(driver).breathe_login
@@ -118,6 +116,7 @@ class TestSignUp < Base
     # Feature flag dependent
     # NavigateBrowserExtension.new(driver).cookie_modal_accept
     SignUpExtension.new(driver).sign_up_login_button
+    sleep 1
     LoginExtension.new(driver).login_setup_acc_admin
     PageValueCheck.new(driver).signup_fail_check
     puts '1. Login from sign up page - Pass'
@@ -129,5 +128,5 @@ end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
 # TestSignUp.new.test_sign_up_with_bulk
-# TestSignUp.new.test_sign_up_with_add_employee_manually
+TestSignUp.new.test_sign_up_with_add_employee_manually
 TestSignUp.new.signup_login_path

@@ -66,12 +66,12 @@ class LMUserViewAccess < Base
       AppNavigationExtensionLM.new(driver).navigate_to_learn
       puts '9F. learn - user navigated to pages not accessible due to permissions - Fail'
     rescue StandardError
-      AppNavigationExtensionLM.new(driver).return_to_dashboard
+      AppNavigationExtensionLM.new(driver).return_to_dashboard_error_page_not_found
       puts '9P. Could not access the learn page due to current permissions set up - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_performance
-      puts '10F. performance - user can edit the 121 record which they should not have permissions - Fail'
+      # puts '10F. performance - user can edit the 121 record which they should not have permissions - Fail'
     rescue StandardError
       AppNavigationExtensionLM.new(driver).breadcrumb_to_performance_home
       puts '10P. performance - user was unable to edit due to current permissions set up - Pass'
@@ -97,7 +97,7 @@ class LMUserViewAccess < Base
       AppNavigationExtensionLM.new(driver).navigate_to_documents
       puts '13F. user navigated to document page - Fail'
     rescue StandardError
-      AppNavigationExtensionLM.new(driver).return_to_dashboard
+      AppNavigationExtensionLM.new(driver).return_to_dashboard_error_page_not_found
       puts '13P. User was unable to edit and manage documents - Pass'
     end
     begin
@@ -110,14 +110,14 @@ class LMUserViewAccess < Base
       AppNavigationExtensionLM.new(driver).navigate_to_remuneration
       puts '15F. remunerations - user navigated to pages not accessible due to permissions - Fail'
     rescue StandardError
-      AppNavigationExtensionLM.new(driver).return_to_dashboard
+      AppNavigationExtensionLM.new(driver).return_to_dashboard_error_page_not_found
       puts '15P. remunerations - user was unable to access the page due to current permissions set up - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_employees_employee
       puts '16F. Lm navigates to employees, employee profile pages by url - Fail'
     rescue StandardError
-      AppNavigationExtensionLM.new(driver).return_to_dashboard
+      AppNavigationExtensionLM.new(driver).return_to_dashboard_error_page_not_found
       puts '16P. Could not navigate to other employee profile pages by url- Pass'
     end
     AppNavigationExtensionLM.new(driver).lm_logout

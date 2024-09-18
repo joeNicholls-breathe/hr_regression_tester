@@ -36,27 +36,27 @@ class NavigationAroundAccountConfiguration < Base
   end
 
   def navigate_to_two_factor_authentication
-    driver.find_element(xpath: '/html/body/section[2]/div[3]/div[1]/div[2]/a').click
+    driver.find_element(css: 'a[href="/account/edit_mfa_configuration"]').click
   end
 
   def navigate_to_change_what_hr_users_can_do
     driver.find_element(
-      css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(1) >
-            div:nth-child(3) > a:nth-child(2)'
+      css: 'body > div.hr-main-container > div > section > div:nth-child(2) >
+       div:nth-child(1) > div:nth-child(3) > a:nth-child(2)'
     ).click
   end
 
   def navigate_to_change_what_hr_users_can_do_as_hr
     driver.find_element(
-      css: 'body > section.content.container.p-4 > div:nth-child(2) > div:nth-child(1) >
-            div:nth-child(2) > a:nth-child(2)'
+      css: 'body > div.hr-main-container > div > section > div:nth-child(2) >
+       div:nth-child(1) > div:nth-child(2) > a:nth-child(2)'
     ).click
   end
 
   def navigate_to_change_what_line_managers_can_do
     driver.find_element(
-      css: 'body > section.content.container.p-4 > div:nth-child(2) >
-            div:nth-child(1) > div:nth-child(3) > a:nth-child(3)'
+      css: 'body > div.hr-main-container > div > section > div:nth-child(2) >
+      div:nth-child(1) > div:nth-child(3) > a:nth-child(3)'
     ).click
   end
 

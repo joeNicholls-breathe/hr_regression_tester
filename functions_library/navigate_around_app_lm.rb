@@ -13,21 +13,26 @@ class AppNavigationExtensionLM < Base
   end
 
   def lm_logout
-    driver.find_element(css: 'body > div.container > div > div.app-header__for_updated_switcher > div.app-header__user').click
-    driver.find_element(css: 'body > div.container > div > div.app-header__for_updated_switcher > div.app-header__user.show > ul > li:nth-child(5)').click
+    driver.find_element(css: 'button[data-element-id=header-avatar-menu-button]').click
+    driver.find_element(css: 'a[data-element-id=header-avatar-menu-item-logout]').click
   end
 
   def my_people
-    driver.find_element(xpath: '/html/body/section[1]/div/nav/div/ul/li[6]').click
-    driver.find_element(xpath: '/html/body/section[1]/div/nav/div/ul/li[6]/div/a[2]').click
+    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-people]').click
+    sleep 0.5
+    driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-my_people]').click
   end
 
   def my_employee
-    driver.find_element(xpath: '/html/body/section[2]/div/table/tbody/tr/td[9]/a').click
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22270')
+  end
+
+  def my_employees_employee
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22271')
   end
 
   def my_employee_leave
-    driver.find_element(xpath: '/html/body/section[2]/div[1]/div[7]/ul/li[2]').click
+    driver.find_element(id: 'leave').click
   end
 
   def view_leave_record
@@ -48,7 +53,7 @@ class AppNavigationExtensionLM < Base
   end
 
   def add_leave_for_my_employee
-    driver.find_element(xpath: '/html/body/section[2]/div[2]/div/a').click
+    driver.find_element(css: 'body > div.hr-main-container > div.hr-main > section > div.employee-section-header > div > a').click
   end
 
   def cancel_employee_leave_request
@@ -76,7 +81,7 @@ class AppNavigationExtensionLM < Base
   end
 
   def return_to_employee_leave_index
-    driver.find_element(xpath: '/html/body/section[2]/div[2]/a').click
+    driver.find_element(css: 'body > div.hr-main-container > div.hr-main > section > div.breadcrumb > a').click
   end
 
   def add_toil
@@ -135,8 +140,12 @@ class AppNavigationExtensionLM < Base
   end
 
   def return_to_dashboard
-    driver.find_element(css: '#wrapper > div > p:nth-child(3) > a').click
+    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-dashboard]').click
     sleep 0.25
+  end
+
+  def return_to_dashboard_error_page_not_found
+    driver.find_element(css: '#wrapper > div > p:nth-child(3) > a').click
   end
 
   def create_a_sickness
@@ -170,11 +179,11 @@ class AppNavigationExtensionLM < Base
 
   def navigate_to_sickness_manage
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/sicknesses')
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(2) > svg').click
-    a = driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a')
+    a = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(1)')
     attribute_value = a.attribute('href')
     split_value = attribute_value.split('/')[6]
     selector = "#edit_sickness_#{split_value} > p > input"
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(2) > svg').click
     driver.find_element(id: 'complete-sickness').click
     driver.find_element(css: selector).click
     puts 'User can manage sickness'
@@ -182,25 +191,25 @@ class AppNavigationExtensionLM < Base
 
   def delete_sickness_direct_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/sicknesses')
+    sleep 0.25
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(2) > svg').click
-    a = driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a')
+    a = driver.find_element(css: 'body > div.hr-main-container > div.hr-main > section > div.employee-section-header > div > a:nth-child(1)')
     attribute_value = a.attribute('href')
     split_value = attribute_value.split('/')[6]
     selector = "#delete_sickness_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
-    driver.find_element(css: 'body > section.content.container.p-4 > div.employee-section-header >
-      div > span > span > svg.svg-inline--fa.fa-circle.fa-w-16.fa-stack-2x').click
+    driver.find_element(css: 'body > div.hr-main-container > div.hr-main > section > div.employee-section-header > div > span > span').click
     driver.find_element(css: selector).click
   end
 
   def delete_sickness_employees_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22271/sicknesses')
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(2) > svg').click
-    a = driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a')
+    a = driver.find_element(css: 'body > div.hr-main-container > div.hr-main > section > div.employee-section-header > div > a:nth-child(1)')
     attribute_value = a.attribute('href')
     split_value = attribute_value.split('/')[6]
     selector = "#delete_sickness_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
-    driver.find_element(css: 'body > section.content.container > div.employee-section-header >
-     div > span > span > svg.svg-inline--fa.fa-trash-alt.fa-w-14.fa-inverse.fa-stack-1x').click
+    driver.find_element(css: 'body > div.hr-main-container > div.hr-main > section > div.employee-section-header > div > span > span >
+     svg.svg-inline--fa.fa-trash-alt.fa-w-14.fa-inverse.fa-stack-1x').click
     driver.find_element(css: selector).click
   end
 
@@ -215,11 +224,17 @@ class AppNavigationExtensionLM < Base
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/performance')
     driver.find_element(css: '#DataTables_Table_0 > thead > tr > th.sort-desc.sorting_desc').click
     puts 'User navigated to view performance 121'
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > a:nth-child(2) > svg').click
+    # driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > a:nth-child(2) > svg').click
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/one_to_ones/140298/edit')
+    # can not user URl as line managers currently have permissions to access this via the URL
     driver.find_element(id: 'one_to_one_employee_summary').send_keys("Edited on #{todays_date_string}")
     driver.find_element(css: '#edit_one_to_one_140298 > p > input').click
-    driver.find_element(css: 'body > section.content.container.p-4 > div.employee-section-header > div > span > span').click
+    # driver.find_element(css: 'body > section.content.container.p-4 > div.employee-section-header > div > span > span').click
     puts 'User can manage(edit) 121 record'
+  end
+
+  def return_to_performance_home
+    driver.find_element(css: 'body > div.hr-main-container > div.hr-main > section > div.breadcrumb > a').click
   end
 
   def navigate_to_objectives
@@ -255,7 +270,7 @@ class AppNavigationExtensionLM < Base
     attribute_value = a.attribute('href')
     split_value = attribute_value.split('/')[6]
     selector = "#delete_employee_document_#{split_value} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg > path').click
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click
     driver.find_element(css: selector).click
   end
 
@@ -301,7 +316,7 @@ class AppNavigationExtensionLM < Base
   end
 
   def breadcrumb_to_performance_home
-    driver.find_element(xpath: '/html/body/section[2]/div[2]/a').click
+    driver.find_element(xpath: '/html/body/div[4]/div[1]/section/div[2]/a').click
   end
 
   def navigate_to_employees_employee
@@ -443,8 +458,8 @@ class AppNavigationExtensionLM < Base
   end
 
   def homepage_logo
-    driver.find_element(css: 'body > div.container > div > div.app-header__for_updated_switcher >
-     div.app-header__logo_switcher > a > img.header-logo.d-none.d-lg-block').click
+    driver.find_element(css: 'body > div.hr-nav-container > div:nth-child(2) > div > div > nav >
+     div > div:nth-child(1) > div.sidenav__logo > a').click
   end
 
   def reset_sickness_emp_return_to_work

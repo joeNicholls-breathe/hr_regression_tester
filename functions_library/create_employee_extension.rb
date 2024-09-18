@@ -7,7 +7,7 @@ class CreateEmployeeExtension < Base
   # rubocop:disable Metrics/AbcSize
   def create_employee_pending_starter_from_people_page
     sleep 1
-    driver.find_element(css: 'body > section.content.container > div.float-right > a').click
+    driver.find_element(css: 'body > div.hr-main-container > div > section > div.float-right > a').click
     driver.find_element(id: 'employee_first_name').send_keys 'Newemployee'
     driver.find_element(id: 'employee_last_name').send_keys 'User'
     driver.find_element(id: 'employee_email').send_keys "pendingstarter#{random_number_string}@regressionaccount.com"
@@ -27,13 +27,14 @@ class CreateEmployeeExtension < Base
   end
 
   def make_pending_starter_a_finance_user
-    driver.find_element(xpath: '//*[@id="quicksearch"]').send_keys 'Newemployee User'
+    driver.find_element(css: 'input[data-element-id=header-employee-search]').send_keys 'Newemployee User'
     sleep 0.5
+    driver.find_element(css: 'div[class=popover-content]').click
     # profile more - permissions
     driver.find_element(xpath: '//*[@id="more-link"]/span').click
     driver.find_element(xpath: '//*[@id="permissions"]').click
     # edit
-    driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a > span').click
+    driver.find_element(css: 'div[class=float-right]').click
     driver.find_element(id: 'employee_finance_true').click
     # may need to scroll page
     driver.find_element(xpath: '//*[@id="update-employee-button"]').click
@@ -59,7 +60,9 @@ class CreateEmployeeExtension < Base
     driver.find_element(xpath: '//*[@id="more-link"]/span').click
     driver.find_element(xpath: '//*[@id="permissions"]').click
     # edit
-    driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a > span').click
+    driver.find_element(css: 'body > div.hr-main-container > div > section >
+      div.employee-section-header > div > a').click
+    sleep 0.1
     driver.find_element(id: 'employee_hr_true').click
     # may need to scroll page
     driver.find_element(xpath: '//*[@id="update-employee-button"]').click

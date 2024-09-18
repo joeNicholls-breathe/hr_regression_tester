@@ -4,12 +4,12 @@ require File.expand_path('base.rb', __dir__)
 
 class LogoutExtension < Base
   def user_logout
-    driver.find_element(id: 'user-menu-dropdown').click
-    driver.find_element(css: "a[href='/employees/sign_out']").click
+    driver.find_element(css: 'button[data-element-id=header-avatar-menu-button]').click
+    driver.find_element(css: 'a[data-element-id=header-avatar-menu-item-logout]').click
   end
 
   def logout_admin
-    driver.find_element(id: 'user-menu-dropdown').click
-    driver.find_element(css: 'body > div.container > div > div.app-header__user.show > ul > li:nth-child(5)').click
+    driver.find_element(css: 'button[data-element-id=header-avatar-menu-button]').click
+    driver.find_element(css: 'a[data-element-id=header-avatar-menu-item-logout]').click
   end
 end

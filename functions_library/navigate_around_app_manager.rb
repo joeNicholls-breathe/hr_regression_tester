@@ -8,11 +8,11 @@ class AppNavigationExtensionManager < Base
   end
 
   def navigate_to_dashboard
-    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[2]/a').click
+    driver.find_element(id: 'top-menu-menu-item-1-0').click
   end
 
   def navigate_to_my_dashboard
-    driver.find_element(id: 'tab-my-dashboard-link').click
+    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-dashboard]').click
   end
 
   def navigate_to_people_list
@@ -24,28 +24,33 @@ class AppNavigationExtensionManager < Base
   end
 
   def navigate_to_add_new_employee
-    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[3]').click
-    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[3]/div/a[3]').click
+    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-people]').click
+    sleep 0.25
+    driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-add_new_people]').click
   end
 
   def navigate_to_settings_without_welcome_page_active
-    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[6]').click
-    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[6]/div/a[2]').click
+    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-configure]').click
+    sleep 0.25
+    driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-settings]').click
   end
 
   def navigate_to_settings_with_welcome_page_active
-    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[7]').click
-    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[7]/div/a[2]').click
+    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-configure]').click
+    sleep 0.25
+    driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-settings]').click
   end
 
   def navigate_to_settings_without_welcome_page_active_hr_user
-    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[6]/a').click
-    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[6]/div/a').click
+    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-configure]').click
+    sleep 0.25
+    driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-settings]').click
   end
 
   def navigate_to_settings_with_welcome_page_active_hr_user
-    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[7]').click
-    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[7]/div/a').click
+    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-configure]').click
+    sleep 0.25
+    driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-settings]').click
   end
 
   def navigate_to_holiday_years
@@ -61,28 +66,35 @@ class AppNavigationExtensionManager < Base
   end
 
   def navigate_to_plan_and_billing
-    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[7]').click
+    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-configure]').click
+    sleep 0.25
     driver.find_element(css: 'href="/account/plan_and_billing"').click
   end
 
   def search_employee_hr
-    driver.find_element(id: 'quicksearch').send_keys 'HR User'
-    sleep 1
+    driver.find_element(css: 'input[data-element-id=header-employee-search]').send_keys 'HR User'
+    sleep 0.5
+    driver.find_element(css: 'div[class=popover-content]').click
+    sleep 0.5
   end
 
   def search_employee_harold
-    driver.find_element(id: 'quicksearch').send_keys 'Harold Rasputin'
-    sleep 1
+    driver.find_element(css: 'input[data-element-id=header-employee-search]').send_keys 'Harold Rasputin'
+    sleep 0.5
+    driver.find_element(css: 'div[class=popover-content]').click
+    sleep 0.5
   end
 
   def manager_logout
-    driver.find_element(id: 'user-menu-dropdown').click
-    driver.find_element(xpath: '/html/body/div[3]/div/div[3]/ul/li[4]/a/img').click
+    driver.find_element(css: 'button[data-element-id=header-avatar-menu-button]').click
+    sleep 0.25
+    driver.find_element(css: 'a[data-element-id=header-avatar-menu-item-logout]').click
   end
 
   def user_logout
-    driver.find_element(id: 'user-menu-dropdown').click
-    driver.find_element(xpath: '/html/body/div[3]/div/div[3]/ul/li[4]/a/img').click
+    driver.find_element(css: 'button[data-element-id=header-avatar-menu-button]').click
+    sleep 0.25
+    driver.find_element(css: 'a[data-element-id=header-avatar-menu-item-logout]').click
   end
 
   def pop_modal_price_increase

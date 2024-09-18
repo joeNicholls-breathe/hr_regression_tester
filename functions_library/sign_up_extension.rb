@@ -15,7 +15,6 @@ class SignUpExtension < Base
     choose.select_by(:text, '21-50')
     driver.find_element(id: 'contactNumber').send_keys '01342 717123'
     driver.find_element(id: 'password').send_keys 'Password1'
-    driver.find_element(id: 'confirmPassword').send_keys 'Password1'
     begin
       driver.find_element(id: 'account-terms-read').click
     rescue Selenium::WebDriver::Error::ElementClickInterceptedError
@@ -37,7 +36,6 @@ class SignUpExtension < Base
     choose.select_by(:text, '21-50')
     driver.find_element(id: 'contactNumber').send_keys '01342 717123'
     driver.find_element(id: 'password').send_keys 'Password1'
-    driver.find_element(id: 'confirmPassword').send_keys 'Password1'
     begin
       driver.find_element(id: 'account-terms-read').click
     rescue Selenium::WebDriver::Error::ElementClickInterceptedError
@@ -59,7 +57,6 @@ class SignUpExtension < Base
     choose.select_by(:text, '21-50')
     driver.find_element(id: 'contactNumber').send_keys '01342 717123'
     driver.find_element(id: 'password').send_keys 'Password1'
-    driver.find_element(id: 'confirmPassword').send_keys 'Password1'
     begin
       driver.find_element(id: 'account-terms-read').click
     rescue Selenium::WebDriver::Error::ElementClickInterceptedError
@@ -79,7 +76,6 @@ class SignUpExtension < Base
     driver.find_element(id: 'name').send_keys("Regression Account1 #{random_number_string}")
     driver.find_element(id: 'contactNumber').send_keys '01342 717123'
     driver.find_element(id: 'password').send_keys 'Password1'
-    driver.find_element(id: 'confirmPassword').send_keys 'Password1'
     begin
       driver.find_element(id: 'account-terms-read').click
     rescue Selenium::WebDriver::Error::ElementClickInterceptedError
@@ -101,7 +97,6 @@ class SignUpExtension < Base
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:text, '21-50')
     driver.find_element(id: 'password').send_keys 'Password1'
-    driver.find_element(id: 'confirmPassword').send_keys 'Password1'
     begin
       driver.find_element(id: 'account-terms-read').click
     rescue Selenium::WebDriver::Error::ElementClickInterceptedError
@@ -123,7 +118,6 @@ class SignUpExtension < Base
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:text, '21-50')
     driver.find_element(id: 'contactNumber').send_keys '01342 717123'
-    driver.find_element(id: 'confirmPassword').send_keys 'Password1'
     begin
       driver.find_element(id: 'account-terms-read').click
     rescue Selenium::WebDriver::Error::ElementClickInterceptedError

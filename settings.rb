@@ -28,7 +28,9 @@ module Settings
         setup_acc_email_perms_employee: 'emp_perms@auto-reg.co.uk',
         setup_acc_email_perms_finance: 'finance@auto-reg.co.uk',
         setup_acc_email_perms_holiday: 'ha@auto-reg.co.uk',
-        setup_acc_email_perms_expenses: 'expenses@auto-reg.co.uk'
+        setup_acc_email_perms_expenses: 'expenses@auto-reg.co.uk',
+        functionality_admin_user: 'admin@autofunctionality.com',
+        functionality_employee_user: 'emp@autofunctionality.com'
       }
     }
   end

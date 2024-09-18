@@ -51,21 +51,23 @@ class LMUserManageAccess < Base
     AppNavigationExtensionLM.new(driver).subtract_adjustment_subtrack
     puts '7b P. User can made adjustments - Pass'
     begin
+      # issus with delete not erroring rescue
       AppNavigationExtensionLM.new(driver).delete_sickness_direct_employee
-      puts '8F. sickness - user deleted the record due to permissions - Fail'
     rescue Selenium::WebDriver::Error::NoSuchElementError
+      puts '8. sickness - user could not delete the record due to permissions'
       AppNavigationExtensionLM.new(driver).navigate_to_sickness_view
       AppNavigationExtensionLM.new(driver).navigate_to_sickness_manage
       puts '8P. Manage sickness record - user able to manage sickness record - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_performance
-      puts '9F. user can delete 121 record should not have permissions- Fail'
     rescue StandardError
+      puts '9. user can not delete 121 record due to perms'
       AppNavigationExtensionLM.new(driver).breadcrumb_to_performance_home
       puts '9P. performance - user was able to edit the record - Pass'
     end
     begin
+      AppNavigationExtensionLM.new(driver).return_to_performance_home
       AppNavigationExtensionLM.new(driver).navigate_to_objectives
       puts '10F. objectives - user was able to delete the record - Fail'
     rescue StandardError
@@ -84,8 +86,8 @@ class LMUserManageAccess < Base
     puts '11. currently not being run'
     begin
       AppNavigationExtensionLM.new(driver).document_delete
-      puts '12F. user navigated to document page and has deleted the record - Fail'
     rescue Selenium::WebDriver::Error::NoSuchElementError
+      puts '12. user could not delete document'
       AppNavigationExtensionLM.new(driver).navigate_to_documents
       puts '12P. user was access to the document and has edited it - Pass'
     end
@@ -105,7 +107,7 @@ class LMUserManageAccess < Base
       AppNavigationExtensionLM.new(driver).navigate_to_employees_employee
       puts '15F. Lm navigates to employees, employee profile pages by url - Fail'
     rescue StandardError
-      AppNavigationExtensionLM.new(driver).return_to_dashboard
+      AppNavigationExtensionLM.new(driver).return_to_dashboard_error_page_not_found
       puts '15P. Could not navigate to other employee profile pages by url - Pass'
     end
     AppNavigationExtensionLM.new(driver).lm_logout

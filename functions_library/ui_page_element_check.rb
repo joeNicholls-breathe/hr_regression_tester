@@ -79,14 +79,13 @@ class PageValueCheck < Base
   end
 
   def employee_leave_remaining
-    a = driver.find_element(css: 'body > section.content.container > div.row > div > div > table > tbody > tr:nth-child(3) > td')
-    # leave_deduction = driver.find_element(xpath: '/html/body/section[2]/div[5]/div/div/table/tbody/tr[3]/td')
+    a = driver.find_element(css: 'body > div.hr-main-container > div.hr-main > section > div.row > div > div > table > tbody > tr:nth-child(3) > td')
     leave_remaining = a.attribute('innerHTML')
     puts "Check - #{leave_remaining} remain available"
   end
 
   def sickness_current_state_view_only
-    a = driver.find_element(css: 'body > section.content.container > div.row > div > div > table > tbody > tr:nth-child(1) > td')
+    a = driver.find_element(css: 'body > div.hr-main-container > div.hr-main > section > div.row > div > div > table > tbody > tr:nth-child(1) > td')
     current_state = a.attribute('innerHTML')
     puts "Check - #{current_state} should still be Return to Work"
   end
