@@ -29,14 +29,14 @@ class CreateEmployeeExtension < Base
   def make_pending_starter_a_finance_user
     driver.find_element(css: 'input[data-element-id=header-employee-search]').send_keys 'Newemployee User'
     sleep 0.5
-    driver.find_element(css: 'div[class=popover-content]').click
+    driver.find_element(xpath: '/html/body/div[6]/div').click
+    # driver.find_element(css: 'div[class=popover-content]').click
     # profile more - permissions
     driver.find_element(xpath: '//*[@id="more-link"]/span').click
     driver.find_element(xpath: '//*[@id="permissions"]').click
     # edit
     driver.find_element(css: 'div[class=float-right]').click
     driver.find_element(id: 'employee_finance_true').click
-    # may need to scroll page
     driver.find_element(xpath: '//*[@id="update-employee-button"]').click
   end
 

@@ -13,7 +13,7 @@ class NavigateAroundAppEmployee < Base
 
   def navigate_to_dashboard_employee
     driver.navigate.to('https://hr.breathehrstaging.com/#tab-my-dashboard')
-    # driver.find_element(css: 'href="/dashboard"').click
+    # driver.find_element(xpath: '//*[text()="Dashboard"]').click
   end
 
   def navigate_to_profile_employee
@@ -38,9 +38,13 @@ class NavigateAroundAppEmployee < Base
     driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[4]/a').click
   end
 
-  def navigate_to_leave_request_widget
-    driver.find_element(id: 'tab-my-dashboard-link').click
-    driver.find_element(css: 'div.widget-card:nth-child(1) > div:nth-child(3) > a:nth-child(1)').click
+  def navigate_to_leave_request_widget_request_leave
+    driver.find_element(css: 'div[data-element-id=my-leave-widget] .bdds-button--primary').click
+  end
+
+  def navigate_to_leave_request_widget_manage_leave
+    driver.find_element(css: 'div[data-element-id=my-leave-widget] .bdds-popover-trigger__open').click
+    driver.find_element(link_text: 'Manage leave').click
   end
 
   # permissions employee testing methods

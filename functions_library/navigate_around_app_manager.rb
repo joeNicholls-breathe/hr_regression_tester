@@ -19,8 +19,10 @@ class AppNavigationExtensionManager < Base
     driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[3]').click
   end
 
-  def navigate_to_people_screen_pill
-    driver.find_element(xpath: '//*[@id="tab-hr-dashboard"]/div[1]/div[2]/a[1]').click
+  def navigate_to_people_screen
+    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-people]').click
+    sleep 0.25
+    driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-our_people]').click
   end
 
   def navigate_to_add_new_employee

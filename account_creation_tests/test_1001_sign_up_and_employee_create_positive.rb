@@ -79,19 +79,21 @@ class TestSignUp < Base
     SignUpExtension.new(driver).sign_up_std_positive
     puts '2. Sign Up Std form - Pass'
     # time to deal with the recapthca if pressent and remove gravatar setting in settings
-    sleep 30
+    sleep 0.5
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
     puts '3. Navigate to Manager Dashboard - Pass'
-    AppNavigationExtensionManager.new(driver).navigate_to_people_screen_pill
+    binding.pry
+    AppNavigationExtensionManager.new(driver).navigate_to_people_screen
     puts '4. Navigate to People screen via pill - Pass'
     CreateEmployeeExtension.new(driver).create_employee_pending_starter_from_people_page
     puts '5. Create new employee via people page, that will start tomorrow - Pass'
     sleep 0.25
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
     puts '6. Return to Manager Dashboard - Pass'
-    PageValueCheck.new(driver).checking_pending_starter
+    PageValueCheck.new(driver).checking_pending_starter # might need to scroll on this
     puts '7. Employee create - new pending starter is present on account dashboard - Pass'
     CreateEmployeeExtension.new(driver).make_pending_starter_a_finance_user
+    # add in a check on finance user being applied on the saved page
     puts '8. Make Pending Starter a Finance User - Pass'
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     NavigationAroundAccountConfiguration.new(driver).navigate_to_two_factor_authentication

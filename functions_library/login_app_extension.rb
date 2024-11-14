@@ -9,4 +9,8 @@ class LoginAppExtension < Base
   def select_saas
     driver.find_element(class: 'saas').click
   end
+
+  def select_rota
+    driver.find_element(class: 'rta').click
+  end
 end
