@@ -82,7 +82,7 @@ class TestSignUp < Base
     sleep 0.5
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
     puts '3. Navigate to Manager Dashboard - Pass'
-    binding.pry
+    # CURRENT PLACE TO UPDATE UI
     AppNavigationExtensionManager.new(driver).navigate_to_people_screen
     puts '4. Navigate to People screen via pill - Pass'
     CreateEmployeeExtension.new(driver).create_employee_pending_starter_from_people_page

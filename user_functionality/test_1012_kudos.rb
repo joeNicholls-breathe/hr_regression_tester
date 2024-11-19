@@ -11,6 +11,7 @@ require './functions_library/login_app_extension'
 require './functions_library/kudos_extension'
 require './functions_library/navigate_around_app_employee'
 
+# rubocop:disable Metrics/AbcSize
 class UserKudos < Base
   attr_accessor :driver
 
@@ -32,5 +33,6 @@ class UserKudos < Base
     driver.close
   end
 end
+# rubocop:enable Metrics/AbcSize
 
 UserKudos.new.test_1012_user_kudos

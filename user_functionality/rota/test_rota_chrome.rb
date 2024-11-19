@@ -10,14 +10,18 @@ require './functions_library/login_app_extension'
 require './functions_library/navigate_browser_extension'
 require './settings'
 
+# rubocop:disable Metrics/BlockLength
+
 RSpec.describe 'Rota Regression test script' do
   before do
     options = Selenium::WebDriver::Chrome::Options.new
     options.add_argument('--headless')
     options.add_argument('--disable-gpu')
     options.add_argument('--window-size=1920,1080')
-    @driver = Selenium::WebDriver.for :chrome, options: options
+    @driver = Selenium::WebDriver.for :chrome, options:
   end
+
+  # accessing Rota application
 
   it 'navigate to breathe user login' do
     NavigateBrowserExtension.new(@driver).breathe_login
@@ -32,6 +36,24 @@ RSpec.describe 'Rota Regression test script' do
     expect(@driver.title).to eql('Rota, Time & Attendance')
   end
 
+  it 'navigate to rota from hr as admin user' do
+    NavigateBrowserExtension.new(@driver).breathe_login
+    LoginExtension.new(@driver).login_rota_admin
+    LoginAppExtension.new(@driver).select_hr
+    sleep 0.25
+    expect(@driver.title).to eql('Rota, Time & Attendance')
+  end
+
+  it 'navigate to timesheets from hr as admin user' do
+    NavigateBrowserExtension.new(@driver).breathe_login
+    LoginExtension.new(@driver).login_rota_admin
+    LoginAppExtension.new(@driver).select_rota
+    sleep 0.25
+    expect(@driver.title).to eql('Rota, Time & Attendance')
+  end
+
+  # shifts create/assign/edit/cancel/delete/switch to an employee
+
   it 'assign and share shift to an employee' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_admin
@@ -43,6 +65,8 @@ RSpec.describe 'Rota Regression test script' do
     sleep 1
     expect(@driver.title).to eql('')
   end
+
+  # templates create/assign/edit/cancel/delete/switch to an employee
 
   it 'create a template for an employee' do
     NavigateBrowserExtension.new(@driver).breathe_login
@@ -68,4 +92,10 @@ RSpec.describe 'Rota Regression test script' do
     LoginAppExtension.new(@driver).select_rota
     expect(@driver.title).to eql('')
   end
+
+  # manage employees
+  # reports
+  # employee managing themselves
+
+  # rubocop:enable Metrics/BlockLength
 end
