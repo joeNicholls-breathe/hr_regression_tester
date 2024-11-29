@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 require File.expand_path('base.rb', __dir__)
-
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Metrics/ClassLength
+# rubocop:disable Metrics/LineLength
+# rubocop:disable Metrics/MethodLength
 class RotaExtension < Base
   def navigate_to_rota_from_hr_admin
     driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-rota]').click
@@ -69,13 +70,13 @@ class RotaExtension < Base
     driver.find_element(id: 'end-time-input').send_keys '16:30'
     sleep 1
     element = driver.find_element(id: 'elmo-checkbox-label-notify-now-checkbox')
-    driver.execute_script("arguments[0].scrollIntoView(true);", element)
+    driver.execute_script('arguments[0].scrollIntoView(true);', element)
     sleep 1
-    driver.find_element(xpath: '//*[@id="rostered-shift-modal"]/div[3]/div/div[2]/div[5]/div/div/div/div/div[2]').click
+    driver.find_element(xpath: '//*[@id=rostered-shift-modal]/div[3]/div/div[2]/div[5]/div/div/div/div/div[2]').click
     sleep 1
-    driver.find_element(xpath: '//*[@id="rostered-shift-modal"]/div[3]/div/div[2]/div[5]/div/div/div/div/div[2]/div[1]/div').send_keys ("Testing note added in edit on #{todays_date_string}")
+    driver.find_element(xpath: '//*[@id=rostered-shift-modal]/div[3]/div/div[2]/div[5]/div/div/div/div/div[2]/div[1]/div').send_keys("Testing note added in edit on #{todays_date_string}")
     sleep 1
-    driver.find_element(xpath: '//*[@id="submit-rostered-shift-btn"]/span[1]').click
+    driver.find_element(xpath: '//*[@id=submit-rostered-shift-btn]/span[1]').click
   end
 
   def delete_shift
@@ -89,7 +90,7 @@ class RotaExtension < Base
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[2]/div/div/
       div[1]/div[1]/div[3]/div/div/div/div/div/button/span[4]').click
     driver.find_element(xpath: '//*[@id="elmo-dropdown2"]/li[2]').click
-    driver.find_element(id: 'offer-note-text-area').send_keys ("Test #{todays_date_string}")
+    driver.find_element(id: 'offer-note-text-area').send_keys("Test #{todays_date_string}")
     driver.find_element(css: 'button[data-testid=offer-shift-dialog-submit]').click
     sleep 0.25
   end
@@ -97,7 +98,7 @@ class RotaExtension < Base
   def swap_shift
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[2]/div/div/div[2]/div[1]/div[3]/div/div/div/div/div/button').click
     driver.find_element(xpath: '//*[@id="elmo-dropdown3"]/li[1]').click
-    driver.find_element(id: 'swap-not-text-area').send_keys ("Test #{todays_date_string}")
+    driver.find_element(id: 'swap-not-text-area').send_keys("Test #{todays_date_string}")
     driver.find_element(css: '#swap-done-button').click
   end
 
@@ -125,7 +126,7 @@ class RotaExtension < Base
 
   def assign_template
     driver.find_element(css: '#header-navigation-right').click
-    driver.find_element(xpath: '//*[@id="roster-template"]').click  
+    driver.find_element(xpath: '//*[@id="roster-template"]').click
     driver.find_element(xpath: '//*[@id="templates-modal"]/div[3]/div/div[1]/div/div/div/div[2]/div[2]/div/div').click
     sleep 1
     driver.find_element(xpath: '//*[@id="apply-template"]').click
@@ -133,11 +134,11 @@ class RotaExtension < Base
   end
 
   def delete_template
-    driver.find_element(id:'roster-template').click
+    driver.find_element(id: 'roster-template').click
     sleep 1
-    driver.find_element(id:'delete-template-0').click
+    driver.find_element(id: 'delete-template-0').click
     sleep 1
-    driver.find_element(id:'delete-template-btn').click
+    driver.find_element(id: 'delete-template-btn').click
   end
 
   def add_timesheet_pending_approval_manager
@@ -146,13 +147,13 @@ class RotaExtension < Base
     driver.find_element(css: 'input[data-testid=elmo-input-default]').send_keys '16'
     # might have an issue submitting this
   end
-  
+
   def add_timesheet_pending_approval_employee
     driver.find_element(xpath: '//*[@id="createTimesheetBtn"]').click
-    driver.find_element(id:'date-input').send_keys two_week_date_string
-    driver.find_element(id:'start-time-input').send_keys '11:00'
-    driver.find_element(id:'end-time-input').send_keys '17:00'
-    driver.find_element(xpath:'/html/body/div[3]/div[3]/div/div[3]/button[2]').click
+    driver.find_element(id: 'date-input').send_keys two_week_date_string
+    driver.find_element(id: 'start-time-input').send_keys '11:00'
+    driver.find_element(id: 'end-time-input').send_keys '17:00'
+    driver.find_element(xpath: '/html/body/div[3]/div[3]/div/div[3]/button[2]').click
   end
 
   def employee_view_next_seven_days
@@ -192,3 +193,5 @@ class RotaExtension < Base
 end
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/ClassLength
+# rubocop:enable Metrics/LineLength
+# rubocop:enable Metrics/MethodLength

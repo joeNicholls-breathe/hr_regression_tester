@@ -10,6 +10,9 @@ require './functions_library/logout_extension'
 require './functions_library/navigate_browser_extension'
 require './functions_library/rota_extension'
 require './settings'
+# rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/LineLength
 
 class Rota < Base
   attr_accessor :driver
@@ -35,7 +38,7 @@ class Rota < Base
     RotaExtension.new(@driver).assign_multiple_shifts_std_employee
     sleep 1
     RotaExtension.new(@driver).share_shift
-    # ON THE SAVE OF THE TEMPLATE WE HAVE AN ISSUE THAT IT DOESNT SAVE FROM THE AUTOMATION ALTHOUGH 
+    # ON THE SAVE OF THE TEMPLATE WE HAVE AN ISSUE THAT IT DOESNT SAVE FROM THE AUTOMATION ALTHOUGH
     # IS FINE FROM MANUAL SAME ISSUE ABOVE WITH MANUAL CHANGE WORKS FINE
     RotaExtension.new(@driver).create_template
     RotaExtension.new(@driver).assign_template
@@ -49,7 +52,7 @@ class Rota < Base
     LoginAppExtension.new(@driver).select_hr
     RotaExtension.new(@driver).my_employee_dashboard_rota
     RotaExtension.new(@driver).employee_view_next_seven_days
-    #CURRENT POSITION
+    # CURRENT POSITION
     RotaExtension.new(@driver).employee_check_assigned_rota_template # need to make sure template is with 30 days or today
     RotaExtension.new(@driver).view_notifications_employee_shifts
     RotaExtension.new(@driver).decline_shift
@@ -65,4 +68,7 @@ class Rota < Base
   end
 end
 
+# rubocop:enable Metrics/AbcSize
+# rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/LineLength
 Rota.new.test_rota
