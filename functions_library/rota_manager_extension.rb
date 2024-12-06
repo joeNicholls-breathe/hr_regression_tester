@@ -88,9 +88,8 @@ class RotaExtension < Base
 
   def delete_shift
     driver.find_element(css: '#user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
-    sleep 0.25
+    sleep 0.5
     driver.find_element(id: 'delete-tab-btn').click
-    sleep 0.25
   end
 
   def bulk_delete_shifts

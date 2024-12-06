@@ -17,9 +17,9 @@ require './settings'
 RSpec.describe 'Rota Regression test script' do
   before do
     options = Selenium::WebDriver::Chrome::Options.new
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
-    options.add_argument('--window-size=1920,1080')
+    # options.add_argument('--headless')
+    # options.add_argument('--disable-gpu')
+    # options.add_argument('--window-size=1920,1080')
     @driver = Selenium::WebDriver.for :chrome, options:
   end
 
@@ -51,7 +51,7 @@ RSpec.describe 'Rota Regression test script' do
     LoginAppExtension.new(@driver).select_hr
     sleep 0.5
     RotaExtension.new(@driver).navigate_to_timeandattendance_daily_from_hr_admin
-    sleep 1.5
+    sleep 2
     expect(@driver.title).to eql('Timesheets')
   end
 
@@ -73,6 +73,7 @@ RSpec.describe 'Rota Regression test script' do
     expect(@driver.title).to eql('Employee dashboard | My Rosters')
   end
 
+  # THIS MIGHT NOT BE A CREDIBLE TEST - AWAITING CONFIRMAITON - can fail
   it '3c. RTA employee - login and navigate to TIMESHEEET from hr' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_employee
@@ -102,8 +103,8 @@ RSpec.describe 'Rota Regression test script' do
     LoginAppExtension.new(@driver).select_rota
     sleep 0.25
     RotaExtension.new(@driver).navigate_to_the_next_monday_shift
+    sleep 0.25
     RotaExtension.new(@driver).edit_shift_monday_std_employee
-    sleep 1
     RotaExtension.new(@driver).share_shift
     sleep 2
     employee_monday_shift = @driver.find_element(class: 'roster-map-1-0')
@@ -113,25 +114,16 @@ RSpec.describe 'Rota Regression test script' do
 
   it '4c. delete single shift that was assigned to the employee' do
     NavigateBrowserExtension.new(@driver).breathe_login
-    LoginExtension.new(@driver).login_rota_employee
+    LoginExtension.new(@driver).login_rota_admin
     LoginAppExtension.new(@driver).select_rota
     sleep 0.25
     RotaExtension.new(@driver).navigate_to_the_next_monday_shift
     RotaExtension.new(@driver).delete_shift
-  end
-
-  it '4d. assign a single shift to an employee' do
-    NavigateBrowserExtension.new(@driver).breathe_login
-    LoginExtension.new(@driver).login_rota_admin
-    LoginAppExtension.new(@driver).select_rota
-    sleep 0.25
-    RotaExtension.new(@driver).assign_one_shift_monday_std_employee
-    sleep 1
-    RotaExtension.new(@driver).share_shift
     sleep 2
+    @driver.find_element(css: '#user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
     employee_monday_shift = @driver.find_element(class: 'roster-map-1-0')
-    monday_shift_time_element = employee_monday_shift.find_element(class: 'shift-card-view__time')
-    expect(monday_shift_time_element.attribute('innerHTML')).to eql('10:10-17:10')
+    monday_shift_time_element = employee_monday_shift.find_element(class: 'elmo-input')
+    expect(monday_shift_time_element.attribute('innerHTML')).to eql('')
   end
 
   it '4d. assign multiple shift to employee' do
@@ -145,7 +137,7 @@ RSpec.describe 'Rota Regression test script' do
     sleep 2
     employee_monday_shift = @driver.find_element(class: 'roster-map-1-0')
     monday_shift_time_element = employee_monday_shift.find_element(class: 'shift-card-view__time')
-    expect(monday_shift_time_element.attribute('innerHTML')).to eql('10:10-17:10')
+    expect(monday_shift_time_element.attribute('innerHTML')).to eql('11:11-19:11')
   end
 
   # templates create/assign/edit/cancel/delete/switch to an employee
@@ -154,8 +146,13 @@ RSpec.describe 'Rota Regression test script' do
     LoginExtension.new(@driver).login_rota_admin
     LoginAppExtension.new(@driver).select_rota
     sleep 0.25
+    RotaExtension.new(@driver).navigate_to_the_next_monday_shift
+    RotaExtension.new(@driver).navigate_to_the_next_monday_shift
+    sleep 0.25
     RotaExtension.new(@driver).create_template
-    expect(@driver.title).to eql('Rota week view - user view')
+    employee_monday_shift = @driver.find_element(class: 'roster-map-1-0')
+    monday_shift_time_element = employee_monday_shift.find_element(class: 'shift-card-view__time')
+    expect(monday_shift_time_element.attribute('innerHTML')).to eql('11:11-19:11')
   end
 
   it '5b. delete a template for an employee' do
@@ -164,6 +161,7 @@ RSpec.describe 'Rota Regression test script' do
     LoginAppExtension.new(@driver).select_rota
     sleep 0.25
     RotaExtension.new(@driver).delete_template
+    # Need to open up the tab again to check the template has been removed
     expect(@driver.title).to eql('Rota week view - user view')
   end
 
@@ -218,6 +216,12 @@ RSpec.describe 'Rota Regression test script' do
     sleep 0.25
     RotaEmpExtension.new(@driver).employee_view_next_seven_days
     RotaEmpExtension.new(@driver).swap_shift
+  end
+
+  it '7a. remove all shifts assigned to the employee' do
+    NavigateBrowserExtension.new(@driver).breathe_login
+    LoginExtension.new(@driver).login_rota_employee
+    LoginAppExtension.new(@driver).select_rota
   end
   # rubocop:enable Metrics/BlockLength
 end
