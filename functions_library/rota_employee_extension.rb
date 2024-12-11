@@ -3,14 +3,8 @@
 require File.expand_path('base.rb', __dir__)
 # rubocop:disable Metrics/LineLength
 class RotaEmpExtension < Base
-  def my_employee_dashboard_rota
+  def navigate_to_rota_from_hr
     driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-rota]').click
-    sleep 0.5
-    driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-employee_dashboard]').click
-  end
-
-  def my_employee_dashboard_timesheets
-    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-timesheets]').click
     sleep 0.5
     driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-employee_dashboard]').click
   end
@@ -31,17 +25,13 @@ class RotaEmpExtension < Base
     driver.find_element(css: '#swap-done-button').click
   end
 
-  def add_timesheet_pending_approval_employee
-    driver.find_element(xpath: '//*[@id="createTimesheetBtn"]').click
-    driver.find_element(id: 'date-input').send_keys two_week_date_string
-    driver.find_element(id: 'start-time-input').send_keys '11:00'
-    driver.find_element(id: 'end-time-input').send_keys '17:00'
-    driver.find_element(xpath: '/html/body/div[3]/div[3]/div/div[3]/button[2]').click
-  end
-
   def employee_view_next_seven_days
     driver.find_element(xpath: '/html/body/div[2]/div[1]/main/div[3]/div/
       div[1]/div/div/div[1]/label[2]/span[2]/span').click
+  end
+
+  def employee_view_next_thirty_days
+    driver.find_element(xpath: '//*[@id="my-rosters-filters"]/div/div[1]/label[3]').click
   end
 
   def employee_check_assigned_rota_template

@@ -3,7 +3,6 @@
 require File.expand_path('base.rb', __dir__)
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Metrics/ClassLength
-# rubocop:disable Metrics/LineLength
 # rubocop:disable Metrics/MethodLength
 class RotaExtension < Base
   def navigate_to_rota_from_hr_admin
@@ -12,18 +11,11 @@ class RotaExtension < Base
     driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-rota]').click
   end
 
-  def navigate_to_timeandattendance_daily_from_hr_admin
-    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-time_attendance]').click
-    sleep 0.5
-    driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-timesheets_daily]').click
-  end
-
   def find_employee_time_from_card
     driver.find_element(class: 'roster-map-1-0 shift-card-view__time')
   end
 
   def assign_one_shift_monday_std_employee
-    driver.find_element(css: '#header-navigation-right').click
     # roster item 0 = monday 7 = sunday
     driver.find_element(css: '#user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
     driver.find_element(css: 'input[id=roster-time-range-input]').send_keys '10.10-17.10'
@@ -31,9 +23,6 @@ class RotaExtension < Base
   end
 
   def assign_multiple_shifts_std_employee
-    driver.find_element(css: '#header-navigation-right').click
-    sleep 1
-    driver.find_element(css: '#header-navigation-right').click
     driver.find_element(css: '#user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
     driver.find_element(css: 'input[id=roster-time-range-input]').send_keys '11.11-19.11'
     driver.find_element(css: '.input-with-icon__icon-wrapper > svg:nth-child(1)').click
@@ -92,17 +81,22 @@ class RotaExtension < Base
     driver.find_element(id: 'delete-tab-btn').click
   end
 
-  def bulk_delete_shifts
+  def bulk_delete_shifts_admin
     driver.find_element(css: '#bulk-delete-btn > span.elmo-btn__pressed').click
-    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[4]/
-      div[2]/div/div[2]/div[3]/div[1]/div/div').click
-    sleep 0.25
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[4]
+      /div[2]/div/div[2]/div[5]/div[1]/div').click
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[1]/div/div/div[2]/div/button[1]/span[1]').click
     sleep 0.25
     driver.find_element(xpath: '//*[@id="confirm-bulk-delete-modal"]/div[3]/div/div[2]/button[2]').click
+  end
+
+  def bulk_delete_shifts_employee
+    driver.find_element(css: '#bulk-delete-btn > span.elmo-btn__pressed').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[4]
+      /div[2]/div/div[2]/div[4]/div[1]/div').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[1]/div/div/div[2]/div/button[1]/span[1]').click
     sleep 0.25
     driver.find_element(xpath: '//*[@id="confirm-bulk-delete-modal"]/div[3]/div/div[2]/button[2]').click
-    sleep 0.25
   end
 
   def create_template
@@ -120,7 +114,6 @@ class RotaExtension < Base
   end
 
   def assign_template
-    driver.find_element(css: '#header-navigation-right').click
     driver.find_element(xpath: '//*[@id="roster-template"]').click
     driver.find_element(xpath: '//*[@id="templates-modal"]/div[3]/div/div[1]/div/div/div/div[2]/div[2]/div/div').click
     sleep 1
@@ -137,32 +130,7 @@ class RotaExtension < Base
     # if we can not delete the template - organise logic maybe just refresh page but this would be a cheat
     driver.find_element(xpath: '//*[@id="templates-modal"]/div[3]/div/div[2]/button[1]').click
   end
-
-  def add_timesheet_pending_approval_manager
-    driver.find_element(css: 'div[data-testid=add-timesheet-placeholder]').click
-    driver.find_element(css: 'input[data-testid=elmo-input-default]').send_keys '8'
-    driver.find_element(css: 'input[data-testid=elmo-input-default]').send_keys '16'
-    # might have an issue submitting this
-  end
-
-  def approve_timesheet
-    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[2]/div/div/div').click
-    driver.find_element(xpath: '')
-  end
-
-  def reject_timesheet
-    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[2]/div/div/div').click
-  end
-
-  def bulk_approve
-    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[1]/div/div[3]/div/div[2]/button/span[2]').click
-  end
-
-  def remove_timesheet
-    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[1]/div/div[3]/div/div[2]/button/span[2]').click
-  end
 end
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/ClassLength
-# rubocop:enable Metrics/LineLength
 # rubocop:enable Metrics/MethodLength
