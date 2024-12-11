@@ -81,12 +81,19 @@ class RotaExtension < Base
     driver.find_element(id: 'delete-tab-btn').click
   end
 
+  def delete_shift_wednesday
+    driver.find_element(css: '#user-cell-0-roster-2-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
+    sleep 0.5
+    driver.find_element(id: 'delete-tab-btn').click
+  end
+
   def bulk_delete_shifts_admin
     driver.find_element(css: '#bulk-delete-btn > span.elmo-btn__pressed').click
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[4]
       /div[2]/div/div[2]/div[5]/div[1]/div').click
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[1]/div/div/div[2]/div/button[1]/span[1]').click
     sleep 0.25
+    driver.find_element(xpath: '//*[@id="confirm-bulk-delete-modal"]/div[3]/div/div[2]/button[2]').click
     driver.find_element(xpath: '//*[@id="confirm-bulk-delete-modal"]/div[3]/div/div[2]/button[2]').click
   end
 
@@ -95,8 +102,13 @@ class RotaExtension < Base
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[4]
       /div[2]/div/div[2]/div[4]/div[1]/div').click
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[1]/div/div/div[2]/div/button[1]/span[1]').click
-    sleep 0.25
+    sleep 0.50
     driver.find_element(xpath: '//*[@id="confirm-bulk-delete-modal"]/div[3]/div/div[2]/button[2]').click
+    driver.find_element(xpath: '//*[@id="confirm-bulk-delete-modal"]/div[3]/div/div[2]/button[2]').click
+  end
+
+  def bulk_delete_cancel_button
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[1]/div/div/div[2]/div/button[2]').click
   end
 
   def create_template

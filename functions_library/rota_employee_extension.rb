@@ -19,8 +19,10 @@ class RotaEmpExtension < Base
   end
 
   def swap_shift
-    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[2]/div/div/div[2]/div[1]/div[3]/div/div/div/div/div/button').click
-    driver.find_element(xpath: '//*[@id="elmo-dropdown3"]/li[1]').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[2]/div/div/
+      div[2]/div[1]/div[3]/div/div/div/div/div/button').click
+    sleep 0.5
+    driver.find_element(xpath: '//*[@id="elmo-dropdown2"]/li[1]').click
     driver.find_element(id: 'swap-not-text-area').send_keys("Test #{todays_date_string}")
     driver.find_element(css: '#swap-done-button').click
   end

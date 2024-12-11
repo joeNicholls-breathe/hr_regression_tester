@@ -19,9 +19,9 @@ require './settings'
 RSpec.describe 'Rota Regression test script' do
   before do
     options = Selenium::WebDriver::Chrome::Options.new
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
-    options.add_argument('--window-size=1920,1080')
+    # options.add_argument('--headless')
+    # options.add_argument('--disable-gpu')
+    # options.add_argument('--window-size=1920,1080')
     @driver = Selenium::WebDriver.for :chrome, options:
   end
 
@@ -262,7 +262,7 @@ RSpec.describe 'Rota Regression test script' do
     @driver.quit
   end
 
-  it '7c. decline shift assigned to the employee' do
+  it '7c. decline/offer shift assigned to the employee' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_employee
     LoginAppExtension.new(@driver).select_rota
@@ -296,18 +296,25 @@ RSpec.describe 'Rota Regression test script' do
     sleep 1
     RotaExtension.new(@driver).navigate_to_the_next_monday_shift
     puts 'next week'
-    sleep 1.1
+    sleep 1
     RotaExtension.new(@driver).bulk_delete_shifts_employee
-    sleep 2.1
+    sleep 2
+    RotaExtension.new(@driver).delete_shift
+    sleep 1
+    RotaExtension.new(@driver).delete_shift_wednesday
+    sleep 1
     RotaExtension.new(@driver).navigate_to_the_next_monday_shift
     puts 'two weeks time'    
-    sleep 1.2
+    sleep 1
     RotaExtension.new(@driver).bulk_delete_shifts_employee
-    sleep 2.2
+    sleep 2
+    RotaExtension.new(@driver).bulk_delete_cancel_button
+    sleep 0.5
     RotaExtension.new(@driver).bulk_delete_shifts_admin
-    sleep 2.3
+    sleep 2
+    RotaExtension.new(@driver).bulk_delete_cancel_button
     @driver.find_element(css: '#user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
-    employee_monday_shift = @driver.find_element(class: 'roster-map-1-0')
+    employee_monday_shift = @driver.find_element(class: 'roster-map-2-0')
     monday_shift_time_element = employee_monday_shift.find_element(class: 'elmo-input')
     expect(monday_shift_time_element.attribute('innerHTML')).to eql('')
     @driver.quit
