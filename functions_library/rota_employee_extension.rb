@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require File.expand_path('base.rb', __dir__)
-# rubocop:disable Metrics/LineLength
 class RotaEmpExtension < Base
   def navigate_to_rota_from_hr
     driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-rota]').click
@@ -12,6 +11,7 @@ class RotaEmpExtension < Base
   def decline_shift
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[2]/div/div/
       div[1]/div[1]/div[3]/div/div/div/div/div/button/span[4]').click
+    sleep 0.5
     driver.find_element(xpath: '//*[@id="elmo-dropdown2"]/li[2]').click
     driver.find_element(id: 'offer-note-text-area').send_keys("Test #{todays_date_string}")
     driver.find_element(css: 'button[data-testid=offer-shift-dialog-submit]').click
@@ -59,4 +59,3 @@ class RotaEmpExtension < Base
     driver.find_element(class: 'elmo-modal__header-close').click
   end
 end
-# rubocop:enable Metrics/LineLength

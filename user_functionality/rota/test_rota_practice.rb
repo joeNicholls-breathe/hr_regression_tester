@@ -38,9 +38,6 @@ class Rota < Base
     RotaExtension.new(@driver).assign_multiple_shifts_std_employee
     sleep 1
     RotaExtension.new(@driver).share_shift
-    # ON THE SAVE OF THE TEMPLATE WE HAVE AN ISSUE THAT IT DOESNT SAVE FROM
-    # THE AUTOMATION ALTHOUGH IS FINE FROM MANUAL, SAME ISSUE ABOVE WITH MANUAL
-    # CHANGE WORKS FINE
     RotaExtension.new(@driver).create_template
     RotaExtension.new(@driver).assign_template
     RotaExtension.new(@driver).share_shift
@@ -51,8 +48,6 @@ class Rota < Base
     RotaExtension.new(@driver).assign_template
     RotaExtension.new(@driver).share_shift
     sleep 5
-    # DELETE WONT REMOVE THE PREVIOUS TEMPLATE FOR SOME REASON - AS SOON AS A SHIFT
-    # IS SAVED THEN THIS IS FOREVER IN THE DB BUT IS REMOVED FROM THE FE
     RotaExtension.new(@driver).delete_template
     LogoutExtension.new(driver).logout_admin
   end
@@ -80,13 +75,17 @@ class Rota < Base
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_admin
     LoginAppExtension.new(@driver).select_hr
+    sleep 1
     TimesheetExtension.new(@driver).navigate_to_timeandattendance_daily_from_hr_admin
+    TimesheetExtension.new(@driver).add_timesheet_to_employee
   end
 
-  def remove_test_data
-    # this will be to remove all data from the employee
-    # so we can run this again on the next run as this will be run three times a day
-    # bulk delete shifts
+  def employee_t
+    NavigateBrowserExtension.new(@driver).breathe_login
+    LoginExtension.new(@driver).login_rota_employee
+    LoginAppExtension.new(@driver).select_hr
+    RotaEmpExtension.new(@driver).navigate_to_rota_from_hr
+    TimesheetEmpExtension.new(@driver).add_timesheet_pending_approval_employee
   end
 end
 
@@ -94,6 +93,6 @@ end
 # rubocop:enable Metrics/MethodLength
 
 # Rota.new.test_rota
-Rota.new.employee
+# Rota.new.employee
 Rota.new.timesheets
-Rota.new.remove_test_data
+Rota.new.employee_t

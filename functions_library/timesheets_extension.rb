@@ -9,6 +9,25 @@ class TimesheetExtension < Base
     driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-timesheets_daily]').click
   end
 
+  # rubocop:disable Metrics/AbcSize
+  def add_timesheet_to_employee
+    driver.find_element(css: 'span[data-testid=elmo-btn-label-new-shift-form]').click
+    # shift employee
+    driver.find_element(id: 'shift-user').click
+    driver.find_element(class: 'react-select__single-value css-qc6sy-singleValue').send_keys 'Std Employee User'
+    # project
+    driver.find_element(id: 'react-select-4-input').click
+    # department
+    driver.find_element(id: 'react-select-5-input').click
+    # start
+    driver.find_element(id: 'timesheet-start').send_keys '12:01'
+    # end
+    driver.find_element(id: 'timesheet-end').send_keys '20:02'
+    # break
+    driver.find_element(id: 'break-start-input-0').send_keys '17:00'
+  end
+  # rubocop:enable Metrics/AbcSize
+
   def add_timesheet_pending_approval_manager
     driver.find_element(css: 'div[data-testid=add-timesheet-placeholder]').click
     driver.find_element(css: 'input[data-testid=elmo-input-default]').send_keys '8'
