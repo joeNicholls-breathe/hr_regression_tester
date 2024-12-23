@@ -6,9 +6,9 @@ require './functions_library/navigate_browser_extension'
 require './functions_library/sign_up_extension'
 # require File.join(__dir__, "account_employee_setup", "positive_imports", "employee_full.xlsx")
 # require './account_employee_setup/positive_imports/employee_full.xlsx'
-require './functions_library/navigate_around_app_manager'
+require './functions_library/navigate_around_app_manager_extension'
 require './functions_library/create_employee_extension'
-require './functions_library/ui_page_element_check'
+require './functions_library/ui_page_element_check_extension'
 require './functions_library/test_reference_extension'
 require './functions_library/settings_config/account_config_navigation/account_configuration_navigation_extension'
 require './functions_library/settings_config/2FA/2fa_extension'
@@ -79,10 +79,9 @@ class TestSignUp < Base
     SignUpExtension.new(driver).sign_up_std_positive
     puts '2. Sign Up Std form - Pass'
     # time to deal with the recapthca if pressent and remove gravatar setting in settings
-    sleep 0.5
+    sleep 30
     AppNavigationExtensionManager.new(driver).navigate_to_dashboard
     puts '3. Navigate to Manager Dashboard - Pass'
-    # CURRENT PLACE TO UPDATE UI
     AppNavigationExtensionManager.new(driver).navigate_to_people_screen
     puts '4. Navigate to People screen via pill - Pass'
     CreateEmployeeExtension.new(driver).create_employee_pending_starter_from_people_page
@@ -115,8 +114,8 @@ class TestSignUp < Base
 
   def signup_login_path
     NavigateBrowserExtension.new(driver).breathe_signup
-    # Feature flag dependent
     # NavigateBrowserExtension.new(driver).cookie_modal_accept
+    # NEED TO CONFIRM SIGN UP PATH GOES TO THE RIGHT URL
     SignUpExtension.new(driver).sign_up_login_button
     sleep 1
     LoginExtension.new(driver).login_setup_acc_admin

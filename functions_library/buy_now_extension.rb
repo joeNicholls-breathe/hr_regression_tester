@@ -7,12 +7,12 @@ class BuyNowExtension < Base
   # rubocop:disable Metrics/AbcSize
   def buy_now_monthly_micro_no_modules_positive
     # plan
-    # ISSUES with this selection dropdown - need to talk with Tim
-    driver.find_element(xpath: '//*[text() = "Regular - Monthly (up to 50 people)"]').click
-    driver.find_element(xpath: '//*[text() = "Micro - Monthly (up to 10 people)"]').click
-    drop = driver.find_element(xpath: '//*[text() = "Regular - Monthly (up to 50 people)"]')
-    choose = Selenium::WebDriver::Support::Select.new(drop)
-    choose.select_by(:value, 'Micro - Monthly  (up to 10 people)')
+    # ISSUES with this selection dropdown react component
+    # driver.find_element(xpath: '//*[text() = "Regular - Monthly (up to 50 people)"]').click
+    # driver.find_element(xpath: '//*[text() = "Micro - Monthly (up to 10 people)"]').click
+    # drop = driver.find_element(xpath: '//*[text() = "Regular - Monthly (up to 50 people)"]')
+    # choose = Selenium::WebDriver::Support::Select.new(drop)
+    # choose.select_by(:value, 'Micro - Monthly (up to 10 people)')
     # all these buttons work
     # modals switch all on
     driver.find_element(css: 'div.addRemoveModule.plus-sign').click

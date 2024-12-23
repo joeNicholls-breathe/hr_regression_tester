@@ -6,7 +6,7 @@ class AccountHolidayAllowanceExtension < Base
   # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
   def holiday_allowances_add
-    driver.find_element(css: 'body > section.content.container.p-4 > div.float-right > a').click
+    driver.find_element(xpath: '/html/body/div[3]/div/section/div[2]/a').click
     driver.find_element(id: 'holiday_allowance_title')
           .send_keys "Regression Test holiday allowance#{todays_date_string}"
     driver.find_element(id: 'holiday_allowance_flat_quantity').send_keys '25'
@@ -17,7 +17,7 @@ class AccountHolidayAllowanceExtension < Base
     driver.find_element(id: 'holiday_allowance_max_negative').send_keys '5'
     driver.find_element(xpath: '//*[@id="new_holiday_allowance"]/p/input').click
     sleep 0.5
-    driver.find_element(css: 'body > section.content.container.p-4 > div.breadcrumb > a').click
+    driver.find_element(xpath: '/html/body/div[4]/div/section/div[1]/a').click
   end
 
   def holiday_allowances_edit
@@ -31,15 +31,16 @@ class AccountHolidayAllowanceExtension < Base
     driver.find_element(id: 'holiday_allowance_flat_quantity').clear
     driver.find_element(id: 'holiday_allowance_flat_quantity').send_keys '21'
     driver.find_element(css: selector).click
-    driver.find_element(css: 'body > section.content.container.p-4 > div.breadcrumb > a').click
+    driver.find_element(xpath: '/html/body/div[4]/div/section/div[1]/a').click
   end
 
   def holiday_allowances_select_default
     drop = driver.find_element(id: 'account_holiday_allowance_id')
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:value, '3974')
-    driver.find_element(xpath: '/html/body/section[2]/form[2]/div/div[2]/input').click
-    driver.find_element(css: 'body > section.content.container.p-4 > div.breadcrumb > a').click
+    driver.find_element(xpath: '/html/body/div[4]/div/section/form[2]/div/div[2]/input').click
+    sleep 1
+    driver.find_element(xpath: '/html/body/div[4]/div/section/div[1]/a').click
   end
 
   def holiday_allowances_delete

@@ -5,14 +5,14 @@ class CompanyBlackoutsExtension < Base
   # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
   def company_blackout_add_new
-    driver.find_element(css: 'body > section.content.container.p-4 > div.float-right > a').click
+    driver.find_element(xpath: '/html/body/div[3]/div/section/div[2]/a').click
     driver.find_element(id: 'company_blackout_name').send_keys "Blackout test #{todays_date}"
     driver.find_element(id: '#company_blackout_start_date_react').send_keys two_week_date_string
     driver.find_element(id: '#company_blackout_end_date_react').send_keys two_week_date_string
     driver.find_element(id: 'company_blackout_whole_company').click
     driver.find_element(xpath: '//*[@id="new_company_blackout"]/p/input').click
     sleep 0.5
-    driver.find_element(css: 'body > section.content.container.p-4 > div.breadcrumb > a').click
+    driver.find_element(xpath: '/html/body/div[3]/div/section/div[1]/a').click
   end
 
   def company_blackout_edit
@@ -28,7 +28,7 @@ class CompanyBlackoutsExtension < Base
     driver.find_element(id: '#company_blackout_end_date_react').clear
     driver.find_element(id: '#company_blackout_end_date_react').send_keys sixteen_days_date_string
     driver.find_element(css: selector).click
-    driver.find_element(css: 'body > section.content.container.p-4 > div.breadcrumb > a').click
+    driver.find_element(xpath: '/html/body/div[3]/div/section/div[1]/a').click
   end
 
   def company_blackout_delete

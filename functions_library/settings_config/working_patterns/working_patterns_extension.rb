@@ -6,7 +6,7 @@ class AccountWorkingPatternExtension < Base
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
   def working_pattern_add
-    driver.find_element(xpath: '/html/body/section[2]/div[2]/a').click
+    driver.find_element(xpath: '/html/body/div[3]/div/section/div[2]/a').click
     driver.find_element(id: 'working_pattern_name').send_keys 'Reggression Add Working Pattern'
     driver.find_element(id: 'working_pattern_mon_hr_hours').send_keys '7'
     driver.find_element(id: 'working_pattern_mon_hr_minutes').send_keys '30'
@@ -26,14 +26,14 @@ class AccountWorkingPatternExtension < Base
   end
 
   def working_pattern_breadcrumb
-    driver.find_element(css: 'body > section.content.container.p-4 > div.breadcrumb > a').click
+    driver.find_element(xpath: '/html/body/div[4]/div/section/div[1]/a').click
   end
 
   def working_pattern_set_new_default
     drop = driver.find_element(id: 'account_working_pattern_id')
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:value, '3936')
-    driver.find_element(xpath: '/html/body/section[2]/form[2]/div/div[2]/input').click
+    driver.find_element(xpath: '/html/body/div[3]/div/section/form[2]/div/div[2]/input').click
   end
 
   def working_pattern_edit
@@ -65,9 +65,7 @@ class AccountWorkingPatternExtension < Base
 
   def working_pattern_show_inactive
     driver.find_element(id: 'show-inactive-patterns').click
-    driver.find_element(
-      css: 'body > section.content.container.p-4 > form.form.mb-1 > div > div > div.form-group.buttons > input'
-    ).click
+    driver.find_element(xpath: '/html/body/div[4]/div/section/form[1]/div/div/div[3]/input').click
   end
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize

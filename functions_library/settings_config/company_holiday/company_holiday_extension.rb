@@ -6,7 +6,7 @@ require File.expand_path('../../base.rb', __dir__)
 # rubocop:disable Metrics/AbcSize
 class CompanyHolidaysExtension < Base
   def company_holiday_add
-    driver.find_element(css: 'body > section.content.container.p-4 > div.float-right > a').click
+    driver.find_element(xpath: '/html/body/div[3]/div/section/div[2]/a').click
     driver.find_element(id: 'company_holiday_name').send_keys "Test Holiday #{todays_date_string}"
     driver.find_element(id: '#company_holiday_day_on_react').send_keys todays_date_string
     driver.find_element(id: 'company_holiday_half').click
