@@ -2,15 +2,15 @@
 
 require 'selenium-webdriver'
 require 'logger'
-require './functions_library/ui_page_element_check'
+require './functions_library/ui_page_element_check_extension'
 require './functions_library/test_reference_extension'
 require './functions_library/navigate_browser_extension'
 require './functions_library/login_extension'
 require './functions_library/login_app_extension'
 require './functions_library/logout_extension'
 require './functions_library/holiday_extension'
-require './functions_library/navigate_around_app_manager'
-require './functions_library/navigate_around_app_employee'
+require './functions_library/navigate_around_app_manager_extension'
+require './functions_library/navigate_around_app_employee_extension'
 require './functions_library/create_employee_extension'
 require './functions_library/delete_employee_extension'
 require './functions_library/leave_request_extension'
@@ -47,7 +47,7 @@ class AccountSetupHRUser < Base
     HrUserConfigExtension.new(driver).hr_user_configuration_remind_line_manager_to_give_121_off
     HrUserConfigExtension.new(driver).hr_user_configuration_grapevine_label_clear
     HrUserConfigExtension.new(driver).update_hr_settings
-    puts '6. remove settings from HR user/account - (bradford/121 reminders/grapevine)'
+    puts '6. remove settings from all HR user/account - (bradford/121 reminders/grapevine)'
     sleep 1
     LogoutExtension.new(driver).logout_admin
     puts '7. logout'
@@ -56,12 +56,13 @@ class AccountSetupHRUser < Base
     LoginAppExtension.new(driver).select_hr
     puts '8. login as hr user'
     AppNavigationExtensionManager.new(driver).navigate_to_my_dashboard
-    NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget
+    NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget_request_leave
     LeaveRequestExtension.new(driver).employee_holiday_leave_request_one
     puts '9. create holiday request'
     # AppNavigationExtensionManager.new(driver).navigate_to_my_dashboard
     # PageValueCheck.new(driver).check_leave_has_ben_requested
     # puts '10. check that user can not self approve leave'
+    sleep 1
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active_hr_user
     NavigationAroundAccountConfiguration.new(driver).navigate_to_change_what_hr_users_can_do_as_hr
     # HrUserConfigExtension.new(driver).hr_user_configuration_use_gravatar
@@ -73,17 +74,19 @@ class AccountSetupHRUser < Base
     puts '11. adds settings back to HR user/account
             (approve own leave/bradford factor/121 reminders/grapevine)'
     NavigateAroundAppEmployee.new(driver).navigate_to_profile_employee
+    puts '12a. check employee own profile summary'
     AppNavigationExtensionManager.new(driver).navigate_to_my_dashboard
-    NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget
+    NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget_request_leave
     LeaveRequestExtension.new(driver).employee_holiday_leave_request_two
-    sleep 0.50
-    puts '12. create holiday request'
+    sleep 1
+    puts '12b. create holiday request'
     LogoutExtension.new(driver).logout_admin
     puts '13. logout'
     LoginExtension.new(driver).login_setup_acc_admin
     puts '14. login as admin'
     AppNavigationExtensionManager.new(driver).search_employee_hr
-    DeleteEmployeeExtension.new(driver).delete_employee__hr_user
+    sleep 1
+    DeleteEmployeeExtension.new(driver).delete_employee_hr_user
     puts '15. delete hr user'
     AppNavigationExtensionManager.new(driver).search_employee_harold
     NavigateAroundAppEmployee.new(driver).navigate_to_my_profile_leave_requested
@@ -93,7 +96,7 @@ class AccountSetupHRUser < Base
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     NavigationAroundAccountConfiguration.new(driver).navigate_to_change_what_hr_users_can_do
     HrUserConfigExtension.new(driver).update_hr_settings
-    sleep 0.50
+    sleep 1
     puts '17. test maintanence - reinstate hr users need approval for leave requests'
     LogoutExtension.new(driver).logout_admin
     puts '18. logout'
