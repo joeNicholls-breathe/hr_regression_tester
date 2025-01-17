@@ -3,28 +3,30 @@
 require File.expand_path('base.rb', __dir__)
 class RotaEmpExtension < Base
   def navigate_to_rota_from_hr
+    sleep @sleep_time_long
     driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-rota]').click
-    sleep 0.5
+    sleep @sleep_time_short
     driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-employee_dashboard]').click
   end
 
   def decline_shift
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[2]/div/div/
       div[1]/div[1]/div[3]/div/div/div/div/div/button/span[4]').click
-    sleep 0.5
+    sleep @sleep_time_short
     driver.find_element(xpath: '//*[@id="elmo-dropdown2"]/li[2]').click
     driver.find_element(id: 'offer-note-text-area').send_keys("Test #{todays_date_string}")
     driver.find_element(css: 'button[data-testid=offer-shift-dialog-submit]').click
-    sleep 0.25
+    sleep @sleep_time_short
   end
 
   def swap_shift
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[2]/div/div/
       div[2]/div[1]/div[3]/div/div/div/div/div/button').click
-    sleep 0.5
+    sleep @sleep_time_long
     driver.find_element(xpath: '//*[@id="elmo-dropdown2"]/li[1]').click
     driver.find_element(id: 'swap-not-text-area').send_keys("Test #{todays_date_string}")
     driver.find_element(css: '#swap-done-button').click
+    sleep @sleep_time_short
   end
 
   def employee_view_next_seven_days
@@ -51,7 +53,7 @@ class RotaEmpExtension < Base
 
   def mark_all_as_read_and_delete
     driver.find_element(css: 'button[data-testid=elmo-btn-read-all]').click
-    sleep 0.25
+    sleep @sleep_time_short
     driver.find_element(css: 'button[data-testid=elmo-btn-delete-all]').click
   end
 

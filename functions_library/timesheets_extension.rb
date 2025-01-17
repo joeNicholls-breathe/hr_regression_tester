@@ -4,8 +4,9 @@ require File.expand_path('base.rb', __dir__)
 
 class TimesheetExtension < Base
   def navigate_to_timeandattendance_daily_from_hr_admin
+    sleep @sleep_time_long
     driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-time_attendance]').click
-    sleep 1
+    sleep @sleep_time_short
     driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-timesheets_daily]').click
   end
 

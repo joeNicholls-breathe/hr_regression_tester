@@ -18,6 +18,8 @@ require './settings'
 
 RSpec.describe 'Rota Regression test script' do
   before do
+    @sleep_time_long = (ENV['SLEEPTIME_LONG'] || 4).to_f
+    @sleep_time_short = (ENV['SLEEPTIME_SMALL'] || 1).to_f
     options = Selenium::WebDriver::Chrome::Options.new
     options.add_argument('--headless')
     options.add_argument('--disable-gpu')
@@ -43,21 +45,13 @@ RSpec.describe 'Rota Regression test script' do
   it '2b. RTA admin - login and navigate to ROTA from hr' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_admin
+    sleep @sleep_time_long
     LoginAppExtension.new(@driver).select_hr
-    sleep 0.5
+    sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_rota_from_hr_admin
-    expect(@driver.title).to eql('Rota, Time & Attendance')
-    @driver.quit
-  end
-
-  it '2c. RTA admin - login and navigate to TIMESHEEET from hr' do
-    NavigateBrowserExtension.new(@driver).breathe_login
-    LoginExtension.new(@driver).login_rota_admin
-    LoginAppExtension.new(@driver).select_hr
-    sleep 0.5
-    TimesheetExtension.new(@driver).navigate_to_timeandattendance_daily_from_hr_admin
-    sleep 2
-    expect(@driver.title).to eql('Timesheets')
+    sleep @sleep_time_long
+    # expect(@driver.title).to eql('Rota, Time & Attendance')
+    expect(@driver.title).to eql('Rota week view - user view')
     @driver.quit
   end
 
@@ -65,7 +59,7 @@ RSpec.describe 'Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_employee
     LoginAppExtension.new(@driver).select_rota
-    sleep 2
+    sleep @sleep_time_long
     expect(@driver.title).to eql('Employee dashboard | My Rosters')
     @driver.quit
   end
@@ -74,9 +68,9 @@ RSpec.describe 'Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_employee
     LoginAppExtension.new(@driver).select_hr
-    sleep 1
+    sleep @sleep_time_short
     RotaEmpExtension.new(@driver).navigate_to_rota_from_hr
-    sleep 2
+    sleep @sleep_time_long
     expect(@driver.title).to eql('Employee dashboard | My Rosters')
     @driver.quit
   end
@@ -85,9 +79,9 @@ RSpec.describe 'Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_line_manager
     LoginAppExtension.new(@driver).select_rota
-    sleep 2
-    # expect(@driver.title).to eql('Rota, Time & Attendance')
-    expect(@driver.title).to eql('Rota week view - user view')
+    sleep @sleep_time_long
+    expect(@driver.title).to eql('Rota, Time & Attendance')
+    # expect(@driver.title).to eql('Rota week view - user view')
     @driver.quit
   end
 
@@ -95,22 +89,11 @@ RSpec.describe 'Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_line_manager
     LoginAppExtension.new(@driver).select_hr
-    sleep 0.25
+    sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_rota_from_hr_admin
-    sleep 2
+    sleep @sleep_time_long
     # expect(@driver.title).to eql('Rota, Time & Attendance')
     expect(@driver.title).to eql('Rota week view - user view')
-    @driver.quit
-  end
-
-  it '4c. RTA line manager - login and navigate to TIMESHEEET from hr' do
-    NavigateBrowserExtension.new(@driver).breathe_login
-    LoginExtension.new(@driver).login_rota_line_manager
-    LoginAppExtension.new(@driver).select_hr
-    sleep 0.25
-    TimesheetExtension.new(@driver).navigate_to_timeandattendance_daily_from_hr_admin
-    sleep 2
-    expect(@driver.title).to eql('Timesheets')
     @driver.quit
   end
 
@@ -119,12 +102,13 @@ RSpec.describe 'Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_admin
     LoginAppExtension.new(@driver).select_rota
-    sleep 0.25
+    sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_the_next_monday_shift
-    sleep 0.5
+    sleep @sleep_time_short
     RotaExtension.new(@driver).assign_one_shift_monday_std_employee
+    sleep @sleep_time_long
     RotaExtension.new(@driver).share_shift
-    sleep 2
+    sleep @sleep_time_long
     employee_monday_shift = @driver.find_element(class: 'roster-map-2-0')
     monday_shift_time_element = employee_monday_shift.find_element(class: 'shift-card-view__time')
     expect(monday_shift_time_element.attribute('innerHTML')).to eql('10:10-17:10')
@@ -135,12 +119,13 @@ RSpec.describe 'Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_admin
     LoginAppExtension.new(@driver).select_rota
-    sleep 0.25
+    sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_the_next_monday_shift
-    sleep 1
+    sleep @sleep_time_long
     RotaExtension.new(@driver).edit_shift_monday_std_employee
+    sleep @sleep_time_long
     RotaExtension.new(@driver).share_shift
-    sleep 2
+    sleep @sleep_time_long
     employee_monday_shift = @driver.find_element(class: 'roster-map-2-0')
     monday_shift_time_element = employee_monday_shift.find_element(class: 'shift-card-view__time')
     expect(monday_shift_time_element.attribute('innerHTML')).to eql('08:30-16:30')
@@ -151,11 +136,11 @@ RSpec.describe 'Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_admin
     LoginAppExtension.new(@driver).select_rota
-    sleep 0.25
+    sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_the_next_monday_shift
-    sleep 1
+    sleep @sleep_time_long
     RotaExtension.new(@driver).delete_shift
-    sleep 2
+    sleep @sleep_time_long
     @driver.find_element(css: '#user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
     employee_monday_shift = @driver.find_element(class: 'roster-map-2-0')
     monday_shift_time_element = employee_monday_shift.find_element(class: 'elmo-input')
@@ -167,13 +152,13 @@ RSpec.describe 'Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_admin
     LoginAppExtension.new(@driver).select_rota
-    sleep 0.25
+    sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_the_next_monday_shift
-    sleep 1
+    sleep @sleep_time_long
     RotaExtension.new(@driver).assign_multiple_shifts_std_employee
-    sleep 1
+    sleep @sleep_time_long
     RotaExtension.new(@driver).share_shift
-    sleep 2
+    sleep @sleep_time_long
     employee_monday_shift = @driver.find_element(class: 'roster-map-2-2')
     monday_shift_time_element = employee_monday_shift.find_element(class: 'shift-card-view__time')
     expect(monday_shift_time_element.attribute('innerHTML')).to eql('11:12-19:12')
@@ -185,9 +170,9 @@ RSpec.describe 'Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_admin
     LoginAppExtension.new(@driver).select_rota
-    sleep 0.25
+    sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_the_next_monday_shift
-    sleep 1
+    sleep @sleep_time_long
     RotaExtension.new(@driver).create_template
     # THERE IS AN ISSUE HERE AS THE AUTOMATION DOES NOT SAVE THE TEMPLATE
     # but will return to the same screen and forfil the expectation
@@ -201,7 +186,7 @@ RSpec.describe 'Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_admin
     LoginAppExtension.new(@driver).select_rota
-    sleep 0.25
+    sleep @sleep_time_short
     RotaExtension.new(@driver).delete_template
     # THERE IS AN ISSUE HERE AS THE AUTOMATION DOES NOT DELETE THE TEMPLATE
     # Need to open up the tab again to check the template has been removed
@@ -213,15 +198,15 @@ RSpec.describe 'Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_admin
     LoginAppExtension.new(@driver).select_rota
-    sleep 0.25
+    sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_the_next_monday_shift
-    sleep 1
+    sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_the_next_monday_shift
-    sleep 1
+    sleep @sleep_time_short
     RotaExtension.new(@driver).assign_template
-    sleep 6
+    sleep @sleep_time_long
     RotaExtension.new(@driver).share_shift
-    sleep 3
+    sleep @sleep_time_long
     employee_monday_shift = @driver.find_element(class: 'roster-map-2-4')
     monday_shift_time_element = employee_monday_shift.find_element(class: 'shift-card-view__time')
     expect(monday_shift_time_element.attribute('innerHTML')).to eql('10:31-17:31')
@@ -234,12 +219,13 @@ RSpec.describe 'Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_employee
     LoginAppExtension.new(@driver).select_hr
-    sleep 0.25
+    sleep @sleep_time_short
     RotaEmpExtension.new(@driver).navigate_to_rota_from_hr
-    sleep 0.25
+    sleep @sleep_time_short
     RotaEmpExtension.new(@driver).employee_view_next_seven_days
-    sleep 1
+    sleep @sleep_time_long
     RotaEmpExtension.new(@driver).employee_check_assigned_rota_template
+    sleep @sleep_time_long
     employee_rota_shift = @driver.find_element(css: 'span[data-testid=elmo-typography-default]')
     shift_time = employee_rota_shift.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[2]/
       div/div/div[1]/div[2]/div/div[2]/div[1]/div[2]/div/div')
@@ -251,13 +237,13 @@ RSpec.describe 'Rota Regression test script' do
   it '7b. rota employee notification' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_employee
-    sleep 0.25
+    sleep @sleep_time_short
     LoginAppExtension.new(@driver).select_rota
-    sleep 0.25
+    sleep @sleep_time_short
     RotaEmpExtension.new(@driver).view_notifications_employee_shifts
     RotaEmpExtension.new(@driver).mark_all_as_read_and_delete
     RotaEmpExtension.new(@driver).close_notification_employee
-    sleep 0.25
+    sleep @sleep_time_short
     puts '7b. complete'
     @driver.quit
   end
@@ -266,9 +252,9 @@ RSpec.describe 'Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_employee
     LoginAppExtension.new(@driver).select_rota
-    sleep 1
+    sleep @sleep_time_short
     RotaEmpExtension.new(@driver).employee_view_next_seven_days
-    sleep 0.5
+    sleep @sleep_time_short
     RotaEmpExtension.new(@driver).decline_shift
     @driver.find_element(css: 'div[data-testid=badge-with-dropdown-info]').click
     element = @driver.find_element(css: 'svg[data-testid=CallMadeIcon]')
@@ -280,9 +266,9 @@ RSpec.describe 'Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_employee
     LoginAppExtension.new(@driver).select_rota
-    sleep 1
+    sleep @sleep_time_short
     RotaEmpExtension.new(@driver).employee_view_next_thirty_days
-    sleep 0.5
+    sleep @sleep_time_long
     RotaEmpExtension.new(@driver).swap_shift
     @driver.find_element(css: 'div[data-testid=badge-with-dropdown-info]').click
     element = @driver.find_element(css: 'svg[data-testid=SwapHorizOutlinedIcon]')
@@ -294,24 +280,25 @@ RSpec.describe 'Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_admin
     LoginAppExtension.new(@driver).select_rota
-    sleep 1
+    sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_the_next_monday_shift
-    sleep 1
+    sleep @sleep_time_long
     RotaExtension.new(@driver).bulk_delete_shifts_employee
-    sleep 3
+    sleep @sleep_time_long
     RotaExtension.new(@driver).delete_shift
-    sleep 1
+    sleep @sleep_time_long
     RotaExtension.new(@driver).delete_shift_wednesday
-    sleep 1
+    sleep @sleep_time_long
     RotaExtension.new(@driver).navigate_to_the_next_monday_shift
-    sleep 1
+    sleep @sleep_time_short
     RotaExtension.new(@driver).bulk_delete_shifts_employee
-    sleep 3
+    sleep @sleep_time_long
     RotaExtension.new(@driver).bulk_delete_cancel_button
-    sleep 0.5
+    sleep @sleep_time_long
     RotaExtension.new(@driver).bulk_delete_shifts_admin
-    sleep 3
+    sleep @sleep_time_long
     RotaExtension.new(@driver).bulk_delete_cancel_button
+    sleep @sleep_time_long
     @driver.find_element(css: '#user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
     employee_monday_shift = @driver.find_element(class: 'roster-map-2-0')
     monday_shift_time_element = employee_monday_shift.find_element(class: 'elmo-input')

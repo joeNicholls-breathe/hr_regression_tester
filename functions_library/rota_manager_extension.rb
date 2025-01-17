@@ -6,8 +6,9 @@ require File.expand_path('base.rb', __dir__)
 # rubocop:disable Metrics/MethodLength
 class RotaExtension < Base
   def navigate_to_rota_from_hr_admin
+    sleep @sleep_time_long
     driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-rota]').click
-    sleep 0.5
+    sleep @sleep_time_short
     driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-rota]').click
   end
 
@@ -17,6 +18,7 @@ class RotaExtension < Base
 
   def assign_one_shift_monday_std_employee
     # roster item 0 = monday 7 = sunday
+    sleep @sleep_time_short
     driver.find_element(css: '#user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
     driver.find_element(css: 'input[id=roster-time-range-input]').send_keys '10.10-17.10'
     driver.find_element(css: '.input-with-icon__icon-wrapper > svg:nth-child(1)').click
@@ -26,11 +28,11 @@ class RotaExtension < Base
     driver.find_element(css: '#user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
     driver.find_element(css: 'input[id=roster-time-range-input]').send_keys '11.11-19.11'
     driver.find_element(css: '.input-with-icon__icon-wrapper > svg:nth-child(1)').click
-    sleep 1
+    sleep @sleep_time_long
     driver.find_element(css: '#user-cell-0-roster-2-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
     driver.find_element(css: 'input[id=roster-time-range-input]').send_keys '11.12-19.12'
     driver.find_element(css: '.input-with-icon__icon-wrapper > svg:nth-child(1)').click
-    sleep 1
+    sleep @sleep_time_short
     driver.find_element(css: '#user-cell-0-roster-4-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
     driver.find_element(css: 'input[id=roster-time-range-input]').send_keys '11.13-19.13'
     driver.find_element(css: '.input-with-icon__icon-wrapper > svg:nth-child(1)').click
@@ -44,7 +46,7 @@ class RotaExtension < Base
 
   def edit_shift_monday_std_employee
     driver.find_element(css: '#user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
-    sleep 0.25
+    sleep @sleep_time_short
     driver.find_element(css: 'input[data-testid=elmo-input-default]').clear
     driver.find_element(css: 'input[data-testid=elmo-input-default]').send_keys :backspace
     driver.find_element(css: 'input[data-testid=elmo-input-default]').send_keys one_week_one_day_string
@@ -77,13 +79,13 @@ class RotaExtension < Base
 
   def delete_shift
     driver.find_element(css: '#user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
-    sleep 0.5
+    sleep @sleep_time_short
     driver.find_element(id: 'delete-tab-btn').click
   end
 
   def delete_shift_wednesday
     driver.find_element(css: '#user-cell-0-roster-2-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
-    sleep 0.5
+    sleep @sleep_time_short
     driver.find_element(id: 'delete-tab-btn').click
   end
 
@@ -92,8 +94,9 @@ class RotaExtension < Base
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[4]
       /div[2]/div/div[2]/div[5]/div[1]/div').click
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[1]/div/div/div[2]/div/button[1]/span[1]').click
-    sleep 0.25
+    sleep @sleep_time_short
     driver.find_element(xpath: '//*[@id="confirm-bulk-delete-modal"]/div[3]/div/div[2]/button[2]').click
+    sleep @sleep_time_short
     driver.find_element(xpath: '//*[@id="confirm-bulk-delete-modal"]/div[3]/div/div[2]/button[2]').click
   end
 
@@ -102,8 +105,9 @@ class RotaExtension < Base
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[4]
       /div[2]/div/div[2]/div[4]/div[1]/div').click
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[1]/div/div/div[2]/div/button[1]/span[1]').click
-    sleep 0.50
+    sleep @sleep_time_short
     driver.find_element(xpath: '//*[@id="confirm-bulk-delete-modal"]/div[3]/div/div[2]/button[2]').click
+    sleep @sleep_time_short
     driver.find_element(xpath: '//*[@id="confirm-bulk-delete-modal"]/div[3]/div/div[2]/button[2]').click
   end
 
@@ -115,30 +119,31 @@ class RotaExtension < Base
     driver.find_element(id: 'copy-week-actions').click
     driver.find_element(css: 'div[data-testid=save-roster-template-btn]').click
     driver.find_element(id: 'template-name').send_keys todays_date_string
-    sleep 0.25
+    sleep @sleep_time_short
     driver.find_element(id: 'template-name').send_keys :backspace
     driver.find_element(id: 'template-name').send_keys :backspace
     driver.find_element(id: 'template-name').send_keys :backspace
     driver.find_element(id: 'template-name').send_keys :backspace
     driver.find_element(id: 'template-name').send_keys '24'
-    sleep 2
+    sleep @sleep_time_long
     driver.find_element(xpath: '//*[@id="save-template-modal"]/div[3]/div/div[2]/button[1]').click
   end
 
   def assign_template
     driver.find_element(xpath: '//*[@id="roster-template"]').click
     driver.find_element(xpath: '//*[@id="templates-modal"]/div[3]/div/div[1]/div/div/div/div[2]/div[2]/div/div').click
-    sleep 1
+    sleep @sleep_time_long
     driver.find_element(xpath: '//*[@id="apply-template"]').click
+    sleep @sleep_time_long
   end
 
   def delete_template
     driver.find_element(id: 'roster-template').click
-    sleep 1
+    sleep @sleep_time_short
     driver.find_element(id: 'delete-template-0').click
-    sleep 1
+    sleep @sleep_time_short
     driver.find_element(id: 'delete-template-btn').click
-    sleep 1
+    sleep @sleep_time_short
     # if we can not delete the template - organise logic maybe just refresh page but this would be a cheat
     driver.find_element(xpath: '//*[@id="templates-modal"]/div[3]/div/div[2]/button[1]').click
   end
