@@ -66,8 +66,11 @@ RSpec.describe 'Timesheet Regression test script' do
     LoginAppExtension.new(@driver).select_hr
     sleep @sleep_time_short
     TimesheetExtension.new(@driver).navigate_to_timeandattendance_daily_from_hr_admin
-    binding.pry
-    TimesheetExtension.new(@driver).add_timesheet_to_employee # today?
+    TimesheetExtension.new(@driver).add_timesheet_to_employee
+    # today
+    employee_timesheet_today = @driver.find_element(class: 'card-header-options')
+    timesheet_element = employee_timesheet_today.find_element(class: 'MuiChip-label MuiChip-labelSmall css-tavflp')
+    expect(timesheet_element.attribute('innerHTML')).to eql('Pending')
   end
 
   it '3a admin user - appoves timesheet for empployee' do
@@ -76,7 +79,6 @@ RSpec.describe 'Timesheet Regression test script' do
     LoginAppExtension.new(@driver).select_hr
     sleep @sleep_time_short
     TimesheetExtension.new(@driver).navigate_to_timeandattendance_daily_from_hr_admin
-    binding.pry
     TimesheetExtension.new(@driver).add_timesheet_pending_approval_manager # today? will need to change
   end
 
@@ -86,7 +88,6 @@ RSpec.describe 'Timesheet Regression test script' do
     LoginAppExtension.new(@driver).select_hr
     RotaEmpExtension.new(@driver).navigate_to_rota_from_hr
     TimesheetEmpExtension.new(@driver).my_timesheets
-    binding.pry
     TimesheetEmpExtension.new(@driver).add_timesheet_pending_approval_employee # 2 weeks today?
   end
   # rubocop:enable Metrics/BlockLength

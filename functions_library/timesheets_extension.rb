@@ -11,23 +11,37 @@ class TimesheetExtension < Base
   end
 
   # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   def add_timesheet_to_employee
     driver.find_element(css: 'span[data-testid=elmo-btn-label-new-shift-form]').click
     # shift employee
     driver.find_element(id: 'shift-user').click
-    driver.find_element(class: 'react-select__single-value css-qc6sy-singleValue').send_keys 'Std Employee User'
-    # project
-    driver.find_element(id: 'react-select-4-input').click
+    driver.find_element(xpath: '//*[text() = "Std Employee User"]').click
+    sleep 0.25
     # department
-    driver.find_element(id: 'react-select-5-input').click
-    # start
+    driver.find_element(id: 'area-role-dropdown').click
+    driver.find_element(xpath: '//*[text() = "Sales - employee"]').click
+    # project
+    # driver.find_element(id: 'project').click
+    # driver.find_element(xpath: '//*[text() = "Test Project One"]').click
+    # start time
     driver.find_element(id: 'timesheet-start').send_keys '12:01'
-    # end
+    # end time
     driver.find_element(id: 'timesheet-end').send_keys '20:02'
-    # break
+    # break time
+    driver.find_element(id: 'break-start-input-0').send_keys :backspace
+    driver.find_element(id: 'break-start-input-0').send_keys :backspace
+    driver.find_element(id: 'break-start-input-0').send_keys :backspace
+    driver.find_element(id: 'break-start-input-0').send_keys :backspace
+    driver.find_element(id: 'break-start-input-0').send_keys :backspace
     driver.find_element(id: 'break-start-input-0').send_keys '17:00'
+    sleep 0.25
+    driver.find_element(css: '#new-shift-card >
+      div.MuiCardActions-root.MuiCardActions-spacing.action-shift-card__actions.css-3zukih >
+      button:nth-child(1)').click
   end
   # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 
   def add_timesheet_pending_approval_manager
     driver.find_element(css: 'div[data-testid=add-timesheet-placeholder]').click
