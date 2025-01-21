@@ -2,12 +2,12 @@
 
 require 'selenium-webdriver'
 require 'logger'
-require './functions_library/ui_page_element_check'
+require './functions_library/ui_page_element_check_extension'
 require './functions_library/test_reference_extension'
 require './functions_library/navigate_browser_extension'
 require './functions_library/login_extension'
 require './functions_library/login_app_extension'
-require './functions_library/navigate_around_app_manager'
+require './functions_library/navigate_around_app_manager_extension'
 require './functions_library/settings_config/2FA/2fa_extension'
 require './functions_library/settings_config/account_config_navigation/account_configuration_navigation_extension'
 require './functions_library/settings_config/account_details/account_details_extension'
@@ -53,12 +53,21 @@ class AccountSetup < Base
     puts '5. enter company details - cancel changes'
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     puts '6. return to company settings'
-    NavigationAroundAccountConfiguration.new(driver).navigate_to_modules_chargable
-    # AccountModulesExtension.new(driver).modules_chargable_switch_on
-    # puts "switch on modules - chargable"
     NavigationAroundAccountConfiguration.new(driver).navigate_to_modules_free
     AccountModulesExtension.new(driver).modules_free_switch_on_off
-    puts '7. switch on and off modules - free'
+    puts '7a. switch on and off modules - free'
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_modules_chargable
+    AccountModulesExtension.new(driver).expenses_trial_on
+    AccountModulesExtension.new(driver).recruitment_trial_on
+    AccountModulesExtension.new(driver).rota_trial_on
+    AccountModulesExtension.new(driver).learn_trial_on
+    puts '7b. switch on modules - chargable'
+    AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_modules_free
+    # NavigationAroundAccountConfiguration.new(driver).navigate_to_modules_chargable
+    # issue with rta and learn disable button therefire WILL NEED MANUAL UPDATE IN UI UNTIL FIXED
+    # AccountModulesExtension.new(driver).modules_chargable_switch_off
+    # puts '7c. switch off modules - chargable'
     sleep 1
     AccountModulesExtension.new(driver).custom_fields
     puts '8. add a custom field'
@@ -97,7 +106,7 @@ class AccountSetup < Base
     puts '14f. Contract type - Cancel delete'
     PicklistContactExtension.new(driver).details_contract_type_add_return_breadcrumb
     puts '14g. Breadcrumb return from Contract type'
-    NavigationAroundAccountConfiguration.new(driver).return_to_picklist_menu
+    # NavigationAroundAccountConfiguration.new(driver).return_to_picklist_menu
     puts '15a. retutn to picklists'
     PicklistGenderExtension.new(driver).navigate_to_gender
     puts '15b. navigate to genders'
@@ -126,6 +135,7 @@ class AccountSetup < Base
     puts '19. Navigate to Abscence settings - Working Patterns'
     AccountWorkingPatternExtension.new(driver).working_pattern_add
     puts '20a. Working Pattern add'
+    sleep 1
     AccountWorkingPatternExtension.new(driver).working_pattern_breadcrumb
     puts '20b. Working Pattern breadcrumb return to view'
     AccountWorkingPatternExtension.new(driver).working_pattern_set_new_default
@@ -151,7 +161,8 @@ class AccountSetup < Base
     AccountHolidayAllowanceExtension.new(driver).holiday_allowances_select_default
     puts '22d. Holiday allowance select default'
     AccountHolidayAllowanceExtension.new(driver).holiday_allowance_search
-    puts '22e. Holiday allowance search'
+    puts '22e. Holiday allowance search' # what should this bring back if there is no allowance with a 'Z'
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     NavigationAroundAccountConfiguration.new(driver).navigate_to_holiday_years
     puts '23. Navigate to Abscence settings - holidays years'
@@ -181,6 +192,7 @@ class AccountSetup < Base
     puts '29. Navigate to Integrations - API setup'
     # APIExtenion.new(driver).api_key_switch_on
     # puts '30a. Api switch on'
+    # SHOULD ADD IN A CHECK AND EXPECTATION HERE
     APIExtenion.new(driver).api_key_switch_reset
     puts '30b. Api reset api key'
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
@@ -191,11 +203,12 @@ class AccountSetup < Base
     CalendarSubscriptionExtension.new(driver).amend_calendar_revert_settings
     puts '32a. Calendar subscription managed centrally, added department and reset'
     CalendarSubscriptionExtension.new(driver).calendar_allow_manage_own
+    NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     NavigationAroundAccountConfiguration.new(driver).navigate_to_calendar_subscriptions
     CalendarSubscriptionExtension.new(driver).amend_calendar_revert_settings
     puts '32b. Calendar subscription managed by employees, added can see own calendar only and reset'
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    NavigationAroundAccountConfiguration.new(driver).navigate_to_rota_cloud
+    NavigationAroundAccountConfiguration.new(driver).navigate_to_rota_cloud # add an expectation to check the screen
     puts '33. Navigate to Integrations - Rotacloud - Test manually if we need to cover this'
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     sleep 2

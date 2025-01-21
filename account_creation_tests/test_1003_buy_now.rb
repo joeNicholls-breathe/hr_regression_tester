@@ -4,8 +4,8 @@ require 'selenium-webdriver'
 require 'logger'
 require './functions_library/navigate_browser_extension'
 require './functions_library/sign_up_extension'
-require './functions_library/navigate_around_app_manager'
-require './functions_library/ui_page_element_check'
+require './functions_library/navigate_around_app_manager_extension'
+require './functions_library/ui_page_element_check_extension'
 require './functions_library/test_reference_extension'
 require './functions_library/settings_config/account_config_navigation/account_configuration_navigation_extension'
 require './functions_library/buy_now_extension'
@@ -29,7 +29,7 @@ class TestBuyNow < Base
     sleep 1
     SignUpExtension.new(driver).sign_up_std_positive
     puts '2. Sign Up Buy Now Std form - Pass'
-    sleep 30 # for the recapatcha and remove gravatar use from account
+    sleep 20 # for the recapatcha and remove gravatar use from account
     BuyNowExtension.new(driver).buy_now_monthly_micro_no_modules_positive
     puts '3. Buy Now account becomes active (Micro / Monthly / No modules) - Pass'
     CancelPLanExtension.new(driver).cancel_account

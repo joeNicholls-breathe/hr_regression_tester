@@ -8,7 +8,6 @@ class SaasExtension < Base
     sleep 8
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions').click
     sleep 0.5
-    driver.find_element(css: 'button.btn.btn-danger.modal-confirm').click
   end
 
   def search_direct_trial_account

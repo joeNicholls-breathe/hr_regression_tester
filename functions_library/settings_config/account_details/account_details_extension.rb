@@ -7,7 +7,7 @@ class AccountDetailsExtension < Base
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
   def company_details_data_entry_edit_positive
-    driver.find_element(xpath: '/html/body/section[2]/div[2]/a').click
+    driver.find_element(xpath: '/html/body/div[3]/div/section/div[2]/a').click
     # company address
     driver.find_element(id: 'account_name').clear
     driver.find_element(id: 'account_name').send_keys 'Regression Setup Account Ltd'
@@ -86,7 +86,7 @@ class AccountDetailsExtension < Base
   end
 
   def company_details_data_entry_cancel_changes
-    driver.find_element(xpath: '/html/body/section[2]/div[2]/a').click
+    driver.find_element(xpath: '/html/body/div[4]/div/section/div[2]/a').click
     # company address
     driver.find_element(id: 'account_name').clear
     driver.find_element(id: 'account_name').send_keys 'Regression Setup Account Ltd'

@@ -3,10 +3,17 @@
 require File.expand_path('base.rb', __dir__)
 class LoginAppExtension < Base
   def select_hr
-    driver.find_element(class: 'hr').click
+    a = wait.until { driver.find_element(class: 'hr') }
+    a.click
   end
 
   def select_saas
-    driver.find_element(class: 'saas').click
+    a = wait.until { driver.find_element(class: 'saas') }
+    a.click
+  end
+
+  def select_rota
+    a = wait.until { driver.find_element(class: 'rta') }
+    a.click
   end
 end

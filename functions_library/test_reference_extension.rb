@@ -43,6 +43,11 @@ module TestRefExtension
     oneweek.strftime('%d/%m/%Y')
   end
 
+  def one_week_one_day_string
+    oneweek = todays_date + 8.days
+    oneweek.strftime('%d/%m/%Y')
+  end
+
   def one_week_ago_string
     weekago = todays_date + 7.days
     weekago.strftime('%d/%m/%Y')

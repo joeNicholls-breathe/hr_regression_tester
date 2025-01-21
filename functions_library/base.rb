@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'selenium-webdriver'
+require 'rspec'
 require 'roo'
 require_relative '../settings'
 require './functions_library/test_reference_extension'
@@ -14,10 +15,12 @@ class Base
 
   def initialize(driver)
     @driver = driver
-    @driver.manage.timeouts.implicit_wait = 3
+    @driver.manage.timeouts.implicit_wait = 10
+    @sleep_time_long = (ENV['SLEEPTIME_LONG'] || 4).to_f
+    @sleep_time_short = (ENV['SLEEPTIME_SMALL'] || 1).to_f
   end
 
   def wait
-    Selenium::WebDriver::Wait.new(timeout: 3)
+    Selenium::WebDriver::Wait.new(timeout: 10)
   end
 end

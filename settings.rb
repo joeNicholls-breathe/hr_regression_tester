@@ -30,7 +30,11 @@ module Settings
         setup_acc_email_perms_holiday: 'ha@auto-reg.co.uk',
         setup_acc_email_perms_expenses: 'expenses@auto-reg.co.uk',
         functionality_admin_user: 'admin@autofunctionality.com',
-        functionality_employee_user: 'emp@autofunctionality.com'
+        functionality_employee_user: 'emp@autofunctionality.com',
+        rota_admin_email: 'admin@reg-rota.co.uk',
+        rota_assign_shift_to_admin_user: 'user-cell-0-roster-4-9d33e8cf-4e6f-48a8-a47c-04eef7b027c6',
+        rota_employee_email: 'std.emp@reg-rota.co.uk',
+        rota_line_manager_email: 'line.man@reg-rota.co.uk'
       }
     }
   end

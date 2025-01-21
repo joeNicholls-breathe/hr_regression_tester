@@ -5,24 +5,23 @@ require File.expand_path('../../base.rb', __dir__)
 class PicklistContactExtension < Base
   # contract type
   def details_navigate_to_contract_type
-    driver.find_element(xpath: '/html/body/section[2]/div[3]/div[1]/div[3]/a[1]').click
+    driver.find_element(xpath: '/html/body/div[3]/div/section/div[3]/div[1]/div[3]/a[1]').click
   end
 
   def details_contract_types_add
-    driver.find_element(xpath: '/html/body/section[2]/div[2]').click
+    driver.find_element(xpath: '/html/body/div[3]/div/section/div[2]/a').click
     driver.find_element(id: 'company_contract_type_name').send_keys("Add Contract Type#{todays_date_string}")
     driver.find_element(css: '#new_company_contract_type > p > input').click
   end
 
   def details_contract_types_add_cancel
-    driver.find_element(xpath: '/html/body/section[2]/div[2]').click
+    driver.find_element(xpath: '/html/body/div[4]/div/section/div[2]/a').click
     driver.find_element(id: 'company_contract_type_name').send_keys 'Add Contract Type Cancel'
     driver.find_element(xpath: '//*[@id="new_company_contract_type"]/p/a').click
   end
 
   def details_contract_type_add_return_breadcrumb
-    driver.find_element(xpath: '/html/body/section[2]/div[2]').click
-    driver.find_element(xpath: '/html/body/section/div/div/div/a').click
+    driver.find_element(xpath: '/html/body/div[4]/div/section/div[1]/a').click
   end
 
   def details_contract_types_edit
