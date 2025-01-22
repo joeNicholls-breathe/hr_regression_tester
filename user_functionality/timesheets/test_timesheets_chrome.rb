@@ -66,11 +66,16 @@ RSpec.describe 'Timesheet Regression test script' do
     LoginAppExtension.new(@driver).select_hr
     sleep @sleep_time_short
     TimesheetExtension.new(@driver).navigate_to_timeandattendance_daily_from_hr_admin
-    TimesheetExtension.new(@driver).add_timesheet_to_employee
-    # today
+    TimesheetExtension.new(@driver).add_timesheet_to_employee # today
+    # rubocop:disable Layout/LineLength
     employee_timesheet_today = @driver.find_element(class: 'card-header-options')
-    timesheet_element = employee_timesheet_today.find_element(class: 'MuiChip-label MuiChip-labelSmall css-tavflp')
-    expect(timesheet_element.attribute('innerHTML')).to eql('Pending')
+    timesheet_element = employee_timesheet_today.find_element(css: '#root > div.new-navigation >
+      main > div.jss7.css-y3yp6x > div.elmo-loadingoverlay > div > div > div.MuiCardHeader-root.css-faujvq >
+      div.MuiCardHeader-action.css-1bh09gn > div > div')
+    # ISSUE retrieving the innerHTML
+    expect(timesheet_element.attribute('innerHTML')).to eql('<span class=MuiChip-label MuiChip-labelSmall css-tavflp > Pending</span>')
+    # expect(timesheet_element.attribute('innerHTML')).to eql('Pending')
+    # rubocop:enable Layout/LineLength
   end
 
   it '3a admin user - appoves timesheet for empployee' do

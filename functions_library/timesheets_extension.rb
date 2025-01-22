@@ -35,9 +35,12 @@ class TimesheetExtension < Base
     driver.find_element(id: 'break-start-input-0').send_keys :backspace
     driver.find_element(id: 'break-start-input-0').send_keys :backspace
     driver.find_element(id: 'break-start-input-0').send_keys '17:00'
-    sleep 0.25
+    sleep 1.0
     driver.find_element(css: '#new-shift-card >
-      div.MuiCardActions-root.MuiCardActions-spacing.action-shift-card__actions.css-3zukih >
+     div.MuiCardActions-root.MuiCardActions-spacing.action-shift-card__actions.css-3zukih >
+      button:nth-child(1)').click
+    driver.find_element(css: '#new-shift-card >
+     div.MuiCardActions-root.MuiCardActions-spacing.action-shift-card__actions.css-3zukih >
       button:nth-child(1)').click
   end
   # rubocop:enable Metrics/AbcSize
