@@ -49,7 +49,7 @@ module TestRefExtension
   end
 
   def one_week_ago_string
-    weekago = todays_date + 7.days
+    weekago = todays_date - 7.days
     weekago.strftime('%d/%m/%Y')
   end
 
