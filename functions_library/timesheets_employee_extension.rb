@@ -32,12 +32,12 @@ class TimesheetEmpExtension < Base
     driver.find_element(xpath: '/html/body/div[3]/div[3]/div/div[3]/button[2]').click
   end
 
-  def my_approve_timesheet
+  def my_approved_timesheet
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div[1]/div/div/div/div[1]/label[4]').click
-    # amend filter to approved only 
+    # amend filter to approved only
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div[1]/div/div/div/div[2]/div/div/div/button').click
     driver.find_element(id: 'elmo-checkbox-pending').click
-    driver.find_element(xpath:'//*[@id="FilterCustomModal"]/div[3]/div/div[2]/button').click
+    driver.find_element(xpath: '//*[@id="FilterCustomModal"]/div[3]/div/div[2]/button').click
   end
 end
 # rubocop:enable Metrics/AbcSize

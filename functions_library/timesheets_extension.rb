@@ -91,6 +91,9 @@ class TimesheetExtension < Base
 
   def add_timesheet_weekly_view
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[5]').click
+    driver.find_element(xpath: '/html/body/div[2]/div[3]/form/div/div[2]/div[1]/div/input').send_keys '11.04'
+    driver.find_element(xpath: '/html/body/div[2]/div[3]/form/div/div[2]/div[2]/div/input').send_keys '19.04'
+    driver.find_element(xpath: '/html/body/div[2]/div[3]/form/div/div[2]/div[2]/div/input').send_keys :enter
   end
 
   def add_timesheet_pending_approval_manager
@@ -136,21 +139,35 @@ class TimesheetExtension < Base
     sleep 5
   end
 
+  # Weekly view issues with page hidden menu of actions
   def approve_weekly_view_timesheets
-    driver.find_element(css: '').click
+    # rubocop:disable Layout/LineLength
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[5]/div/div/div').click
+    # Issue with selecting the underlying approve icon
+    # rubocop:enable Layout/LineLength
   end
 
-  def edit_timesheet_weekly_view
-    driver.find_element(css: '').click
-  end
-
+  # approve, edit, add new and delete from the weekly tab can not currently be targeted
   def bulk_approve
-    # can it be done on lm view of weekly will i need more data?
-    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[1]/div/div[3]/div/div[2]/button/span[2]').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[1]/div/div[3]/div/div[2]').click
+    # rubocop:disable Layout/LineLength
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[5]/div/div/div').click
+    # rubocop:enable Layout/LineLength
+    driver.find_element(css: 'button[data-testid=bulk-approve-confirm-btn]').click
+    driver.find_element(css: 'button[data-testid=bulk-approve-modal-confirm-btn]').click
   end
 
   def bulk_remove
-    driver.find_element(css: '').click
+    driver.find_element(css: 'button[data-testid=bulk-delete-mode-btn]').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[1]').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[2]').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[3]').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[4]').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[5]').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[6]').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[7]').click
+    driver.find_element(css: 'button[data-testid=bulk-delete-confirm-btn]').click
+    driver.find_element(css: 'button[data-testid=bulk-delete-modal-confirm-btn]').click
   end
 end
 # rubocop:enable Metrics/AbcSize
