@@ -12,7 +12,7 @@ require './functions_library/sickness_triggers_extension'
 class BradfordFactorTriggers
   attr_accessor :driver
 
-  # will test that a line manager can load the sickness triggers page
+  # Tests the create, edit, delete functions for bradford factor triggers
 
   def initialize
     @driver = Selenium::WebDriver.for :chrome

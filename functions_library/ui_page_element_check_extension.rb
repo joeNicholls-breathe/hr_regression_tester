@@ -48,7 +48,7 @@ class PageValueCheck < Base
   end
 
   def signup_fail_check
-    return puts 'Dashboard reached' if driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[1]/a')
+    puts 'Dashboard reached' if driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[1]/a')
   rescue Selenium::WebDriver::Error::NoSuchElementError
     puts 'Check - Account was not Signed Up - TEST Pass - Element not Found'
   end
@@ -68,13 +68,13 @@ class PageValueCheck < Base
   end
 
   def leave_request_clashes_with_existing_absence
-    return puts 'absence created' if driver.find_element(css: "a[href='/employees/20717/absences']")
+    puts 'absence created' if driver.find_element(css: "a[href='/employees/20717/absences']")
   rescue Selenium::WebDriver::Error::NoSuchElementError
     puts 'Check - Pass - Absence not created - Clashes with existing absence'
   end
 
   def leave_request_clashes_with_blackout_check
-    return puts 'absence created' if driver.find_element(css: "a[href='/employees/20717/absences']")
+    puts 'absence created' if driver.find_element(css: "a[href='/employees/20717/absences']")
   rescue Selenium::WebDriver::Error::NoSuchElementError
     puts 'Check - Pass - Absence not created - Clashes with company blackout'
   end
@@ -92,7 +92,7 @@ class PageValueCheck < Base
   end
 
   def more_than_one_open_sickness_record
-    return puts 'Pass - Sickness not created - Employee can only have one open sickness' if
+    puts 'Pass - Sickness not created - Employee can only have one open sickness' if
       driver.find_element(css: '#new_sickness > fieldset > div.start-section > div.form-group.has-error')
   rescue Selenium::WebDriver::Error::NoSuchElementError
     puts 'Sickness created'
