@@ -150,9 +150,13 @@ class TimesheetExtension < Base
   # approve, edit, add new and delete from the weekly tab can not currently be targeted
   def bulk_approve
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[1]/div/div[3]/div/div[2]').click
-    # rubocop:disable Layout/LineLength
-    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[5]/div/div/div').click
-    # rubocop:enable Layout/LineLength
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[1]').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[2]').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[3]').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[4]').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[5]').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[6]').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[7]').click
     driver.find_element(css: 'button[data-testid=bulk-approve-confirm-btn]').click
     driver.find_element(css: 'button[data-testid=bulk-approve-modal-confirm-btn]').click
   end
@@ -166,8 +170,13 @@ class TimesheetExtension < Base
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[5]').click
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[6]').click
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[7]').click
-    driver.find_element(css: 'button[data-testid=bulk-delete-confirm-btn]').click
-    driver.find_element(css: 'button[data-testid=bulk-delete-modal-confirm-btn]').click
+    button = driver.find_element(css: 'button[data-testid=bulk-delete-confirm-btn]')
+    if button.enabled?
+      driver.find_element(css: 'button[data-testid=bulk-delete-confirm-btn]').click
+      driver.find_element(css: 'button[data-testid=bulk-delete-modal-confirm-btn]').click
+    else
+      driver.find_element(css: 'button[data-testid=bulk-delete-mode-cancel-btn]').click
+    end
   end
 end
 # rubocop:enable Metrics/AbcSize

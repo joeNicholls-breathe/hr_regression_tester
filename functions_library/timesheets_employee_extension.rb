@@ -9,6 +9,10 @@ class TimesheetEmpExtension < Base
     driver.find_element(link_text: 'My Timesheets').click
   end
 
+  def last_six_months
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div[1]/div/div/div/div[1]/label[4]').click
+  end
+
   def add_timesheet_pending_approval_employee_last_week
     driver.find_element(xpath: '//*[@id="createTimesheetBtn"]').click
     sleep 0.25
@@ -32,8 +36,7 @@ class TimesheetEmpExtension < Base
     driver.find_element(xpath: '/html/body/div[3]/div[3]/div/div[3]/button[2]').click
   end
 
-  def my_approved_timesheet
-    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div[1]/div/div/div/div[1]/label[4]').click
+  def approved_only_timesheet
     # amend filter to approved only
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div[1]/div/div/div/div[2]/div/div/div/button').click
     driver.find_element(id: 'elmo-checkbox-pending').click

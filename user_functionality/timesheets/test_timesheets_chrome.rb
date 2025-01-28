@@ -67,6 +67,12 @@ RSpec.describe 'Timesheet Regression test script' do
     TimesheetExtension.new(@driver).navigate_to_timeandattendance_daily_from_hr
     TimesheetExtension.new(@driver).add_timesheet_to_employee_today
     sleep @sleep_time_long
+    # rubocop:disable Layout/LineLength
+    employee_timesheet = @driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div[2]/div/div/div[2]/div[1]/div[2]/div/div')
+    # rubocop:enable Layout/LineLength
+    timesheet_start_time = employee_timesheet.attribute('innerHTML').split('>')[1].split('<')[0]
+    expect(timesheet_start_time).to eql('12:01')
+    @driver.quit
   end
 
   it '2b line manager user - adds timesheet to employee' do
@@ -78,6 +84,12 @@ RSpec.describe 'Timesheet Regression test script' do
     TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
     TimesheetExtension.new(@driver).add_timesheet_to_employee_yesterday
     sleep @sleep_time_long
+    # rubocop:disable Layout/LineLength
+    employee_timesheet = @driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div[2]/div/div/div[2]/div[1]/div[2]/div/div')
+    # rubocop:enable Layout/LineLength
+    timesheet_start_time = employee_timesheet.attribute('innerHTML').split('>')[1].split('<')[0]
+    expect(timesheet_start_time).to eql('13:02')
+    @driver.quit
   end
 
   it '2c employee - add timesheet to self' do
@@ -88,6 +100,14 @@ RSpec.describe 'Timesheet Regression test script' do
     TimesheetEmpExtension.new(@driver).my_timesheets
     TimesheetEmpExtension.new(@driver).add_timesheet_pending_approval_employee_last_week
     sleep @sleep_time_long
+    TimesheetEmpExtension.new(@driver).last_six_months
+    # rubocop:disable Layout/LineLength
+    employee_timesheet = @driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div[2]/div/div/div[2]/div[1]/div/div[1]/div[2]/div/div[2]')
+    # rubocop:enable Layout/LineLength
+    sleep @sleep_time_long
+    timesheet_times = employee_timesheet.attribute('innerHTML')
+    expect(timesheet_times).to eql('09:03 - 17:03')
+    @driver.quit
   end
 
   it '3a admin user - appoves timesheet for employee' do
@@ -98,6 +118,12 @@ RSpec.describe 'Timesheet Regression test script' do
     TimesheetExtension.new(@driver).navigate_to_timeandattendance_daily_from_hr
     TimesheetExtension.new(@driver).approve_timesheet
     sleep @sleep_time_long
+    # rubocop:disable Layout/LineLength
+    employee_timesheet = @driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div[2]/div/div/div[1]/div[3]/div/div/span')
+    # rubocop:enable Layout/LineLength
+    timesheet_approved = employee_timesheet.attribute('innerHTML')
+    expect(timesheet_approved).to eql('Approved')
+    @driver.quit
   end
 
   it '3b admin user - edit timesheet for employee yesterday' do
@@ -107,8 +133,15 @@ RSpec.describe 'Timesheet Regression test script' do
     sleep @sleep_time_short
     TimesheetExtension.new(@driver).navigate_to_timeandattendance_daily_from_hr
     TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
+    sleep @sleep_time_short
     TimesheetExtension.new(@driver).edit_timesheet_on_daily
     sleep @sleep_time_long
+    # rubocop:disable Layout/LineLength
+    employee_timesheet = @driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div[2]/div/div/div[2]/div[1]/div[2]/div/div')
+    # rubocop:enable Layout/LineLength
+    timesheet_start_time = employee_timesheet.attribute('innerHTML').split('>')[1].split('<')[0]
+    expect(timesheet_start_time).to eql('10:15')
+    @driver.quit
   end
 
   it '3c admin user - removes timesheet for employee today' do
@@ -141,6 +174,8 @@ RSpec.describe 'Timesheet Regression test script' do
     sleep @sleep_time_short
     TimesheetExtension.new(@driver).navigate_to_timeandattendance_weekly_from_hr
     sleep @sleep_time_short
+    TimesheetExtension.new(@driver).bulk_approve
+    sleep @sleep_time_long
     TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
     sleep @sleep_time_short
     TimesheetExtension.new(@driver).bulk_approve
@@ -153,7 +188,8 @@ RSpec.describe 'Timesheet Regression test script' do
     LoginAppExtension.new(@driver).select_hr
     RotaEmpExtension.new(@driver).navigate_to_rota_from_hr
     TimesheetEmpExtension.new(@driver).my_timesheets
-    TimesheetEmpExtension.new(@driver).my_approved_timesheet
+    TimesheetEmpExtension.new(@driver).last_six_months
+    TimesheetEmpExtension.new(@driver).approved_only_timesheet
     sleep @sleep_time_long
   end
 
@@ -164,6 +200,18 @@ RSpec.describe 'Timesheet Regression test script' do
     sleep @sleep_time_short
     TimesheetExtension.new(@driver).navigate_to_timeandattendance_weekly_from_hr
     sleep @sleep_time_short
+    TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
+    sleep @sleep_time_short
+    TimesheetExtension.new(@driver).bulk_remove
+    sleep @sleep_time_long
+    TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
+    sleep @sleep_time_short
+    TimesheetExtension.new(@driver).bulk_remove
+    sleep @sleep_time_long
+    TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
+    sleep @sleep_time_short
+    TimesheetExtension.new(@driver).bulk_remove
+    sleep @sleep_time_long
     TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
     sleep @sleep_time_short
     TimesheetExtension.new(@driver).bulk_remove
