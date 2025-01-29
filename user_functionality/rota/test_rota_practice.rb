@@ -87,11 +87,31 @@ class Rota < Base
     RotaEmpExtension.new(@driver).navigate_to_rota_from_hr
     TimesheetEmpExtension.new(@driver).add_timesheet_pending_approval_employee
   end
-end
 
+  it '4b line manager - approve on weekly view' do
+    NavigateBrowserExtension.new(@driver).breathe_login
+    LoginExtension.new(@driver).login_rota_line_manager
+    LoginAppExtension.new(@driver).select_hr
+    sleep @sleep_time_short
+    TimesheetExtension.new(@driver).navigate_to_timeandattendance_weekly_from_hr
+    sleep @sleep_time_short
+    TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
+    sleep @sleep_time_short
+    TimesheetExtension.new(@driver).approve_weekly_view_timesheets
+    sleep @sleep_time_long
+  end
+
+  it '4c line manager - edit on weekly view' do
+    NavigateBrowserExtension.new(@driver).breathe_login
+    LoginExtension.new(@driver).login_rota_line_manager
+    LoginAppExtension.new(@driver).select_hr
+    sleep @sleep_time_short
+    TimesheetExtension.new(@driver).edit_timesheet_weekly_view
+    sleep @sleep_time_long
+  end
+end
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/MethodLength
-
 # Rota.new.test_rota
 # Rota.new.employee
 Rota.new.timesheets
