@@ -20,9 +20,9 @@ RSpec.describe 'Timesheet Regression test script' do
     @sleep_time_long = (ENV['SLEEPTIME_LONG'] || 4).to_f
     @sleep_time_short = (ENV['SLEEPTIME_SMALL'] || 1).to_f
     options = Selenium::WebDriver::Chrome::Options.new
-    # options.add_argument('--headless')
-    # options.add_argument('--disable-gpu')
-    # options.add_argument('--window-size=1920,1080')
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
     @driver = Selenium::WebDriver.for :chrome, options:
   end
 
@@ -55,6 +55,7 @@ RSpec.describe 'Timesheet Regression test script' do
     LoginAppExtension.new(@driver).select_hr
     RotaEmpExtension.new(@driver).navigate_to_rota_from_hr
     TimesheetEmpExtension.new(@driver).my_timesheets
+    sleep @sleep_time_long
     expect(@driver.title).to eql('Employee dashboard | My Timesheet')
     @driver.quit
   end
@@ -82,6 +83,7 @@ RSpec.describe 'Timesheet Regression test script' do
     sleep @sleep_time_short
     TimesheetExtension.new(@driver).navigate_to_timeandattendance_daily_from_hr
     TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
+    sleep @sleep_time_short
     TimesheetExtension.new(@driver).add_timesheet_to_employee_yesterday
     sleep @sleep_time_long
     # rubocop:disable Layout/LineLength
@@ -152,6 +154,11 @@ RSpec.describe 'Timesheet Regression test script' do
     TimesheetExtension.new(@driver).navigate_to_timeandattendance_daily_from_hr
     TimesheetExtension.new(@driver).remove_timesheet_daily
     sleep @sleep_time_long
+    banner = @driver.find_element(class: 'elmo-message-block__header')
+    employee_timesheet = banner.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div[2]/div/div/div')
+    timesheet_banner = employee_timesheet.attribute('innerHTML').split('>')[1].split('<')[0]
+    expect(timesheet_banner).to eql('No shifts were found matching your filter.')
+    @driver.quit
   end
 
   it '4a line manager - create timesheet for employee on weekly view' do
@@ -165,6 +172,10 @@ RSpec.describe 'Timesheet Regression test script' do
     sleep @sleep_time_short
     TimesheetExtension.new(@driver).add_timesheet_weekly_view
     sleep @sleep_time_long
+    employee_timesheet = @driver.find_element(css: 'p[data-testid=timesheet-time]')
+    timesheet_start_and_end_time = employee_timesheet.attribute('innerHTML')
+    expect(timesheet_start_and_end_time).to eql('11:04 - 19:04')
+    @driver.quit
   end
 
   it '4b line manager - bulk approve on weekly view' do
@@ -180,6 +191,9 @@ RSpec.describe 'Timesheet Regression test script' do
     sleep @sleep_time_short
     TimesheetExtension.new(@driver).bulk_approve
     sleep @sleep_time_long
+    timesheet_approved = @driver.find_element(css: 'svg[data-testid=CheckCircleOutlinedIcon]')
+    timesheet_approved.displayed?
+    @driver.quit
   end
 
   it '5a employee - review approved timesheet and notification' do
@@ -189,8 +203,15 @@ RSpec.describe 'Timesheet Regression test script' do
     RotaEmpExtension.new(@driver).navigate_to_rota_from_hr
     TimesheetEmpExtension.new(@driver).my_timesheets
     TimesheetEmpExtension.new(@driver).last_six_months
+    sleep @sleep_time_short
     TimesheetEmpExtension.new(@driver).approved_only_timesheet
     sleep @sleep_time_long
+    # rubocop:disable Layout/LineLength
+    employee_timesheet = @driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div[2]/div/div/div[2]/div[1]/div/div[2]/div[2]/div/span')
+    # rubocop:enable Layout/LineLength
+    timesheet_approved_only = employee_timesheet.attribute('innerHTML')
+    expect(timesheet_approved_only).to eql('Approved')
+    @driver.quit
   end
 
   it '6a line manager - bulk remove on weekly view' do
@@ -199,8 +220,6 @@ RSpec.describe 'Timesheet Regression test script' do
     LoginAppExtension.new(@driver).select_hr
     sleep @sleep_time_short
     TimesheetExtension.new(@driver).navigate_to_timeandattendance_weekly_from_hr
-    sleep @sleep_time_short
-    TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
     sleep @sleep_time_short
     TimesheetExtension.new(@driver).bulk_remove
     sleep @sleep_time_long
