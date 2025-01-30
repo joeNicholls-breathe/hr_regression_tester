@@ -27,8 +27,18 @@ RSpec.describe 'Timesheet Regression test script' do
     @driver = Selenium::WebDriver.for :chrome, options:
   end
 
-  # accessing Timesheet application as users
-  it '1a. RTA admin - login and navigate to TIMESHEEET from hr' do
+  # holidays
+  it '1a. Employee holiday added to HR' do
+  end
+
+  it '1a1. Employee holiday added to HR on a timesheet day' do
+  end
+
+  it '1b. Employee other leave added to HR' do
+  end
+
+  # sickness
+  it '2a. Employee sickness added to HR' do
   end
   # rubocop:enable Metrics/BlockLength
 end
