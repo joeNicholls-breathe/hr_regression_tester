@@ -81,4 +81,14 @@ module TestRefExtension
     five_year = todays_date + 5.years
     five_year.strftime('%d/%m/%Y')
   end
+
+  # rubocop:disable Rails/Date
+  # rubocop:disable Lint/AmbiguousOperatorPrecedence
+  def next_monday
+    today = Date.today
+    next_monday = today + ((1 - today.wday) % 7 + 7) % 7
+    next_monday.strftime('%d/%m/%Y')
+  end
+  # rubocop:enable Rails/Date
+  # rubocop:enable Lint/AmbiguousOperatorPrecedence
 end

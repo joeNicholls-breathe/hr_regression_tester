@@ -73,6 +73,10 @@ class AppNavigationExtensionManager < Base
     driver.find_element(css: 'href="/account/plan_and_billing"').click
   end
 
+  def navigate_to_rota_employee_add_holiday
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/26349/leave_requests/new')
+  end
+
   def search_employee_hr
     driver.find_element(css: 'input[data-element-id=header-employee-search]').send_keys 'HR User'
     sleep 1
