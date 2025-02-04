@@ -178,7 +178,9 @@ class HolidayExtension < Base
     drop = driver.find_element(:id, 'employee_id')
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:text, 'Std Employee User')
-    finish_purge
+    driver.find_element(class: 'confirm-checkbox').click
+    driver.find_element(id: 'continue-purge').click
+    driver.find_element(xpath: '//*[@id="purge_data_modal"]/div/div/div[3]/button[2]').click
   end
 end
 # rubocop:enable Metrics/ClassLength

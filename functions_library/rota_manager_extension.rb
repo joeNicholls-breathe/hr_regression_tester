@@ -83,6 +83,12 @@ class RotaExtension < Base
     driver.find_element(id: 'delete-tab-btn').click
   end
 
+  def delete_shift_with_leave
+    driver.find_element(css: '#user-cell-1-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
+    sleep @sleep_time_short
+    driver.find_element(id: 'delete-tab-btn').click
+  end
+
   def delete_shift_wednesday
     driver.find_element(css: '#user-cell-0-roster-2-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
     sleep @sleep_time_short

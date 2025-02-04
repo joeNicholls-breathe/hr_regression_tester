@@ -44,7 +44,8 @@ RSpec.describe 'Timesheet Regression test script' do
     RotaExtension.new(@driver).navigate_to_the_next_monday_shift
     sleep @sleep_time_short
     employee_shift_tomorrow = @driver.find_element(class: 'roster-map-2-0')
-    shift_element = employee_shift_tomorrow.find_element(class: 'leave-card').split('>')[2].split('<')[2]
+    # shift_element = employee_shift_tomorrow.find_element(class: 'leave-card').split('>')[2].split('<')[2]
+    shift_element = employee_shift_tomorrow.find_element(class: 'jss68')
     expect(shift_element.attribute('innerHTML')).to eql('On Leave')
     sleep @sleep_time_short
     HolidayExtension.new(@driver).select_rota_employee_holiday_to_purge
@@ -54,9 +55,33 @@ RSpec.describe 'Timesheet Regression test script' do
   it '1b. Employee holiday added to HR on a day where a rota is already present in RTA' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_admin
-    sleep @sleep_time_long
-    LoginAppExtension.new(@driver).select_hr
     sleep @sleep_time_short
+    LoginAppExtension.new(@driver).select_rota
+    sleep @sleep_time_short
+    RotaExtension.new(@driver).navigate_to_the_next_monday_shift
+    sleep @sleep_time_short
+    RotaExtension.new(@driver).assign_one_shift_monday_std_employee
+    sleep @sleep_time_long
+    RotaExtension.new(@driver).share_shift
+    sleep @sleep_time_long
+    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_add_holiday
+    HolidayExtension.new(@driver).holiday_request_for_next_monday
+    sleep @sleep_time_short
+    RotaExtension.new(@driver).navigate_to_rota_from_hr_admin
+    sleep @sleep_time_short
+    RotaExtension.new(@driver).navigate_to_the_next_monday_shift
+    sleep @sleep_time_short
+    employee_shift_tomorrow = @driver.find_element(class: 'roster-map-2-0')
+    sleep @sleep_time_short
+    # rubocop:disable Layout/LineLength
+    shift_element = employee_shift_tomorrow.find_element(xpath: '//*[@id="user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17"]/div/div[1]/div[2]')
+    # rubocop:enable Layout/LineLength
+    expect(shift_element.attribute('innerHTML')).to eql('On Leave')
+    sleep @sleep_time_short
+    RotaExtension.new(@driver).delete_shift_with_leave
+    sleep @sleep_time_long
+    HolidayExtension.new(@driver).select_rota_employee_holiday_to_purge
+    @driver.quit
   end
 
   it '1c. Employee holiday added to a date and then a rota shift is then added to RTA' do

@@ -84,9 +84,18 @@ module TestRefExtension
 
   # rubocop:disable Rails/Date
   # rubocop:disable Lint/AmbiguousOperatorPrecedence
-  def next_monday
+  def next_monday_not
+    # can not handle if the day is monday today
     today = Date.today
     next_monday = today + ((1 - today.wday) % 7 + 7) % 7
+    next_monday.strftime('%d/%m/%Y')
+  end
+
+  def next_monday
+    today = Date.today
+    days_until_monday = (8 - today.wday) % 7 # Ensures at least 1 day ahead
+    days_until_monday = 7 if days_until_monday.zero? # If today is Monday, get next Monday
+    next_monday = today + days_until_monday
     next_monday.strftime('%d/%m/%Y')
   end
   # rubocop:enable Rails/Date
