@@ -77,6 +77,14 @@ class AppNavigationExtensionManager < Base
     driver.navigate.to('https://hr.breathehrstaging.com/employees/26349/leave_requests/new')
   end
 
+  def navigate_to_rota_employee_add_sickness
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/26349/sicknesses/new')
+  end
+
+  def navigate_to_rota_employee_sickness_index
+    driver.navigate.to('https://hr.breathehrstaging.com/employees/26349/sicknesses')
+  end
+
   def search_employee_hr
     driver.find_element(css: 'input[data-element-id=header-employee-search]').send_keys 'HR User'
     sleep 1

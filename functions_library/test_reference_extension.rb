@@ -98,6 +98,13 @@ module TestRefExtension
     next_monday = today + days_until_monday
     next_monday.strftime('%d/%m/%Y')
   end
+
+  def last_monday
+    today = Date.today
+    days_since_last_monday = (today.wday - 1) % 7 + 7 # Always at least 7 days back
+    last_monday = today - days_since_last_monday
+    last_monday.strftime('%d/%m/%Y')
+  end
   # rubocop:enable Rails/Date
   # rubocop:enable Lint/AmbiguousOperatorPrecedence
 end

@@ -77,6 +77,10 @@ class RotaExtension < Base
     driver.find_element(css: '#header-navigation-right').click
   end
 
+  def navigate_to_last_monday_shift
+    driver.find_element(css: '#header-navigation-left').click
+  end
+
   def delete_shift
     driver.find_element(css: '#user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
     sleep @sleep_time_short
@@ -152,6 +156,28 @@ class RotaExtension < Base
     sleep @sleep_time_short
     # if we can not delete the template - organise logic maybe just refresh page but this would be a cheat
     driver.find_element(xpath: '//*[@id="templates-modal"]/div[3]/div/div[2]/button[1]').click
+  end
+
+  def create_shift_with_leave
+    driver.find_element(css: '#user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
+    driver.find_element(xpath: '//*[@id="user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17"]/div/div[2]').click
+    driver.find_element(id: 'start-time-input').send_keys :backspace
+    driver.find_element(id: 'start-time-input').send_keys :backspace
+    driver.find_element(id: 'start-time-input').send_keys :backspace
+    driver.find_element(id: 'start-time-input').send_keys :backspace
+    driver.find_element(id: 'start-time-input').send_keys :backspace
+    driver.find_element(id: 'start-time-input').send_keys '09:31'
+    driver.find_element(id: 'end-time-input').send_keys :backspace
+    driver.find_element(id: 'end-time-input').send_keys :backspace
+    driver.find_element(id: 'end-time-input').send_keys :backspace
+    driver.find_element(id: 'end-time-input').send_keys :backspace
+    driver.find_element(id: 'end-time-input').send_keys :backspace
+    driver.find_element(id: 'end-time-input').send_keys '17:31'
+    driver.find_element(xpath: '//*[@id="submit-rostered-shift-btn"]/span[1]').click
+  end
+
+  def shift_with_leave_accept
+    driver.find_element(css: '#approve-overlap-btn').click
   end
 end
 # rubocop:enable Metrics/AbcSize
