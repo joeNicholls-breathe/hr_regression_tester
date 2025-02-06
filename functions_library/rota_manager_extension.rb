@@ -179,6 +179,13 @@ class RotaExtension < Base
   def shift_with_leave_accept
     driver.find_element(css: '#approve-overlap-btn').click
   end
+
+  def navigate_to_rota_employees_people
+    sleep @sleep_time_short
+    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-rota]').click
+    sleep @sleep_time_short
+    driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-people]').click
+  end
 end
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/ClassLength

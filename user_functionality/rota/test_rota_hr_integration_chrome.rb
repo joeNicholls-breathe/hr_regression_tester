@@ -225,7 +225,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     shift_element = employee_shift_tomorrow.find_element(class: 'jss43')
     expect(shift_element.attribute('innerHTML')).to eql('Sickness')
     sleep @sleep_time_long
-    SicknessExtension.new(@driver).navigate_to_rota_employee_sickness_index
+    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_sickness
     sleep @sleep_time_short
     SicknessExtension.new(@driver).delete_sickness_record
     @driver.quit
@@ -235,8 +235,35 @@ RSpec.describe 'HR to Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_admin
     sleep @sleep_time_long
-    LoginAppExtension.new(@driver).select_hr
+    LoginAppExtension.new(@driver).select_rota
     sleep @sleep_time_short
+    RotaExtension.new(@driver).navigate_to_last_monday_shift
+    sleep @sleep_time_short
+    RotaExtension.new(@driver).assign_one_shift_monday_std_employee
+    sleep @sleep_time_long
+    RotaExtension.new(@driver).share_shift
+    sleep @sleep_time_long
+    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_add_sickness
+    SicknessExtension.new(@driver).sickness_request_for_last_monday
+    sleep @sleep_time_short
+    RotaExtension.new(@driver).navigate_to_rota_from_hr_admin
+    sleep @sleep_time_short
+    RotaExtension.new(@driver).navigate_to_last_monday_shift
+    sleep @sleep_time_short
+    employee_shift_tomorrow = @driver.find_element(class: 'roster-map-2-0')
+    sleep @sleep_time_short
+    sleep @sleep_time_short
+    # rubocop:disable Layout/LineLength
+    shift_element = employee_shift_tomorrow.find_element(xpath: '//*[@id="user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17"]/div/div[1]/div[2]')
+    # rubocop:enable Layout/LineLength
+    expect(shift_element.attribute('innerHTML')).to eql('Sickness')
+    sleep @sleep_time_long
+    RotaExtension.new(@driver).delete_shift_with_leave
+    sleep @sleep_time_long
+    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_sickness
+    sleep @sleep_time_short
+    SicknessExtension.new(@driver).delete_sickness_record
+    @driver.quit
   end
 
   it '3c. Employee sickness added to a date and then a rota shift is then added to RTA' do
@@ -245,33 +272,66 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_long
     LoginAppExtension.new(@driver).select_hr
     sleep @sleep_time_short
+    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_add_sickness
+    SicknessExtension.new(@driver).sickness_request_for_last_monday
+    sleep @sleep_time_short
+    sleep @sleep_time_short
+    RotaExtension.new(@driver).navigate_to_rota_from_hr_admin
+    sleep @sleep_time_short
+    RotaExtension.new(@driver).navigate_to_last_monday_shift
+    sleep @sleep_time_short
+    RotaExtension.new(@driver).create_shift_with_leave # same action as sickness
+    sleep @sleep_time_long
+    warning_element = @driver.find_element(xpath: '//*[@id="shift-overlap-modal"]/div[3]/div/div[1]/p')
+    expect(warning_element.attribute('innerHTML')).to eql('Shift is overlapped with user sickness')
+    RotaExtension.new(@driver).shift_with_leave_accept # same action as sickness
+    RotaExtension.new(@driver).share_shift
+    sleep @sleep_time_long
+    employee_shift_tomorrow = @driver.find_element(class: 'roster-map-2-0')
+    sleep @sleep_time_short
+    # rubocop:disable Layout/LineLength
+    shift_element = employee_shift_tomorrow.find_element(xpath: '//*[@id="user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17"]/div/div[1]/div[2]')
+    # rubocop:enable Layout/LineLength
+    expect(shift_element.attribute('innerHTML')).to eql('Sickness')
+    sleep @sleep_time_long
+    RotaExtension.new(@driver).delete_shift_with_leave
+    sleep @sleep_time_long
+    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_sickness
+    sleep @sleep_time_short
+    SicknessExtension.new(@driver).delete_sickness_record
+    @driver.quit
   end
 
   # new employee
   it '4a. Add a new employee to HR which is sent to RTA' do
     NavigateBrowserExtension.new(@driver).breathe_login
-    LoginExtension.new(@driver).login_rota_admin
-    sleep @sleep_time_long
+    LoginExtension.new(@driver).login_admin
+    sleep @sleep_time_short
     LoginAppExtension.new(@driver).select_hr
     sleep @sleep_time_short
     AppNavigationExtensionManager.new(@driver).navigate_to_add_new_employee
     CreateEmployeeExtension.new(@driver).create_employee_pending_starter_from_people_page
+    RotaExtension.new(@driver).navigate_to_rota_employees_people
+    sleep @sleep_time_short
   end
 
   it '4b. Change the employee department and job to another' do
     NavigateBrowserExtension.new(@driver).breathe_login
-    LoginExtension.new(@driver).login_rota_admin
+    LoginExtension.new(@driver).login_admin
     sleep @sleep_time_long
     LoginAppExtension.new(@driver).select_rota
     sleep @sleep_time_short
+    RotaExtension.new(@driver).navigate_to_rota_employees_people
   end
 
   it '4a Remove an employee from HR which is changed to left in RTA' do
     NavigateBrowserExtension.new(@driver).breathe_login
-    LoginExtension.new(@driver).login_rota_admin
+    LoginExtension.new(@driver).login_admin
     sleep @sleep_time_long
     LoginAppExtension.new(@driver).select_hr
     sleep @sleep_time_short
+    DeleteEmployeeExtension.new(@driver).delete_employee
+    RotaExtension.new(@driver).navigate_to_rota_employees_people
   end
   # rubocop:enable Metrics/BlockLength
 end

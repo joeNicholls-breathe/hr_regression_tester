@@ -81,7 +81,7 @@ class AppNavigationExtensionManager < Base
     driver.navigate.to('https://hr.breathehrstaging.com/employees/26349/sicknesses/new')
   end
 
-  def navigate_to_rota_employee_sickness_index
+  def navigate_to_rota_employee_sickness
     driver.navigate.to('https://hr.breathehrstaging.com/employees/26349/sicknesses')
   end
 
