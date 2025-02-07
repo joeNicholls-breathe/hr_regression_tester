@@ -99,6 +99,14 @@ class AppNavigationExtensionManager < Base
     sleep 1
   end
 
+  def search_employee_newemployeeuser
+    driver.find_element(css: 'input[data-element-id=header-employee-search]').send_keys 'Newemployee User'
+    sleep 1
+    driver.find_element(css: 'input[data-element-id=header-employee-search]').send_keys :enter
+    sleep 1
+    driver.find_element(xpath: '/html/body/div[6]/div').click
+  end
+
   def manager_logout
     driver.find_element(css: 'button[data-element-id=header-avatar-menu-button]').click
     sleep 0.25

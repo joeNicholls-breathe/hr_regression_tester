@@ -4,6 +4,7 @@ require File.expand_path('base.rb', __dir__)
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Metrics/ClassLength
 # rubocop:disable Metrics/MethodLength
+# rubocop:disable Layout/LineLength
 class RotaExtension < Base
   def navigate_to_rota_from_hr_admin
     sleep @sleep_time_long
@@ -186,7 +187,41 @@ class RotaExtension < Base
     sleep @sleep_time_short
     driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-people]').click
   end
+
+  def search_employee_on_people_page
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[1]/div/div[3]/div/button[1]').click
+    driver.find_element(id: 'search-bar').send_keys 'Newemployee'
+  end
+
+  def select_employee
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div/div[2]').click
+  end
+
+  def edit_employee_details
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[4]/div/div[1]/div/button').click
+    driver.find_element(xpath: '//*[@id="role"]').click
+    driver.find_element(xpath: '//*[@id="menu-role_id"]/div[3]/ul/li[7]').click
+    driver.find_element(id: 'area').click
+    driver.find_element(xpath: '//*[@id="menu-areaId"]/div[3]/ul/li[2]').click
+    sleep @sleep_time_short
+    driver.find_element(xpath: '//*[@id="user-add-roles-modal"]/div[3]/div/div[2]/button[2]').click
+    sleep @sleep_time_short
+  end
+
+  def change_primary_job
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[4]/div/div[1]/div/button').click
+    driver.find_element(xpath: '//*[@id="user-add-roles-modal"]/div[3]/div/div[1]/form/div[3]/div[2]/div[1]/div/a').click
+    driver.find_element(xpath: '//*[@id="user-add-roles-modal"]/div[3]/div/div[1]/form/div[3]/div[2]/div[2]/div[1]/span').click
+    driver.find_element(xpath: '//*[@id="user-add-roles-modal"]/div[3]/div/div[1]/form/div[3]/div[2]/div[1]/div/a').click
+    driver.find_element(xpath: '//*[@id="user-add-roles-modal"]/div[3]/div/div[2]/button[2]').click
+    sleep @sleep_time_short
+  end
+
+  def return_to_people_index
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[1]/div[1]/div/div/div[1]/div[2]/div[1]/button').click
+  end
 end
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/ClassLength
 # rubocop:enable Metrics/MethodLength
+# rubocop:enable Layout/LineLength

@@ -17,6 +17,8 @@ require './functions_library/navigate_around_app_manager_extension'
 require './functions_library/holiday_extension'
 require './functions_library/other_leave_request_extension'
 require './functions_library/sickness_extension'
+require './functions_library/create_employee_extension'
+require './functions_library/delete_employee_extension'
 require './settings'
 # rubocop:disable Metrics/BlockLength
 
@@ -285,6 +287,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     warning_element = @driver.find_element(xpath: '//*[@id="shift-overlap-modal"]/div[3]/div/div[1]/p')
     expect(warning_element.attribute('innerHTML')).to eql('Shift is overlapped with user sickness')
     RotaExtension.new(@driver).shift_with_leave_accept # same action as sickness
+    sleep @sleep_time_short
     RotaExtension.new(@driver).share_shift
     sleep @sleep_time_long
     employee_shift_tomorrow = @driver.find_element(class: 'roster-map-2-0')
@@ -310,9 +313,18 @@ RSpec.describe 'HR to Rota Regression test script' do
     LoginAppExtension.new(@driver).select_hr
     sleep @sleep_time_short
     AppNavigationExtensionManager.new(@driver).navigate_to_add_new_employee
-    CreateEmployeeExtension.new(@driver).create_employee_pending_starter_from_people_page
+    CreateEmployeeExtension.new(@driver).create_employee_rota
     RotaExtension.new(@driver).navigate_to_rota_employees_people
     sleep @sleep_time_short
+    RotaExtension.new(@driver).search_employee_on_people_page
+    sleep @sleep_time_short
+    # rubocop:disable Layout/LineLength
+    new_employee_present = @driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]')
+    # rubocop:enable Layout/LineLength
+    sleep @sleep_time_short
+    expect(new_employee_present.attribute('innerHTML')).to eql('Newemployee User')
+    sleep @sleep_time_short
+    @driver.quit
   end
 
   it '4b. Change the employee department and job to another' do
@@ -322,6 +334,21 @@ RSpec.describe 'HR to Rota Regression test script' do
     LoginAppExtension.new(@driver).select_rota
     sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_rota_employees_people
+    sleep @sleep_time_short
+    RotaExtension.new(@driver).search_employee_on_people_page
+    sleep @sleep_time_short
+    RotaExtension.new(@driver).select_employee
+    RotaExtension.new(@driver).edit_employee_details
+    RotaExtension.new(@driver).change_primary_job
+    RotaExtension.new(@driver).return_to_people_index
+    RotaExtension.new(@driver).search_employee_on_people_page
+    sleep @sleep_time_short
+    # rubocop:disable Layout/LineLength
+    new_employee_present = @driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div/div[2]/div[2]/div/div[3]/div[2]')
+    # rubocop:enable Layout/LineLength
+    sleep @sleep_time_short
+    expect(new_employee_present.attribute('innerHTML')).to eql('line manager - Logistics, Regression Account')
+    @driver.quit
   end
 
   it '4a Remove an employee from HR which is changed to left in RTA' do
@@ -330,8 +357,16 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_long
     LoginAppExtension.new(@driver).select_hr
     sleep @sleep_time_short
+    AppNavigationExtensionManager.new(@driver).search_employee_newemployeeuser
+    sleep @sleep_time_short
     DeleteEmployeeExtension.new(@driver).delete_employee
     RotaExtension.new(@driver).navigate_to_rota_employees_people
+    RotaExtension.new(@driver).search_employee_on_people_page
+    sleep @sleep_time_short
+    new_employee_present = @driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div/div/h3')
+    sleep @sleep_time_short
+    expect(new_employee_present.attribute('innerHTML')).to eql('Your search did not match any user names.')
+    @driver.quit
   end
   # rubocop:enable Metrics/BlockLength
 end
