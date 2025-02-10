@@ -143,6 +143,13 @@ class BradfordFactorExtension < Base
     driver.find_element(class: 'btn-success').click
   end
 
+  # Attempt to create a factor over maximum boundary - 1000
+  def create_bradford_over_one_thousand
+    driver.find_element(id: 'bradford_factor_rule_score').clear
+    driver.find_element(id: 'bradford_factor_rule_score').send_keys '1001'
+    driver.find_element(class: 'btn-success').click
+  end
+
   # Clicks the Bradford Factor breadcrumb to take you from the /new view to the overview
   def click_breadcrumb_between_create_and_overview
     driver.find_element(
