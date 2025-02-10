@@ -21,11 +21,11 @@ class BradfordFactorValidation
   end
 
   def execute
-    # test_1013a_empty_value
-    # test_1013b_below_zero
-    # test_1013c_non_numerical_value
-    # test_1013d_factor_between_two_valid_values
-    # test_1013e_creating_duplicate_rule
+    test_1013a_empty_value
+    test_1013b_below_zero
+    test_1013c_non_numerical_value
+    test_1013d_factor_between_two_valid_values
+    test_1013e_creating_duplicate_rule
     test_1013f_factor_over_maximum_boundary
   end
 
@@ -108,9 +108,7 @@ class BradfordFactorValidation
     navigate_to_bradford_factor
     GeneralSicknessTriggerExtension.new(driver).open_new_rule_modal
     puts 'PASS - Create modal open'
-    driver.find_element(id: 'bradford_factor_rule_score').clear
-    driver.find_element(id: 'bradford_factor_rule_score').send_keys '1001'
-    driver.find_element(class: 'btn-success').click
+    BradfordFactorExtension.new(driver).create_bradford_over_one_thousand
     GeneralSicknessTriggerExtension.new(driver).find_notification_validation_message(
       'Error creating rule Score must be less than 1000'
     )
