@@ -18,9 +18,9 @@ class SicknessInstanceValidation
   end
 
   def execute
-    # test_1015a_cannot_be_empty
-    # test_1015b_must_be_a_number
-    # test_1015c_must_be_an_integer
+    test_1015a_cannot_be_empty
+    test_1015b_must_be_a_number
+    test_1015c_must_be_an_integer
     test_1015d_create_duplicate_rule
   end
 

@@ -42,7 +42,7 @@ class BradfordFactorTriggers
   end
 
   def test1012a_create_bradford_trigger
-    puts 'Starting test_1001'
+    puts 'Starting test_1012a'
     navigate_to_bradford_factor
     GeneralSicknessTriggerExtension.new(driver).open_new_rule_modal
     puts 'PASS - Create modal open'
@@ -52,7 +52,7 @@ class BradfordFactorTriggers
   end
 
   def test1012b_cancel_create_bradford_trigger
-    puts 'Starting test_1002'
+    puts 'Starting test_1012b'
     navigate_to_bradford_factor
     GeneralSicknessTriggerExtension.new(driver).open_new_rule_modal
     puts 'PASS - Create modal open'
@@ -60,8 +60,8 @@ class BradfordFactorTriggers
     puts 'PASS - Bradford Rule Cancelled'
   end
 
-  def test1012d_edit_bradford_trigger
-    puts 'Starting test_2001'
+  def test1012c_edit_bradford_trigger
+    puts 'Starting test_1012c'
     navigate_to_bradford_factor
     BradfordFactorExtension.new(driver).open_bradford_factor_edit_modal
     puts 'PASS - Edit modal open'
@@ -70,25 +70,25 @@ class BradfordFactorTriggers
     BradfordFactorExtension.new(driver).compare_edited_bradford_result
   end
 
-  def test1012e_cancel_bradford_factor_edit
-    puts 'Starting test_2002'
+  def test1012d_cancel_bradford_factor_edit
+    puts 'Starting test_1012d'
     navigate_to_bradford_factor
     BradfordFactorExtension.new(driver).open_bradford_factor_edit_modal
     puts 'PASS - Edit modal open'
-    GeneralSicknessTriggerExtension.new(driver).cancel_rule_creations
+    GeneralSicknessTriggerExtension.new(driver).cancel_rule_creation
     puts 'PASS - Bradford Rule Cancelled'
   end
 
-  def test1012f_cancel_bradford_factor_delete
-    puts 'Starting test_3002'
+  def test1012e_cancel_bradford_factor_delete
+    puts 'Starting test_1012e'
     navigate_to_bradford_factor
     BradfordFactorExtension.new(driver).open_bradford_factor_delete_modal
     puts 'PASS - Confirm Delete window opened'
     GeneralSicknessTriggerExtension.new(driver).cancel_rule_deletion
   end
 
-  def test1012g_delete_bradford_trigger
-    puts 'Starting test_3002'
+  def test1012f_delete_bradford_trigger
+    puts 'Starting test_1012f'
     navigate_to_bradford_factor
     BradfordFactorExtension.new(driver).open_bradford_factor_delete_modal
     puts 'PASS - Confirm Delete window opened'
