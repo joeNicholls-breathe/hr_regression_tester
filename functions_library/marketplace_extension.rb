@@ -11,7 +11,7 @@ class MarketPlaceExtension < Base
     widgets = driver.find_elements(class: 'find-more')
     target = "https://hr.breathehrstaging.com/marketplace/#{target_href}"
     widget = widgets.find { |w| w.attribute('href') == target }
-      widget.click
+    widget.click
     puts "PASS - #{target_href} opened"
   end
 
@@ -19,7 +19,7 @@ class MarketPlaceExtension < Base
     title = driver.find_element(css: 'body > div.hr-main-container > div > section > h1').text
     if expected_title == title
       puts 'PASS - Correct Page Loaded'
-    else 
+    else
       puts 'FAIL - Incorrect Title - May be wrong page'
     end
     driver.find_element(css: 'body > div.hr-main-container > div > section > div.breadcrumb > a').click
