@@ -32,6 +32,7 @@ class SicknessInstanceValidation
     LoginAppExtension.new(driver).select_hr
     puts 'PASS - select hr'
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
+    sleep 2
     SicknessInstanceExtension.new(driver).navigate_to_sickness_instances
   end
 
