@@ -37,6 +37,7 @@ class BradfordFactorValidation
     LoginAppExtension.new(driver).select_hr
     puts 'PASS - select hr'
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
+    sleep 2
     BradfordFactorExtension.new(driver).navigate_to_bradford_factor
     puts 'PASS - Navigate to Bradford Sickness Triggers'
   end
