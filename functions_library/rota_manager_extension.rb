@@ -40,7 +40,7 @@ class RotaExtension < Base
   end
 
   def share_shift
-    # NEED TO ADD IN A WAIT UNTIL THE BUTTON IS ACTIVE
+    sleep 3
     driver.find_element(css: 'button[id=share-roster]').click
     driver.find_element(css: 'button[id=publish-changes-btn]').click
   end

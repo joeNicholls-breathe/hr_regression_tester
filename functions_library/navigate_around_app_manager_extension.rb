@@ -103,8 +103,7 @@ class AppNavigationExtensionManager < Base
     driver.find_element(css: 'input[data-element-id=header-employee-search]').send_keys 'Newemployee User'
     sleep 1
     driver.find_element(css: 'input[data-element-id=header-employee-search]').send_keys :enter
-    sleep 1
-    driver.find_element(xpath: '/html/body/div[6]/div').click
+    sleep 2
   end
 
   def manager_logout
