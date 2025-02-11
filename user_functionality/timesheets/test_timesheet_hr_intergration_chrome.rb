@@ -22,7 +22,7 @@ require './functions_library/delete_employee_extension'
 require './settings'
 # rubocop:disable Metrics/BlockLength
 
-RSpec.describe 'HR to Rota Regression test script' do
+RSpec.describe 'HR to Timesheets Regression test script' do
   before do
     @sleep_time_long = (ENV['SLEEPTIME_LONG'] || 4).to_f
     @sleep_time_short = (ENV['SLEEPTIME_SMALL'] || 2).to_f
@@ -34,7 +34,7 @@ RSpec.describe 'HR to Rota Regression test script' do
   end
 
   # holidays
-  it '1a. Employee holiday added to HR and seen in RTA' do
+  it '1a. Employee holiday added to HR and seen in Timesheets' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_admin
     sleep @sleep_time_long
@@ -43,12 +43,12 @@ RSpec.describe 'HR to Rota Regression test script' do
     AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_add_holiday
     HolidayExtension.new(@driver).holiday_request_for_next_monday
     sleep @sleep_time_short
-    RotaExtension.new(@driver).navigate_to_rota_from_hr_admin
+    TimesheetExtension.new(@driver).navigate_to_timeandattendance_weekly_from_hr
     sleep @sleep_time_short
-    RotaExtension.new(@driver).navigate_to_the_next_monday_shift
+    TimesheetExtension.new(@driver).navigate_to_tomorrow_nextweek
     sleep @sleep_time_short
     # rubocop:disable Layout/LineLength
-    shift_element = @driver.find_element(xpath: '//*[@id="user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17"]/div/div[1]/div[2]')
+    shift_element = @driver.find_element(xpath: '')
     # rubocop:enable Layout/LineLength
     expect(shift_element.attribute('innerHTML')).to eql('On Leave')
     sleep @sleep_time_short
@@ -300,76 +300,6 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_short
     SicknessExtension.new(@driver).delete_sickness_record
     sleep @sleep_time_short
-    @driver.quit
-  end
-
-  # new employee
-  it '4a. Add a new employee to HR which is sent to RTA' do
-    NavigateBrowserExtension.new(@driver).breathe_login
-    LoginExtension.new(@driver).login_admin
-    sleep @sleep_time_short
-    LoginAppExtension.new(@driver).select_hr
-    sleep @sleep_time_short
-    AppNavigationExtensionManager.new(@driver).navigate_to_add_new_employee
-    CreateEmployeeExtension.new(@driver).create_employee_rota
-    sleep @sleep_time_short
-    RotaExtension.new(@driver).navigate_to_rota_employees_people
-    sleep @sleep_time_short
-    RotaExtension.new(@driver).search_employee_on_people_page
-    sleep @sleep_time_short
-    # rubocop:disable Layout/LineLength
-    new_employee_present = @driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]')
-    # rubocop:enable Layout/LineLength
-    sleep @sleep_time_short
-    expect(new_employee_present.attribute('innerHTML')).to eql('Newemployee User')
-    sleep @sleep_time_short
-    @driver.quit
-  end
-
-  it '4b. Change the employee department and job to another' do
-    NavigateBrowserExtension.new(@driver).breathe_login
-    LoginExtension.new(@driver).login_admin
-    sleep @sleep_time_long
-    LoginAppExtension.new(@driver).select_rota
-    sleep @sleep_time_short
-    RotaExtension.new(@driver).navigate_to_rota_employees_people
-    sleep @sleep_time_short
-    RotaExtension.new(@driver).search_employee_on_people_page
-    sleep @sleep_time_short
-    RotaExtension.new(@driver).select_employee
-    sleep 4
-    RotaExtension.new(@driver).edit_employee_details
-    sleep 3
-    RotaExtension.new(@driver).change_primary_job
-    sleep 3
-    RotaExtension.new(@driver).return_to_people_index
-    sleep @sleep_time_short
-    RotaExtension.new(@driver).search_employee_on_people_page
-    sleep @sleep_time_short
-    # rubocop:disable Layout/LineLength
-    new_employee_present = @driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div/div[2]/div[2]/div/div[3]/div[2]')
-    # rubocop:enable Layout/LineLength
-    sleep @sleep_time_short
-    expect(new_employee_present.attribute('innerHTML')).to eql('line manager - Logistics, Regression Account')
-    @driver.quit
-  end
-
-  it '4c Remove an employee from HR which is changed to left in RTA' do
-    NavigateBrowserExtension.new(@driver).breathe_login
-    LoginExtension.new(@driver).login_admin
-    sleep @sleep_time_long
-    LoginAppExtension.new(@driver).select_hr
-    sleep @sleep_time_short
-    AppNavigationExtensionManager.new(@driver).search_employee_newemployeeuser
-    sleep 4
-    DeleteEmployeeExtension.new(@driver).delete_employee
-    sleep 2
-    RotaExtension.new(@driver).navigate_to_rota_employees_people
-    RotaExtension.new(@driver).search_employee_on_people_page
-    sleep @sleep_time_short
-    new_employee_present = @driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div/div/h3')
-    sleep @sleep_time_short
-    expect(new_employee_present.attribute('innerHTML')).to eql('Your search did not match any user names.')
     @driver.quit
   end
   # rubocop:enable Metrics/BlockLength

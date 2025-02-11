@@ -32,7 +32,7 @@ RSpec.describe 'Rota Regression negative test script' do
     @driver = Selenium::WebDriver.for :chrome, options:
   end
 
-  it '1a. Employee already has a shift for that date' do
+  it '1a. Employee already has a shift for the date a second is attempted upon' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_admin
     sleep @sleep_time_long
@@ -50,7 +50,8 @@ RSpec.describe 'Rota Regression negative test script' do
     expect(shift_element.attribute('innerHTML')).to eql('Std Employee User is already working on February 17th 10:10 - 17:10.')
     # rubocop:enable Layout/LineLength
     sleep @sleep_time_short
-    HolidayExtension.new(@driver).select_rota_employee_holiday_to_purge
+    RotaExtension.new(@driver).delete_shift_with_leave
+    sleep @sleep_time_short
     @driver.quit
   end
 end

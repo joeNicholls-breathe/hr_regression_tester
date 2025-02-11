@@ -25,6 +25,11 @@ class TimesheetExtension < Base
     sleep 1
   end
 
+  def navigate_to_tomorrow_nextweek
+    driver.find_element(css: 'svg[data-testid=ChevronRightIcon]').click
+    sleep 1
+  end
+
   def add_timesheet_to_employee_today
     driver.find_element(css: 'span[data-testid=elmo-btn-label-new-shift-form]').click
     # shift employee
