@@ -21,6 +21,8 @@ require './functions_library/create_employee_extension'
 require './functions_library/delete_employee_extension'
 require './settings'
 
+# rubocop:disable Metrics/BlockLength
+
 RSpec.describe 'Rota Regression negative test script' do
   before do
     @sleep_time_long = (ENV['SLEEPTIME_LONG'] || 4).to_f
@@ -55,3 +57,4 @@ RSpec.describe 'Rota Regression negative test script' do
     @driver.quit
   end
 end
+# rubocop:enable Metrics/BlockLength

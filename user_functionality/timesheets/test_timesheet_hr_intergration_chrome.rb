@@ -48,7 +48,7 @@ RSpec.describe 'HR to Timesheets Regression test script' do
     TimesheetExtension.new(@driver).navigate_to_tomorrow_nextweek
     sleep @sleep_time_short
     # rubocop:disable Layout/LineLength
-    shift_element = @driver.find_element(xpath: '')
+    shift_element = @driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[1]')
     # rubocop:enable Layout/LineLength
     expect(shift_element.attribute('innerHTML')).to eql('On Leave')
     sleep @sleep_time_short
