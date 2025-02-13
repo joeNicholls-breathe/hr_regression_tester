@@ -8,7 +8,7 @@ require File.expand_path('base.rb', __dir__)
 class RotaExtension < Base
   def navigate_to_rota_from_hr_admin
     driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-rota]').click
-    sleep 1
+    sleep 2
     driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-rota]').click
   end
 
