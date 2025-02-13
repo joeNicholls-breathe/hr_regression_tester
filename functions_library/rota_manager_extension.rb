@@ -7,9 +7,8 @@ require File.expand_path('base.rb', __dir__)
 # rubocop:disable Layout/LineLength
 class RotaExtension < Base
   def navigate_to_rota_from_hr_admin
-    sleep @sleep_time_long
     driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-rota]').click
-    sleep @sleep_time_short
+    sleep 1
     driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-rota]').click
   end
 

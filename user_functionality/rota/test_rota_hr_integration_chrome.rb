@@ -27,9 +27,9 @@ RSpec.describe 'HR to Rota Regression test script' do
     @sleep_time_long = (ENV['SLEEPTIME_LONG'] || 4).to_f
     @sleep_time_short = (ENV['SLEEPTIME_SMALL'] || 2).to_f
     options = Selenium::WebDriver::Chrome::Options.new
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
-    options.add_argument('--window-size=1920,1080')
+    # options.add_argument('--headless')
+    # options.add_argument('--disable-gpu')
+    # options.add_argument('--window-size=1920,1080')
     @driver = Selenium::WebDriver.for :chrome, options:
   end
 
@@ -40,7 +40,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_long
     LoginAppExtension.new(@driver).select_hr
     sleep @sleep_time_short
-    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_add_holiday
+    AppNavigationExtensionManager.new(@driver).navigate_to_employee_holiday('26349')
     HolidayExtension.new(@driver).holiday_request_for_next_monday
     sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_rota_from_hr_admin
@@ -69,7 +69,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_long
     RotaExtension.new(@driver).share_shift
     sleep @sleep_time_long
-    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_add_holiday
+    AppNavigationExtensionManager.new(@driver).navigate_to_employee_holiday('26349')
     HolidayExtension.new(@driver).holiday_request_for_next_monday
     sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_rota_from_hr_admin
@@ -94,7 +94,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_long
     LoginAppExtension.new(@driver).select_hr
     sleep @sleep_time_short
-    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_add_holiday
+    AppNavigationExtensionManager.new(@driver).navigate_to_employee_holiday('26349')
     HolidayExtension.new(@driver).holiday_request_for_next_monday
     sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_rota_from_hr_admin
@@ -126,7 +126,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_long
     LoginAppExtension.new(@driver).select_hr
     sleep @sleep_time_short
-    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_add_holiday
+    AppNavigationExtensionManager.new(@driver).navigate_to_employee_holiday('26349')
     OtherLeaveRequestExtension.new(@driver).other_leave_request_for_next_monday
     sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_rota_from_hr_admin
@@ -155,7 +155,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_long
     RotaExtension.new(@driver).share_shift
     sleep @sleep_time_long
-    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_add_holiday
+    AppNavigationExtensionManager.new(@driver).navigate_to_employee_holiday('26349')
     OtherLeaveRequestExtension.new(@driver).other_leave_request_for_next_monday
     sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_rota_from_hr_admin
@@ -179,7 +179,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_long
     LoginAppExtension.new(@driver).select_hr
     sleep @sleep_time_short
-    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_add_holiday
+    AppNavigationExtensionManager.new(@driver).navigate_to_employee_holiday('26349')
     OtherLeaveRequestExtension.new(@driver).other_leave_request_for_next_monday
     sleep @sleep_time_short
     sleep @sleep_time_short
@@ -215,19 +215,19 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_long
     LoginAppExtension.new(@driver).select_hr
     sleep @sleep_time_short
-    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_add_sickness
+    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_add_sickness('26349')
     SicknessExtension.new(@driver).sickness_request_for_last_monday
     sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_rota_from_hr_admin
     sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_last_monday_shift
-    sleep @sleep_time_long
+    sleep 5
     # rubocop:disable Layout/LineLength
     shift_element = @driver.find_element(xpath: '//*[@id="user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17"]/div/div[1]/div[2]')
     # rubocop:enable Layout/LineLength
     expect(shift_element.attribute('innerHTML')).to eql('Sickness')
     sleep @sleep_time_long
-    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_sickness
+    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_sickness('26349')
     sleep @sleep_time_short
     SicknessExtension.new(@driver).delete_sickness_record
     sleep @sleep_time_short
@@ -246,7 +246,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_long
     RotaExtension.new(@driver).share_shift
     sleep @sleep_time_long
-    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_add_sickness
+    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_add_sickness('26349')
     SicknessExtension.new(@driver).sickness_request_for_last_monday
     sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_rota_from_hr_admin
@@ -260,7 +260,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_long
     RotaExtension.new(@driver).delete_shift_with_leave
     sleep 5
-    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_sickness
+    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_sickness('26349')
     sleep @sleep_time_short
     SicknessExtension.new(@driver).delete_sickness_record
     sleep @sleep_time_short
@@ -273,7 +273,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_long
     LoginAppExtension.new(@driver).select_hr
     sleep @sleep_time_short
-    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_add_sickness
+    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_add_sickness('26349')
     SicknessExtension.new(@driver).sickness_request_for_last_monday
     sleep @sleep_time_short
     sleep @sleep_time_short
@@ -296,7 +296,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_long
     RotaExtension.new(@driver).delete_shift_with_leave
     sleep 5
-    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_sickness
+    AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_sickness('26349')
     sleep @sleep_time_short
     SicknessExtension.new(@driver).delete_sickness_record
     sleep @sleep_time_short

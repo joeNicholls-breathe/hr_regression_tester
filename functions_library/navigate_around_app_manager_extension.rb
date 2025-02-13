@@ -73,16 +73,16 @@ class AppNavigationExtensionManager < Base
     driver.find_element(css: 'href="/account/plan_and_billing"').click
   end
 
-  def navigate_to_rota_employee_add_holiday
-    driver.navigate.to('https://hr.breathehrstaging.com/employees/26349/leave_requests/new')
+  def navigate_to_employee_holiday(employee_id)
+    driver.navigate.to("https://hr.breathehrstaging.com/employees/#{employee_id}/leave_requests/new")
   end
 
-  def navigate_to_rota_employee_add_sickness
-    driver.navigate.to('https://hr.breathehrstaging.com/employees/26349/sicknesses/new')
+  def navigate_to_rota_employee_add_sickness(employee_id)
+    driver.navigate.to("https://hr.breathehrstaging.com/employees/#{employee_id}/sicknesses/new")
   end
 
-  def navigate_to_rota_employee_sickness
-    driver.navigate.to('https://hr.breathehrstaging.com/employees/26349/sicknesses')
+  def navigate_to_rota_employee_sickness(employee_id)
+    driver.navigate.to("https://hr.breathehrstaging.com/employees/#{employee_id}/sicknesses")
   end
 
   def search_employee_hr
@@ -104,6 +104,8 @@ class AppNavigationExtensionManager < Base
     sleep 1
     driver.find_element(css: 'input[data-element-id=header-employee-search]').send_keys :enter
     sleep 2
+    # sometimes below click is required, make a check before incase employee profile loads without needing click
+    # driver.find_element(xpath: '/html/body/div[6]/div').click
   end
 
   def manager_logout
