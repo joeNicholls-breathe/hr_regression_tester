@@ -39,10 +39,6 @@ class HolidayExtension < Base
     driver.navigate.to('https://hr.breathehrstaging.com/employees/21870/holidays')
   end
 
-  def add_leave_request_for_holiday_employee
-    driver.navigate.to('https://hr.breathehrstaging.com/employees/20717/leave_requests/new')
-  end
-
   def add_leave_request_for_carry_over_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/21090/leave_requests/new')
   end

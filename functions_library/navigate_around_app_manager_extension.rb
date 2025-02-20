@@ -16,7 +16,11 @@ class AppNavigationExtensionManager < Base
   end
 
   def navigate_to_people_list
-    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[3]').click
+    driver.find_element(css: '#top-menu-menu-item-1-0').click
+    sleep 1
+    driver.find_element(
+      css: '#top-menu > div:nth-child(2) > ul > li:nth-child(1) > div > div > ul > li:nth-child(1) > a'
+    ).click
   end
 
   def navigate_to_people_screen
@@ -101,5 +105,24 @@ class AppNavigationExtensionManager < Base
 
   def pop_modal_price_increase
     driver.find_element(css: '#pricing-dismiss').click
+  end
+
+  # Opens leave from employees profile
+  def open_employee_leave
+    driver.find_element(id: 'leave').click
+  end
+
+  def navigate_to_data
+    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-people]').click
+    sleep 1
+    driver.find_element(
+      css: '#top-menu > div:nth-child(2) > ul > li:nth-child(1) > div > div > ul > li:nth-child(3) > a'
+    ).click
+  end
+
+  def open_purge_data
+    driver.find_element(
+      css: 'body > div.hr-main-container > div > section > div:nth-child(2) > div:nth-child(2) > div > a'
+      ).click
   end
 end

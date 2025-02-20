@@ -8,8 +8,11 @@ require './functions_library/login_app_extension'
 require './functions_library/employee_dashboard_extension'
 require './functions_library/holiday_extension'
 require './functions_library/leave_request_extension'
-require './functions_library/navigate_around_app_employee'
-require './functions_library/ui_page_element_check'
+require './functions_library/navigate_around_app_employee_extension'
+require './functions_library/ui_page_element_check_extension'
+require './functions_library/navigate_around_app_manager_extension'
+require './functions_library/people_page_extension'
+require './functions_library/holiday_auto_approval_extension'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/ClassLength
@@ -48,7 +51,11 @@ class TestLeaveRequest
     LoginAppExtension.new(driver).select_hr
     puts 'Pass - Selects HR'
     sleep 1
-    HolidayExtension.new(driver).add_leave_request_for_holiday_employee
+    # EmployeeDashboardExtension.new(driver).click_widget('Request leave')
+    AppNavigationExtensionManager.new(driver).navigate_to_people_list
+    PeoplePageExtension.new(driver).select_employee_from_list('Holiday employee')
+    AppNavigationExtensionManager.new(driver).open_employee_leave
+    LeaveRequestExtension.new(driver).click_add_new_leave_request
     puts 'Pass - opens add absence record'
     sleep 1
     LeaveRequestExtension.new(driver).employee_leave_request_in_two_weeks
@@ -69,7 +76,7 @@ class TestLeaveRequest
     LoginAppExtension.new(driver).select_hr
     puts 'Pass - Selects HR'
     sleep 1
-    EmployeeDashboardExtension.new(driver).make_holiday_request
+    EmployeeDashboardExtension.new(driver).click_widget('Request leave')
     puts 'Pass - Opens leave request'
     sleep 1
     LeaveRequestExtension.new(driver).employee_leave_request_in_two_weeks
@@ -95,7 +102,7 @@ class TestLeaveRequest
     puts 'Start test 3 - Employee creates leave request'
     HolidayExtension.new(driver).holiday_employee_absence_index
     puts 'Pass- back to leave screen'
-    HolidayExtension.new(driver).add_leave_request_for_holiday_employee
+    LeaveRequestExtension.new(driver).click_add_new_leave_request
     puts 'Pass - Opens leave request'
     sleep 1
     LeaveRequestExtension.new(driver).employee_leave_request_overlapping_in_two_weeks
@@ -117,15 +124,15 @@ class TestLeaveRequest
     end
     LogoutExtension.new(driver).user_logout
     puts 'Pass - Holiday Employee logged out'
-    puts 'TEST 0 complete - Absence not created that overlaps existing absence'
+    puts 'TEST 3 complete - Absence not created that overlaps existing absence'
   end
 
   def test_04_delete_holiday_data
-    puts 'Start test 3 - Deletes holiday information for employee'
+    puts 'Start test 4 - Deletes holiday information for employee'
     LoginExtension.new(driver).login_admin
     puts 'Pass - Login as admin'
     sleep 1
-    HolidayExtension.new(driver).purge_holiday_data_holiday_employee
+    HolidayAutoApprovalExtension.new(driver).purge_holiday_data_auto_approval_employee('Holiday employee')
     puts 'Pass - Purge holday data'
     HolidayExtension.new(driver).holiday_employee_absence_index
     if HolidayExtension.new(driver).booked_amount == '0.0 days'

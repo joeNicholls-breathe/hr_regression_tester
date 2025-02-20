@@ -28,4 +28,10 @@ class EmployeeDashboardExtension < Base
   def view_sicknesses
     driver.find_element(css: "a[href='/employees/20717/sicknesses']").click
   end
+
+  def click_widget(widget_text)
+    all_widgets = driver.find_elements(class: 'bdds-button--contained')
+    widget = all_widgets.find { |x| x.text == widget_text }
+    widget.click
+  end
 end

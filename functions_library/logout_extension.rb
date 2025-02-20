@@ -9,7 +9,7 @@ class LogoutExtension < Base
   end
 
   def logout_admin
-    driver.find_element(css: 'button[data-element-id=header-avatar-menu-button]').click
+    driver.find_element(class: 'bdds-avatar__image').click
     driver.find_element(css: 'a[data-element-id=header-avatar-menu-item-logout]').click
   end
 end

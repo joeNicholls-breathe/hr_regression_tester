@@ -118,5 +118,11 @@ class LeaveRequestExtension < Base
     driver.find_element(id: 'leave_request_ignore_blackout_clashes').click
     driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
   end
+
+  def click_add_new_leave_request
+    driver.find_element(
+      css: 'body > div.hr-main-container > div > section > div.employee-section-header > div > a > span > svg.svg-inline--fa.fa-plus.fa-w-14.fa-inverse.fa-stack-1x'
+    ).click
+  end
 end
 # rubocop:enable Metrics/AbcSize

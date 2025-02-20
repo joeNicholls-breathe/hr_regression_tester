@@ -3,13 +3,13 @@
 require 'rspec'
 require 'selenium-webdriver'
 require 'logger'
-require './functions_library/ui_page_element_check'
+require './functions_library/ui_page_element_check_extension'
 require './functions_library/test_reference_extension'
 require './functions_library/navigate_browser_extension'
 require './functions_library/login_extension'
 require './functions_library/login_app_extension'
 require './functions_library/kudos_extension'
-require './functions_library/navigate_around_app_employee'
+require './functions_library/navigate_around_app_employee_extension'
 
 # rubocop:disable Metrics/AbcSize
 class UserKudos < Base
@@ -28,7 +28,7 @@ class UserKudos < Base
     KudosExtension.new(driver).create_kudos_individual
     # see methods for new way to navigate to dashboard widget buttons
     NavigateAroundAppEmployee.new(driver).navigate_to_dashboard_employee
-    NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget
+    NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget_manage_leave
     puts 'Test 1012 complete'
     driver.close
   end
