@@ -3,7 +3,7 @@
 require File.expand_path('base.rb', __dir__)
 
 # # :
-class HolidayExtension < Base
+class HolidayExtension < Base # rubocop:disable Metrics/ClassLength
   def holiday_request_dashboard_navigate_employee
     leave_request_button = driver.find_element(css: '#tab-my-dashboard > div > div:nth-child(1) > div.card-footer > a')
     button_href = leave_request_button.property('href')
