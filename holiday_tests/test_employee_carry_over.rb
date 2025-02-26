@@ -63,35 +63,15 @@ class TestLeaveRequest
 
   def test_02_check_allowance_totals
     puts 'Start test - Check totals'
-    if HolidayExtension.new(driver).booked_amount == '1.0 day'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('1.0 day')
     if Time.now.utc.strftime('%d/%m/%Y') > '31/03/2025'
       puts 'Holiday year after carry over period'
-      after_carry_over_period
+      HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     else
       puts 'Holiday year within carry over period'
-      during_carry_over_period
+      HolidayExtension.new(driver).compare_holiday_allowance('24.0 days')
     end
     puts 'Test complete - Approver can approve holiday request'
-  end
-
-  def after_carry_over_period
-    if HolidayExtension.new(driver).available_amount == '20.0 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
-  end
-
-  def during_carry_over_period
-    if HolidayExtension.new(driver).available_amount == '24.0 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
   end
 
   def test_03_delete_holiday_data
@@ -99,17 +79,9 @@ class TestLeaveRequest
     HolidayExtension.new(driver).purge_holiday_data('Carry-over Employee')
     puts 'Pass - purge holday data'
     HolidayExtension.new(driver).holiday_employee_absence_index
-    if HolidayExtension.new(driver).booked_amount == '0.0 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
     puts 'Test complete - Holiday employees holiday deleted'
-    if HolidayExtension.new(driver).available_amount == '20.0 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     puts 'Test complete - Holiday employees holiday deleted'
   end
 end

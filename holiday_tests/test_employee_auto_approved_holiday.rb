@@ -121,7 +121,7 @@ class TestAutoApprovedHoliday
     puts 'Start Test - Holiday approver approves request'
     puts 'Pass - Navigate to Login Screen'
     sleep 1
-    LoginExtension.new(driver).login_auto_approval_admin
+    LoginExtension.new(driver).login_admin
     puts 'Pass - Login as admin'
     sleep 1
     LoginAppExtension.new(driver).select_hr
@@ -130,11 +130,7 @@ class TestAutoApprovedHoliday
     purge_employee('auto approval-one')
     puts 'Pass - absences purged'
     sleep 2
-    if HolidayExtension.new(driver).booked_amount == '0.0 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
     puts 'test complete - absences deleted for auto approval employee one'
   end
 
@@ -143,11 +139,7 @@ class TestAutoApprovedHoliday
     purge_employee('auto approval-two')
     puts 'Pass - absences purged'
     sleep 2
-    if HolidayExtension.new(driver).booked_amount == '0.0 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
     puts 'test complate - absences deleted for auto approval employee two'
   end
 
@@ -156,11 +148,7 @@ class TestAutoApprovedHoliday
     purge_employee('auto approval-three')
     puts 'Pass - absences purged'
     sleep 2
-    if HolidayExtension.new(driver).booked_amount == '0.0 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
     puts 'test complate - absences deleted for auto approval employee three'
   end
 

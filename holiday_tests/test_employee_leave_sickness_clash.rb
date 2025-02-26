@@ -13,7 +13,6 @@ require './functions_library/navigate_around_app_employee_extension'
 require './functions_library/ui_page_element_check_extension'
 
 # rubocop:disable Metrics/MethodLength
-# rubocop:disable Metrics/ClassLength
 # rubocop:disable Metrics/AbcSize
 class TestLeaveRequest
   attr_accessor :driver
@@ -58,7 +57,6 @@ class TestLeaveRequest
     sleep 1
     SicknessExtension.new(driver).holiday_employee_sickness_index
     puts 'pass - navigates to employee sickness screen'
-    LogoutExtension.new(driver).logout_admin
     puts 'TEST 01 complete'
   end
 
@@ -83,16 +81,8 @@ class TestLeaveRequest
     sleep 1
     HolidayExtension.new(driver).holiday_employee_absence_index
     puts 'Pass - Navigate to holiday employee absences'
-    if HolidayExtension.new(driver).booked_amount == '0.0 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
-    if HolidayExtension.new(driver).available_amount == '20.0 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
+    HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     puts 'TEST 02 complete'
   end
 
@@ -110,16 +100,8 @@ class TestLeaveRequest
     sleep 1
     HolidayExtension.new(driver).holiday_employee_absence_index
     puts 'Pass - Navigate to holiday employee absences'
-    if HolidayExtension.new(driver).booked_amount == '0.0 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
-    if HolidayExtension.new(driver).available_amount == '20.0 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
+    HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     LogoutExtension.new(driver).user_logout
     puts 'Pass - Holiday Employee logged out'
     puts 'TEST 03 complete'
@@ -139,22 +121,13 @@ class TestLeaveRequest
     HolidayExtension.new(driver).purge_holiday_data('Holiday employee')
     puts 'Pass - Purge holday data'
     HolidayExtension.new(driver).holiday_employee_absence_index
-    if HolidayExtension.new(driver).booked_amount == '0.0 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
-    if HolidayExtension.new(driver).available_amount == '20.0 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
+    HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     puts 'Test complete - Holiday employees holiday deleted'
     puts 'Test 4 complete - absences deleted'
   end
 end
 # rubocop:enable Metrics/MethodLength
-# rubocop:enable Metrics/ClassLength
 # rubocop:enable Metrics/AbcSize
 
 TestLeaveRequest.new.test_leave_sickness_request

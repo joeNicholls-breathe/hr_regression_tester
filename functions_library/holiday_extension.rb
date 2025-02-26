@@ -80,6 +80,19 @@ class HolidayExtension < Base
     driver.find_element(class: 'modal-confirm').click
   end
 
+  def purge_other_leave_data(employee_name) # rubocop:disable Metrics/AbcSize
+    driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
+    drop = driver.find_element(:id, 'employee_id')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:text, employee_name)
+    drop_type = driver.find_element(id: 'area')
+    choose = Selenium::WebDriver::Support::Select.new(drop_type)
+    choose.select_by(:text, 'Other Leave')
+    driver.find_element(class: 'confirm-checkbox').click
+    driver.find_element(id: 'continue-purge').click
+    driver.find_element(class: 'modal-confirm').click
+  end
+
   def navigate_to_purge_data
     driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
   end
@@ -124,5 +137,21 @@ class HolidayExtension < Base
     driver.find_element(
       xpath: '/html/body/section[2]/div[7]/div[1]/div/table/tbody/tr/td[7]/div/div/div/div[3]/button[2]'
     ).click
+  end
+
+  def compare_booked_amount(expected_amount)
+    if HolidayExtension.new(driver).booked_amount == expected_amount
+      puts 'Pass - booked_amount total correct'
+    else
+      puts 'FAIL - booked_amount total incorrect'
+    end
+  end
+
+  def compare_holiday_allowance(expected_amount)
+    if HolidayExtension.new(driver).available_amount == expected_amount
+      puts 'Pass - available_amount total correct'
+    else
+      puts 'FAIL - available_amount total incorrect'
+    end
   end
 end

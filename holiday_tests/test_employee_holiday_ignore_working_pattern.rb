@@ -56,16 +56,8 @@ class TestLeaveRequest
   def test_02_check_totals
     HolidayExtension.new(driver).employee_ignore_work_pattern_absence_index
     puts 'Pass - Navigate to holiday employee absences'
-    if HolidayExtension.new(driver).booked_amount == '10.0 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
-    if HolidayExtension.new(driver).available_amount == '10.0 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('10.0 days')
+    HolidayExtension.new(driver).compare_holiday_allowance('10.0 days')
     puts 'Test complete - Totals are correct'
   end
 
@@ -74,16 +66,8 @@ class TestLeaveRequest
     HolidayExtension.new(driver).purge_holiday_data('ignore WP holiday')
     puts 'Pass - Purge holday data'
     HolidayExtension.new(driver).employee_ignore_work_pattern_absence_index
-    if HolidayExtension.new(driver).booked_amount == '0.0 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
-    if HolidayExtension.new(driver).available_amount == '20.0 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
+    HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     puts 'Test complete - Ignore work pattern adds total'
   end
 end

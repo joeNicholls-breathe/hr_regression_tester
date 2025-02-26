@@ -63,16 +63,8 @@ class TestLeaveRequest
   def test_02_check_allowance_totals
     puts 'Start test - Check totals'
     EmployeeDashboardExtension.new(driver).open_employee_holiday
-    if HolidayExtension.new(driver).booked_amount == '15.0 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
-    if HolidayExtension.new(driver).available_amount == '0.0 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('15.0 days')
+    HolidayExtension.new(driver).compare_holiday_allowance('0.0 days')
     puts 'Test complete - Approver can approve holiday request'
     LogoutExtension.new(driver).user_logout
   end
@@ -87,17 +79,8 @@ class TestLeaveRequest
     HolidayExtension.new(driver).purge_holiday_data('Negative Carry-Over')
     puts 'Pass - purge holday data'
     HolidayExtension.new(driver).negative_carry_over_holiday_employee_absence_index
-    if HolidayExtension.new(driver).booked_amount == '0.0 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
-    puts 'Test complete - Negative Carry-Over holiday deleted'
-    if HolidayExtension.new(driver).available_amount == '10.0 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
+    HolidayExtension.new(driver).compare_holiday_allowance('10.0 days')
     puts 'Test complete - Negative Carry-Over holiday deleted'
   end
 end

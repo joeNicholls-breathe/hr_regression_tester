@@ -15,7 +15,6 @@ require './functions_library/test_reference_extension'
 require './functions_library/ui_page_element_check_extension'
 require './functions_library/people_page_extension'
 
-# rubocop:disable Metrics/ClassLength
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
 class TestLeaveRequest
@@ -76,16 +75,8 @@ class TestLeaveRequest
   def test_03_check_allowance_totals
     puts 'START test 03 - Check totals'
     HolidayExtension.new(driver).holiday_employee_absence_index
-    if HolidayExtension.new(driver).booked_amount == '0.0 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
-    if HolidayExtension.new(driver).available_amount == '20.0 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
+    HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     puts 'TEST 03 complete - No absences to change allowance'
   end
 
@@ -107,16 +98,8 @@ class TestLeaveRequest
   def test_05_check_allowance_totals
     puts 'START test 05 - Check totals'
     HolidayExtension.new(driver).holiday_employee_absence_index
-    if HolidayExtension.new(driver).booked_amount == '1.0 day'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
-    if HolidayExtension.new(driver).available_amount == '19.0 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('1.0 days')
+    HolidayExtension.new(driver).compare_holiday_allowance('19.0 days')
     puts 'TEST 05 complete - Absence does not remove allowance from employee'
   end
 
@@ -125,17 +108,8 @@ class TestLeaveRequest
     purge_employee('Holiday employee')
     puts 'Pass - purge holday data'
     HolidayExtension.new(driver).holiday_employee_absence_index
-    if HolidayExtension.new(driver).booked_amount == '0.0 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
-    puts 'Pass Negative Carry-Over holiday deleted'
-    if HolidayExtension.new(driver).available_amount == '20.0 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
+    HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     AppNavigationExtensionManager.new(driver).navigate_to_company_blackouts
     puts 'Pass - Navigate to company blackouts'
     CompanyBlackoutsExtension.new(driver).company_blackout_delete
@@ -155,7 +129,6 @@ class TestLeaveRequest
     puts "#{employee}'s Leave Opened"
   end
 end
-# rubocop:enable Metrics/ClassLength
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
 

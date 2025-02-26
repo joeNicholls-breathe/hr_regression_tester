@@ -78,16 +78,8 @@ class TestLeaveRequest
     sleep 1
     HolidayExtension.new(driver).holiday_employee_absence_index
     puts 'Pass - Navigate to holiday employee absences'
-    if HolidayExtension.new(driver).booked_amount == '0.5 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
-    if HolidayExtension.new(driver).available_amount == '19.5 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('0.5 days')
+    HolidayExtension.new(driver).compare_holiday_allowance('19.5 days')
     puts 'Test complete - Approver can approve holiday request'
   end
 
@@ -96,16 +88,8 @@ class TestLeaveRequest
     HolidayExtension.new(driver).purge_holiday_data('Holiday employee')
     puts 'Pass - Purge holday data'
     HolidayExtension.new(driver).holiday_employee_absence_index
-    if HolidayExtension.new(driver).booked_amount == '0.0 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
-    if HolidayExtension.new(driver).available_amount == '20.0 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
+    HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     puts 'Test complete - Holiday employees holiday deleted'
   end
 end

@@ -74,16 +74,8 @@ class TestLeaveRequest
 
   def test_03_check_allowance_totals
     puts 'Start test - Check totals'
-    if HolidayExtension.new(driver).booked_amount == '0.5 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
-    if HolidayExtension.new(driver).available_amount == '19.5 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('0.5 days')
+    HolidayExtension.new(driver).compare_holiday_allowance('19.5 days')
     sleep 1
     puts 'Test 03 complete - Absence does not remove allowance from employee'
   end
@@ -94,17 +86,9 @@ class TestLeaveRequest
     puts 'Pass - purge holday data'
     sleep 1
     HolidayExtension.new(driver).holiday_employee_absence_index
-    if HolidayExtension.new(driver).booked_amount == '0.0 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
     puts 'Test complete - Negative Carry-Over holiday deleted'
-    if HolidayExtension.new(driver).available_amount == '20.0 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     sleep 1
     AppNavigationExtensionManager.new(driver).navigate_to_company_holidays
     puts 'Pass - Navigate to company holidays'
