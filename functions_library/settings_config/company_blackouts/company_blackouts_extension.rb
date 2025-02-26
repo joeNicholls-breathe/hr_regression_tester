@@ -10,7 +10,7 @@ class CompanyBlackoutsExtension < Base
     driver.find_element(id: '#company_blackout_start_date_react').send_keys two_week_date_string
     driver.find_element(id: '#company_blackout_end_date_react').send_keys two_week_date_string
     driver.find_element(id: 'company_blackout_whole_company').click
-    driver.find_element(xpath: '//*[@id="new_company_blackout"]/p/input').click
+    driver.find_element(class: 'btn-success').click
     sleep 0.5
     driver.find_element(xpath: '/html/body/div[3]/div/section/div[1]/a').click
   end

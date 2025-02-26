@@ -8,11 +8,12 @@ require './functions_library/login_app_extension'
 require './functions_library/employee_dashboard_extension'
 require './functions_library/holiday_extension'
 require './functions_library/leave_request_extension'
-require './functions_library/navigate_around_app_employee'
-require './functions_library/navigate_around_app_manager'
+require './functions_library/navigate_around_app_employee_extension'
+require './functions_library/navigate_around_app_manager_extension'
 require './functions_library/settings_config/company_blackouts/company_blackouts_extension'
 require './functions_library/test_reference_extension'
-require './functions_library/ui_page_element_check'
+require './functions_library/ui_page_element_check_extension'
+require './functions_library/people_page_extension'
 
 # rubocop:disable Metrics/ClassLength
 # rubocop:disable Metrics/MethodLength
@@ -53,6 +54,7 @@ class TestLeaveRequest
     sleep 1
     AppNavigationExtensionManager.new(driver).navigate_to_company_blackouts
     puts 'Pass - Navigate to company blackouts'
+    sleep 1
     CompanyBlackoutsExtension.new(driver).company_blackout_add_new
     puts 'Pass - Added company blackout'
     puts 'TEST 01 complete'
@@ -60,7 +62,10 @@ class TestLeaveRequest
 
   def test_02_create_holiday_clash
     puts 'START test 02 - Create absence that clashes with company blackout'
-    HolidayExtension.new(driver).add_leave_request_for_holiday_employee
+    AppNavigationExtensionManager.new(driver).navigate_to_people_list
+    PeoplePageExtension.new(driver).select_employee_from_list('Holiday employee')
+    AppNavigationExtensionManager.new(driver).open_employee_leave
+    LeaveRequestExtension.new(driver).click_add_new_leave_request
     puts 'Pass - opens add absence record'
     LeaveRequestExtension.new(driver).employee_leave_request_in_two_weeks
     puts 'Pass - creates absence to clash with company blackout'
@@ -86,7 +91,10 @@ class TestLeaveRequest
 
   def test_04_create_holiday_overrides_clash
     puts 'START test 04 - Create absence that clashes with company blackout'
-    HolidayExtension.new(driver).add_leave_request_for_holiday_employee
+    AppNavigationExtensionManager.new(driver).navigate_to_people_list
+    PeoplePageExtension.new(driver).select_employee_from_list('Holiday employee')
+    AppNavigationExtensionManager.new(driver).open_employee_leave
+    LeaveRequestExtension.new(driver).click_add_new_leave_request
     puts 'Pass - opens add absence record'
     LeaveRequestExtension.new(driver).employee_leave_request_in_two_weeks
     puts 'Pass - creates absence to clash with company blackout'
@@ -114,7 +122,7 @@ class TestLeaveRequest
 
   def test_06_delete_records
     puts 'START test 06 - Deletes holiday and company blackout'
-    HolidayExtension.new(driver).purge_holiday_data_holiday_employee
+    purge_employee('Holiday employee')
     puts 'Pass - purge holday data'
     HolidayExtension.new(driver).holiday_employee_absence_index
     if HolidayExtension.new(driver).booked_amount == '0.0 days'
@@ -133,6 +141,18 @@ class TestLeaveRequest
     CompanyBlackoutsExtension.new(driver).company_blackout_delete
     puts 'Pass - deleted company blackout'
     puts 'TEST 06 complete - Deleted blackout and company blackout'
+  end
+
+  def purge_employee(employee)
+    AppNavigationExtensionManager.new(driver).navigate_to_data
+    AppNavigationExtensionManager.new(driver).open_purge_data
+    puts 'PASS - Purge Data Opened'
+    HolidayExtension.new(driver).purge_holiday_data(employee)
+    puts "#{employee}'s Data Purged"
+    AppNavigationExtensionManager.new(driver).navigate_to_people_list
+    PeoplePageExtension.new(driver).select_employee_from_list(employee)
+    AppNavigationExtensionManager.new(driver).open_employee_leave
+    puts "#{employee}'s Leave Opened"
   end
 end
 # rubocop:enable Metrics/ClassLength

@@ -8,9 +8,11 @@ require './functions_library/login_app_extension'
 require './functions_library/employee_dashboard_extension'
 require './functions_library/holiday_extension'
 require './functions_library/leave_request_extension'
-require './functions_library/navigate_around_app_employee'
-require './functions_library/navigate_around_app_manager'
+require './functions_library/navigate_around_app_employee_extension'
+require './functions_library/navigate_around_app_manager_extension'
 require './functions_library/settings_config/company_holiday/company_holiday_extension'
+require './functions_library/people_page_extension'
+require './functions_library/test_reference_extension'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
@@ -59,13 +61,15 @@ class TestLeaveRequest
 
   def test_02_create_holiday_clash
     puts 'Start test - Create absence that clashes with company holiday'
-    HolidayExtension.new(driver).add_leave_request_for_holiday_employee
+    AppNavigationExtensionManager.new(driver).navigate_to_people_list
+    PeoplePageExtension.new(driver).select_employee_from_list('Holiday employee')
+    AppNavigationExtensionManager.new(driver).open_employee_leave
+    LeaveRequestExtension.new(driver).click_add_new_leave_request
     puts 'Pass - opens add absence record'
-    sleep 1
     LeaveRequestExtension.new(driver).employee_leave_request_today
     puts 'Pass - creates absence to clash with company holiday'
     sleep 1
-    puts 'Test complete - Absence created that clashes with company holiday'
+    puts 'Test 02 complete - Absence created that clashes with company holiday'
   end
 
   def test_03_check_allowance_totals
@@ -81,12 +85,12 @@ class TestLeaveRequest
       puts 'FAIL - available_amount total incorrect'
     end
     sleep 1
-    puts 'Test 02 complete - Absence does not remove allowance from employee'
+    puts 'Test 03 complete - Absence does not remove allowance from employee'
   end
 
   def test_04_delete_records
     puts 'Start test - Deletes holiday and company holiday'
-    HolidayExtension.new(driver).purge_holiday_data_holiday_employee
+    purge_employee('Holiday employee')
     puts 'Pass - purge holday data'
     sleep 1
     HolidayExtension.new(driver).holiday_employee_absence_index
@@ -109,6 +113,18 @@ class TestLeaveRequest
     puts 'Pass - deleted company holiday'
     sleep 1
     puts 'Test complete - Deleted holiday and company holiday'
+  end
+
+  def purge_employee(employee)
+    AppNavigationExtensionManager.new(driver).navigate_to_data
+    AppNavigationExtensionManager.new(driver).open_purge_data
+    puts 'PASS - Purge Data Opened'
+    HolidayExtension.new(driver).purge_holiday_data(employee)
+    puts "#{employee}'s Data Purged"
+    AppNavigationExtensionManager.new(driver).navigate_to_people_list
+    PeoplePageExtension.new(driver).select_employee_from_list(employee)
+    AppNavigationExtensionManager.new(driver).open_employee_leave
+    puts "#{employee}'s Leave Opened"
   end
 end
 # rubocop:enable Metrics/MethodLength

@@ -39,14 +39,4 @@ class HolidayAutoApprovalExtension < Base
     driver.find_element(css: '#\#leave_request_end_date_react').send_keys '16/12/2025'
     driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
   end
-
-  def purge_holiday_data_auto_approval_employee(employee_name)
-    driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
-    drop = driver.find_element(:id, 'employee_id')
-    choose = Selenium::WebDriver::Support::Select.new(drop)
-    choose.select_by(:text, employee_name)
-    driver.find_element(class: 'confirm-checkbox').click
-    driver.find_element(id: 'continue-purge').click
-    driver.find_element(class: 'modal-confirm').click
-  end
 end

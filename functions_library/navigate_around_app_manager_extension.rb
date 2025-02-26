@@ -123,6 +123,6 @@ class AppNavigationExtensionManager < Base
   def open_purge_data
     driver.find_element(
       css: 'body > div.hr-main-container > div > section > div:nth-child(2) > div:nth-child(2) > div > a'
-      ).click
+    ).click
   end
 end

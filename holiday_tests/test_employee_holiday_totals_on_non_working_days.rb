@@ -8,7 +8,7 @@ require './functions_library/login_app_extension'
 require './functions_library/employee_dashboard_extension'
 require './functions_library/holiday_extension'
 require './functions_library/leave_request_extension'
-require './functions_library/navigate_around_app_employee'
+require './functions_library/navigate_around_app_employee_extension'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
@@ -44,13 +44,14 @@ class TestLeaveRequest
     LoginAppExtension.new(driver).select_hr
     puts 'Pass - Selects HR'
     sleep 1
-    EmployeeDashboardExtension.new(driver).make_holiday_request
+    EmployeeDashboardExtension.new(driver).click_widget('Request leave')
     puts 'Pass - Opens leave request'
     sleep 1
-    LeaveRequestExtension.new(driver).employee_holiday_leave_request_on_saturday
+    # Has to be on a weekend/non-working day
+    LeaveRequestExtension.new(driver).make_leave_request_half_day('28/12/2025', '28/12/2025')
     puts 'Pass - Completes leave request'
     sleep 1
-    EmployeeDashboardExtension.new(driver).view_holiday_request
+    EmployeeDashboardExtension.new(driver).open_employee_holiday
     puts 'Pass - Displays leave request'
     sleep 1
     LogoutExtension.new(driver).user_logout
@@ -93,7 +94,7 @@ class TestLeaveRequest
 
   def test_03_delete_holiday_data
     puts 'Start test - Deletes holiday information for employee'
-    HolidayExtension.new(driver).purge_holiday_data_holiday_employee
+    HolidayExtension.new(driver).purge_holiday_data('Holiday employee')
     puts 'Pass - purge holday data'
     HolidayExtension.new(driver).holiday_employee_absence_index
     if HolidayExtension.new(driver).booked_amount == '0.0 days'

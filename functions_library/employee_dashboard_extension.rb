@@ -34,4 +34,16 @@ class EmployeeDashboardExtension < Base
     widget = all_widgets.find { |x| x.text == widget_text }
     widget.click
   end
+
+  def open_employee_holiday
+    # rubocop:disable Layout/LineLength
+    driver.find_element(
+      css: 'body > div.hr-main-container > div.hr-main > div.new-bootstrap > div:nth-child(1) > div > div > div:nth-child(3) > div > section > div > div > div > div > div > div:nth-child(1) > div > div.bdds-card__header > div.bdds-popover-trigger > button'
+    ).click
+    sleep 0.25
+    buttons = driver.find_elements(class: 'bdds-button--text')
+    button = buttons.find { |x| x.text == 'Manage leave' }
+    button.click
+  end
+  # rubocop:enable Layout/LineLength
 end

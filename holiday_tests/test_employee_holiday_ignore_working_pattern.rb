@@ -71,7 +71,7 @@ class TestLeaveRequest
 
   def test_03_delete_holiday_data
     puts 'Start test - Deletes holiday information for employee'
-    HolidayExtension.new(driver).purge_holiday_data_holiday_employee_ignore_work_pattern
+    HolidayExtension.new(driver).purge_holiday_data('ignore WP holiday')
     puts 'Pass - Purge holday data'
     HolidayExtension.new(driver).employee_ignore_work_pattern_absence_index
     if HolidayExtension.new(driver).booked_amount == '0.0 days'

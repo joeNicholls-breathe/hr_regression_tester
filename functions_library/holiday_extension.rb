@@ -2,7 +2,7 @@
 
 require File.expand_path('base.rb', __dir__)
 
-# rubocop:disable Metrics/ClassLength # :
+# # :
 class HolidayExtension < Base
   def holiday_request_dashboard_navigate_employee
     leave_request_button = driver.find_element(css: '#tab-my-dashboard > div > div:nth-child(1) > div.card-footer > a')
@@ -43,18 +43,18 @@ class HolidayExtension < Base
     driver.navigate.to('https://hr.breathehrstaging.com/employees/21090/leave_requests/new')
   end
 
-  def add_leave_request_for_negative_carry_over_employee
-    driver.navigate.to('https://hr.breathehrstaging.com/employees/21870/leave_requests/new')
-  end
-
   def add_leave_request_for_ignore_work_pattern_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/24930/leave_requests/new')
   end
 
   def approve_leave_request
+    # rubocop:disable Layout/LineLength
     driver.find_element(xpath: '//*[@id="DataTables_Table_0"]/tbody/tr/td[7]/a[1]').click
-    driver.find_element(xpath: '/html/body/section[2]/div[4]/div[2]/button[2]').click
-    driver.find_element(xpath: '/html/body/section[2]/div[4]/div[2]/div[2]/div/div/form/div[3]/input').click
+    driver.find_element(
+      css: 'body > div.hr-main-container > div > section > div.filter-controls > div.form-group.buttons > button.btn.btn-success'
+    ).click
+    driver.find_element(xpath: '/html/body/div[3]/div/section/div[4]/div[2]/div[2]/div/div/form/div[3]/input').click
+    # rubocop:enable Layout/LineLength
   end
 
   def holiday_request_profile_navigate_employee
@@ -70,55 +70,18 @@ class HolidayExtension < Base
     driver.find_element(id: 'available').text
   end
 
-  def purge_holiday_data_holiday_employee
-    navigate_to_purge_data
+  def purge_holiday_data(employee_name)
+    driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
     drop = driver.find_element(:id, 'employee_id')
     choose = Selenium::WebDriver::Support::Select.new(drop)
-    choose.select_by(:text, 'Holiday employee')
-    finish_purge
-  end
-
-  def purge_holiday_data_holiday_employee_ignore_work_pattern
-    navigate_to_purge_data
-    drop = driver.find_element(:id, 'employee_id')
-    choose = Selenium::WebDriver::Support::Select.new(drop)
-    choose.select_by(:text, 'ignore WP holiday')
-    finish_purge
-  end
-
-  def purge_other_leave_data_holiday_employee
-    navigate_to_purge_data
-    drop = driver.find_element(:id, 'employee_id')
-    choose = Selenium::WebDriver::Support::Select.new(drop)
-    choose.select_by(:text, 'Holiday employee')
-    driver.find_element(xpath: '//*[@id="area"]/option[2]').click
-    finish_purge
-  end
-
-  def purge_holiday_data_for_carry_over_employee
-    navigate_to_purge_data
-    drop = driver.find_element(:id, 'employee_id')
-    choose = Selenium::WebDriver::Support::Select.new(drop)
-    choose.select_by(:text, 'Carry-over Employee')
-    finish_purge
-  end
-
-  def purge_holiday_data_for_negative_carry_over_employee
-    navigate_to_purge_data
-    drop = driver.find_element(:id, 'employee_id')
-    choose = Selenium::WebDriver::Support::Select.new(drop)
-    choose.select_by(:text, 'Negative Carry-Over')
-    finish_purge
+    choose.select_by(:text, employee_name)
+    driver.find_element(class: 'confirm-checkbox').click
+    driver.find_element(id: 'continue-purge').click
+    driver.find_element(class: 'modal-confirm').click
   end
 
   def navigate_to_purge_data
     driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
-  end
-
-  def finish_purge
-    driver.find_element(xpath: '/html/body/section[2]/div/div[3]/div/form/div/div[3]/input').click
-    driver.find_element(id: 'continue-purge').click
-    driver.find_element(xpath: '//*[@id="purge_data_modal"]/div/div/div[3]/button[2]').click
   end
 
   def cancel_form
@@ -163,4 +126,3 @@ class HolidayExtension < Base
     ).click
   end
 end
-# rubocop:enable Metrics/ClassLength

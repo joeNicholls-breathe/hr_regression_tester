@@ -168,7 +168,7 @@ class TestAutoApprovedHoliday
     AppNavigationExtensionManager.new(driver).navigate_to_data
     AppNavigationExtensionManager.new(driver).open_purge_data
     puts 'PASS - Purge Data Opened'
-    HolidayAutoApprovalExtension.new(driver).purge_holiday_data_auto_approval_employee(employee)
+    HolidayExtension.new(driver).purge_holiday_data(employee)
     puts "#{employee}'s Data Purged"
     AppNavigationExtensionManager.new(driver).navigate_to_people_list
     PeoplePageExtension.new(driver).select_employee_from_list(employee)

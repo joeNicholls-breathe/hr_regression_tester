@@ -41,7 +41,7 @@ class LMUserNoAccess < Base
     # puts '4b. approve employee leave request'
     AppNavigationExtensionLM.new(driver).return_to_employee_leave_index # can remove once work out the above issue.
     AppNavigationExtensionLM.new(driver).add_leave_for_my_employee
-    LeaveRequestExtension.new(driver).employee_holiday_leave_request_two
+    LeaveRequestExtension.new(driver).make_leave_request('11/11/2025', '12/11/2025')
     puts '5. add new leave request for employee - Pass'
     sleep 0.50
     AppNavigationExtensionLM.new(driver).cancel_employee_leave_request

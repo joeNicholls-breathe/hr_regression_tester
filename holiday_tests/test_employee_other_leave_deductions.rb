@@ -92,7 +92,7 @@ class TestLeaveRequest
 
   def test_03_delete_holiday_data
     puts 'Start test - Deletes holiday information for employee'
-    HolidayExtension.new(driver).purge_other_leave_data_holiday_employee
+    HolidayExtension.new(driver).purge_holiday_data('Holiday employee')
     puts 'Pass - purge other leave data'
     HolidayExtension.new(driver).holiday_employee_absence_index
     if HolidayExtension.new(driver).booked_amount == '0.0 days'

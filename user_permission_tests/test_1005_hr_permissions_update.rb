@@ -57,7 +57,7 @@ class AccountSetupHRUser < Base
     puts '8. login as hr user'
     AppNavigationExtensionManager.new(driver).navigate_to_my_dashboard
     NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget_request_leave
-    LeaveRequestExtension.new(driver).employee_holiday_leave_request_one
+    LeaveRequestExtension.new(driver).make_leave_request_half_day('16/12/2025', '16/12/2025')
     puts '9. create holiday request'
     # AppNavigationExtensionManager.new(driver).navigate_to_my_dashboard
     # PageValueCheck.new(driver).check_leave_has_ben_requested
@@ -77,7 +77,7 @@ class AccountSetupHRUser < Base
     puts '12a. check employee own profile summary'
     AppNavigationExtensionManager.new(driver).navigate_to_my_dashboard
     NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget_request_leave
-    LeaveRequestExtension.new(driver).employee_holiday_leave_request_two
+    LeaveRequestExtension.new(driver).make_leave_request('11/11/2025', '12/11/2025')
     sleep 1
     puts '12b. create holiday request'
     LogoutExtension.new(driver).logout_admin

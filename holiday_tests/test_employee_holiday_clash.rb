@@ -132,7 +132,7 @@ class TestLeaveRequest
     LoginExtension.new(driver).login_admin
     puts 'Pass - Login as admin'
     sleep 1
-    HolidayAutoApprovalExtension.new(driver).purge_holiday_data_auto_approval_employee('Holiday employee')
+    HolidayExtension.new(driver).purge_holiday_data('Holiday employee')
     puts 'Pass - Purge holday data'
     HolidayExtension.new(driver).holiday_employee_absence_index
     if HolidayExtension.new(driver).booked_amount == '0.0 days'

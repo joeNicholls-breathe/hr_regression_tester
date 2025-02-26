@@ -8,7 +8,7 @@ require './functions_library/login_app_extension'
 require './functions_library/employee_dashboard_extension'
 require './functions_library/holiday_extension'
 require './functions_library/leave_request_extension'
-require './functions_library/navigate_around_app_employee'
+require './functions_library/navigate_around_app_employee_extension'
 require './functions_library/test_reference_extension'
 
 # rubocop:disable Metrics/MethodLength
@@ -50,13 +50,13 @@ class TestLeaveRequest
     HolidayExtension.new(driver).add_leave_request_for_carry_over_employee
     puts 'Pass - opens add absence record'
     sleep 1
-    LeaveRequestExtension.new(driver).employee_holiday_leave_request_last_year
+    LeaveRequestExtension.new(driver).make_leave_request('29/12/2024', '29/12/2024')
     puts 'Pass - creates absence last year to create carry over period'
     sleep 1
     HolidayExtension.new(driver).add_leave_request_for_carry_over_employee
     puts 'Pass - opens add absence record'
     sleep 1
-    LeaveRequestExtension.new(driver).employee_holiday_leave_in_carry_over
+    LeaveRequestExtension.new(driver).make_leave_request('06/01/2025', '06/01/2025')
     puts 'Pass - creates absence in carry over period'
     sleep 1
   end
@@ -68,7 +68,7 @@ class TestLeaveRequest
     else
       puts 'FAIL - booked_amount total incorrect'
     end
-    if Time.now.utc.strftime('%d/%m/%Y') < '31/03/2024'
+    if Time.now.utc.strftime('%d/%m/%Y') > '31/03/2025'
       puts 'Holiday year after carry over period'
       after_carry_over_period
     else
@@ -96,7 +96,7 @@ class TestLeaveRequest
 
   def test_03_delete_holiday_data
     puts 'Start test - Deletes holiday information for carry over employee'
-    HolidayExtension.new(driver).purge_holiday_data_for_carry_over_employee
+    HolidayExtension.new(driver).purge_holiday_data('Carry-over Employee')
     puts 'Pass - purge holday data'
     HolidayExtension.new(driver).holiday_employee_absence_index
     if HolidayExtension.new(driver).booked_amount == '0.0 days'

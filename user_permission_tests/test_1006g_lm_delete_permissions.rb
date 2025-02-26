@@ -28,7 +28,7 @@ class LMUserDeleteAccess < Base
     LoginAppExtension.new(driver).select_hr
     puts '1a - employee - login'
     HolidayExtension.new(driver).holiday_request_dashboard_navigate_employee
-    LeaveRequestExtension.new(driver).employee_holiday_leave_request_one
+    LeaveRequestExtension.new(driver).make_leave_request_half_day('16/12/2025', '16/12/2025')
     puts '1b - employee - holiday leave request'
     # might want to add more items to delete from user they i wont have to clear from other user - might be cleaner
     sleep 1
@@ -52,7 +52,7 @@ class LMUserDeleteAccess < Base
     AppNavigationExtensionLM.new(driver).my_employees_employee
     AppNavigationExtensionLM.new(driver).my_employee_leave
     AppNavigationExtensionLM.new(driver).add_leave_for_my_employee
-    LeaveRequestExtension.new(driver).employee_holiday_leave_request_two
+    LeaveRequestExtension.new(driver).make_leave_request('11/11/2025', '12/11/2025')
     puts '5. add new leave request for Employees, employee - Pass'
     AppNavigationExtensionLM.new(driver).cancel_employee_booked_leave
     puts '6. cancels booked leave for Employees, employee - Pass'

@@ -8,7 +8,7 @@ require './functions_library/login_app_extension'
 require './functions_library/employee_dashboard_extension'
 require './functions_library/holiday_extension'
 require './functions_library/leave_request_extension'
-require './functions_library/navigate_around_app_employee'
+require './functions_library/navigate_around_app_employee_extension'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
@@ -40,28 +40,29 @@ class TestLeaveRequest
     NavigateBrowserExtension.new(driver).breathe_login
     puts 'Pass - Navigate to Login Screen'
     sleep 1
-    LoginExtension.new(driver).login_admin
-    puts 'Pass - Login as admin'
+    LoginExtension.new(driver).login_negative_carry_over_holiday_employee
+    puts 'Pass - Login as negative carryover employee'
     sleep 1
     LoginAppExtension.new(driver).select_hr
     puts 'Pass - Selects HR'
     sleep 1
-    HolidayExtension.new(driver).add_leave_request_for_negative_carry_over_employee
+    EmployeeDashboardExtension.new(driver).click_widget('Request leave')
     puts 'Pass - opens add absence record'
     sleep 1
-    LeaveRequestExtension.new(driver).negative_carry_over_employee_holiday_leave_this_year
+    LeaveRequestExtension.new(driver).make_leave_request('13/10/2025', '24/10/2025')
     puts 'Pass - creates absence to use this years allowance'
     sleep 1
-    HolidayExtension.new(driver).add_leave_request_for_negative_carry_over_employee
+    EmployeeDashboardExtension.new(driver).click_widget('Request leave')
     puts 'Pass - opens add absence record'
     sleep 1
-    LeaveRequestExtension.new(driver).negative_carry_over_employee_holiday_next_years_allowance
+    LeaveRequestExtension.new(driver).make_leave_request('17/11/2025', '22/11/2025')
     puts 'Pass - creates absence in this year to use next years allowance'
     sleep 1
   end
 
   def test_02_check_allowance_totals
     puts 'Start test - Check totals'
+    EmployeeDashboardExtension.new(driver).open_employee_holiday
     if HolidayExtension.new(driver).booked_amount == '15.0 days'
       puts 'Pass - booked_amount total correct'
     else
@@ -73,11 +74,17 @@ class TestLeaveRequest
       puts 'FAIL - available_amount total incorrect'
     end
     puts 'Test complete - Approver can approve holiday request'
+    LogoutExtension.new(driver).user_logout
   end
 
   def test_03_delete_holiday_data
     puts 'Start test - Deletes holiday information for Negative carry over employee'
-    HolidayExtension.new(driver).purge_holiday_data_for_negative_carry_over_employee
+    NavigateBrowserExtension.new(driver).breathe_login
+    puts 'Pass - Navigate to Login Screen'
+    sleep 1
+    LoginExtension.new(driver).login_admin
+    puts 'Pass - Login as admin'
+    HolidayExtension.new(driver).purge_holiday_data('Negative Carry-Over')
     puts 'Pass - purge holday data'
     HolidayExtension.new(driver).negative_carry_over_holiday_employee_absence_index
     if HolidayExtension.new(driver).booked_amount == '0.0 days'
