@@ -173,11 +173,11 @@ class HolidayExtension < Base
     driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
   end
 
-  def select_rota_employee_holiday_to_purge
+  def select_rota_employee_holiday_to_purge(employee_name)
     navigate_to_purge_data
     drop = driver.find_element(:id, 'employee_id')
     choose = Selenium::WebDriver::Support::Select.new(drop)
-    choose.select_by(:text, 'Std Employee User')
+    choose.select_by(:text, employee_name)
     driver.find_element(class: 'confirm-checkbox').click
     driver.find_element(id: 'continue-purge').click
     driver.find_element(xpath: '//*[@id="purge_data_modal"]/div/div/div[3]/button[2]').click

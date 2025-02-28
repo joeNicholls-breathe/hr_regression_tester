@@ -27,7 +27,8 @@ RSpec.describe 'HR to Rota Regression test script' do
     @sleep_time_long = (ENV['SLEEPTIME_LONG'] || 4).to_f
     @sleep_time_short = (ENV['SLEEPTIME_SMALL'] || 2).to_f
     options = Selenium::WebDriver::Chrome::Options.new
-    # options.add_argument('--headless')
+    # options.add_argument('--headless') 
+    # going to leave this switch off as i can not work out why it fail
     options.add_argument('--disable-gpu')
     options.add_argument('--window-size=1920,1080')
     @driver = Selenium::WebDriver.for :chrome, options:
@@ -52,7 +53,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     # rubocop:enable Layout/LineLength
     expect(shift_element.attribute('innerHTML')).to eql('On Leave')
     sleep @sleep_time_short
-    HolidayExtension.new(@driver).select_rota_employee_holiday_to_purge
+    HolidayExtension.new(@driver).select_rota_employee_holiday_to_purge('Std Employee User')
     sleep @sleep_time_short
     @driver.quit
   end
@@ -83,7 +84,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_short
     RotaExtension.new(@driver).delete_shift_with_leave
     sleep 5
-    HolidayExtension.new(@driver).select_rota_employee_holiday_to_purge
+    HolidayExtension.new(@driver).select_rota_employee_holiday_to_purge('Std Employee User')
     sleep @sleep_time_short
     @driver.quit
   end
@@ -114,7 +115,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_short
     RotaExtension.new(@driver).delete_shift_with_leave
     sleep 5
-    HolidayExtension.new(@driver).select_rota_employee_holiday_to_purge
+    HolidayExtension.new(@driver).select_rota_employee_holiday_to_purge('Std Employee User')
     sleep @sleep_time_short
     @driver.quit
   end
@@ -138,7 +139,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     # rubocop:enable Layout/LineLength
     expect(shift_element.attribute('innerHTML')).to eql('On Leave')
     sleep @sleep_time_short
-    OtherLeaveRequestExtension.new(@driver).select_rota_employee_other_leave_to_purge
+    OtherLeaveRequestExtension.new(@driver).select_rota_employee_other_leave_to_purge('Std Employee User')
     sleep @sleep_time_short
     @driver.quit
   end
@@ -169,7 +170,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_short
     RotaExtension.new(@driver).delete_shift_with_leave
     sleep 5
-    OtherLeaveRequestExtension.new(@driver).select_rota_employee_other_leave_to_purge
+    OtherLeaveRequestExtension.new(@driver).select_rota_employee_other_leave_to_purge('Std Employee User')
     sleep @sleep_time_short
   end
 
@@ -203,7 +204,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     RotaExtension.new(@driver).delete_shift_with_leave
     sleep 5
     # Delete other leave rather than holiday - Need to do??
-    OtherLeaveRequestExtension.new(@driver).select_rota_employee_other_leave_to_purge
+    OtherLeaveRequestExtension.new(@driver).select_rota_employee_other_leave_to_purge('Std Employee User')
     sleep 4
     @driver.quit
   end

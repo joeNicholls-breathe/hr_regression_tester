@@ -107,6 +107,16 @@ class RotaExtension < Base
     sleep @sleep_time_short
     driver.find_element(xpath: '//*[@id="confirm-bulk-delete-modal"]/div[3]/div/div[2]/button[2]').click
     sleep @sleep_time_short
+  end
+
+  def bulk_delete_shifts_employee_with_swaps
+    driver.find_element(css: '#bulk-delete-btn > span.elmo-btn__pressed').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[4]
+      /div[2]/div/div[2]/div[4]/div[1]/div').click
+    driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[1]/div/div/div[2]/div/button[1]/span[1]').click
+    sleep @sleep_time_short
+    driver.find_element(xpath: '//*[@id="confirm-bulk-delete-modal"]/div[3]/div/div[2]/button[2]').click
+    sleep @sleep_time_short
     driver.find_element(xpath: '//*[@id="confirm-bulk-delete-modal"]/div[3]/div/div[2]/button[2]').click
   end
 
@@ -118,7 +128,6 @@ class RotaExtension < Base
     sleep @sleep_time_short
     driver.find_element(xpath: '//*[@id="confirm-bulk-delete-modal"]/div[3]/div/div[2]/button[2]').click
     sleep @sleep_time_short
-    driver.find_element(xpath: '//*[@id="confirm-bulk-delete-modal"]/div[3]/div/div[2]/button[2]').click
   end
 
   def bulk_delete_cancel_button

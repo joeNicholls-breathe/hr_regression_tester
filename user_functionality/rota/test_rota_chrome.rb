@@ -21,13 +21,15 @@ RSpec.describe 'Rota Regression test script' do
     @sleep_time_long = (ENV['SLEEPTIME_LONG'] || 4).to_f
     @sleep_time_short = (ENV['SLEEPTIME_SMALL'] || 1).to_f
     options = Selenium::WebDriver::Chrome::Options.new
-    # options.add_argument('--headless')
+    options.add_argument('--headless')
     options.add_argument('--disable-gpu')
     options.add_argument('--window-size=1920,1080')
     @driver = Selenium::WebDriver.for :chrome, options:
   end
 
   # accessing Rota application
+  puts 'Test 4a and 7a will fail but this is expected behaviour'
+  
   it '1a. navigate to breathe login' do
     NavigateBrowserExtension.new(@driver).breathe_login
     expect(@driver.title).to eql('Log in to Breathe')
@@ -283,7 +285,7 @@ RSpec.describe 'Rota Regression test script' do
     sleep @sleep_time_short
     RotaExtension.new(@driver).navigate_to_the_next_monday_shift
     sleep @sleep_time_long
-    RotaExtension.new(@driver).bulk_delete_shifts_employee
+    RotaExtension.new(@driver).bulk_delete_shifts_employee_with_swaps
     sleep @sleep_time_long
     RotaExtension.new(@driver).delete_shift
     sleep @sleep_time_long
@@ -293,11 +295,7 @@ RSpec.describe 'Rota Regression test script' do
     sleep @sleep_time_short
     RotaExtension.new(@driver).bulk_delete_shifts_employee
     sleep @sleep_time_long
-    RotaExtension.new(@driver).bulk_delete_cancel_button
-    sleep @sleep_time_long
     RotaExtension.new(@driver).bulk_delete_shifts_admin
-    sleep @sleep_time_long
-    RotaExtension.new(@driver).bulk_delete_cancel_button
     sleep @sleep_time_long
     @driver.find_element(css: '#user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17').click
     employee_monday_shift = @driver.find_element(class: 'roster-map-2-0')

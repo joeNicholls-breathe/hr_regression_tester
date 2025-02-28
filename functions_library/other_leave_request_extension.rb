@@ -31,11 +31,12 @@ class OtherLeaveRequestExtension < Base
     driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
   end
 
-  def select_rota_employee_other_leave_to_purge
+  def select_rota_employee_other_leave_to_purge(employee_name)
     navigate_to_purge_data
+    # HolidayExtension.new(driver).navigate_to_purge_data
     drop = driver.find_element(:id, 'employee_id')
     choose = Selenium::WebDriver::Support::Select.new(drop)
-    choose.select_by(:text, 'Std Employee User')
+    choose.select_by(:text, employee_name)
     drop = driver.find_element(:id, 'area')
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:text, 'Other Leave')
