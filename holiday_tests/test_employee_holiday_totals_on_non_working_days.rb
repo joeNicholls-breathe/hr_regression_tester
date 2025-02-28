@@ -30,6 +30,7 @@ class TestLeaveRequest
     test_01_employee_makes_request
     test_02_approver_approves_request
     test_03_delete_holiday_data
+    driver.close
     puts 'Complete - test_employee_holiday_totals_on_non_working_days.rb'
   end
 

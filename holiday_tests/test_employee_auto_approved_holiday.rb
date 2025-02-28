@@ -36,6 +36,7 @@ class TestAutoApprovedHoliday
     test_04_delete_absences_for_auto_approval_employee_one
     test_05_delete_absences_for_auto_approval_employee_two
     test_06_delete_absences_for_auto_approval_employee_three
+    driver.close
     puts 'Complete - test_employee_auto_approval_process.rb'
   end
 

@@ -28,6 +28,7 @@ class TestLeaveRequest
     test_01_login_as_admin_and_create_record
     test_02_check_totals
     test_03_delete_holiday_data
+    driver.close
     puts 'Complete - test_employee_holiday_ignore_working_pattern.rb'
   end
 

@@ -40,7 +40,7 @@ class EmployeeDashboardExtension < Base
     driver.find_element(
       css: 'body > div.hr-main-container > div.hr-main > div.new-bootstrap > div:nth-child(1) > div > div > div:nth-child(3) > div > section > div > div > div > div > div > div:nth-child(1) > div > div.bdds-card__header > div.bdds-popover-trigger > button'
     ).click
-    sleep 0.25
+    sleep 1
     buttons = driver.find_elements(class: 'bdds-button--text')
     button = buttons.find { |x| x.text == 'Manage leave' }
     button.click

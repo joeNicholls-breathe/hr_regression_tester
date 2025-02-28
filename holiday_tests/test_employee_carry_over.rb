@@ -33,6 +33,7 @@ class TestLeaveRequest
     test_01_employee_makes_request
     test_02_check_allowance_totals
     test_03_delete_holiday_data
+    driver.close
     puts 'Complete - test_employee_holiday_carry_over.rb'
   end
 

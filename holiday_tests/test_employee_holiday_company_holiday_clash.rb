@@ -36,6 +36,7 @@ class TestLeaveRequest
     test_02_create_holiday_clash
     test_03_check_allowance_totals
     test_04_delete_records
+    driver.close
     puts 'Complete - test_employee_holiday_company_holiday_clash.rb'
   end
 

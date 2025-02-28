@@ -36,6 +36,7 @@ class TestLeaveRequest
     test_02_employee_makes_request_on_same_day
     test_03_employee_makes_request_overlapping_absence
     test_04_delete_holiday_data
+    driver.close
     puts 'Complete - test_employee_holiday_clash.rb'
   end
 

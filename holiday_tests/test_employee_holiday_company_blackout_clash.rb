@@ -37,6 +37,7 @@ class TestLeaveRequest
     test_04_create_holiday_overrides_clash
     test_05_check_allowance_totals
     test_06_delete_records
+    driver.close
     puts 'Complete - test_employee_holiday_company_blackout_clash.rb'
   end
 
