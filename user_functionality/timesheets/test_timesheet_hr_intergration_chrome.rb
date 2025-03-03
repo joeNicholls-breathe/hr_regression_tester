@@ -27,11 +27,13 @@ RSpec.describe 'HR to Timesheets Regression test script' do
     @sleep_time_long = (ENV['SLEEPTIME_LONG'] || 4).to_f
     @sleep_time_short = (ENV['SLEEPTIME_SMALL'] || 2).to_f
     options = Selenium::WebDriver::Chrome::Options.new
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
-    options.add_argument('--window-size=1920,1080')
+    # options.add_argument('--headless')
+    # options.add_argument('--disable-gpu')
+    # options.add_argument('--window-size=1920,1080')
     @driver = Selenium::WebDriver.for :chrome, options:
   end
+
+  # WORK IN PROGRESS
 
   # holidays
   it '1a. Employee holiday added to HR and seen in Timesheets' do

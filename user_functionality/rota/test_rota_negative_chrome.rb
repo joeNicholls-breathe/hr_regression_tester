@@ -34,6 +34,8 @@ RSpec.describe 'Rota Regression negative test script' do
     @driver = Selenium::WebDriver.for :chrome, options:
   end
 
+  # WORK IN PROGRESS
+
   it '1a. Employee already has a shift for the date a second is attempted upon' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_admin

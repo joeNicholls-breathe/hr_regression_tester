@@ -29,7 +29,7 @@ RSpec.describe 'Rota Regression test script' do
 
   # accessing Rota application
   puts 'Test 4a and 7a will fail but this is expected behaviour'
-  
+
   it '1a. navigate to breathe login' do
     NavigateBrowserExtension.new(@driver).breathe_login
     expect(@driver.title).to eql('Log in to Breathe')

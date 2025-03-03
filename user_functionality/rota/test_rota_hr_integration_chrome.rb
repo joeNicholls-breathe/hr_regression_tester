@@ -27,8 +27,8 @@ RSpec.describe 'HR to Rota Regression test script' do
     @sleep_time_long = (ENV['SLEEPTIME_LONG'] || 4).to_f
     @sleep_time_short = (ENV['SLEEPTIME_SMALL'] || 2).to_f
     options = Selenium::WebDriver::Chrome::Options.new
-    # options.add_argument('--headless') 
-    # going to leave this switch off as i can not work out why it fail
+    # options.add_argument('--headless')
+    # leaving head on, as i can not work out why it fail headless
     options.add_argument('--disable-gpu')
     options.add_argument('--window-size=1920,1080')
     @driver = Selenium::WebDriver.for :chrome, options:
@@ -68,8 +68,8 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_short
     RotaExtension.new(@driver).assign_one_shift_monday_std_employee
     sleep @sleep_time_long
-    RotaExtension.new(@driver).share_shift
-    sleep @sleep_time_long
+    # RotaExtension.new(@driver).share_shift
+    # sleep @sleep_time_long
     AppNavigationExtensionManager.new(@driver).navigate_to_employee_holiday('26349')
     HolidayExtension.new(@driver).holiday_request_for_next_monday
     sleep @sleep_time_short
@@ -85,7 +85,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     RotaExtension.new(@driver).delete_shift_with_leave
     sleep 5
     HolidayExtension.new(@driver).select_rota_employee_holiday_to_purge('Std Employee User')
-    sleep @sleep_time_short
+    sleep @sleep_time_long
     @driver.quit
   end
 
@@ -106,7 +106,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     warning_element = @driver.find_element(xpath: '//*[@id="shift-overlap-modal"]/div[3]/div/div[1]/p')
     expect(warning_element.attribute('innerHTML')).to eql('Shift is overlapped with user leave')
     RotaExtension.new(@driver).shift_with_leave_accept
-    RotaExtension.new(@driver).share_shift
+    # RotaExtension.new(@driver).share_shift
     sleep @sleep_time_long
     # rubocop:disable Layout/LineLength
     shift_element = @driver.find_element(xpath: '//*[@id="user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17"]/div/div[1]/div[2]')
@@ -116,7 +116,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     RotaExtension.new(@driver).delete_shift_with_leave
     sleep 5
     HolidayExtension.new(@driver).select_rota_employee_holiday_to_purge('Std Employee User')
-    sleep @sleep_time_short
+    sleep @sleep_time_long
     @driver.quit
   end
 
@@ -140,7 +140,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     expect(shift_element.attribute('innerHTML')).to eql('On Leave')
     sleep @sleep_time_short
     OtherLeaveRequestExtension.new(@driver).select_rota_employee_other_leave_to_purge('Std Employee User')
-    sleep @sleep_time_short
+    sleep @sleep_time_long
     @driver.quit
   end
 
@@ -154,8 +154,8 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_short
     RotaExtension.new(@driver).assign_one_shift_monday_std_employee
     sleep @sleep_time_long
-    RotaExtension.new(@driver).share_shift
-    sleep @sleep_time_long
+    # RotaExtension.new(@driver).share_shift
+    # sleep @sleep_time_long
     AppNavigationExtensionManager.new(@driver).navigate_to_employee_holiday('26349')
     OtherLeaveRequestExtension.new(@driver).other_leave_request_for_next_monday
     sleep @sleep_time_short
@@ -171,7 +171,8 @@ RSpec.describe 'HR to Rota Regression test script' do
     RotaExtension.new(@driver).delete_shift_with_leave
     sleep 5
     OtherLeaveRequestExtension.new(@driver).select_rota_employee_other_leave_to_purge('Std Employee User')
-    sleep @sleep_time_short
+    sleep @sleep_time_long
+    @driver.quit
   end
 
   it '2c. Employee other leave added to a date and then a rota shift is then added to RTA' do
@@ -193,8 +194,8 @@ RSpec.describe 'HR to Rota Regression test script' do
     warning_element = @driver.find_element(xpath: '//*[@id="shift-overlap-modal"]/div[3]/div/div[1]/p')
     expect(warning_element.attribute('innerHTML')).to eql('Shift is overlapped with user leave')
     RotaExtension.new(@driver).shift_with_leave_accept
-    sleep @sleep_time_short
-    RotaExtension.new(@driver).share_shift
+    # sleep @sleep_time_short
+    # RotaExtension.new(@driver).share_shift
     sleep @sleep_time_long
     # rubocop:disable Layout/LineLength
     shift_element = @driver.find_element(xpath: '//*[@id="user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17"]/div/div[1]/div[2]')
@@ -205,7 +206,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep 5
     # Delete other leave rather than holiday - Need to do??
     OtherLeaveRequestExtension.new(@driver).select_rota_employee_other_leave_to_purge('Std Employee User')
-    sleep 4
+    sleep @sleep_time_long
     @driver.quit
   end
 
@@ -231,7 +232,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_sickness('26349')
     sleep @sleep_time_short
     SicknessExtension.new(@driver).delete_sickness_record
-    sleep @sleep_time_short
+    sleep @sleep_time_long
     @driver.quit
   end
 
@@ -245,8 +246,8 @@ RSpec.describe 'HR to Rota Regression test script' do
     sleep @sleep_time_short
     RotaExtension.new(@driver).assign_one_shift_monday_std_employee
     sleep @sleep_time_long
-    RotaExtension.new(@driver).share_shift
-    sleep @sleep_time_long
+    # RotaExtension.new(@driver).share_shift
+    # sleep @sleep_time_long
     AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_add_sickness('26349')
     SicknessExtension.new(@driver).sickness_request_for_last_monday
     sleep @sleep_time_short
@@ -264,7 +265,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_sickness('26349')
     sleep @sleep_time_short
     SicknessExtension.new(@driver).delete_sickness_record
-    sleep @sleep_time_short
+    sleep @sleep_time_long
     @driver.quit
   end
 
@@ -287,8 +288,8 @@ RSpec.describe 'HR to Rota Regression test script' do
     warning_element = @driver.find_element(xpath: '//*[@id="shift-overlap-modal"]/div[3]/div/div[1]/p')
     expect(warning_element.attribute('innerHTML')).to eql('Shift is overlapped with user sickness')
     RotaExtension.new(@driver).shift_with_leave_accept # same action as sickness
-    sleep @sleep_time_short
-    RotaExtension.new(@driver).share_shift
+    # sleep @sleep_time_short
+    # RotaExtension.new(@driver).share_shift
     sleep @sleep_time_long
     # rubocop:disable Layout/LineLength
     shift_element = @driver.find_element(xpath: '//*[@id="user-cell-0-roster-0-9d33f01a-3628-44d5-be40-36ffa17dcb17"]/div/div[1]/div[2]')
@@ -300,7 +301,7 @@ RSpec.describe 'HR to Rota Regression test script' do
     AppNavigationExtensionManager.new(@driver).navigate_to_rota_employee_sickness('26349')
     sleep @sleep_time_short
     SicknessExtension.new(@driver).delete_sickness_record
-    sleep @sleep_time_short
+    sleep @sleep_time_long
     @driver.quit
   end
 
