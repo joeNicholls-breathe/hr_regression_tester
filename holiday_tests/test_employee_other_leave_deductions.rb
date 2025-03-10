@@ -50,7 +50,7 @@ class TestLeaveRequest
     sleep 1
     OtherLeaveRequestExtension.new(driver).employee_holiday_other_leave_request
     puts 'Pass - Completes leave request'
-    sleep 1
+    sleep 3
     EmployeeDashboardExtension.new(driver).open_employee_holiday
     puts 'Pass - Displays leave request'
     sleep 1
@@ -87,7 +87,9 @@ class TestLeaveRequest
     puts 'Start test - Deletes holiday information for employee'
     HolidayExtension.new(driver).purge_other_leave_data('Holiday employee')
     puts 'Pass - purge other leave data'
+    sleep 2
     HolidayExtension.new(driver).holiday_employee_absence_index
+    sleep 2
     HolidayExtension.new(driver).compare_booked_amount('0.0 days')
     HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     puts 'Test complete - Holiday employees holiday deleted'

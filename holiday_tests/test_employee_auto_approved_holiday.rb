@@ -57,8 +57,8 @@ class TestAutoApprovedHoliday
     HolidayAutoApprovalExtension.new(driver).holiday_request_for_auto_approval
     puts 'Pass - creates absence which should be auto approved'
     sleep 2
-    NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget_manage_leave
-    HolidayExtension.new(driver).compare_booked_amount('1.0 days')
+    EmployeeDashboardExtension.new(driver).open_employee_holiday
+    HolidayExtension.new(driver).compare_booked_amount('1.0 day')
     HolidayExtension.new(driver).compare_holiday_allowance('19.0 days')
     puts 'Pass - absence created, totals correct'
     LogoutExtension.new(driver).user_logout
@@ -83,12 +83,10 @@ class TestAutoApprovedHoliday
     HolidayAutoApprovalExtension.new(driver).holiday_request_for_auto_approval
     puts 'Pass - creates absence which should be auto approved'
     sleep 2
-    NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget_manage_leave
-    HolidayExtension.new(driver).compare_booked_amount('1.0 days')
+    EmployeeDashboardExtension.new(driver).open_employee_holiday
+    HolidayExtension.new(driver).compare_booked_amount('1.0 day')
     HolidayExtension.new(driver).compare_holiday_allowance('19.0 days')
     puts 'Pass - absence created, totals correct'
-    LogoutExtension.new(driver).user_logout
-    puts 'Pass - Holiday Employee logged out'
     puts 'Test complete for employee two'
   end
 
@@ -107,13 +105,11 @@ class TestAutoApprovedHoliday
     sleep 1
     HolidayAutoApprovalExtension.new(driver).holiday_request_for_auto_approval
     puts 'Pass - creates absence which should not be auto approved'
-    sleep 2
-    NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget_manage_leave
+    sleep 3
+    EmployeeDashboardExtension.new(driver).open_employee_holiday
     HolidayExtension.new(driver).compare_booked_amount('0.0 days')
     HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     puts 'Pass - absence created, totals correct'
-    LogoutExtension.new(driver).user_logout
-    puts 'Pass - Holiday Employee logged out'
     puts 'Test complete for employee three'
   end
 
@@ -141,7 +137,7 @@ class TestAutoApprovedHoliday
     puts 'Pass - absences purged'
     sleep 2
     HolidayExtension.new(driver).compare_booked_amount('0.0 days')
-    puts 'test complate - absences deleted for auto approval employee two'
+    puts 'test complete - absences deleted for auto approval employee two'
   end
 
   def test_06_delete_absences_for_auto_approval_employee_three
@@ -150,7 +146,7 @@ class TestAutoApprovedHoliday
     puts 'Pass - absences purged'
     sleep 2
     HolidayExtension.new(driver).compare_booked_amount('0.0 days')
-    puts 'test complate - absences deleted for auto approval employee three'
+    puts 'test complete - absences deleted for auto approval employee three'
   end
 
   def purge_employee(employee)

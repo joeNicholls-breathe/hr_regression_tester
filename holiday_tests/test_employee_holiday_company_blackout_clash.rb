@@ -54,7 +54,7 @@ class TestLeaveRequest
     sleep 1
     AppNavigationExtensionManager.new(driver).navigate_to_company_blackouts
     puts 'Pass - Navigate to company blackouts'
-    sleep 1
+    sleep 2
     CompanyBlackoutsExtension.new(driver).company_blackout_add_new
     puts 'Pass - Added company blackout'
     puts 'TEST 01 complete'
@@ -99,7 +99,7 @@ class TestLeaveRequest
   def test_05_check_allowance_totals
     puts 'START test 05 - Check totals'
     HolidayExtension.new(driver).holiday_employee_absence_index
-    HolidayExtension.new(driver).compare_booked_amount('1.0 days')
+    HolidayExtension.new(driver).compare_booked_amount('1.0 day')
     HolidayExtension.new(driver).compare_holiday_allowance('19.0 days')
     puts 'TEST 05 complete - Absence does not remove allowance from employee'
   end
@@ -113,6 +113,7 @@ class TestLeaveRequest
     HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     AppNavigationExtensionManager.new(driver).navigate_to_company_blackouts
     puts 'Pass - Navigate to company blackouts'
+    sleep 2
     CompanyBlackoutsExtension.new(driver).company_blackout_delete
     puts 'Pass - deleted company blackout'
     puts 'TEST 06 complete - Deleted blackout and company blackout'

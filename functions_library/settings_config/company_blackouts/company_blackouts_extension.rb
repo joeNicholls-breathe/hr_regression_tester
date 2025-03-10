@@ -5,7 +5,9 @@ class CompanyBlackoutsExtension < Base
   # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
   def company_blackout_add_new
-    driver.find_element(xpath: '/html/body/div[3]/div/section/div[2]/a').click
+    driver.find_element(
+        css: 'body > div.hr-main-container > div > section > div.float-right > a > span > svg.svg-inline--fa.fa-plus.fa-w-14.fa-inverse.fa-stack-1x'
+      ).click
     driver.find_element(id: 'company_blackout_name').send_keys "Blackout test #{todays_date}"
     driver.find_element(id: '#company_blackout_start_date_react').send_keys two_week_date_string
     driver.find_element(id: '#company_blackout_end_date_react').send_keys two_week_date_string
@@ -38,6 +40,7 @@ class CompanyBlackoutsExtension < Base
     selector = "#delete_company_blackout_#{split_value} > div > div >
                 div.modal-footer > button.btn.btn-danger.modal-confirm"
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click
+    sleep 1
     driver.find_element(css: selector).click
   end
   # rubocop:enable Metrics/AbcSize

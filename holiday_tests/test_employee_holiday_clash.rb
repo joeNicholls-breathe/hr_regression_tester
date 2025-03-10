@@ -60,8 +60,6 @@ class TestLeaveRequest
     sleep 1
     LeaveRequestExtension.new(driver).employee_leave_request_in_two_weeks
     puts 'Pass - creates absence record for holiday employee'
-    sleep 1
-    LogoutExtension.new(driver).logout_admin
     puts 'TEST 01 complete'
   end
 
@@ -106,19 +104,20 @@ class TestLeaveRequest
     puts 'Pass - Navigate to holiday employee absences'
     HolidayExtension.new(driver).compare_booked_amount('1.0 day')
     HolidayExtension.new(driver).compare_holiday_allowance('19.0 days')
-    LogoutExtension.new(driver).user_logout
-    puts 'Pass - Holiday Employee logged out'
     puts 'TEST 3 complete - Absence not created that overlaps existing absence'
   end
 
   def test_04_delete_holiday_data
     puts 'Start test 4 - Deletes holiday information for employee'
+    NavigateBrowserExtension.new(driver).breathe_login
     LoginExtension.new(driver).login_admin
     puts 'Pass - Login as admin'
     sleep 1
     HolidayExtension.new(driver).purge_holiday_data('Holiday employee')
+    sleep 2
     puts 'Pass - Purge holday data'
     HolidayExtension.new(driver).holiday_employee_absence_index
+    sleep 2
     HolidayExtension.new(driver).compare_booked_amount('0.0 days')
     HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     puts 'Test complete - Holiday employees holiday deleted'

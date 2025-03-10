@@ -52,7 +52,7 @@ class TestLeaveRequest
     sleep 1
     LeaveRequestExtension.new(driver).make_leave_request('13/10/2025', '24/10/2025')
     puts 'Pass - creates absence to use this years allowance'
-    sleep 1
+    sleep 2
     EmployeeDashboardExtension.new(driver).click_widget('Request leave')
     puts 'Pass - opens add absence record'
     sleep 1
@@ -63,11 +63,11 @@ class TestLeaveRequest
 
   def test_02_check_allowance_totals
     puts 'Start test - Check totals'
+    sleep 2
     EmployeeDashboardExtension.new(driver).open_employee_holiday
     HolidayExtension.new(driver).compare_booked_amount('15.0 days')
     HolidayExtension.new(driver).compare_holiday_allowance('0.0 days')
     puts 'Test complete - Approver can approve holiday request'
-    LogoutExtension.new(driver).user_logout
   end
 
   def test_03_delete_holiday_data
@@ -80,6 +80,7 @@ class TestLeaveRequest
     HolidayExtension.new(driver).purge_holiday_data('Negative Carry-Over')
     puts 'Pass - purge holday data'
     HolidayExtension.new(driver).negative_carry_over_holiday_employee_absence_index
+    sleep 2
     HolidayExtension.new(driver).compare_booked_amount('0.0 days')
     HolidayExtension.new(driver).compare_holiday_allowance('10.0 days')
     puts 'Test complete - Negative Carry-Over holiday deleted'

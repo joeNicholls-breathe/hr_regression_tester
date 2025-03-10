@@ -15,14 +15,6 @@ class AppNavigationExtensionManager < Base
     driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-dashboard]').click
   end
 
-  def navigate_to_people_list
-    driver.find_element(css: '#top-menu-menu-item-1-0').click
-    sleep 1
-    driver.find_element(
-      css: '#top-menu > div:nth-child(2) > ul > li:nth-child(1) > div > div > ul > li:nth-child(1) > a'
-    ).click
-  end
-
   def navigate_to_people_screen
     driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-people]').click
     sleep 0.25
@@ -112,12 +104,42 @@ class AppNavigationExtensionManager < Base
     driver.find_element(id: 'leave').click
   end
 
+  # def navigate_to_data
+  #   driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-people]').click
+  #   wait = Selenium::WebDriver::Wait.new(timeout: 10)
+  #   wait.until do
+  #     data = driver.find_element(
+  #       css: '#top-menu > div:nth-child(2) > ul > li:nth-child(1) > div > div > ul > li:nth-child(3) > a'
+  #     )
+  #     data.displayed?
+  #   end
+  #   driver.find_element(
+  #       css: '#top-menu > div:nth-child(2) > ul > li:nth-child(1) > div > div > ul > li:nth-child(3) > a'
+  #     ).click
+  # end
+  
   def navigate_to_data
-    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-people]').click
-    sleep 1
+    sleep 2
+    driver.find_element(css:'a[data-element-id=side-nav-l1-item-prefix-people]').click
+    sleep 3
     driver.find_element(
       css: '#top-menu > div:nth-child(2) > ul > li:nth-child(1) > div > div > ul > li:nth-child(3) > a'
-    ).click
+     ).click
+  end
+
+  def navigate_to_people_list
+    sleep 2
+    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-people]').click
+    wait = Selenium::WebDriver::Wait.new(timeout: 10)
+    wait.until do
+      data = driver.find_element(
+        css: '#top-menu > div:nth-child(2) > ul > li:nth-child(1) > div > div > ul > li:nth-child(1) > a'
+      )
+      data.displayed?
+    end
+    driver.find_element(
+        css: '#top-menu > div:nth-child(2) > ul > li:nth-child(1) > div > div > ul > li:nth-child(1) > a'
+      ).click
   end
 
   def open_purge_data
