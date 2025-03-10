@@ -85,8 +85,9 @@ class TestLeaveRequest
     puts 'Start test - Deletes holiday and company holiday'
     purge_employee('Holiday employee')
     puts 'Pass - purge holday data'
-    sleep 1
+    sleep 2
     HolidayExtension.new(driver).holiday_employee_absence_index
+    sleep 2
     HolidayExtension.new(driver).compare_booked_amount('0.0 days')
     puts 'Test complete - Negative Carry-Over holiday deleted'
     HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')

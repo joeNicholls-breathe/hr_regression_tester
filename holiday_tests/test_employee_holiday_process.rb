@@ -89,6 +89,7 @@ class TestLeaveRequest
     HolidayExtension.new(driver).purge_holiday_data('Holiday employee')
     puts 'Pass - Purge holday data'
     HolidayExtension.new(driver).holiday_employee_absence_index
+    sleep 2
     HolidayExtension.new(driver).compare_booked_amount('0.0 days')
     HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     puts 'Test complete - Holiday employees holiday deleted'

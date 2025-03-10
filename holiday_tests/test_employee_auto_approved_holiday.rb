@@ -58,6 +58,7 @@ class TestAutoApprovedHoliday
     puts 'Pass - creates absence which should be auto approved'
     sleep 2
     EmployeeDashboardExtension.new(driver).open_employee_holiday
+    sleep 1
     HolidayExtension.new(driver).compare_booked_amount('1.0 day')
     HolidayExtension.new(driver).compare_holiday_allowance('19.0 days')
     puts 'Pass - absence created, totals correct'

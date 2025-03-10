@@ -140,6 +140,7 @@ class HolidayExtension < Base # rubocop:disable Metrics/ClassLength
   end
 
   def compare_booked_amount(expected_amount)
+    sleep 2
     if HolidayExtension.new(driver).booked_amount == expected_amount
       puts 'Pass - booked_amount total correct'
     else

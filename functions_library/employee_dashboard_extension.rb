@@ -73,8 +73,7 @@ class EmployeeDashboardExtension < Base
     driver.find_element(
       class: 'bdds-card__menu-trigger'
         ).click
-    sleep 2
-    menu = driver.find_elements(class: 'bdds-button--text')
-    button = menu.find_element(tag_
+    sleep 3
+    driver.find_element(class: 'bdds-button--text').click
   end
 end
