@@ -100,8 +100,9 @@ RSpec.describe 'Timesheet Regression test script' do
     LoginAppExtension.new(@driver).select_hr
     RotaEmpExtension.new(@driver).navigate_to_rota_from_hr
     TimesheetEmpExtension.new(@driver).my_timesheets
+    sleep @sleep_time_short
     TimesheetEmpExtension.new(@driver).add_timesheet_pending_approval_employee_last_week
-    sleep @sleep_time_long
+    sleep @sleep_time_short
     TimesheetEmpExtension.new(@driver).last_six_months
     # rubocop:disable Layout/LineLength
     employee_timesheet = @driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div[2]/div/div/div[2]/div[1]/div/div[1]/div[2]/div/div[2]')
@@ -182,12 +183,20 @@ RSpec.describe 'Timesheet Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_line_manager
     LoginAppExtension.new(@driver).select_hr
-    sleep @sleep_time_short
     TimesheetExtension.new(@driver).navigate_to_timeandattendance_weekly_from_hr
     sleep @sleep_time_short
-    TimesheetExtension.new(@driver).bulk_approve
-    sleep @sleep_time_long
-    TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
+    # rubocop:disable Rails/Date
+    today = Date.today.strftime('%A')
+    # rubocop:enable Rails/Date
+    # rubocop:disable Style/IdenticalConditionalBranches
+    if today == 'Monday'
+      TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
+    else
+      TimesheetExtension.new(@driver).bulk_approve
+      sleep @sleep_time_long
+      TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
+    end
+    # rubocop:enable Style/IdenticalConditionalBranches
     sleep @sleep_time_short
     TimesheetExtension.new(@driver).bulk_approve
     sleep @sleep_time_long
@@ -221,20 +230,33 @@ RSpec.describe 'Timesheet Regression test script' do
     sleep @sleep_time_short
     TimesheetExtension.new(@driver).navigate_to_timeandattendance_weekly_from_hr
     sleep @sleep_time_short
-    TimesheetExtension.new(@driver).bulk_remove
+    TimesheetExtension.new(@driver).bulk_remove # 1
     sleep @sleep_time_long
     TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
-    sleep @sleep_time_short
-    TimesheetExtension.new(@driver).bulk_remove
+    sleep @sleep_time_long
+    TimesheetExtension.new(@driver).bulk_remove # 2
     sleep @sleep_time_long
     TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
-    sleep @sleep_time_short
-    TimesheetExtension.new(@driver).bulk_remove
+    sleep @sleep_time_long
+    TimesheetExtension.new(@driver).bulk_remove # 3
     sleep @sleep_time_long
     TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
-    sleep @sleep_time_short
-    TimesheetExtension.new(@driver).bulk_remove
     sleep @sleep_time_long
+    TimesheetExtension.new(@driver).bulk_remove # 4
+    sleep @sleep_time_long
+    TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
+    sleep @sleep_time_long
+    TimesheetExtension.new(@driver).bulk_remove # 5
+    sleep @sleep_time_long
+    TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
+    sleep @sleep_time_long
+    TimesheetExtension.new(@driver).bulk_remove # 6
+    sleep @sleep_time_long
+    TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
+    sleep @sleep_time_long
+    TimesheetExtension.new(@driver).bulk_remove # 7
+    sleep @sleep_time_long
+    @driver.quit
   end
   # rubocop:enable Metrics/BlockLength
 end

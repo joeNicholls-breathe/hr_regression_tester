@@ -176,8 +176,7 @@ RSpec.describe 'Rota Regression test script' do
     RotaExtension.new(@driver).navigate_to_the_next_monday_shift
     sleep @sleep_time_long
     RotaExtension.new(@driver).create_template
-    # THERE IS AN ISSUE HERE AS THE AUTOMATION DOES NOT SAVE THE TEMPLATE
-    # but will return to the same screen and forfil the expectation
+    sleep @sleep_time_short
     employee_monday_shift = @driver.find_element(class: 'roster-map-2-0')
     monday_shift_time_element = employee_monday_shift.find_element(class: 'shift-card-view__time')
     expect(monday_shift_time_element.attribute('innerHTML')).to eql('11:11-19:11')
@@ -188,11 +187,12 @@ RSpec.describe 'Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_admin
     LoginAppExtension.new(@driver).select_rota
-    sleep @sleep_time_short
+    sleep @sleep_time_long
     RotaExtension.new(@driver).delete_template
-    # THERE IS AN ISSUE HERE AS THE AUTOMATION DOES NOT DELETE THE TEMPLATE
-    # Need to open up the tab again to check the template has been removed
-    expect(@driver.title).to eql('Rota week view - user view')
+    sleep @sleep_time_short
+    RotaExtension.new(@driver).open_template_modal
+    shift_template_still_present = @driver.find_element(id: 'template-name')
+    expect(shift_template_still_present.attribute('innerHTML')).to eql('Employee Std Week1')
     @driver.quit
   end
 
@@ -211,7 +211,7 @@ RSpec.describe 'Rota Regression test script' do
     sleep @sleep_time_long
     employee_monday_shift = @driver.find_element(class: 'roster-map-2-4')
     monday_shift_time_element = employee_monday_shift.find_element(class: 'shift-card-view__time')
-    expect(monday_shift_time_element.attribute('innerHTML')).to eql('10:31-17:31')
+    expect(monday_shift_time_element.attribute('innerHTML')).to eql('10:05-18:05')
     @driver.quit
   end
 
@@ -246,7 +246,6 @@ RSpec.describe 'Rota Regression test script' do
     RotaEmpExtension.new(@driver).mark_all_as_read_and_delete
     RotaEmpExtension.new(@driver).close_notification_employee
     sleep @sleep_time_short
-    puts '7b. complete'
     @driver.quit
   end
 
@@ -282,7 +281,7 @@ RSpec.describe 'Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_admin
     LoginAppExtension.new(@driver).select_rota
-    sleep @sleep_time_short
+    sleep @sleep_time_long
     RotaExtension.new(@driver).navigate_to_the_next_monday_shift
     sleep @sleep_time_long
     RotaExtension.new(@driver).bulk_delete_shifts_employee_with_swaps
@@ -292,7 +291,7 @@ RSpec.describe 'Rota Regression test script' do
     RotaExtension.new(@driver).delete_shift_wednesday
     sleep @sleep_time_long
     RotaExtension.new(@driver).navigate_to_the_next_monday_shift
-    sleep @sleep_time_short
+    sleep @sleep_time_long
     RotaExtension.new(@driver).bulk_delete_shifts_employee
     sleep @sleep_time_long
     RotaExtension.new(@driver).bulk_delete_shifts_admin

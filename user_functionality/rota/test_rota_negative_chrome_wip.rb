@@ -23,18 +23,18 @@ require './settings'
 
 # rubocop:disable Metrics/BlockLength
 
+# WORK IN PROGRESS
+
 RSpec.describe 'Rota Regression negative test script' do
   before do
     @sleep_time_long = (ENV['SLEEPTIME_LONG'] || 4).to_f
     @sleep_time_short = (ENV['SLEEPTIME_SMALL'] || 1).to_f
     options = Selenium::WebDriver::Chrome::Options.new
     # options.add_argument('--headless')
-    # options.add_argument('--disable-gpu')
-    # options.add_argument('--window-size=1920,1080')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
     @driver = Selenium::WebDriver.for :chrome, options:
   end
-
-  # WORK IN PROGRESS
 
   it '1a. Employee already has a shift for the date a second is attempted upon' do
     NavigateBrowserExtension.new(@driver).breathe_login

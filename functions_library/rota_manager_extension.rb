@@ -103,6 +103,7 @@ class RotaExtension < Base
     driver.find_element(css: '#bulk-delete-btn > span.elmo-btn__pressed').click
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[4]
       /div[2]/div/div[2]/div[5]/div[1]/div').click
+    sleep 1
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[1]/div/div/div[2]/div/button[1]/span[1]').click
     sleep @sleep_time_short
     driver.find_element(xpath: '//*[@id="confirm-bulk-delete-modal"]/div[3]/div/div[2]/button[2]').click
@@ -124,6 +125,7 @@ class RotaExtension < Base
     driver.find_element(css: '#bulk-delete-btn > span.elmo-btn__pressed').click
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div[4]
       /div[2]/div/div[2]/div[4]/div[1]/div').click
+    sleep 1
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[1]/div/div/div[2]/div/button[1]/span[1]').click
     sleep @sleep_time_short
     driver.find_element(xpath: '//*[@id="confirm-bulk-delete-modal"]/div[3]/div/div[2]/button[2]').click
@@ -143,9 +145,10 @@ class RotaExtension < Base
     driver.find_element(id: 'template-name').send_keys :backspace
     driver.find_element(id: 'template-name').send_keys :backspace
     driver.find_element(id: 'template-name').send_keys :backspace
-    driver.find_element(id: 'template-name').send_keys '24'
+    driver.find_element(id: 'template-name').send_keys '25a'
     sleep @sleep_time_long
-    driver.find_element(xpath: '//*[@id="save-template-modal"]/div[3]/div/div[2]/button[1]').click
+    driver.find_element(id: 'save-template-btn').click
+    sleep @sleep_time_long
   end
 
   def assign_template
@@ -165,6 +168,10 @@ class RotaExtension < Base
     sleep @sleep_time_short
     # if we can not delete the template - organise logic maybe just refresh page but this would be a cheat
     driver.find_element(xpath: '//*[@id="templates-modal"]/div[3]/div/div[2]/button[1]').click
+  end
+
+  def open_template_modal
+    driver.find_element(id: 'roster-template').click
   end
 
   def create_shift_with_leave
