@@ -180,6 +180,7 @@ class TimesheetExtension < Base
       driver.find_element(css: 'button[data-testid=bulk-delete-confirm-btn]').click
       driver.find_element(css: 'button[data-testid=bulk-delete-modal-confirm-btn]').click
     else
+      sleep @sleep_time_short
       driver.find_element(css: 'button[data-testid=bulk-delete-mode-cancel-btn]').click
     end
   end
