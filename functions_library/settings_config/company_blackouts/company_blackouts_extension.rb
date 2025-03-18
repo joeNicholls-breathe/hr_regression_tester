@@ -5,9 +5,11 @@ class CompanyBlackoutsExtension < Base
   # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
   def company_blackout_add_new
+    # rubocop:disable Layout/LineLength
     driver.find_element(
-        css: 'body > div.hr-main-container > div > section > div.float-right > a > span > svg.svg-inline--fa.fa-plus.fa-w-14.fa-inverse.fa-stack-1x'
-      ).click
+      css: 'body > div.hr-main-container > div > section > div.float-right > a > span > svg.svg-inline--fa.fa-plus.fa-w-14.fa-inverse.fa-stack-1x'
+    ).click
+    # rubocop:enable Layout/LineLength
     driver.find_element(id: 'company_blackout_name').send_keys "Blackout test #{todays_date}"
     driver.find_element(id: '#company_blackout_start_date_react').send_keys two_week_date_string
     driver.find_element(id: '#company_blackout_end_date_react').send_keys two_week_date_string

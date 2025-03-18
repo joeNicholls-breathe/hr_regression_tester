@@ -57,7 +57,7 @@ class TestAutoApprovedHoliday
     HolidayAutoApprovalExtension.new(driver).holiday_request_for_auto_approval
     puts 'Pass - creates absence which should be auto approved'
     sleep 2
-    EmployeeDashboardExtension.new(driver).open_employee_holiday
+    NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget_manage_leave
     sleep 1
     HolidayExtension.new(driver).compare_booked_amount('1.0 day')
     HolidayExtension.new(driver).compare_holiday_allowance('19.0 days')
@@ -84,7 +84,8 @@ class TestAutoApprovedHoliday
     HolidayAutoApprovalExtension.new(driver).holiday_request_for_auto_approval
     puts 'Pass - creates absence which should be auto approved'
     sleep 2
-    EmployeeDashboardExtension.new(driver).open_employee_holiday
+    NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget_manage_leave
+    sleep 1
     HolidayExtension.new(driver).compare_booked_amount('1.0 day')
     HolidayExtension.new(driver).compare_holiday_allowance('19.0 days')
     puts 'Pass - absence created, totals correct'
@@ -107,7 +108,8 @@ class TestAutoApprovedHoliday
     HolidayAutoApprovalExtension.new(driver).holiday_request_for_auto_approval
     puts 'Pass - creates absence which should not be auto approved'
     sleep 3
-    EmployeeDashboardExtension.new(driver).open_employee_holiday
+    NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget_manage_leave
+    sleep 1
     HolidayExtension.new(driver).compare_booked_amount('0.0 days')
     HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     puts 'Pass - absence created, totals correct'

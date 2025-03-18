@@ -64,7 +64,8 @@ class TestLeaveRequest
   def test_02_check_allowance_totals
     puts 'Start test - Check totals'
     sleep 2
-    EmployeeDashboardExtension.new(driver).open_employee_holiday
+    NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget_manage_leave
+    sleep 1
     HolidayExtension.new(driver).compare_booked_amount('15.0 days')
     HolidayExtension.new(driver).compare_holiday_allowance('0.0 days')
     puts 'Test complete - Approver can approve holiday request'

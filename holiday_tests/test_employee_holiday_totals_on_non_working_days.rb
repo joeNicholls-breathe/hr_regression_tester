@@ -51,8 +51,8 @@ class TestLeaveRequest
     # Has to be on a weekend/non-working day
     LeaveRequestExtension.new(driver).make_leave_request_half_day('28/12/2025', '28/12/2025')
     puts 'Pass - Completes leave request'
-    sleep 3
-    EmployeeDashboardExtension.new(driver).open_employee_holiday
+    sleep 2
+    NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget_manage_leave
     puts 'Pass - Displays leave request'
     puts 'Test complete - Employee creates leave request'
   end
@@ -86,7 +86,7 @@ class TestLeaveRequest
     HolidayExtension.new(driver).purge_holiday_data('Holiday employee')
     puts 'Pass - purge holiday data'
     HolidayExtension.new(driver).holiday_employee_absence_index
-    sleep 2
+    sleep 3
     HolidayExtension.new(driver).compare_booked_amount('0.0 days')
     HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     puts 'Test complete - Holiday employees holiday deleted'

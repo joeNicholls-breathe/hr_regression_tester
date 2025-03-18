@@ -52,7 +52,7 @@ class TestLeaveRequest
     LeaveRequestExtension.new(driver).make_leave_request_half_day('16/12/2025', '16/12/2025')
     puts 'Pass - Completes leave request'
     sleep 2
-    EmployeeDashboardExtension.new(driver).open_employee_holiday
+    NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget_manage_leave
     puts 'Pass - Displays leave request'
     sleep 1
     LeaveRequestExtension.new(driver).click_add_new_leave_request

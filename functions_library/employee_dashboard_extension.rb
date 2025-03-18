@@ -35,44 +35,10 @@ class EmployeeDashboardExtension < Base
     widget.click
   end
 
-  # def open_employee_holiday_old
-  #   driver.find_element(
-  #     css: 'body > div.hr-main-container > div.hr-main > div.new-bootstrap > div:nth-child(1) > div > div > div:nth-child(3) > div > section > div > div > div > div > div > div:nth-child(1) > div > div.bdds-card__header > div.bdds-popover-trigger > button'
-  #   ).click
-  #   wait = Selenium::WebDriver::Wait.new(timeout: 20)
-  #   wait.until do
-  #     buttons = driver.find_elements(class: 'bdds-button--text')
-  #     button = buttons.find { |x| x.text == 'Manage leave' }
-  #     button&.displayed? && button&.enabled?
-  #   end
-  #   button = driver.find_elements(class: 'bdds-button--text').find { |x| x.text == 'Manage leave' }
-  #   button.click
-  # end
-
-  def open_employee_holiday_old
-    wait = Selenium::WebDriver::Wait.new(timeout: 20)
-    driver.find_element(
-      class: 'bdds-card__menu-trigger'
-    ).click
-    wait.until do
-      buttons = driver.find_elements(class: 'bdds-button--text')
-      buttons != []
-    end
-    wait.until do
-      buttons = driver.find_elements(class: 'bdds-button--text')
-      button = buttons.find { |x| x.text == 'Manage leave' }
-      wait.until do
-        button.displayed?
-      end
-    end
-    button = driver.find_elements(class: 'bdds-button--text').find { |x| x.text == 'Manage leave' }
-    button.click
-  end
-
   def open_employee_holiday
     driver.find_element(
       class: 'bdds-card__menu-trigger'
-        ).click
+    ).click
     sleep 3
     driver.find_element(class: 'bdds-button--text').click
   end

@@ -51,7 +51,7 @@ class TestLeaveRequest
     OtherLeaveRequestExtension.new(driver).employee_holiday_other_leave_request
     puts 'Pass - Completes leave request'
     sleep 3
-    EmployeeDashboardExtension.new(driver).open_employee_holiday
+    NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget_manage_leave
     puts 'Pass - Displays leave request'
     sleep 1
     LogoutExtension.new(driver).user_logout

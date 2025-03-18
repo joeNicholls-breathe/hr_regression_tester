@@ -3,7 +3,6 @@
 require File.expand_path('base.rb', __dir__)
 
 # rubocop:disable Metrics/ClassLength
-
 class NavigateAroundAppEmployee < Base
   def set_employee
     leave_request_button = driver.find_element(css: '#tab-my-dashboard > div > div:nth-child(1) > div.card-footer > a')
@@ -44,6 +43,7 @@ class NavigateAroundAppEmployee < Base
 
   def navigate_to_leave_request_widget_manage_leave
     driver.find_element(css: 'div[data-element-id=my-leave-widget] .bdds-popover-trigger__open').click
+    sleep 3
     driver.find_element(link_text: 'Manage leave').click
   end
 
@@ -145,5 +145,4 @@ class NavigateAroundAppEmployee < Base
     driver.find_element(css: '#new_employee_one_to_one_request > p > input').click
   end
 end
-
 # rubocop:enable Metrics/ClassLength

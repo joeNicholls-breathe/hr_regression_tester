@@ -63,6 +63,7 @@ class TestLeaveRequest
   def test_02_create_holiday_clash
     puts 'START test 02 - Create absence that clashes with company blackout'
     AppNavigationExtensionManager.new(driver).navigate_to_people_list
+    sleep 2
     PeoplePageExtension.new(driver).select_employee_from_list('Holiday employee')
     AppNavigationExtensionManager.new(driver).open_employee_leave
     LeaveRequestExtension.new(driver).click_add_new_leave_request

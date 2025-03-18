@@ -66,6 +66,7 @@ class TestLeaveRequest
 
   def test_02_check_allowance_totals
     puts 'Start test - Check totals'
+    sleep 2
     HolidayExtension.new(driver).compare_booked_amount('1.0 day')
     if Time.now.utc.strftime('%d/%m/%Y') > '31/03/2025'
       puts 'Holiday year after carry over period'
