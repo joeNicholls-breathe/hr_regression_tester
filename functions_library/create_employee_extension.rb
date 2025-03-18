@@ -93,6 +93,21 @@ class CreateEmployeeExtension < Base
     # may need to scroll page
     driver.find_element(xpath: '//*[@id="update-employee-button"]').click
   end
+
+  def create_employee_rota
+    driver.find_element(id: 'employee_first_name').send_keys 'Newemployee'
+    driver.find_element(id: 'employee_last_name').send_keys 'User'
+    driver.find_element(id: 'employee_email').send_keys "new.user#{random_number_string}@regressionaccount.com"
+    driver.find_element(id: 'employee_jobs_attributes_0_title').send_keys 'New employee Test'
+    driver.find_element(id: '#employee_join_date_react').send_keys last_monday
+    driver.find_element(id: 'employee_employee_ref').send_keys random_number_string
+    driver.find_element(id: 'employee_gets_statutory_true').click
+    driver.find_element(id: 'employee_statutory_holiday_country_id').click
+    drop = driver.find_element(id: 'employee_statutory_holiday_country_id')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:value, '1')
+    driver.find_element(xpath: '//*[@id="new_employee"]/p/input').click
+  end
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
 end

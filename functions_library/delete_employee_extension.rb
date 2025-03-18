@@ -10,4 +10,12 @@ class DeleteEmployeeExtension < Base
     driver.find_element(id: 'delete-employee-checkbox').click
     driver.find_element(id: 'delete-employee-button').click
   end
+
+  def delete_employee
+    driver.find_element(
+      css: 'body > div.hr-main-container > div > section > div.employee-section-header > div > a:nth-child(2)'
+    ).click
+    driver.find_element(id: 'delete-employee-checkbox').click
+    driver.find_element(id: 'delete-employee-button').click
+  end
 end

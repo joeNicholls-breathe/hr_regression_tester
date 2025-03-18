@@ -35,8 +35,8 @@ class HolidayAutoApprovalExtension < Base
   end
 
   def holiday_request_for_auto_approval
-    driver.find_element(css: '#\#leave_request_start_date_react').send_keys '16/12/2024'
-    driver.find_element(css: '#\#leave_request_end_date_react').send_keys '16/12/2024'
+    driver.find_element(css: '#\#leave_request_start_date_react').send_keys '16/12/2025'
+    driver.find_element(css: '#\#leave_request_end_date_react').send_keys '16/12/2025'
     driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
   end
 

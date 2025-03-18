@@ -71,4 +71,14 @@ class SicknessExtension < Base
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click
     driver.find_element(css: selector).click
   end
+
+  def sickness_request_for_last_monday
+    driver.find_element(css: '#\#sickness_start_date_react').send_keys last_monday
+    driver.find_element(css: '#\#sickness_end_date_react').send_keys last_monday
+    sleep 1
+    drop = driver.find_element(id: 'sickness_company_sicknesstype_id')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:text, 'Other')
+    driver.find_element(xpath: '//*[@id="new_sickness"]/p/input').click
+  end
 end

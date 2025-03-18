@@ -3,6 +3,7 @@
 require 'selenium-webdriver'
 require 'rspec'
 require 'roo'
+require 'date'
 require_relative '../settings'
 require './functions_library/test_reference_extension'
 require 'pry'

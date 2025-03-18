@@ -166,5 +166,21 @@ class HolidayExtension < Base
       xpath: '/html/body/section[2]/div[7]/div[1]/div/table/tbody/tr/td[7]/div/div/div/div[3]/button[2]'
     ).click
   end
+
+  def holiday_request_for_next_monday
+    driver.find_element(css: '#\#leave_request_start_date_react').send_keys next_monday
+    driver.find_element(css: '#\#leave_request_end_date_react').send_keys next_monday
+    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
+  end
+
+  def select_rota_employee_holiday_to_purge(employee_name)
+    navigate_to_purge_data
+    drop = driver.find_element(:id, 'employee_id')
+    choose = Selenium::WebDriver::Support::Select.new(drop)
+    choose.select_by(:text, employee_name)
+    driver.find_element(class: 'confirm-checkbox').click
+    driver.find_element(id: 'continue-purge').click
+    driver.find_element(xpath: '//*[@id="purge_data_modal"]/div/div/div[3]/button[2]').click
+  end
 end
 # rubocop:enable Metrics/ClassLength
