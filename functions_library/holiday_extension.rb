@@ -138,22 +138,6 @@ class HolidayExtension < Base # rubocop:disable Metrics/ClassLength
       xpath: '/html/body/section[2]/div[7]/div[1]/div/table/tbody/tr/td[7]/div/div/div/div[3]/button[2]'
     ).click
   end
-  
-  def compare_booked_amount(expected_amount)
-    sleep 2
-    if HolidayExtension.new(driver).booked_amount == expected_amount
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
-  end
-
-  def compare_holiday_allowance(expected_amount)
-    if HolidayExtension.new(driver).available_amount == expected_amount
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
 
   def compare_booked_amount(expected_amount)
     sleep 2
