@@ -154,6 +154,7 @@ class HolidayExtension < Base # rubocop:disable Metrics/ClassLength
     else
       puts 'FAIL - available_amount total incorrect'
     end
+  end
 
   def holiday_request_for_next_monday
     driver.find_element(css: '#\#leave_request_start_date_react').send_keys next_monday
@@ -169,6 +170,5 @@ class HolidayExtension < Base # rubocop:disable Metrics/ClassLength
     driver.find_element(class: 'confirm-checkbox').click
     driver.find_element(id: 'continue-purge').click
     driver.find_element(xpath: '//*[@id="purge_data_modal"]/div/div/div[3]/button[2]').click
-
   end
 end
