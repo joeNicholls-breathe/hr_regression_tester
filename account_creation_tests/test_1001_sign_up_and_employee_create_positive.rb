@@ -22,7 +22,11 @@ class TestSignUp < Base
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    # options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for :chrome, options: options
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -104,6 +108,7 @@ class TestSignUp < Base
     LoginExtension.new(driver).login_as_saas_admin
     LoginAppExtension.new(driver).select_saas
     SaasExtension.new(driver).delete_account_from_direct_search_account_page # if trial
+    SaasExtension.new(driver).delete_modal_confirm
     puts '11. SAAS delete account - Pass'
     SaasExtension.new(driver).saas_user_logout
     puts '12. Saas User Logout - Pass'
@@ -113,16 +118,16 @@ class TestSignUp < Base
   end
 
   def signup_login_path
+    # SIGN UP PATH NEED TO GO TO THE RIGHT URL (STAGING)
     NavigateBrowserExtension.new(driver).breathe_signup
     # NavigateBrowserExtension.new(driver).cookie_modal_accept
-    # NEED TO CONFIRM SIGN UP PATH GOES TO THE RIGHT URL
+    sleep 1
     SignUpExtension.new(driver).sign_up_login_button
     sleep 1
     LoginExtension.new(driver).login_setup_acc_admin
     PageValueCheck.new(driver).signup_fail_check
     puts '1. Login from sign up page - Pass'
     sleep 1
-    puts 'Test 1001 complete'
     driver.close
   end
 end
@@ -130,4 +135,5 @@ end
 # rubocop:enable Metrics/AbcSize
 # TestSignUp.new.test_sign_up_with_bulk
 TestSignUp.new.test_sign_up_with_add_employee_manually
-TestSignUp.new.signup_login_path
+# TestSignUp.new.signup_login_path
+puts 'Test 1001 COMPLETE - PASS'

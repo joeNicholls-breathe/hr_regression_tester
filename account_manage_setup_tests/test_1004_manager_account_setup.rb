@@ -32,7 +32,11 @@ class AccountSetup < Base
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    # options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for :chrome, options: options
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -56,6 +60,7 @@ class AccountSetup < Base
     NavigationAroundAccountConfiguration.new(driver).navigate_to_modules_free
     AccountModulesExtension.new(driver).modules_free_switch_on_off
     puts '7a. switch on and off modules - free'
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_to_modules_chargable
     AccountModulesExtension.new(driver).expenses_trial_on
     AccountModulesExtension.new(driver).recruitment_trial_on
@@ -71,6 +76,7 @@ class AccountSetup < Base
     sleep 1
     AccountModulesExtension.new(driver).custom_fields
     puts '8. add a custom field'
+    sleep 1
     AccountModulesExtension.new(driver).payroll_export_log_changes_only_on
     puts '9a. switch on payroll exports'
     AccountModulesExtension.new(driver).payroll_export_log_off

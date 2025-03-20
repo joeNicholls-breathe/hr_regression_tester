@@ -5,9 +5,16 @@ require File.expand_path('base.rb', __dir__)
 class SaasExtension < Base
   def delete_account_from_direct_search_account_page
     driver.find_element(xpath: '//*[@id="DataTables_Table_0_filter"]/label/input').send_keys 'Regression Account1'
-    sleep 8
+    sleep 2
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions').click
     sleep 0.5
+  end
+
+  def delete_modal_confirm
+    delete_button = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(2)')
+    button_href = delete_button.property('href')
+    account_id = button_href.split('/')[5]
+    driver.find_element(css: "#delete_account_#{account_id} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm").click
   end
 
   def search_direct_trial_account
@@ -27,7 +34,7 @@ class SaasExtension < Base
   end
 
   def saas_user_logout
-    sleep 3
-    driver.find_element(css: 'body > div > section > div > div.col-6.text-right > a').click
+    sleep 2
+    driver.find_element(css: "a[title='log off']").click
   end
 end

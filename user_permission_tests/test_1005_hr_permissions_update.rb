@@ -23,7 +23,11 @@ class AccountSetupHRUser < Base
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for :chrome, options: options
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -49,7 +53,7 @@ class AccountSetupHRUser < Base
     HrUserConfigExtension.new(driver).update_hr_settings
     puts '6. remove settings from all HR user/account - (bradford/121 reminders/grapevine)'
     sleep 1
-    LogoutExtension.new(driver).logout_admin
+    LogoutExtension.new(driver).user_logout
     puts '7. logout'
     NavigateBrowserExtension.new(driver).breathe_login
     LoginExtension.new(driver).login_setup_acc_hr_user
@@ -78,9 +82,9 @@ class AccountSetupHRUser < Base
     AppNavigationExtensionManager.new(driver).navigate_to_my_dashboard
     NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget_request_leave
     LeaveRequestExtension.new(driver).make_leave_request('11/11/2025', '12/11/2025')
-    sleep 1
+    sleep 2
     puts '12b. create holiday request'
-    LogoutExtension.new(driver).logout_admin
+    LogoutExtension.new(driver).user_logout
     puts '13. logout'
     LoginExtension.new(driver).login_setup_acc_admin
     puts '14. login as admin'
@@ -88,20 +92,22 @@ class AccountSetupHRUser < Base
     sleep 1
     DeleteEmployeeExtension.new(driver).delete_employee_hr_user
     puts '15. delete hr user'
+    sleep 1.5
     AppNavigationExtensionManager.new(driver).search_employee_harold
     NavigateAroundAppEmployee.new(driver).navigate_to_my_profile_leave_requested
     LeaveRequestExtension.new(driver).delete_leave_request_requested
+    sleep 1.5
     LeaveRequestExtension.new(driver).delete_leave_request_requested
+    sleep 1.5
     puts '16. delete leave requests'
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     NavigationAroundAccountConfiguration.new(driver).navigate_to_change_what_hr_users_can_do
     HrUserConfigExtension.new(driver).update_hr_settings
     sleep 1
     puts '17. test maintanence - reinstate hr users need approval for leave requests'
-    LogoutExtension.new(driver).logout_admin
+    LogoutExtension.new(driver).user_logout
     puts '18. logout'
     sleep 1
-    puts 'Test 1005 complete'
     driver.close
   end
 end
@@ -109,3 +115,4 @@ end
 # rubocop:enable Metrics/MethodLength
 
 AccountSetupHRUser.new.test_hr_user_setup
+puts 'Test 1005 COMPLETE - PASS'

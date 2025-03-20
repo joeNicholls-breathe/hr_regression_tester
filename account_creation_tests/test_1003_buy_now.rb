@@ -16,7 +16,11 @@ class TestBuyNow < Base
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    # options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for :chrome, options: options
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -34,10 +38,10 @@ class TestBuyNow < Base
     puts '3. Buy Now account becomes active (Micro / Monthly / No modules) - Pass'
     CancelPLanExtension.new(driver).cancel_account
     driver.close
-    puts 'Test 1003 complete'
     # PageValueCheck.new(driver).account_active
   end
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
 TestBuyNow.new.test_buy_now
+puts 'Test 1003 COMPLETE - PASS'
