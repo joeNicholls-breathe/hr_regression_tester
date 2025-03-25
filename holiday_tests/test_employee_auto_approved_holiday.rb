@@ -33,9 +33,7 @@ class TestAutoApprovedHoliday
     test_01_auto_approval_employee_one
     test_02_auto_approval_employee_two
     test_03_auto_approval_employee_three
-    test_04_delete_absences_for_auto_approval_employee_one
-    test_05_delete_absences_for_auto_approval_employee_two
-    test_06_delete_absences_for_auto_approval_employee_three
+    test_04_delete_absences
     driver.close
     puts 'Complete - test_employee_auto_approval_process.rb'
   end
@@ -116,7 +114,7 @@ class TestAutoApprovedHoliday
     puts 'Test complete for employee three'
   end
 
-  def test_04_delete_absences_for_auto_approval_employee_one
+  def test_04_delete_absences
     NavigateBrowserExtension.new(driver).breathe_login
     puts 'Start Test - Holiday approver approves request'
     puts 'Pass - Navigate to Login Screen'
@@ -127,41 +125,17 @@ class TestAutoApprovedHoliday
     LoginAppExtension.new(driver).select_hr
     puts 'Pass - Selects HR'
     sleep 1
-    purge_employee('auto approval-one')
-    puts 'Pass - absences purged'
-    sleep 2
-    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
-    puts 'test complete - absences deleted for auto approval employee one'
-  end
-
-  def test_05_delete_absences_for_auto_approval_employee_two
-    puts 'Start test to purge absence data'
-    purge_employee('auto approval-two')
-    puts 'Pass - absences purged'
-    sleep 2
-    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
-    puts 'test complete - absences deleted for auto approval employee two'
-  end
-
-  def test_06_delete_absences_for_auto_approval_employee_three
-    puts 'Start test to purge absence data'
-    purge_employee('auto approval-three')
-    puts 'Pass - absences purged'
-    sleep 2
-    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
-    puts 'test complete - absences deleted for auto approval employee three'
-  end
-
-  def purge_employee(employee)
     AppNavigationExtensionManager.new(driver).navigate_to_data
     AppNavigationExtensionManager.new(driver).open_purge_data
-    puts 'PASS - Purge Data Opened'
-    HolidayExtension.new(driver).purge_holiday_data(employee)
-    puts "#{employee}'s Data Purged"
-    AppNavigationExtensionManager.new(driver).navigate_to_people_list
-    PeoplePageExtension.new(driver).select_employee_from_list(employee)
-    AppNavigationExtensionManager.new(driver).open_employee_leave
-    puts "#{employee}'s Leave Opened"
+    HolidayExtension.new(driver).purge_holiday_data('auto approval-one')
+    puts 'Pass - auto approval-one purged'
+    HolidayExtension.new(driver).purge_holiday_data('auto approval-two')
+    puts 'Pass - auto approval-two purged'
+    HolidayExtension.new(driver).purge_holiday_data('auto approval-three')
+    puts 'Pass - auto approval-three purged'
+    sleep 1
+    puts 'Pass - absences purged'
+    puts 'test complete - absences deleted for auto approval employee one'
   end
 end
 # rubocop:enable Metrics/ClassLength

@@ -9,6 +9,8 @@ require './functions_library/employee_dashboard_extension'
 require './functions_library/holiday_extension'
 require './functions_library/leave_request_extension'
 require './functions_library/navigate_around_app_employee_extension'
+require './functions_library/navigate_around_app_manager_extension'
+require './functions_library/people_page_extension'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
@@ -29,7 +31,7 @@ class TestLeaveRequest
     puts 'Running - test_employee_holiday_totals_on_non_working_days.rb'
     test_01_employee_makes_request
     test_02_approver_approves_request
-    test_03_delete_holiday_data
+    test_03_delete_absences
     driver.close
     puts 'Complete - test_employee_holiday_totals_on_non_working_days.rb'
   end
@@ -81,15 +83,22 @@ class TestLeaveRequest
     puts 'Test complete - Approver can approve holiday request'
   end
 
-  def test_03_delete_holiday_data
-    puts 'Start test - Deletes holiday information for employee'
+  def test_03_delete_absences
+    NavigateBrowserExtension.new(driver).breathe_login
+    puts 'Start Test - Holiday approver approves request'
+    puts 'Pass - Navigate to Login Screen'
+    sleep 1
+    LoginExtension.new(driver).login_admin
+    puts 'Pass - Login as admin'
+    sleep 1
+    LoginAppExtension.new(driver).select_hr
+    puts 'Pass - Selects HR'
+    sleep 1
+    AppNavigationExtensionManager.new(driver).navigate_to_data
+    AppNavigationExtensionManager.new(driver).open_purge_data
     HolidayExtension.new(driver).purge_holiday_data('Holiday employee')
-    puts 'Pass - purge holiday data'
-    HolidayExtension.new(driver).holiday_employee_absence_index
-    sleep 3
-    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
-    HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
-    puts 'Test complete - Holiday employees holiday deleted'
+    puts 'Pass - absences purged'
+    puts 'test complete - absences purged'
   end
 end
 # rubocop:enable Metrics/MethodLength

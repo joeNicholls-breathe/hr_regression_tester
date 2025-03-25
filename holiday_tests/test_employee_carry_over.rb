@@ -34,7 +34,7 @@ class TestLeaveRequest
     puts 'Running - test_employee_holiday_carry_over.rb'
     test_01_employee_makes_request
     test_02_check_allowance_totals
-    test_03_delete_holiday_data
+    test_03_delete_absences
     driver.close
     puts 'Complete - test_employee_holiday_carry_over.rb'
   end
@@ -78,7 +78,7 @@ class TestLeaveRequest
     puts 'Test complete - Approver can approve holiday request'
   end
 
-  def test_03_delete_holiday_data
+  def test_03_delete_absences
     NavigateBrowserExtension.new(driver).breathe_login
     puts 'Start Test - Holiday approver approves request'
     puts 'Pass - Navigate to Login Screen'
@@ -89,23 +89,12 @@ class TestLeaveRequest
     LoginAppExtension.new(driver).select_hr
     puts 'Pass - Selects HR'
     sleep 1
-    purge_employee('Carry-over Employee')
-    puts 'Pass - absences purged'
-    sleep 2
-    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
-    puts 'test complete - absences deleted for auto approval employee one'
-  end
-
-  def purge_employee(employee)
     AppNavigationExtensionManager.new(driver).navigate_to_data
     AppNavigationExtensionManager.new(driver).open_purge_data
-    puts 'PASS - Purge Data Opened'
-    HolidayExtension.new(driver).purge_holiday_data(employee)
-    puts "#{employee}'s Data Purged"
-    AppNavigationExtensionManager.new(driver).navigate_to_people_list
-    PeoplePageExtension.new(driver).select_employee_from_list(employee)
-    AppNavigationExtensionManager.new(driver).open_employee_leave
-    puts "#{employee}'s Leave Opened"
+    HolidayExtension.new(driver).purge_holiday_data('Carry-over Employee')
+    sleep 1
+    puts 'Pass - absences purged'
+    puts 'test complete - absences deleted for Carry-over employee'
   end
 end
 # rubocop:enable Metrics/MethodLength

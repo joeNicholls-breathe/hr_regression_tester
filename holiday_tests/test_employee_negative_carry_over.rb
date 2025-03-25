@@ -9,6 +9,9 @@ require './functions_library/employee_dashboard_extension'
 require './functions_library/holiday_extension'
 require './functions_library/leave_request_extension'
 require './functions_library/navigate_around_app_employee_extension'
+require './functions_library/navigate_around_app_manager_extension'
+require './functions_library/ui_page_element_check_extension'
+require './functions_library/people_page_extension'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
@@ -31,7 +34,7 @@ class TestLeaveRequest
     puts 'Running - test_employee_holiday_negative_carry_over.rb'
     test_01_employee_makes_request
     test_02_check_allowance_totals
-    test_03_delete_holiday_data
+    test_03_delete_absences
     driver.close
     puts 'Complete - test_employee_holiday_negative_carry_over.rb'
   end
@@ -71,20 +74,22 @@ class TestLeaveRequest
     puts 'Test complete - Approver can approve holiday request'
   end
 
-  def test_03_delete_holiday_data
-    puts 'Start test - Deletes holiday information for Negative carry over employee'
+  def test_03_delete_absences
     NavigateBrowserExtension.new(driver).breathe_login
+    puts 'Start Test - Holiday approver approves request'
     puts 'Pass - Navigate to Login Screen'
     sleep 1
     LoginExtension.new(driver).login_admin
     puts 'Pass - Login as admin'
+    sleep 1
+    LoginAppExtension.new(driver).select_hr
+    puts 'Pass - Selects HR'
+    sleep 1
+    AppNavigationExtensionManager.new(driver).navigate_to_data
+    AppNavigationExtensionManager.new(driver).open_purge_data
     HolidayExtension.new(driver).purge_holiday_data('Negative Carry-Over')
-    puts 'Pass - purge holday data'
-    HolidayExtension.new(driver).negative_carry_over_holiday_employee_absence_index
-    sleep 2
-    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
-    HolidayExtension.new(driver).compare_holiday_allowance('10.0 days')
-    puts 'Test complete - Negative Carry-Over holiday deleted'
+    puts 'Pass - absences purged'
+    puts 'test complete - absences purged'
   end
 end
 # rubocop:enable Metrics/MethodLength

@@ -138,9 +138,7 @@ class AppNavigationExtensionManager < Base
     sleep 2
     driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-people]').click
     sleep 4
-    driver.find_element(
-      css: '#top-menu > div:nth-child(2) > ul > li:nth-child(1) > div > div > ul > li:nth-child(1) > a'
-    ).click
+    driver.find_element(link_text: 'Our people').click
   end
 
   def open_purge_data

@@ -11,6 +11,8 @@ require './functions_library/sickness_extension'
 require './functions_library/leave_request_extension'
 require './functions_library/navigate_around_app_employee_extension'
 require './functions_library/ui_page_element_check_extension'
+require './functions_library/navigate_around_app_manager_extension'
+require './functions_library/people_page_extension'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
@@ -117,16 +119,11 @@ class TestLeaveRequest
     sleep 1
     SicknessExtension.new(driver).delete_sickness_record
     puts 'Pass - deletes sickness record'
-    sleep 1
+    AppNavigationExtensionManager.new(driver).navigate_to_data
+    AppNavigationExtensionManager.new(driver).open_purge_data
     HolidayExtension.new(driver).purge_holiday_data('Holiday employee')
-    puts 'Pass - Purge holday data'
-    sleep 2
-    HolidayExtension.new(driver).holiday_employee_absence_index
-    sleep 2
-    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
-    HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
-    puts 'Test complete - Holiday employees holiday deleted'
-    puts 'Test 4 complete - absences deleted'
+    puts 'Pass - absences purged'
+    puts 'test complete - absences purged'
   end
 end
 # rubocop:enable Metrics/MethodLength

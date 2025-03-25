@@ -36,6 +36,7 @@ class CompanyBlackoutsExtension < Base
   end
 
   def company_blackout_delete
+    sleep 1
     a = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(1)')
     attribute_value = a.attribute('href')
     split_value = attribute_value.split('/')[4]

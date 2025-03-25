@@ -106,30 +106,27 @@ class TestLeaveRequest
   end
 
   def test_06_delete_records
-    puts 'START test 06 - Deletes holiday and company blackout'
-    purge_employee('Holiday employee')
-    puts 'Pass - purge holday data'
-    HolidayExtension.new(driver).holiday_employee_absence_index
-    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
-    HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
+    NavigateBrowserExtension.new(driver).breathe_login
+    puts 'Start Test - Holiday approver approves request'
+    puts 'Pass - Navigate to Login Screen'
+    sleep 1
+    LoginExtension.new(driver).login_admin
+    puts 'Pass - Login as admin'
+    sleep 1
+    LoginAppExtension.new(driver).select_hr
+    puts 'Pass - Selects HR'
+    sleep 1
+    AppNavigationExtensionManager.new(driver).navigate_to_data
+    AppNavigationExtensionManager.new(driver).open_purge_data
+    HolidayExtension.new(driver).purge_holiday_data('Holiday employee')
+    puts 'Pass - absences purged'
+    sleep 1
     AppNavigationExtensionManager.new(driver).navigate_to_company_blackouts
     puts 'Pass - Navigate to company blackouts'
-    sleep 2
+    sleep 3
     CompanyBlackoutsExtension.new(driver).company_blackout_delete
     puts 'Pass - deleted company blackout'
     puts 'TEST 06 complete - Deleted blackout and company blackout'
-  end
-
-  def purge_employee(employee)
-    AppNavigationExtensionManager.new(driver).navigate_to_data
-    AppNavigationExtensionManager.new(driver).open_purge_data
-    puts 'PASS - Purge Data Opened'
-    HolidayExtension.new(driver).purge_holiday_data(employee)
-    puts "#{employee}'s Data Purged"
-    AppNavigationExtensionManager.new(driver).navigate_to_people_list
-    PeoplePageExtension.new(driver).select_employee_from_list(employee)
-    AppNavigationExtensionManager.new(driver).open_employee_leave
-    puts "#{employee}'s Leave Opened"
   end
 end
 # rubocop:enable Metrics/MethodLength

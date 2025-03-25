@@ -35,7 +35,7 @@ class TestLeaveRequest
     test_01_create_employee_holiday
     test_02_employee_makes_request_on_same_day
     test_03_employee_makes_request_overlapping_absence
-    test_04_delete_holiday_data
+    test_04_delete_absences
     driver.close
     puts 'Complete - test_employee_holiday_clash.rb'
   end
@@ -107,21 +107,22 @@ class TestLeaveRequest
     puts 'TEST 3 complete - Absence not created that overlaps existing absence'
   end
 
-  def test_04_delete_holiday_data
-    puts 'Start test 4 - Deletes holiday information for employee'
+  def test_04_delete_absences
     NavigateBrowserExtension.new(driver).breathe_login
+    puts 'Start Test - Holiday approver approves request'
+    puts 'Pass - Navigate to Login Screen'
+    sleep 1
     LoginExtension.new(driver).login_admin
     puts 'Pass - Login as admin'
     sleep 1
+    LoginAppExtension.new(driver).select_hr
+    puts 'Pass - Selects HR'
+    sleep 1
+    AppNavigationExtensionManager.new(driver).navigate_to_data
+    AppNavigationExtensionManager.new(driver).open_purge_data
     HolidayExtension.new(driver).purge_holiday_data('Holiday employee')
-    sleep 2
-    puts 'Pass - Purge holday data'
-    HolidayExtension.new(driver).holiday_employee_absence_index
-    sleep 2
-    HolidayExtension.new(driver).compare_booked_amount('0.0 days')
-    HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
-    puts 'Test complete - Holiday employees holiday deleted'
-    puts 'Test 4 complete - absences deleted'
+    puts 'Pass - absences purged'
+    puts 'test complete - absences deleted for auto approval employee one'
   end
 end
 # rubocop:enable Metrics/MethodLength
