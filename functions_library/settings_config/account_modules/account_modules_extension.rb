@@ -159,7 +159,6 @@ class AccountModulesExtension < Base
   end
 
   def payroll_export_log_changes_only_on
-    binding.pry
     driver.find_element(id: 'account_use_payroll_export_changes').click
     driver.find_element(css: '#edit_account_3899 > p > input').click
   end

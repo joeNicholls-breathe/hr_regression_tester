@@ -14,7 +14,9 @@ class SaasExtension < Base
     delete_button = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(2)')
     button_href = delete_button.property('href')
     account_id = button_href.split('/')[5]
-    driver.find_element(css: "#delete_account_#{account_id} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm").click
+    driver.find_element(
+      css: "#delete_account_#{account_id} > div > div > div.modal-footer > button.btn.btn-danger.modal-confirm"
+    ).click
   end
 
   def search_direct_trial_account
