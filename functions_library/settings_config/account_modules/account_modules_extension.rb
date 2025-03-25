@@ -193,8 +193,8 @@ class AccountModulesExtension < Base
     driver.find_element(id: 'account_use_xero_payroll_0').click
     sleep 0.50
     driver.find_element(xpath: '//*[@id="disable-breathe-xero-payroll-modal"]/div/div/div[2]/input').click
-    sleep 0.50
-    driver.find_element(xpath: '//*[@id="edit_account_3899"]/input[4]').click
+    sleep 1
+    driver.find_element(css: 'input[data-disable-with="disable xero payroll"]').click
     sleep 1
   end
 end
