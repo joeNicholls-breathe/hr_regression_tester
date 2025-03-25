@@ -20,7 +20,7 @@ class TestBuyNow < Base
     # options.add_argument('--headless')
     options.add_argument('--disable-gpu')
     options.add_argument('--window-size=1920,1080')
-    @driver = Selenium::WebDriver.for :chrome, options: options
+    @driver = Selenium::WebDriver.for(:chrome, options:)
     Selenium::WebDriver.logger.level = :info
   end
 
