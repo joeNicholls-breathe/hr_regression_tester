@@ -19,6 +19,7 @@ class TimesheetEmpExtension < Base
     driver.find_element(css: 'input[data-testid=elmo-input-default]').click
     sleep 0.25
     driver.find_element(css: 'svg[data-testid=ArrowLeftIcon]').click
+    sleep 0.25
     driver.find_element(xpath: '//*[text() = "15"]').click
     sleep 0.25
     driver.find_element(id: 'start-time-input').send_keys :backspace
