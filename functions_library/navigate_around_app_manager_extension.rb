@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require File.expand_path('base.rb', __dir__)
-
+# rubocop:disable Metrics/ClassLength
 class AppNavigationExtensionManager < Base
   def navigate_to_employee_dashboard_as_manager
     driver.find_element(xpath: '//*[@id="tab-my-dashboard-link"]/span').click
@@ -13,10 +13,6 @@ class AppNavigationExtensionManager < Base
 
   def navigate_to_my_dashboard
     driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-dashboard]').click
-  end
-
-  def navigate_to_people_list
-    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[3]').click
   end
 
   def navigate_to_people_screen
@@ -123,4 +119,32 @@ class AppNavigationExtensionManager < Base
   def pop_modal_price_increase
     driver.find_element(css: '#pricing-dismiss').click
   end
+
+  # Opens leave from employees profile
+  def open_employee_leave
+    driver.find_element(id: 'leave').click
+  end
+
+  def navigate_to_data
+    sleep 2
+    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-people]').click
+    sleep 4
+    driver.find_element(
+      css: '#top-menu > div:nth-child(2) > ul > li:nth-child(1) > div > div > ul > li:nth-child(3) > a'
+    ).click
+  end
+
+  def navigate_to_people_list
+    sleep 2
+    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-people]').click
+    sleep 4
+    driver.find_element(link_text: 'Our people').click
+  end
+
+  def open_purge_data
+    driver.find_element(
+      css: 'body > div.hr-main-container > div > section > div:nth-child(2) > div:nth-child(2) > div > a'
+    ).click
+  end
 end
+# rubocop:enable Metrics/ClassLength

@@ -5,12 +5,16 @@ class CompanyBlackoutsExtension < Base
   # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
   def company_blackout_add_new
-    driver.find_element(xpath: '/html/body/div[3]/div/section/div[2]/a').click
+    # rubocop:disable Layout/LineLength
+    driver.find_element(
+      css: 'body > div.hr-main-container > div > section > div.float-right > a > span > svg.svg-inline--fa.fa-plus.fa-w-14.fa-inverse.fa-stack-1x'
+    ).click
+    # rubocop:enable Layout/LineLength
     driver.find_element(id: 'company_blackout_name').send_keys "Blackout test #{todays_date}"
     driver.find_element(id: '#company_blackout_start_date_react').send_keys two_week_date_string
     driver.find_element(id: '#company_blackout_end_date_react').send_keys two_week_date_string
     driver.find_element(id: 'company_blackout_whole_company').click
-    driver.find_element(xpath: '//*[@id="new_company_blackout"]/p/input').click
+    driver.find_element(class: 'btn-success').click
     sleep 0.5
     driver.find_element(xpath: '/html/body/div[3]/div/section/div[1]/a').click
   end
@@ -32,12 +36,14 @@ class CompanyBlackoutsExtension < Base
   end
 
   def company_blackout_delete
+    sleep 1
     a = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(1)')
     attribute_value = a.attribute('href')
     split_value = attribute_value.split('/')[4]
     selector = "#delete_company_blackout_#{split_value} > div > div >
                 div.modal-footer > button.btn.btn-danger.modal-confirm"
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click
+    sleep 1
     driver.find_element(css: selector).click
   end
   # rubocop:enable Metrics/AbcSize

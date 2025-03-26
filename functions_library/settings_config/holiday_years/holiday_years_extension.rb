@@ -7,6 +7,7 @@ class HolidayYearExtension < Base
   def edit_holiday_years_now
     # change to next week time
     driver.find_element(xpath: '/html/body/div[3]/div/section/div[2]/a').click
+    sleep 1
     driver.find_element(id: '#new_start_date_react').clear
     driver.find_element(id: '#new_start_date_react').send_keys one_week_date_string
     driver.find_element(xpath: '/html/body/section/div/div/form/p/input').click

@@ -11,7 +11,11 @@ class TestSignUpNegative < Base
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for(:chrome, options:)
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -72,7 +76,6 @@ class TestSignUpNegative < Base
     PageValueCheck.new(driver).signup_fail_check
     sleep 0.5
     puts '6. NT - No password (2) entered - test run'
-    puts 'Test 1002 complete'
     driver.close
   end
 end
@@ -83,3 +86,4 @@ TestSignUpNegative.new.test_sign_up_negative_no_account_employees
 TestSignUpNegative.new.sign_up_negative_no_telephone_number
 TestSignUpNegative.new.sign_up_negative_no_password_one
 TestSignUpNegative.new.sign_up_negative_no_password_two
+puts 'Test 1002 COMPLETE - PASS'

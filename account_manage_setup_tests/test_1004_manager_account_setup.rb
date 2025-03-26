@@ -32,7 +32,11 @@ class AccountSetup < Base
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    # options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for(:chrome, options:)
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -56,6 +60,7 @@ class AccountSetup < Base
     NavigationAroundAccountConfiguration.new(driver).navigate_to_modules_free
     AccountModulesExtension.new(driver).modules_free_switch_on_off
     puts '7a. switch on and off modules - free'
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_to_modules_chargable
     AccountModulesExtension.new(driver).expenses_trial_on
     AccountModulesExtension.new(driver).recruitment_trial_on
@@ -71,79 +76,114 @@ class AccountSetup < Base
     sleep 1
     AccountModulesExtension.new(driver).custom_fields
     puts '8. add a custom field'
-    AccountModulesExtension.new(driver).payroll_export_log_changes_only_on
-    puts '9a. switch on payroll exports'
-    AccountModulesExtension.new(driver).payroll_export_log_off
-    puts '9b. switch off payroll exports'
+    sleep 1
+    # No long in the ui
+    # AccountModulesExtension.new(driver).payroll_export_log_changes_only_on
+    # puts '9a. switch on payroll exports'
+    # AccountModulesExtension.new(driver).payroll_export_log_off
+    # puts '9b. switch off payroll exports'
     AccountModulesExtension.new(driver).person_change_logs
     puts '10a. switch on change logs'
+    sleep 1
     AccountModulesExtension.new(driver).person_change_logs
     puts '10b. switch off change logs'
+    sleep 1
     AccountModulesExtension.new(driver).onboarding_tasks_on
     puts '11a. Turn on onboarding tasks'
+    sleep 1
     AccountModulesExtension.new(driver).onboarding_tasks_off
     puts '11b. Turn off onboarding tasks'
+    sleep 2
     AccountModulesExtension.new(driver).xero_payroll_integration_on
-    puts '12. switch on xero integration might want to do this as the buy now journey'
+    puts '12a. switch on xero integration'
+    sleep 1
+    AccountModulesExtension.new(driver).xero_payroll_integration_off
+    puts '12b. switch off xero integration'
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    sleep 0.50
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_to_picklist
     puts '13a. navigate to picklists'
+    sleep 1
     PicklistContactExtension.new(driver).details_navigate_to_contract_type
     puts '13b. navigate to picklist - Contract types'
+    sleep 1
     PicklistContactExtension.new(driver).details_contract_types_add
     puts '14a. Contract types - Add'
+    sleep 1
     PicklistContactExtension.new(driver).details_contract_types_add_cancel
     puts '14b. Contract types - Cancel add new'
+    sleep 1
     PicklistContactExtension.new(driver).details_contract_types_edit
     puts '14c. Contract type - Edit'
+    sleep 1
     PicklistContactExtension.new(driver).details_contract_types_edit_cancel
     puts '14d. Contract type - Cancel Edit'
-    sleep 0.50
+    sleep 1
     PicklistContactExtension.new(driver).details_contract_types_delete
     puts '14e. Contract type - Delete'
+    sleep 1
     PicklistContactExtension.new(driver).details_contract_types_delete_cancel
     puts '14f. Contract type - Cancel delete'
+    sleep 1
     PicklistContactExtension.new(driver).details_contract_type_add_return_breadcrumb
     puts '14g. Breadcrumb return from Contract type'
+    sleep 1
     # NavigationAroundAccountConfiguration.new(driver).return_to_picklist_menu
-    puts '15a. retutn to picklists'
+    # puts '15a. retutn to picklists'
+    # sleep 1
     PicklistGenderExtension.new(driver).navigate_to_gender
     puts '15b. navigate to genders'
+    sleep 1
     PicklistGenderExtension.new(driver).details_genders_add
     puts '16a. Gender add new'
+    sleep 1
     PicklistGenderExtension.new(driver).details_genders_edit
     puts '16b. Gender edit'
+    sleep 1
     PicklistGenderExtension.new(driver).delete_gender
     puts '16c. Gender delete'
+    sleep 1
     PicklistGenderExtension.new(driver).details_genders_return_breadcrumb
     puts '16d. Breadcrumb return to picklist Contract type'
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_to_email_notifications
     puts '17. navigate to Email notification'
+    sleep 1
     EmailNotificationConfigExtension.new(driver).system_notifications_off
     puts '18a. System email notification Off'
+    sleep 1
     EmailNotificationConfigExtension.new(driver).system_notifications_on
     puts '18b. System email notification On'
+    sleep 1
     EmailNotificationConfigExtension.new(driver).third_party_email_invoice
     puts '18c. Email notification thid party invoice email'
+    sleep 1
     EmailNotificationConfigExtension.new(driver).third_party_email_leave_request_approval
     puts '18d. Email notification thid party leave requests email'
     sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb_email_notification
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_to_woking_patterns
     puts '19. Navigate to Abscence settings - Working Patterns'
+    sleep 1
     AccountWorkingPatternExtension.new(driver).working_pattern_add
     puts '20a. Working Pattern add'
     sleep 1
     AccountWorkingPatternExtension.new(driver).working_pattern_breadcrumb
     puts '20b. Working Pattern breadcrumb return to view'
+    sleep 1
     AccountWorkingPatternExtension.new(driver).working_pattern_set_new_default
     puts '20c. Working Pattern set new default'
+    sleep 1
     AccountWorkingPatternExtension.new(driver).working_pattern_edit
     puts '20d. Working Pattern edit'
+    sleep 1
     AccountWorkingPatternExtension.new(driver).working_pattern_delete
     puts '20e. Working Pattern delete'
+    sleep 1
     AccountWorkingPatternExtension.new(driver).working_pattern_show_inactive
     puts '20f. Working Pattern inactivate'
     AccountWorkingPatternExtension.new(driver).working_pattern_search
@@ -158,25 +198,35 @@ class AccountSetup < Base
     puts '22b. Holiday allowance edit'
     AccountHolidayAllowanceExtension.new(driver).holiday_allowances_delete
     puts '22c. Holiday allowance delete'
+    sleep 1
     AccountHolidayAllowanceExtension.new(driver).holiday_allowances_select_default
     puts '22d. Holiday allowance select default'
+    sleep 1
     AccountHolidayAllowanceExtension.new(driver).holiday_allowance_search
     puts '22e. Holiday allowance search' # what should this bring back if there is no allowance with a 'Z'
     sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+    sleep 2
     NavigationAroundAccountConfiguration.new(driver).navigate_to_holiday_years
     puts '23. Navigate to Abscence settings - holidays years'
+    sleep 3
     HolidayYearExtension.new(driver).edit_holiday_years_now
     puts '24. Holiday year edit year now'
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_to_company_holidays
     puts '25. Navigate to Abscence settings - company holidays'
+    sleep 1
     CompanyHolidaysExtension.new(driver).company_holiday_add
     puts '26a. Company holiday add'
+    sleep 1
     CompanyHolidaysExtension.new(driver).company_holiday_edit
     puts '26b. Company holiday edit'
+    sleep 1
     CompanyHolidaysExtension.new(driver).company_holiday_delete
     puts '26c. Company holiday delete'
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     NavigationAroundAccountConfiguration.new(driver).navigate_to_company_blackout
     puts '27. Navigate to Abscence settings - company blackouts'
@@ -188,36 +238,49 @@ class AccountSetup < Base
     puts '28c. Company blackouts delete'
     sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_to_api_setup
     puts '29. Navigate to Integrations - API setup'
+    sleep 1
     # APIExtenion.new(driver).api_key_switch_on
     # puts '30a. Api switch on'
     # SHOULD ADD IN A CHECK AND EXPECTATION HERE
     APIExtenion.new(driver).api_key_switch_reset
     puts '30b. Api reset api key'
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_to_calendar_subscriptions
     puts '31. Navigate to Integrations - calendar subscriptions'
+    sleep 1
     CalendarSubscriptionExtension.new(driver).calendar_central_setting_on
+    sleep 1
     CalendarSubscriptionExtension.new(driver).add_department_list_item_one
+    sleep 1
     CalendarSubscriptionExtension.new(driver).amend_calendar_revert_settings
     puts '32a. Calendar subscription managed centrally, added department and reset'
+    sleep 1
     CalendarSubscriptionExtension.new(driver).calendar_allow_manage_own
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_to_calendar_subscriptions
+    sleep 1
     CalendarSubscriptionExtension.new(driver).amend_calendar_revert_settings
     puts '32b. Calendar subscription managed by employees, added can see own calendar only and reset'
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_to_rota_cloud # add an expectation to check the screen
     puts '33. Navigate to Integrations - Rotacloud - Test manually if we need to cover this'
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    sleep 2
-    puts 'Test 1004 complete'
+    sleep 1
     driver.close
   end
 end
 # rubocop:enable Metrics/ClassLength
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
-
 AccountSetup.new.test_account_setup
+puts 'Test 1004 COMPLETE - PASS'

@@ -11,8 +11,7 @@ class AccountModulesExtension < Base
     element = driver.find_element(xpath: '/html/body/div[3]/div/section/div/div/div[2]/div/footer/a')
     driver.execute_script('arguments[0].scrollIntoView(true);', element)
     sleep 0.5
-    driver.find_element(css: 'body > div.hr-main-container > div > section > div > div >
-      div.advert-main > div > footer > a').click
+    driver.find_element(link_text: 'Try free for 14 days').click
   end
 
   def recruitment_trial_on
@@ -21,8 +20,7 @@ class AccountModulesExtension < Base
     element = driver.find_element(xpath: '/html/body/div[3]/div/section/div/div/div[2]/div/footer/a')
     driver.execute_script('arguments[0].scrollIntoView(true);', element)
     sleep 0.5
-    driver.find_element(css: 'body > div.hr-main-container > div > section > div > div >
-      div.advert-main > div > footer > a').click
+    driver.find_element(link_text: 'Try free for 14 days').click
   end
 
   def rota_trial_on
@@ -31,8 +29,7 @@ class AccountModulesExtension < Base
     element = driver.find_element(xpath: '/html/body/div[3]/div/section/div/div/div[2]/div/footer/a')
     driver.execute_script('arguments[0].scrollIntoView(true);', element)
     sleep 0.5
-    driver.find_element(css: 'body > div.hr-main-container > div > section > div > div >
-      div.advert-main > div > footer > a').click
+    driver.find_element(link_text: 'Try free for 14 days').click
   end
 
   def learn_trial_on
@@ -41,8 +38,7 @@ class AccountModulesExtension < Base
     element = driver.find_element(xpath: '/html/body/div[3]/div/section/div/div/div[2]/div/footer/a')
     driver.execute_script('arguments[0].scrollIntoView(true);', element)
     sleep 0.5
-    driver.find_element(css: 'body > div.hr-main-container > div > section > div > div >
-      div.advert-main > div > footer > a').click
+    driver.find_element(link_text: 'Try free for 14 days').click
   end
 
   def modules_chargable_switch_off
@@ -132,8 +128,8 @@ class AccountModulesExtension < Base
     driver.execute_script('arguments[0].scrollIntoView(true);', element)
     sleep 0.5
     # data link on personal change logs
-    driver.find_element(xpath: '//*[@id="edit_account_3899"]/div/div[2]/div[3]/div[2]/div[1]/a').click
-    sleep 1
+    # driver.find_element(xpath: '//*[@id="edit_account_3899"]/div/div[2]/div[3]/div[2]/div[1]/a').click
+    # sleep 1
     driver.navigate.back
     sleep 1
     # on
@@ -149,7 +145,6 @@ class AccountModulesExtension < Base
     driver.find_element(css: '#edit_account_3899 > p > input').click
     # driver.find_element(id: 'account_location_booking_enabled').click
     # driver.find_element(css: '#edit_account_3899 > p > input').click
-    # sleep 0.50
   end
 
   def custom_fields
@@ -198,8 +193,8 @@ class AccountModulesExtension < Base
     driver.find_element(id: 'account_use_xero_payroll_0').click
     sleep 0.50
     driver.find_element(xpath: '//*[@id="disable-breathe-xero-payroll-modal"]/div/div/div[2]/input').click
-    sleep 0.50
-    driver.find_element(xpath: '//*[@id="edit_account_3899"]/input[4]').click
+    sleep 1
+    driver.find_element(css: 'input[data-disable-with="disable xero payroll"]').click
     sleep 1
   end
 end

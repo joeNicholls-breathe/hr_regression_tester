@@ -39,44 +39,4 @@ class HolidayAutoApprovalExtension < Base
     driver.find_element(css: '#\#leave_request_end_date_react').send_keys '16/12/2025'
     driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
   end
-
-  def purge_holiday_data_auto_approval_employee_one
-    driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
-    drop = driver.find_element(:id, 'employee_id')
-    choose = Selenium::WebDriver::Support::Select.new(drop)
-    choose.select_by(:text, 'auto approval-one')
-    driver.find_element(xpath: '/html/body/section[2]/div/div[3]/div/form/div/div[3]/input').click
-    driver.find_element(id: 'continue-purge').click
-    driver.find_element(xpath: '//*[@id="purge_data_modal"]/div/div/div[3]/button[2]').click
-  end
-
-  def purge_holiday_data_auto_approval_employee_two
-    driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
-    drop = driver.find_element(:id, 'employee_id')
-    choose = Selenium::WebDriver::Support::Select.new(drop)
-    choose.select_by(:text, 'auto approved-two')
-    driver.find_element(xpath: '/html/body/section[2]/div/div[3]/div/form/div/div[3]/input').click
-    driver.find_element(id: 'continue-purge').click
-    driver.find_element(xpath: '//*[@id="purge_data_modal"]/div/div/div[3]/button[2]').click
-  end
-
-  def purge_holiday_data_auto_approval_employee_three
-    driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
-    drop = driver.find_element(:id, 'employee_id')
-    choose = Selenium::WebDriver::Support::Select.new(drop)
-    choose.select_by(:text, 'auto approval-three')
-    driver.find_element(xpath: '/html/body/section[2]/div/div[3]/div/form/div/div[3]/input').click
-    driver.find_element(id: 'continue-purge').click
-    driver.find_element(xpath: '//*[@id="purge_data_modal"]/div/div/div[3]/button[2]').click
-  end
-
-  def purge_holiday_data_auto_approval_employee_four
-    driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
-    drop = driver.find_element(:id, 'employee_id')
-    choose = Selenium::WebDriver::Support::Select.new(drop)
-    choose.select_by(:text, 'non auto approved')
-    driver.find_element(xpath: '/html/body/section[2]/div/div[3]/div/form/div/div[3]/input').click
-    driver.find_element(id: 'continue-purge').click
-    driver.find_element(xpath: '//*[@id="purge_data_modal"]/div/div/div[3]/button[2]').click
-  end
 end

@@ -6,6 +6,7 @@ require './functions_library/login_extension'
 require './functions_library/login_app_extension'
 require './functions_library/holiday_extension'
 require './functions_library/leave_request_extension'
+require './functions_library/navigate_around_app_manager_extension'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
@@ -27,7 +28,8 @@ class TestLeaveRequest
     puts 'Running - test_employee_holiday_ignore_working_pattern.rb'
     test_01_login_as_admin_and_create_record
     test_02_check_totals
-    test_03_delete_holiday_data
+    test_03_delete_absences
+    driver.close
     puts 'Complete - test_employee_holiday_ignore_working_pattern.rb'
   end
 
@@ -56,35 +58,27 @@ class TestLeaveRequest
   def test_02_check_totals
     HolidayExtension.new(driver).employee_ignore_work_pattern_absence_index
     puts 'Pass - Navigate to holiday employee absences'
-    if HolidayExtension.new(driver).booked_amount == '10.0 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
-    if HolidayExtension.new(driver).available_amount == '10.0 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
+    HolidayExtension.new(driver).compare_booked_amount('10.0 days')
+    HolidayExtension.new(driver).compare_holiday_allowance('10.0 days')
     puts 'Test complete - Totals are correct'
   end
 
-  def test_03_delete_holiday_data
-    puts 'Start test - Deletes holiday information for employee'
-    HolidayExtension.new(driver).purge_holiday_data_holiday_employee_ignore_work_pattern
-    puts 'Pass - Purge holday data'
-    HolidayExtension.new(driver).employee_ignore_work_pattern_absence_index
-    if HolidayExtension.new(driver).booked_amount == '0.0 days'
-      puts 'Pass - booked_amount total correct'
-    else
-      puts 'FAIL - booked_amount total incorrect'
-    end
-    if HolidayExtension.new(driver).available_amount == '20.0 days'
-      puts 'Pass - available_amount total correct'
-    else
-      puts 'FAIL - available_amount total incorrect'
-    end
-    puts 'Test complete - Ignore work pattern adds total'
+  def test_03_delete_absences
+    NavigateBrowserExtension.new(driver).breathe_login
+    puts 'Start Test - Holiday approver approves request'
+    puts 'Pass - Navigate to Login Screen'
+    sleep 1
+    LoginExtension.new(driver).login_admin
+    puts 'Pass - Login as admin'
+    sleep 1
+    LoginAppExtension.new(driver).select_hr
+    puts 'Pass - Selects HR'
+    sleep 1
+    AppNavigationExtensionManager.new(driver).navigate_to_data
+    AppNavigationExtensionManager.new(driver).open_purge_data
+    HolidayExtension.new(driver).purge_holiday_data('ignore WP holiday')
+    puts 'Pass - absences purged'
+    puts 'test complete - absences deleted for auto approval employee one'
   end
 end
 # rubocop:enable Metrics/MethodLength

@@ -153,11 +153,10 @@ class SignUpExtension < Base
   end
 
   def sign_up_login_button
-    driver.find_element(xpath: '//*[@id="hs_cos_wrapper_widget_1709911502283"]/section
-      /div[1]/div/div/div[3]/div/p/a').click
-  rescue Selenium::WebDriver::Error::ElementClickInterceptedError
-    driver.find_element(xpath: '//*[@id="hs_cos_wrapper_widget_1709911502283"]/section
-      /div[1]/div/div/div[3]/div/p/a').click
+    element = driver.find_element(id: 'linkSignupBody1')
+    driver.execute_script('arguments[0].scrollIntoView(true);', element)
+    sleep 0.5
+    driver.find_element(id: 'linkSignupBody1').click
   end
 
   def logo_to_website

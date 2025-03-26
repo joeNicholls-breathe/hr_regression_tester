@@ -4,71 +4,6 @@ require File.expand_path('base.rb', __dir__)
 
 # rubocop:disable Metrics/AbcSize
 class LeaveRequestExtension < Base
-  def employee_holiday_leave_request_one
-    driver.find_element(css: '#\#leave_request_start_date_react').send_keys '16/12/2025' # start date
-    driver.find_element(id: 'leave_request_half_start_true').click # half day
-    driver.find_element(id: 'leave_request_half_start_am_pm_am').click # am
-    driver.find_element(id: 'leave_request_half_start_am_pm_pm').click # pm
-    driver.find_element(css: '#\#leave_request_end_date_react').send_keys '16/12/2025' # end date
-    driver.find_element(id: 'leave_request_notes').send_keys 'Test Leave request as employee reference no. DATE' # note
-    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
-  end
-
-  def employee_holiday_leave_request_two
-    driver.find_element(css: '#\#leave_request_start_date_react').send_keys '11/11/2025' # start date
-    driver.find_element(css: '#\#leave_request_end_date_react').send_keys '12/11/2025' # end date
-    driver.find_element(id: 'leave_request_notes').send_keys 'Test Leave request as employee reference no. DATE' # note
-    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
-  end
-
-  def employee_holiday_leave_request_next_year
-    driver.find_element(css: '#\#leave_request_start_date_react').send_keys '30/12/2025' # start date
-    driver.find_element(id: 'leave_request_half_start_true').click # half day
-    driver.find_element(id: 'leave_request_half_start_am_pm_am').click # am
-    driver.find_element(id: 'leave_request_half_start_am_pm_pm').click # pm
-    driver.find_element(css: '#\#leave_request_end_date_react').send_keys '30/12/2025' # end date
-    driver.find_element(id: 'leave_request_notes').send_keys 'Test Leave request as employee reference no. DATE' # note
-    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
-  end
-
-  def employee_holiday_leave_request_last_year
-    driver.find_element(css: '#\#leave_request_start_date_react').send_keys '29/12/2024' # start date
-    driver.find_element(css: '#\#leave_request_end_date_react').send_keys '29/12/2024' # end date
-    driver.find_element(id: 'leave_request_notes').send_keys 'Test Leave request as employee reference no. DATE' # note
-    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
-  end
-
-  def employee_holiday_leave_request_on_saturday
-    driver.find_element(css: '#\#leave_request_start_date_react').send_keys '28/12/2025' # start date
-    driver.find_element(id: 'leave_request_half_start_true').click # half day
-    driver.find_element(id: 'leave_request_half_start_am_pm_am').click # am
-    driver.find_element(id: 'leave_request_half_start_am_pm_pm').click # pm
-    driver.find_element(css: '#\#leave_request_end_date_react').send_keys '28/12/2025' # end date
-    driver.find_element(id: 'leave_request_notes').send_keys 'Test Leave request as employee reference no. DATE' # note
-    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
-  end
-
-  def employee_holiday_leave_in_carry_over
-    driver.find_element(css: '#\#leave_request_start_date_react').send_keys '04/01/2025' # start date
-    driver.find_element(css: '#\#leave_request_end_date_react').send_keys '04/01/2025' # end date
-    driver.find_element(id: 'leave_request_notes').send_keys 'Testing leave request uses carry over' # note
-    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
-  end
-
-  def negative_carry_over_employee_holiday_leave_this_year
-    driver.find_element(css: '#\#leave_request_start_date_react').send_keys '14/10/2025' # start date
-    driver.find_element(css: '#\#leave_request_end_date_react').send_keys '25/10/2025' # end date
-    driver.find_element(id: 'leave_request_notes').send_keys 'Testing leave request uses carry over' # note
-    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
-  end
-
-  def negative_carry_over_employee_holiday_next_years_allowance
-    driver.find_element(css: '#\#leave_request_start_date_react').send_keys '18/11/2025' # start date
-    driver.find_element(css: '#\#leave_request_end_date_react').send_keys '22/11/2025' # end date
-    driver.find_element(id: 'leave_request_notes').send_keys 'Testing leave request uses carry over' # note
-    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
-  end
-
   def delete_leave_request_booked
     driver.find_element(css: '#DataTables_Table_1 > tbody > tr > td.actions > a:nth-child(2) > svg').click
     driver.find_element(css: '#leave_request_cancellation_reason').send_keys 'Cancel Leave request'
@@ -117,6 +52,30 @@ class LeaveRequestExtension < Base
   def employee_leave_request_overides_blackout
     driver.find_element(id: 'leave_request_ignore_blackout_clashes').click
     driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
+  end
+
+  def make_leave_request(start_date, end_date)
+    driver.find_element(css: '#\#leave_request_start_date_react').send_keys start_date # start date
+    driver.find_element(css: '#\#leave_request_end_date_react').send_keys end_date # end date
+    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
+  end
+
+  def make_leave_request_half_day(start_date, end_date)
+    driver.find_element(css: '#\#leave_request_start_date_react').send_keys start_date # start date
+    driver.find_element(id: 'leave_request_half_start_true').click # half day
+    driver.find_element(id: 'leave_request_half_start_am_pm_am').click # am
+    driver.find_element(id: 'leave_request_half_start_am_pm_pm').click # pm
+    driver.find_element(css: '#\#leave_request_end_date_react').send_keys end_date # end date
+    driver.find_element(id: 'leave_request_notes').send_keys 'Test Leave request as employee reference no. DATE' # note
+    driver.find_element(xpath: '//*[@id="new_leave_request"]/p/input').click
+  end
+
+  def click_add_new_leave_request
+    # rubocop:disable Layout/LineLength
+    driver.find_element(
+      css: 'body > div.hr-main-container > div > section > div.employee-section-header > div > a > span > svg.svg-inline--fa.fa-plus.fa-w-14.fa-inverse.fa-stack-1x'
+    ).click
+    # rubocop:enable Layout/LineLength
   end
 end
 # rubocop:enable Metrics/AbcSize
