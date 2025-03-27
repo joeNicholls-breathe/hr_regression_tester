@@ -70,6 +70,20 @@ class HolidayExtension < Base # rubocop:disable Metrics/ClassLength
     driver.find_element(id: 'available').text
   end
 
+  def carried_amount_days
+    driver.find_element(id: 'carryover-days').text
+  end
+
+  def negative_carry_over
+    driver.find_element(id: 'negative-carryover').text
+  end
+
+  def used_from_next_year
+    driver.find_element(
+      css: '#allowance-breakdown > div:nth-child(5) > div.card-body > div.employee-metric-actions'
+    ).text
+  end
+
   def purge_holiday_data(employee_name)
     driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
     drop = driver.find_element(:id, 'employee_id')
@@ -142,17 +156,43 @@ class HolidayExtension < Base # rubocop:disable Metrics/ClassLength
   def compare_booked_amount(expected_amount)
     sleep 2
     if HolidayExtension.new(driver).booked_amount == expected_amount
-      puts 'Pass - booked_amount total correct'
+      puts 'PASS - booked_amount total correct'
     else
       puts 'FAIL - booked_amount total incorrect'
     end
   end
 
   def compare_holiday_allowance(expected_amount)
-    if HolidayExtension.new(driver).available_amount == expected_amount
-      puts 'Pass - available_amount total correct'
+    if HolidayExtension.new(driver).available_amount.include? expected_amount
+      puts 'PASS - available_amount total correct'
     else
       puts 'FAIL - available_amount total incorrect'
+    end
+  end
+
+  def compare_negative_allowance(expected_amount)
+    if HolidayExtension.new(driver).negative_carry_over.include? expected_amount
+      puts 'PASS - negative_amount total correct'
+    else
+      puts 'FAIL - negative_amount total incorrect'
+    end
+  end
+
+  def compare_holiday_carried_daily(expected_amount)
+    if HolidayExtension.new(driver).carried_amount_days.include? expected_amount
+      puts 'PASS - carried_amount total correct'
+    else
+      puts 'FAIL - carried_amount total incorrect'
+    end
+  end
+
+  def compare_holiday_used_from_next_year(expected_amount)
+    used_from_next = HolidayExtension.new(driver).used_from_next_year
+    if used_from_next.include? expected_amount
+      puts 'PASS - used_from_next_year total correct'
+    else
+      puts 'FAIL - used_from_next_year total incorrect'
+      puts used_from_next
     end
   end
 
