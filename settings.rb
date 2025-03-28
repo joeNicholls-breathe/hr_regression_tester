@@ -35,7 +35,8 @@ module Settings
         rota_assign_shift_to_admin_user: 'user-cell-0-roster-4-9d33e8cf-4e6f-48a8-a47c-04eef7b027c6',
         rota_employee_email: 'std.emp@reg-rota.co.uk',
         rota_line_manager_email: 'line.man@reg-rota.co.uk',
-        edit_year_admin_email: 'admin@holiday-year-end.com'
+        edit_year_admin_email: 'admin@holiday-year-end.com',
+        hourly_holiday_employee_email: 'hourly-employee@hr-regression.com'
       }
     }
   end

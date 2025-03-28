@@ -77,5 +77,26 @@ class LeaveRequestExtension < Base
     ).click
     # rubocop:enable Layout/LineLength
   end
+
+  def make_cancellation_request
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(2) > svg > path').click
+    sleep 1
+    driver.find_element(id: 'leave_request_cancellation_reason').send_keys 'Cancelling Request'
+    driver.find_element(class: 'btn-success').click
+  end
+
+  def find_request_status
+    table_row = driver.find_element(class: 'odd')
+    table_row.find_element(css: '#DataTables_Table_0 > tbody > tr > td:nth-child(6)').text
+  end
+
+  def compare_request_status(expected_status)
+    status = find_request_status
+    if status == expected_status
+      puts "PASS - Request Status is #{expected_status}"
+    else
+      puts "FAIL - Request Status is incorrect, is currently #{status}"
+    end
+  end
 end
 # rubocop:enable Metrics/AbcSize
