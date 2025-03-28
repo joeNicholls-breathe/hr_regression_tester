@@ -52,7 +52,7 @@ class AccountSetupHRUser < Base
     HrUserConfigExtension.new(driver).hr_user_configuration_grapevine_label_clear
     HrUserConfigExtension.new(driver).update_hr_settings
     puts '6. remove settings from all HR user/account - (bradford/121 reminders/grapevine)'
-    sleep 1
+    sleep 2
     LogoutExtension.new(driver).user_logout
     puts '7. logout'
     NavigateBrowserExtension.new(driver).breathe_login
@@ -103,8 +103,8 @@ class AccountSetupHRUser < Base
     AppNavigationExtensionManager.new(driver).navigate_to_settings_with_welcome_page_active
     NavigationAroundAccountConfiguration.new(driver).navigate_to_change_what_hr_users_can_do
     HrUserConfigExtension.new(driver).update_hr_settings
-    sleep 1
     puts '17. test maintanence - reinstate hr users need approval for leave requests'
+    sleep 2
     LogoutExtension.new(driver).user_logout
     puts '18. logout'
     sleep 1

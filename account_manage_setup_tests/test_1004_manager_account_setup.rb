@@ -33,7 +33,6 @@ class AccountSetup < Base
 
   def initialize
     options = Selenium::WebDriver::Chrome::Options.new
-    # options.add_argument('--headless')
     options.add_argument('--disable-gpu')
     options.add_argument('--window-size=1920,1080')
     @driver = Selenium::WebDriver.for(:chrome, options:)
@@ -126,7 +125,7 @@ class AccountSetup < Base
     sleep 1
     PicklistContactExtension.new(driver).details_contract_types_delete_cancel
     puts '14f. Contract type - Cancel delete'
-    sleep 1
+    sleep 2
     PicklistContactExtension.new(driver).details_contract_type_add_return_breadcrumb
     puts '14g. Breadcrumb return from Contract type'
     sleep 1
