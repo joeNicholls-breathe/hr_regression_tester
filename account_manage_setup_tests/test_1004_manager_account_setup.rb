@@ -55,6 +55,7 @@ class AccountSetup < Base
     puts '4. enter company details - save changes'
     AccountDetailsExtension.new(driver).company_details_data_entry_cancel_changes
     puts '5. enter company details - cancel changes'
+    sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
     puts '6. return to company settings'
     NavigationAroundAccountConfiguration.new(driver).navigate_to_modules_free
@@ -186,6 +187,7 @@ class AccountSetup < Base
     sleep 1
     AccountWorkingPatternExtension.new(driver).working_pattern_show_inactive
     puts '20f. Working Pattern inactivate'
+    sleep 1
     AccountWorkingPatternExtension.new(driver).working_pattern_search
     puts '20g. Working Pattern search'
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
@@ -209,12 +211,12 @@ class AccountSetup < Base
     sleep 2
     NavigationAroundAccountConfiguration.new(driver).navigate_to_holiday_years
     puts '23. Navigate to Abscence settings - holidays years'
-    sleep 3
+    sleep 2
     HolidayYearExtension.new(driver).edit_holiday_years_now
     puts '24. Holiday year edit year now'
     sleep 1
     NavigationAroundAccountConfiguration.new(driver).navigate_back_to_settings_breadcrumb
-    sleep 1
+    sleep 2
     NavigationAroundAccountConfiguration.new(driver).navigate_to_company_holidays
     puts '25. Navigate to Abscence settings - company holidays'
     sleep 1
@@ -284,3 +286,4 @@ end
 # rubocop:enable Metrics/AbcSize
 AccountSetup.new.test_account_setup
 puts 'Test 1004 COMPLETE - PASS'
+puts 'issue with rta and learn disable button therefire WILL NEED MANUAL UPDATE IN UI UNTIL FIXED'
