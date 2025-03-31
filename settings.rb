@@ -18,6 +18,7 @@ module Settings
         setup_acc_email: 'admin@auto-reg.co.uk',
         setup_acc_email_hr_user: 'hr@auto-reg.co.uk',
         setup_acc_email_lm_user: 'lm@auto-reg.co.uk',
+        setup_acc_lm_emp_email: 'lmemp@auto-reg.co.uk',
         setup_acc_email_lm_employee: 'empstd@auto-reg.co.uk',
         saas_admin_email: 'antiqueruby0@nllessons.com',
         admin_auto_approval_email: 'auto.approval@hr-regression.com',

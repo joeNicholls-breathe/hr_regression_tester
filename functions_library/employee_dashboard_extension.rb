@@ -42,4 +42,8 @@ class EmployeeDashboardExtension < Base
     sleep 3
     driver.find_element(class: 'bdds-button--text').click
   end
+
+  def expand_dashboard_container
+    driver.find_element(class: 'bdds-container__expand-button').click
+  end
 end
