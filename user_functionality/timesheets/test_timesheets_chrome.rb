@@ -256,6 +256,10 @@ RSpec.describe 'Timesheet Regression test script' do
     sleep @sleep_time_long
     TimesheetExtension.new(@driver).bulk_remove # 7
     sleep @sleep_time_long
+    TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
+    sleep @sleep_time_long
+    TimesheetExtension.new(@driver).bulk_remove # 8
+    sleep @sleep_time_long
     @driver.quit
   end
   # rubocop:enable Metrics/BlockLength
