@@ -28,7 +28,7 @@ class TrainingExtension < Base
   end
 
   def add_training_start_date
-    driver.find_element(id: '#employee_training_course_start_on_react').send_keys tomorrow
+    driver.find_element(id: '#employee_training_course_start_on_react').send_keys todays_date_string
   end
 
   def add_training_end_date
@@ -84,5 +84,11 @@ class TrainingExtension < Base
   def delete_training_request
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > svg').click
     driver.find_element(class: 'modal-confirm').click
+  end
+
+  def get_training_id_employee
+    current_url = driver.current_url
+    split_url = current_url.split('training_courses/', 0)
+    split_url[1]
   end
 end
