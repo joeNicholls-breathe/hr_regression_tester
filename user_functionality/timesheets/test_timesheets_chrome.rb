@@ -102,7 +102,7 @@ RSpec.describe 'Timesheet Regression test script' do
     TimesheetEmpExtension.new(@driver).my_timesheets
     sleep @sleep_time_short
     TimesheetEmpExtension.new(@driver).add_timesheet_pending_approval_employee_last_week
-    sleep @sleep_time_short
+    sleep @sleep_time_long
     TimesheetEmpExtension.new(@driver).last_six_months
     # rubocop:disable Layout/LineLength
     employee_timesheet = @driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div[2]/div/div/div[2]/div[1]/div/div[1]/div[2]/div/div[2]')
@@ -212,7 +212,7 @@ RSpec.describe 'Timesheet Regression test script' do
     RotaEmpExtension.new(@driver).navigate_to_rota_from_hr
     TimesheetEmpExtension.new(@driver).my_timesheets
     TimesheetEmpExtension.new(@driver).last_six_months
-    sleep @sleep_time_short
+    sleep @sleep_time_long
     TimesheetEmpExtension.new(@driver).approved_only_timesheet
     sleep @sleep_time_long
     # rubocop:disable Layout/LineLength
@@ -255,6 +255,10 @@ RSpec.describe 'Timesheet Regression test script' do
     TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
     sleep @sleep_time_long
     TimesheetExtension.new(@driver).bulk_remove # 7
+    sleep @sleep_time_long
+    TimesheetExtension.new(@driver).navigate_to_yesterday_lastweek
+    sleep @sleep_time_long
+    TimesheetExtension.new(@driver).bulk_remove # 8
     sleep @sleep_time_long
     @driver.quit
   end

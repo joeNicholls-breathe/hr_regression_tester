@@ -176,8 +176,11 @@ class TimesheetExtension < Base
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[6]').click
     driver.find_element(xpath: '//*[@id="root"]/div[1]/main/div[3]/div/div/div[3]/div[3]/div/div[2]/div/div[7]').click
     button = driver.find_element(css: 'button[data-testid=bulk-delete-confirm-btn]')
+    sleep 0.50
     if button.enabled?
+      sleep 0.50
       driver.find_element(css: 'button[data-testid=bulk-delete-confirm-btn]').click
+      sleep 0.50
       driver.find_element(css: 'button[data-testid=bulk-delete-modal-confirm-btn]').click
     else
       sleep @sleep_time_short
