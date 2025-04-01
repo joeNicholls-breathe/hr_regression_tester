@@ -12,14 +12,9 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: '#tab-hr-dashboard-link > span:nth-child(1)').click
   end
 
-  def lm_logout
-    driver.find_element(css: 'button[data-element-id=header-avatar-menu-button]').click
-    driver.find_element(css: 'a[data-element-id=header-avatar-menu-item-logout]').click
-  end
-
   def my_people
     driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-people]').click
-    sleep 0.5
+    sleep 1
     driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-my_people]').click
   end
 
@@ -35,7 +30,7 @@ class AppNavigationExtensionLM < Base
     driver.find_element(id: 'leave').click
   end
 
-  def view_leave_record
+  def view_leave_request_record
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a > svg').click
   end
 
@@ -159,7 +154,7 @@ class AppNavigationExtensionLM < Base
     driver.find_element(xpath: '//*[@id="new_sickness"]/p/input').click
   end
 
-  def navigate_to_sickness_view
+  def navigate_to_sickness_view_own_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/sicknesses')
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a > svg').click
     puts 'user can view sickness'
@@ -177,7 +172,7 @@ class AppNavigationExtensionLM < Base
     puts 'user edited sickness record'
   end
 
-  def navigate_to_sickness_manage
+  def navigate_to_sickness_manage_own_employee_own_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/sicknesses')
     a = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(1)')
     attribute_value = a.attribute('href')
@@ -189,7 +184,7 @@ class AppNavigationExtensionLM < Base
     puts 'User can manage sickness'
   end
 
-  def delete_sickness_direct_employee
+  def delete_sickness_direct_employee_own_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/sicknesses')
     sleep 0.25
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(2) > svg').click
@@ -213,13 +208,13 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: selector).click
   end
 
-  def navigate_to_learn
+  def navigate_to_learn_own_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/learn/courses')
     driver.find_element(xpath: '//*[@id="learn"]/span').click
     puts 'user can view learn'
   end
 
-  def navigate_to_performance
+  def navigate_to_performance_own_employee
     # 121s
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/performance')
     driver.find_element(css: '#DataTables_Table_0 > thead > tr > th.sort-desc.sorting_desc').click
@@ -257,14 +252,14 @@ class AppNavigationExtensionLM < Base
     puts 'User can manage(edit) deliverable records'
   end
 
-  def navigate_to_documents
+  def navigate_to_documents_own_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/documents')
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(3) > svg').click
     driver.find_element(css: '#employee_document_title').send_keys '1'
     driver.find_element(css: '#edit_employee_document_1035 > p > input').click
   end
 
-  def document_delete
+  def document_delete_own_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/documents')
     a = driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(3)')
     attribute_value = a.attribute('href')
@@ -274,7 +269,7 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: selector).click
   end
 
-  def navigate_to_jobs
+  def navigate_to_jobs_own_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/jobs')
     puts 'User navigated to employees jobs'
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(1)').click
@@ -293,7 +288,7 @@ class AppNavigationExtensionLM < Base
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(4)').click
   end
 
-  def navigate_to_remuneration
+  def navigate_to_remuneration_own_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/pay_and_benefits')
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a > svg').click
     puts 'User can view pay salary'
@@ -304,7 +299,7 @@ class AppNavigationExtensionLM < Base
     puts 'User can manage pay salary'
   end
 
-  def delete_remuneration
+  def delete_remuneration_own_employee
     driver.navigate.to('https://hr.breathehrstaging.com/employees/22270/pay_and_benefits')
     delete_pay = driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a:nth-child(1)')
     attribute_value = delete_pay.attribute('href')

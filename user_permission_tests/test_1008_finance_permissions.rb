@@ -16,7 +16,11 @@ class FinancePermissions < Base
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    # options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for(:chrome, options:)
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -44,9 +48,9 @@ class FinancePermissions < Base
     puts '9. reports view and check'
     LogoutExtension.new(driver).user_logout
     driver.close
-    puts 'Test 1008 Finance permissions test complete '
   end
 end
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/MethodLength
 FinancePermissions.new.test_1008_finance_permissions
+puts 'Test 1008 Finance permissions test complete'

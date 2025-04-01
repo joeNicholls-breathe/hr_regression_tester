@@ -2,7 +2,7 @@
 
 require 'selenium-webdriver'
 require 'logger'
-require './functions_library/ui_page_element_check'
+require './functions_library/ui_page_element_check_extension'
 require './functions_library/test_reference_extension'
 require './functions_library/navigate_browser_extension'
 require './functions_library/login_extension'
@@ -14,7 +14,11 @@ class EmployeeInputs < Base
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    # options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for(:chrome, options:)
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -26,9 +30,9 @@ class EmployeeInputs < Base
     EmployeeConfigExtension.new(driver).employee_congifuration_what_can_see_custom_fields
     EmployeeConfigExtension.new(driver).employee_congifuration_what_can_do_update_profile_picture
     EmployeeConfigExtension.new(driver).employee_congifuration_update
-    puts 'Test 1007e complete'
     driver.close
   end
 end
 # rubocop:enable Metrics/AbcSize
 EmployeeInputs.new.test_1007e_employee_permissions_return_to_std
+puts 'Test 1007e complete'

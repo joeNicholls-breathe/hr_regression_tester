@@ -16,7 +16,11 @@ class LMUserManageAccess < Base
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    # options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for(:chrome, options:)
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -26,62 +30,60 @@ class LMUserManageAccess < Base
     LoginExtension.new(driver).login_setup_acc_line_manager_user
     LoginAppExtension.new(driver).select_hr
     puts '2. login as Line manager - Pass'
-    AppNavigationExtensionLM.new(driver).lm_dashboard
-    puts '3. navigate to a member of the team that the lm manages - Pass'
     AppNavigationExtensionLM.new(driver).my_people
     AppNavigationExtensionLM.new(driver).my_employee
     AppNavigationExtensionLM.new(driver).my_employee_leave
     sleep 1
     AppNavigationExtensionLM.new(driver).view_leave_record
     PageValueCheck.new(driver).employee_leave_remaining
-    puts '4a. view the employees leave record - Pass'
+    puts '3. view the employees leave record - Pass'
     # AppNavigationExtensionLM.new(driver).approve_employee_leave_request
     # puts '4b. approve employee leave request'
     AppNavigationExtensionLM.new(driver).return_to_employee_leave_index # can remove once work out the above issue.
     AppNavigationExtensionLM.new(driver).add_leave_for_my_employee
     LeaveRequestExtension.new(driver).make_leave_request('11/11/2025', '12/11/2025')
-    puts '5. add new leave request for employee - Pass'
+    puts '4. add new leave request for employee - Pass'
     sleep 0.50
     AppNavigationExtensionLM.new(driver).cancel_employee_leave_request
-    puts '6. cancel booked leave - Pass'
+    puts '5. cancel booked leave - Pass'
     # not sure why this button can not be found
     # AppNavigationExtensionLM.new(driver).add_toil
-    # puts '7a P. User can add toil to employee - Pass'
+    # puts '6a P. User can add toil to employee - Pass'
     AppNavigationExtensionLM.new(driver).add_adjustment_additional
     AppNavigationExtensionLM.new(driver).subtract_adjustment_subtrack
-    puts '7b P. User can made adjustments - Pass'
+    puts '6b P. User can made adjustments - Pass'
     begin
       # issus with delete not erroring rescue
       AppNavigationExtensionLM.new(driver).delete_sickness_direct_employee
     rescue Selenium::WebDriver::Error::NoSuchElementError
-      puts '8. sickness - user could not delete the record due to permissions'
+      puts '7. sickness - user could not delete the record due to permissions'
       AppNavigationExtensionLM.new(driver).navigate_to_sickness_view
       AppNavigationExtensionLM.new(driver).navigate_to_sickness_manage
-      puts '8P. Manage sickness record - user able to manage sickness record - Pass'
+      puts '7P. Manage sickness record - user able to manage sickness record - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).navigate_to_performance
     rescue StandardError
-      puts '9. user can not delete 121 record due to perms'
+      puts '8. user can not delete 121 record due to perms'
       AppNavigationExtensionLM.new(driver).breadcrumb_to_performance_home
-      puts '9P. performance - user was able to edit the record - Pass'
+      puts '8P. performance - user was able to edit the record - Pass'
     end
     begin
       AppNavigationExtensionLM.new(driver).return_to_performance_home
       AppNavigationExtensionLM.new(driver).navigate_to_objectives
-      puts '10F. objectives - user was able to delete the record - Fail'
+      puts '9F. objectives - user was able to delete the record - Fail'
     rescue StandardError
       AppNavigationExtensionLM.new(driver).breadcrumb_to_performance_home
-      puts '10P. User had permission to edit the objectives - Pass'
+      puts '9P. User had permission to edit the objectives - Pass'
     end
     sleep 0.25
     # not in test as button found not to be consistent with other performance tabs
     # begin
     #   AppNavigationExtensionLM.new(driver).navigate_to_deliverables
-    #   puts '11P. deliverables - user was able to manage the record - Fail'
+    #   puts '10P. deliverables - user was able to manage the record - Fail'
     # rescue StandardError
     #   AppNavigationExtensionLM.new(driver).breadcrumb_to_performance_home
-    #   puts '11P. user had permission to view view deliverables - Pass'
+    #   puts '10P. user had permission to view view deliverables - Pass'
     # end
     puts '11. currently not being run'
     begin
@@ -112,10 +114,10 @@ class LMUserManageAccess < Base
     end
     AppNavigationExtensionLM.new(driver).lm_logout
     puts '16. user menu and logout - Pass'
-    puts 'Test 1006e complete'
     driver.close
   end
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
 LMUserManageAccess.new.test_1006e_lm_manage_permisssions
+puts 'Test 1006e COMPLETED - PASS'

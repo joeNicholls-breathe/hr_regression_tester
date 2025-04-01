@@ -19,7 +19,11 @@ class AccountSetupLMUserReturnOriginStatus < Base
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    # options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for(:chrome, options:)
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -78,10 +82,10 @@ class AccountSetupLMUserReturnOriginStatus < Base
     AppNavigationExtensionLM.new(driver).reset_sickness_emp_return_to_work
     puts '7. Returns sickness of employee to status - Return to Work'
     sleep 1
-    puts 'Test 1006h complete'
     driver.close
   end
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
 AccountSetupLMUserReturnOriginStatus.new.test_1006h_linemanager_permisssions_reset
+puts 'Test 1006h COMPLETED - PASS'

@@ -285,4 +285,4 @@ end
 # rubocop:enable Metrics/AbcSize
 AccountSetup.new.test_account_setup
 puts 'Test 1004 COMPLETE - PASS'
-puts 'issue with rta and learn disable button therefire WILL NEED MANUAL UPDATE IN UI UNTIL FIXED'
+puts 'issue with rta and learn disable button therefore WILL NEED MANUAL UPDATE IN UI UNTIL FIXED'

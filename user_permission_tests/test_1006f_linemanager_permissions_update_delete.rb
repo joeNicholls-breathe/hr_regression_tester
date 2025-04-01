@@ -17,7 +17,11 @@ class AccountSetupLMUserDelete < Base
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for(:chrome, options:)
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -46,10 +50,10 @@ class AccountSetupLMUserDelete < Base
     LineManagerDeleteConfigExtension.new(driver).line_manager_update
     puts '5. permissions and approvals - Line manager has all access to personal profile details'
     sleep 1
-    puts 'Test 1006f complete'
     driver.close
   end
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
 AccountSetupLMUserDelete.new.test_1006f_linemanger_permisssions_update_delete
+puts 'Test 1006f COMPLETED - PASS'

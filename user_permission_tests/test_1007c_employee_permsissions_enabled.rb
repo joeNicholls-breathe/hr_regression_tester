@@ -15,7 +15,11 @@ class EmployeeInputs < Base
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    # options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for(:chrome, options:)
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -34,10 +38,10 @@ class EmployeeInputs < Base
     EmployeeConfigExtension.new(driver).employee_congifuration_what_can_do_report_sickness
     EmployeeConfigExtension.new(driver).employee_congifuration_what_can_do_request_one_to_ones
     EmployeeConfigExtension.new(driver).employee_congifuration_update
-    puts 'Test 1007c complete'
     driver.close
   end
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
 EmployeeInputs.new.test_1007c_employee_permissions_enabled
+puts 'Test 1007c COMPLETED - PASS'

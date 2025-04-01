@@ -2,12 +2,12 @@
 
 require 'selenium-webdriver'
 require 'logger'
-require './functions_library/ui_page_element_check'
+require './functions_library/ui_page_element_check_extension'
 require './functions_library/test_reference_extension'
 require './functions_library/navigate_browser_extension'
 require './functions_library/login_extension'
 require './functions_library/login_app_extension'
-require './functions_library/navigate_around_app_manager'
+require './functions_library/navigate_around_app_manager_extension'
 require './functions_library/settings_config/account_config_navigation/account_configuration_navigation_extension'
 require './functions_library/settings_config/line_manager_config/line_manager_manage_extension'
 
@@ -17,7 +17,11 @@ class AccountSetupLMUserManage < Base
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for(:chrome, options:)
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -41,12 +45,11 @@ class AccountSetupLMUserManage < Base
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_remuneration_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_onboarding_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configurations_update
-    puts '4. permissions and approvals - Line manager can manage employee areas'
-    sleep 1
-    puts 'Test 1006d complete'
+    puts '4. permissions and approvals - Line manager can manage employee areas'  
     driver.close
   end
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
 AccountSetupLMUserManage.new.test_1006d_linemanger_permisssions_update_manage
+puts 'Test 1006d COMPLETED - PASS'
