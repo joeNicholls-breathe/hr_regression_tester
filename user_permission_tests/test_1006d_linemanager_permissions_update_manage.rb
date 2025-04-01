@@ -45,7 +45,7 @@ class AccountSetupLMUserManage < Base
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_remuneration_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_onboarding_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configurations_update
-    puts '4. permissions and approvals - Line manager can manage employee areas'  
+    puts '4. permissions and approvals - Line manager can manage employee areas'
     driver.close
   end
 end
