@@ -2,12 +2,10 @@
 
 require 'selenium-webdriver'
 require 'logger'
-require './functions_library/ui_page_element_check'
-require './functions_library/test_reference_extension'
 require './functions_library/navigate_browser_extension'
 require './functions_library/login_extension'
 require './functions_library/login_app_extension'
-require './functions_library/navigate_around_app_manager'
+require './functions_library/navigate_around_app_manager_extension'
 require './functions_library/settings_config/account_config_navigation/account_configuration_navigation_extension'
 require './functions_library/settings_config/line_manager_config/line_manager_delete_extension'
 

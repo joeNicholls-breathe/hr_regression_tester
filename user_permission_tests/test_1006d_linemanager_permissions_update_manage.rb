@@ -35,6 +35,7 @@ class AccountSetupLMUserManage < Base
     NavigationAroundAccountConfiguration.new(driver).navigate_to_change_what_line_managers_can_do
     puts '3. navigate to line settings - assign account settings to LM user'
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_profile_manage
+    LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_personal_profile_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_leave_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_adjustments_and_toil_manage
     LineManagerManageConfigExtension.new(driver).line_manager_configuration_on_sickness_manage

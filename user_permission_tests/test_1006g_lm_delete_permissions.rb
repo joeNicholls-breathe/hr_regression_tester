@@ -2,14 +2,16 @@
 
 require 'selenium-webdriver'
 require 'logger'
-require './functions_library/ui_page_element_check'
+require './functions_library/ui_page_element_check_extension'
 require './functions_library/test_reference_extension'
 require './functions_library/navigate_browser_extension'
 require './functions_library/login_extension'
 require './functions_library/login_app_extension'
-require './functions_library/navigate_around_app_lm'
+require './functions_library/navigate_around_app_lm_extension'
 require './functions_library/leave_request_extension'
 require './functions_library/holiday_extension'
+require './functions_library/logout_extension'
+require './functions_library/employee_dashboard_extension'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
@@ -31,14 +33,14 @@ class LMUserDeleteAccess < Base
     LoginExtension.new(driver).login_setup_acc_lm_employee_user
     LoginAppExtension.new(driver).select_hr
     puts '1a - employee - login'
-    HolidayExtension.new(driver).holiday_request_dashboard_navigate_employee
+    EmployeeDashboardExtension.new(driver).click_widget('Request leave')
     LeaveRequestExtension.new(driver).make_leave_request_half_day('16/12/2025', '16/12/2025')
     puts '1b - employee - holiday leave request'
     # might want to add more items to delete from user they i wont have to clear from other user - might be cleaner
     sleep 1
     LogoutExtension.new(driver).user_logout
     puts '1c. Employees, employee logout- Pass'
-    sleep 0.50
+    sleep 1
     # Line Manager (LM) Login
     NavigateBrowserExtension.new(driver).breathe_login
     LoginExtension.new(driver).login_setup_acc_line_manager_user
@@ -50,6 +52,7 @@ class LMUserDeleteAccess < Base
     AppNavigationExtensionLM.new(driver).my_employee_leave
     AppNavigationExtensionLM.new(driver).delete_leave_request
     puts '3. delete leave request from Employees, employee'
+    sleep 1
     AppNavigationExtensionLM.new(driver).my_people
     AppNavigationExtensionLM.new(driver).my_employees_employee
     AppNavigationExtensionLM.new(driver).my_employee_leave
@@ -64,23 +67,29 @@ class LMUserDeleteAccess < Base
     puts '6. LM adds toil adjustment to Employees, employee - Pass'
     AppNavigationExtensionLM.new(driver).navigate_to_sickness_edit
     AppNavigationExtensionLM.new(driver).delete_sickness_employees_employee
+    sleep 1
     AppNavigationExtensionLM.new(driver).create_a_sickness
     puts '7. Lm able to delete sickness record - Pass'
+    sleep 1
     AppNavigationExtensionLM.new(driver).performance_121_delete_employee_of_employee
     puts '8. Delete 121 - Pass'
-    sleep 1.5
+    sleep 2
     AppNavigationExtensionLM.new(driver).homepage_logo
+    sleep 1
     AppNavigationExtensionLM.new(driver).performance_objective_delete_employee_of_employee
     puts '9. Delete objective - Pass'
-    sleep 1.5
+    sleep 2
     AppNavigationExtensionLM.new(driver).homepage_logo
+    sleep 1
     AppNavigationExtensionLM.new(driver).performance_deliverable_delete_employee_of_employee
     puts '10. Delete deliverable - Pass'
     sleep 1.5
     AppNavigationExtensionLM.new(driver).job_delete_employee_of_employee
     puts '11. Delete job - Pass'
+    sleep 1
     AppNavigationExtensionLM.new(driver).pay_delete_employee_of_employee
     puts '12. Delete pay - Pass'
+    sleep 1
     AppNavigationExtensionLM.new(driver).performance_121_create_employee_of_employee
     puts '13. Create 121 - Pass'
     sleep 1.5
@@ -89,8 +98,10 @@ class LMUserDeleteAccess < Base
     sleep 1.5
     AppNavigationExtensionLM.new(driver).performance_deliverable_create_employee_of_employee
     puts '15. Create deliverable - Pass'
+    sleep 1
     AppNavigationExtensionLM.new(driver).job_create_employee_of_employee
     puts '16. Create job - Pass'
+    sleep 1
     AppNavigationExtensionLM.new(driver).pay_create_employee_of_employee
     puts '17. Create pay - Pass'
     sleep 1

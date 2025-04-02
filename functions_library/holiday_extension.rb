@@ -4,13 +4,6 @@ require File.expand_path('base.rb', __dir__)
 
 # # :
 class HolidayExtension < Base # rubocop:disable Metrics/ClassLength
-  def holiday_request_dashboard_navigate_employee
-    leave_request_button = driver.find_element(css: '#tab-my-dashboard > div > div:nth-child(1) > div.card-footer > a')
-    button_href = leave_request_button.property('href')
-    employee_id = button_href.split('/')[-3]
-    driver.find_element(css: "a[href='/employees/#{employee_id}/leave_requests/new']").click
-  end
-
   def holiday_request_calendar_navigate_employee
     driver.find_element(css: 'href=["/employees/settings[:staging][:employee_id]/leave_requests/make_request"]').click
   end

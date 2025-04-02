@@ -9,6 +9,7 @@ require './functions_library/login_extension'
 require './functions_library/login_app_extension'
 require './functions_library/navigate_around_app_lm_extension'
 require './functions_library/leave_request_extension'
+require './functions_library/logout_extension'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
@@ -17,7 +18,7 @@ class LMUserNoAccess < Base
 
   def initialize
     options = Selenium::WebDriver::Chrome::Options.new
-    options.add_argument('--headless')
+    # options.add_argument('--headless')
     options.add_argument('--disable-gpu')
     options.add_argument('--window-size=1920,1080')
     @driver = Selenium::WebDriver.for(:chrome, options:)
@@ -36,8 +37,8 @@ class LMUserNoAccess < Base
     AppNavigationExtensionLM.new(driver).my_employee
     AppNavigationExtensionLM.new(driver).my_employee_leave
     sleep 1
-    AppNavigationExtensionLM.new(driver).view_leave_record
-    PageValueCheck.new(driver).employee_leave_remaining
+    AppNavigationExtensionLM.new(driver).view_leave_request_record
+    PageValueCheck.new(driver).employee_leave_requested
     puts '3. view the employees leave record - Pass'
     AppNavigationExtensionLM.new(driver).return_to_employee_leave_index # can remove once work out the above issue.
     AppNavigationExtensionLM.new(driver).add_leave_for_my_employee
