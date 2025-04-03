@@ -79,10 +79,10 @@ class PageValueCheck < Base
     puts 'Check - Pass - Absence not created - Clashes with company blackout'
   end
 
-  def employee_leave_remaining
+  def employee_leave_requested
     a = driver.find_element(css: 'body > div.hr-main-container > div.hr-main > section > div.row > div > div > table > tbody > tr:nth-child(3) > td')
     leave_remaining = a.attribute('innerHTML')
-    puts "Check - #{leave_remaining} remain available"
+    puts "Check - #{leave_remaining} requested"
   end
 
   def sickness_current_state_view_only

@@ -2,7 +2,7 @@
 
 require 'selenium-webdriver'
 require 'logger'
-require './functions_library/ui_page_element_check'
+require './functions_library/ui_page_element_check_extension'
 require './functions_library/test_reference_extension'
 require './functions_library/navigate_browser_extension'
 require './functions_library/login_extension'
@@ -15,7 +15,11 @@ class EmployeePermissions < Base
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    # options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for(:chrome, options:)
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -54,10 +58,10 @@ class EmployeePermissions < Base
     NavigateAroundAppEmployee.new(driver).one_to_one_request
     puts '13. request one to one - dashboard'
     LogoutExtension.new(driver).user_logout
-    puts 'Test 1007d script complete'
     driver.close
   end
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
 EmployeePermissions.new.test_1007d_employee_permissions_testing
+puts 'Test 1007d script complete'

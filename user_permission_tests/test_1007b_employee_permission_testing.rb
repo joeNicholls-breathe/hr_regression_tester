@@ -18,7 +18,11 @@ class EmployeePermissions < Base
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    # options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for(:chrome, options:)
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -108,7 +112,6 @@ class EmployeePermissions < Base
       puts '13. not able to request one to one - dashboard - Pass'
     end
     LogoutExtension.new(driver).user_logout
-    puts 'Test 1007b script complete'
     driver.close
   end
 end
@@ -117,3 +120,4 @@ end
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
 EmployeePermissions.new.test_1007b_employee_permissions_testing
+puts 'Test 1007b script complete'
