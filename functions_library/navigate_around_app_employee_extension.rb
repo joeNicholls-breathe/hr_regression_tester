@@ -34,7 +34,7 @@ class NavigateAroundAppEmployee < Base
   end
 
   def navigate_to_calendar_employee
-    driver.find_element(xpath: '//*[@id="navbar-nav-dropdown"]/ul/li[4]/a').click
+    driver.find_element(xpath: '/html/body/div[2]/div[1]/div/div[1]/header/div[2]/ul[2]/li[2]/a').click
   end
 
   def navigate_to_leave_request_widget_request_leave
@@ -143,6 +143,10 @@ class NavigateAroundAppEmployee < Base
     # choose.select_by(:text, '')
     driver.find_element(id: 'employee_one_to_one_request_summary').send_keys 'Added test to employee permissions'
     driver.find_element(css: '#new_employee_one_to_one_request > p > input').click
+  end
+
+  def click_dashboard_lhn
+    driver.find_element(id: 'top-menu-menu-item-0-0').click
   end
 end
 # rubocop:enable Metrics/ClassLength

@@ -8,8 +8,8 @@ require './functions_library/login_app_extension'
 require './functions_library/employee_dashboard_extension'
 require './functions_library/holiday_extension'
 require './functions_library/sickness_extension'
-require './functions_library/navigate_around_app_employee'
-require './functions_library/ui_page_element_check'
+require './functions_library/navigate_around_app_employee_extension'
+require './functions_library/ui_page_element_check_extension'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
@@ -46,7 +46,7 @@ class TestEmployeeOneOpenSicknessProcess
     LoginAppExtension.new(driver).select_hr
     puts 'Pass - Selects HR'
     sleep 1
-    SicknessExtension.new(driver).create_sickness_data_holiday_employee
+    EmployeeDashboardExtension.new(driver).click_widget('Report new sickness')
     puts 'Pass - open Employee sickness form'
     sleep 1
     SicknessExtension.new(driver).employee_sickness_create
