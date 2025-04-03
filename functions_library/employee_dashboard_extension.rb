@@ -46,4 +46,10 @@ class EmployeeDashboardExtension < Base
   def expand_dashboard_container
     driver.find_element(class: 'bdds-container__expand-button').click
   end
+
+  def find_open_training_request
+    cards = driver.find_elements(class: 'bdds-card')
+    card = cards.select { |x| x.attribute('data-element-id') == 'training-widget' }
+    card[0].find_element(class: 'bdds-text--heading')
+  end
 end

@@ -3,7 +3,6 @@
 require 'selenium-webdriver'
 require 'logger'
 require './functions_library/navigate_browser_extension'
-require './functions_library/calendar_extension'
 require './functions_library/login_extension'
 require './functions_library/login_app_extension'
 require './functions_library/navigate_around_app_manager_extension'
@@ -13,14 +12,15 @@ require './functions_library/employee_dashboard_extension'
 require './functions_library/manager_dashboard_extension'
 require './functions_library/training_extension'
 require './functions_library/people_page_extension'
+require './functions_library/reports_extension'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
-
-class TrainingInCalendar # rubocop:disable Metrics/ClassLength
+# rubocop:disable Metrics/ClassLength
+class VerifyTrainingReport
   attr_accessor :driver
 
-  # Tests that employee training appears in the calendar
+  # Tests that employee training appears in the training report
 
   def initialize
     options = Selenium::WebDriver::Chrome::Options.new
@@ -32,14 +32,14 @@ class TrainingInCalendar # rubocop:disable Metrics/ClassLength
   end
 
   def execute
-    puts 'Starting test_1019_verify_training_appears_in_calendar'
+    puts 'Starting test_1020_verify_training_report'
     test_01_employee_opens_training_request_form
     test_02_fill_out_form
-    test_03_confirm_request_training
-    test_04_view_calendar
-    test_05_lm_rejects_request
-    test_06_delete_request
-    puts 'test_1019_verify_training_appears_in_calendar Finished'
+    test_03_hr_opens_report
+    test_04_compare_report_values
+    test_05_manager_approves_training
+    test_06_delete_training
+    puts 'test_1020_verify_training_report Finished'
   end
 
   def test_01_employee_opens_training_request_form
@@ -76,36 +76,14 @@ class TrainingInCalendar # rubocop:disable Metrics/ClassLength
     TrainingExtension.new(driver).add_training_unstructured_units
     puts 'PASS - Unstructured Units Added'
     TrainingExtension.new(driver).confirm_training_form
+    sleep 1
     puts 'PASS - Training Request Form Submitted'
   end
 
-  def test_03_confirm_request_training
-    TrainingExtension.new(driver).click_training_breadcrumb
-    puts 'PASS - Navigate back to training overview'
-    TrainingExtension.new(driver).compare_training_request_status('Requested')
-  end
-
-  def test_04_view_calendar
-    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a > svg').click
-    puts 'PASS - Clicked on training request'
-    training_id = TrainingExtension.new(driver).training_id_employee
-    sleep 1
-    NavigateAroundAppEmployee.new(driver).navigate_to_calendar_employee
-    puts 'PASS - Calendar Opened'
-    sleep 1
-    CalendarExtension.new(driver).find_training_request(training_id)
-    puts 'PASS - Training Found in Calendar'
-    CalendarExtension.new(driver).filter_only_training
-    puts 'PASS - Filtered to only training'
-    CalendarExtension.new(driver).find_training_request(training_id)
-    puts 'PASS - Training Found in Calendar'
-    CalendarExtension.new(driver).find_employee_on_calendar('Employee User')
-  end
-
-  def test_05_lm_rejects_request
+  def test_03_hr_opens_report
     NavigateBrowserExtension.new(driver).breathe_login
     puts 'PASS - load landing page'
-    LoginExtension.new(driver).login_functionality_lm
+    LoginExtension.new(driver).login_functionality_hr
     puts 'PASS - Logged in as LM'
     LoginAppExtension.new(driver).select_hr
     puts 'PASS - hr selected'
@@ -114,32 +92,59 @@ class TrainingInCalendar # rubocop:disable Metrics/ClassLength
     sleep 1
     ManagerDashboardExtension.new(driver).view_open_training_request
     puts 'PASS - Training Request Opened by Manager'
-    training_id = TrainingExtension.new(driver).training_id_manager
-    sleep 1
-    TrainingExtension.new(driver).manager_rejects_training_request
-    puts 'PASS - Clicks reject'
-    sleep 1
-    TrainingExtension.new(driver).fill_out_rejection_form
-    puts 'PASS - Request Rejected'
-    sleep 1
-    NavigateAroundAppEmployee.new(driver).navigate_to_calendar_employee
-    puts 'PASS - Open Calendar'
-    CalendarExtension.new(driver).verify_training_not_present("EmployeeTrainingCourse_#{training_id}")
+    $training_id = TrainingExtension.new(driver).training_id_manager # rubocop:disable Style/GlobalVars
+    AppNavigationExtensionManager.new(driver).open_reports
   end
 
-  def test_06_delete_request
-    NavigateBrowserExtension.new(driver).breathe_login
-    puts 'PASS - load landing page'
-    LoginExtension.new(driver).login_functionality_hr
-    puts 'PASS - Logged in as HR'
+  def test_04_compare_report_values
+    ReportsExtension.new(driver).click_on_report('Training')
     sleep 1
-    LoginAppExtension.new(driver).select_hr
-    puts 'PASS - hr selected'
-    sleep 2
+    training_title = ReportsExtension.new(driver).chosen_column_from_first_row('4')
+    ReportsExtension.new(driver).compare_text_of_column_against_expected('Employee Requested Training', training_title)
+    training_status = ReportsExtension.new(driver).chosen_column_from_first_row('10')
+    ReportsExtension.new(driver).compare_text_of_column_against_expected('Requested', training_status)
+    ReportsExtension.new(driver).filter_by_department('Customer Service')
+    puts 'PASS - Department Filter added'
+    sleep 1
+    ReportsExtension.new(driver).check_table_not_empty
+    puts 'PASS - Row still present'
+    sleep 1
+    ReportsExtension.new(driver).filter_by_location('Working from Home')
+    sleep 1
+    ReportsExtension.new(driver).check_table_is_empty
+    puts 'PASS - Table is empty'
+    ReportsExtension.new(driver).clear_filters
+    puts 'PASS - Filter Cleared'
+    sleep 1
+    ReportsExtension.new(driver).filter_by_start_next_month
+    puts 'PASS - Filter Applied'
+    sleep 1
+    ReportsExtension.new(driver).check_table_not_empty
+    puts 'PASS - Table Empty'
+    sleep 1
+    ReportsExtension.new(driver).clear_filters
+    puts 'PASS - Filter Cleared'
+    sleep 1
+    ReportsExtension.new(driver).click_action_for_selected_row($training_id) # rubocop:disable Style/GlobalVars
+    puts 'PASS - Request Opened'
+  end
+
+  def test_05_manager_approves_training
+    TrainingExtension.new(driver).manager_approves_training_request
+    puts 'PASS - Request Approved'
+    sleep 1
+    AppNavigationExtensionManager.new(driver).open_reports
+    sleep 1
+    ReportsExtension.new(driver).click_on_report('Training')
+    sleep 1
+    training_status = ReportsExtension.new(driver).chosen_column_from_first_row('10')
+    ReportsExtension.new(driver).compare_text_of_column_against_expected('Approved', training_status)
+  end
+
+  def test_06_delete_training
     AppNavigationExtensionManager.new(driver).search_employee('Employee User')
-    puts 'PASS - Employee Searched and Opened'
-    wait = Selenium::WebDriver::Wait.new(timeout: 20)
-    wait.until { driver.find_element(id: 'training').displayed? }
+    puts 'PASS - Employee Search and Opened'
+    sleep 2
     AppNavigationExtensionManager.new(driver).open_employee_training
     puts 'PASS - Opened Employee Training'
     sleep 2
@@ -148,7 +153,7 @@ class TrainingInCalendar # rubocop:disable Metrics/ClassLength
     sleep 2
   end
 end
-
-TrainingInCalendar.new.execute
+VerifyTrainingReport.new.execute
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
+# rubocop:enable Metrics/ClassLength

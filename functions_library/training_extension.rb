@@ -31,6 +31,10 @@ class TrainingExtension < Base
     driver.find_element(id: '#employee_training_course_start_on_react').send_keys todays_date_string
   end
 
+  def add_training_start_date_next_week
+    driver.find_element(id: '#employee_training_course_start_on_react').send_keys one_week_date_string
+  end
+
   def add_training_end_date
     driver.find_element(id: '#employee_training_course_end_on_react').send_keys one_week_date_string
   end
@@ -86,9 +90,32 @@ class TrainingExtension < Base
     driver.find_element(class: 'modal-confirm').click
   end
 
-  def get_training_id_employee
+  def training_id_manager
+    current_url = driver.current_url
+    split_url = current_url.split('training_courses/')
+    split_url[1]
+  end
+
+  def training_id_employee
     current_url = driver.current_url
     split_url = current_url.split('training_courses/', 0)
     split_url[1]
+  end
+
+  def open_edit_modal
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(1) > svg').click
+  end
+
+  def set_outcome_to_passed
+    outcome = driver.find_element(id: 'employee_training_course_outcome')
+    choose = Selenium::WebDriver::Support::Select.new(outcome)
+    choose.select_by(:text, 'Passed')
+  end
+
+  def training_outcome
+    row = driver.find_element(css: '#DataTables_Table_0 > tbody')
+    columns = row.find_elements(tag_name: 'TD')
+    outcome = columns.select { |x| x.attribute('cellIndex') == '7' }
+    outcome[0].text
   end
 end

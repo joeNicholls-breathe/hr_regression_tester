@@ -18,23 +18,28 @@ class TestEmployeeTrainingRejected
   # Tests an employee requesting training
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for(:chrome, options:)
     Selenium::WebDriver.logger.level = :info
   end
 
   def execute
+    puts 'Starting test_1017_employee_training_request_rejected'
     test_01_employee_opens_training_request_form
     test_02_fill_out_form
     test_03_confirm_request_training
     test_04_line_manager_rejects_request
     test_05_delete_training_request
-    puts 'TEST_1017 Complete'
+    puts 'test_1017_employee_training_request_rejected Finished'
   end
 
   def test_01_employee_opens_training_request_form
     NavigateBrowserExtension.new(driver).breathe_login
     puts 'PASS - load landing page'
-    LoginExtension.new(driver).login_setup_acc_lm_employee_user
+    LoginExtension.new(driver).login_functionality_employee
     puts 'PASS - logged in as std employee'
     LoginAppExtension.new(driver).select_hr
     puts 'PASS - hr selected'
@@ -77,8 +82,8 @@ class TestEmployeeTrainingRejected
   def test_04_line_manager_rejects_request
     NavigateBrowserExtension.new(driver).breathe_login
     puts 'PASS - load landing page'
-    LoginExtension.new(driver).login_setup_acc_lmemp_employee_user
-    puts 'PASS - Logged in as HR'
+    LoginExtension.new(driver).login_functionality_lm
+    puts 'PASS - Logged in as LM'
     LoginAppExtension.new(driver).select_hr
     puts 'PASS - hr selected'
     ManagerDashboardExtension.new(driver).switch_todos_to_training
@@ -100,7 +105,7 @@ class TestEmployeeTrainingRejected
 
   def test_05_delete_training_request
     TrainingExtension.new(driver).delete_training_request
-    sleep 1
+    sleep 2
     puts 'PASS - Training Request Deleted'
   end
 end

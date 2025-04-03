@@ -95,6 +95,13 @@ class AppNavigationExtensionManager < Base
     sleep 1
   end
 
+  def search_employee(employee_name)
+    driver.find_element(css: 'input[data-element-id=header-employee-search]').send_keys employee_name
+    sleep 2
+    driver.find_element(css: 'input[data-element-id=header-employee-search]').send_keys :enter
+    sleep 2
+  end
+
   def search_employee_newemployeeuser
     driver.find_element(css: 'input[data-element-id=header-employee-search]').send_keys 'Newemployee User'
     sleep 1
@@ -125,6 +132,10 @@ class AppNavigationExtensionManager < Base
     driver.find_element(id: 'leave').click
   end
 
+  def open_employee_training
+    driver.find_element(id: 'training').click
+  end
+
   def navigate_to_data
     sleep 2
     driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-people]').click
@@ -136,8 +147,8 @@ class AppNavigationExtensionManager < Base
 
   def navigate_to_people_list
     sleep 2
-    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-people]').click
-    sleep 4
+    driver.find_element(id: 'top-menu-menu-item-2-0').click
+    sleep 2
     driver.find_element(link_text: 'Our people').click
   end
 
@@ -145,6 +156,10 @@ class AppNavigationExtensionManager < Base
     driver.find_element(
       css: 'body > div.hr-main-container > div > section > div:nth-child(2) > div:nth-child(2) > div > a'
     ).click
+  end
+
+  def open_reports
+    driver.find_element(id: 'top-menu-menu-item-2-2').click
   end
 end
 # rubocop:enable Metrics/ClassLength
