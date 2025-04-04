@@ -60,9 +60,11 @@ class NavigateAroundAppEmployee < Base
   end
 
   # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Layout/LineLength
   def navigate_to_pay
     driver.navigate.to('https://hr.breathehrstaging.com/employees/24848/pay_and_benefits#tab-pay')
-    driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a').click
+    # opens download, seperate tab opens and the user scloses the tab and then returns to first tab
+    driver.find_element(css: 'body > div.hr-main-container > div > section > div.employee-section-header > div > a').click
     driver.switch_to.window(driver.window_handles.last)
     driver.close
     driver.switch_to.window(driver.window_handles.first)
@@ -70,7 +72,8 @@ class NavigateAroundAppEmployee < Base
 
   def navigate_to_benefits
     driver.navigate.to('https://hr.breathehrstaging.com/employees/24848/pay_and_benefits#tab-benefits')
-    driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a').click
+    # opens download, seperate tab opens and the user scloses the tab and then returns to first tab
+    driver.find_element(css: 'body > div.hr-main-container > div > section > div.employee-section-header > div > a').click
     driver.switch_to.window(driver.window_handles.last)
     driver.close
     driver.switch_to.window(driver.window_handles.first)
@@ -78,12 +81,14 @@ class NavigateAroundAppEmployee < Base
 
   def navigate_to_additional_payments
     driver.navigate.to('https://hr.breathehrstaging.com/employees/24848/pay_and_benefits#tab-bonuses')
-    driver.find_element(css: 'body > section.content.container > div.employee-section-header > div > a').click
+    # opens download, seperate tab opens and the user scloses the tab and then returns to first tab
+    driver.find_element(css: 'body > div.hr-main-container > div > section > div.employee-section-header > div > a').click
     driver.switch_to.window(driver.window_handles.last)
     driver.close
     driver.switch_to.window(driver.window_handles.first)
   end
   # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Layout/LineLength
 
   def navigate_to_performance_onetoone
     driver.navigate.to('https://hr.breathehrstaging.com/employees/24848/performance#one-to-ones')
@@ -136,9 +141,11 @@ class NavigateAroundAppEmployee < Base
 
   def one_to_one_request
     driver.find_element(id: 'employee_one_to_one_request_company_one_to_one_type_id')
+    sleep 1
+    drop = driver.find_element(id: 'employee_one_to_one_request_company_one_to_one_type_id')
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:text, 'Half Year')
-    # driver.find_element(id: 'employee_one_to_one_request_company_location_id')
+    # drop = driver.find_element(id: 'employee_one_to_one_request_company_location_id')
     # choose = Selenium::WebDriver::Support::Select.new(drop)
     # choose.select_by(:text, '')
     driver.find_element(id: 'employee_one_to_one_request_summary').send_keys 'Added test to employee permissions'
