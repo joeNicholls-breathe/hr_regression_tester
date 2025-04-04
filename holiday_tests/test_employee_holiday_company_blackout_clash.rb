@@ -21,8 +21,11 @@ class TestLeaveRequest
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
-    # driver.manage.timeout.implicit_wait = 3
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for(:chrome, options:)
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -55,6 +58,7 @@ class TestLeaveRequest
     AppNavigationExtensionManager.new(driver).navigate_to_company_blackouts
     puts 'Pass - Navigate to company blackouts'
     sleep 2
+    # binding.pry
     CompanyBlackoutsExtension.new(driver).company_blackout_add_new
     puts 'Pass - Added company blackout'
     puts 'TEST 01 complete'

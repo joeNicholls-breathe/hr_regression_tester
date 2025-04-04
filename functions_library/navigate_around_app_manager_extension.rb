@@ -137,17 +137,19 @@ class AppNavigationExtensionManager < Base
   end
 
   def navigate_to_data
-    sleep 2
+    wait = Selenium::WebDriver::Wait.new(timeout: 10)
+    sleep 3
     driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-people]').click
-    sleep 4
-    driver.find_element(
+    data = driver.find_element(
       css: '#top-menu > div:nth-child(2) > ul > li:nth-child(1) > div > div > ul > li:nth-child(3) > a'
-    ).click
+    )
+    wait.until { data.displayed? }
+    data.click
   end
 
   def navigate_to_people_list
     sleep 2
-    driver.find_element(id: 'top-menu-menu-item-2-0').click
+    driver.find_element(id: 'top-menu-menu-item-1-0').click
     sleep 2
     driver.find_element(link_text: 'Our people').click
   end
@@ -160,6 +162,10 @@ class AppNavigationExtensionManager < Base
 
   def open_reports
     driver.find_element(id: 'top-menu-menu-item-2-2').click
+  end
+
+  def open_purge_from_url
+    driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
   end
 end
 # rubocop:enable Metrics/ClassLength

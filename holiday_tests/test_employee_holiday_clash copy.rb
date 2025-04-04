@@ -55,7 +55,6 @@ class TestLeaveRequest
     LoginAppExtension.new(driver).select_hr
     puts 'Pass - Selects HR'
     sleep 1
-    # EmployeeDashboardExtension.new(driver).click_widget('Request leave')
     AppNavigationExtensionManager.new(driver).search_employee('Holiday employee')
     AppNavigationExtensionManager.new(driver).open_employee_leave
     LeaveRequestExtension.new(driver).click_add_new_leave_request
