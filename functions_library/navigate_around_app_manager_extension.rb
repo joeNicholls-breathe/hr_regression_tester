@@ -161,5 +161,9 @@ class AppNavigationExtensionManager < Base
   def open_reports
     driver.find_element(id: 'top-menu-menu-item-2-2').click
   end
+
+  def employee_profile_sickness_tab
+    driver.find_element(id: 'sickness').click
+  end
 end
 # rubocop:enable Metrics/ClassLength

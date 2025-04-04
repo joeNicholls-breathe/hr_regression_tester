@@ -16,7 +16,7 @@ class EmployeeConfigExtension < Base
   end
 
   def employee_congifuration_what_can_see_directory
-    driver.find_element(id: 'account_employees_directory').click
+    driver.find_element(id: 'employees-directory-checkbox').click
   end
 
   def employee_congifuration_what_can_see_calendar
