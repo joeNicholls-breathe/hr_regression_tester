@@ -78,6 +78,7 @@ class TestLeaveRequest
 
   def test_03_check_allowance_totals
     puts 'Start test - Check totals'
+    sleep 1
     HolidayExtension.new(driver).compare_booked_amount('0.5 days')
     HolidayExtension.new(driver).compare_holiday_allowance('19.5 days')
     sleep 1
@@ -95,8 +96,8 @@ class TestLeaveRequest
     LoginAppExtension.new(driver).select_hr
     puts 'Pass - Selects HR'
     sleep 1
-    AppNavigationExtensionManager.new(driver).navigate_to_data
-    AppNavigationExtensionManager.new(driver).open_purge_data
+    AppNavigationExtensionManager.new(driver).open_purge_from_url
+    sleep 1
     HolidayExtension.new(driver).purge_holiday_data('Holiday employee')
     puts 'Pass - absences purged'
     sleep 1
@@ -105,7 +106,7 @@ class TestLeaveRequest
     sleep 1
     CompanyHolidaysExtension.new(driver).company_holiday_delete
     puts 'Pass - deleted company holiday'
-    sleep 1
+    sleep 2
     puts 'Test complete - Deleted holiday and company holiday'
   end
 end

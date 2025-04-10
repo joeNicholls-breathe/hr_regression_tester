@@ -11,11 +11,15 @@ require './functions_library/navigate_around_app_manager_extension'
 require './functions_library/people_page_extension'
 
 # rubocop:disable Metrics/AbcSize
-class EditHolidayYear
+class EditHolidayYear # rubocop:disable Metrics/ClassLength
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for(:chrome, options:)
     Selenium::WebDriver.logger.level = :info
   end
 

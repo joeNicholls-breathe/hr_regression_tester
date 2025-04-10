@@ -7,10 +7,28 @@ class ManagerDashboardExtension < Base
     driver.find_element(id: 'tab-training').click
   end
 
+  def switch_todos_to_sickness
+    driver.find_element(id: 'tab-sicknesses').click
+  end
+
   def view_open_training_request
     driver.find_element(
       css: '#tab-panel-training > div > table > tbody > tr > td.bdds-table__table-data.bdds-table__table-data--column-align-right > span > a' # rubocop:disable Layout/LineLength
     ).click
+  end
+
+  def view_open_sickness_request
+    driver.find_element(
+      css: '#tab-panel-sicknesses > div > table > tbody > tr > td.bdds-table__table-data.bdds-table__table-data--column-align-right > span > a' # rubocop:disable Layout/LineLength
+    ).click
+  end
+
+  def open_sickness_id_from_dashboard
+    open_sickness = driver.find_element(
+      css: '#tab-panel-sicknesses > div > table > tbody > tr > td.bdds-table__table-data.bdds-table__table-data--column-align-right > span > a' # rubocop:disable Layout/LineLength
+    )
+    sickness_id = open_sickness.attribute('href')
+    sickness_id.split('/')[6]
   end
 
   def find_employee_requested_training

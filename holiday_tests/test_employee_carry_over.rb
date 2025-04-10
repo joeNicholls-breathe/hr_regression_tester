@@ -72,7 +72,7 @@ class TestLeaveRequest
     sleep 2
     HolidayExtension.new(driver).compare_booked_amount('1.0 day')
     target_date = Date.new(2025, 3, 31) # Year, month, day
-    today = Date.today
+    today = Date.today # rubocop:disable Rails/Date
     if today > target_date
       puts 'Holiday year after carry over period'
       HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')

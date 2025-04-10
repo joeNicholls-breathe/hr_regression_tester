@@ -159,7 +159,7 @@ class HolidayExtension < Base # rubocop:disable Metrics/ClassLength
     if HolidayExtension.new(driver).available_amount.include? expected_amount
       puts 'PASS - available_amount total correct'
     else
-      puts 'FAIL - available_amount total incorrect'
+      puts 'FAIL - available_amount total incorrect,'
     end
   end
 

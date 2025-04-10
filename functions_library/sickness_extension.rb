@@ -60,7 +60,6 @@ class SicknessExtension < Base
     driver.find_element(css: '#DataTables_Table_0 > tbody > tr:nth-child(1) > td.actions > a > svg').click
     selector = "#edit_sickness_#{split_value} > p > input"
     driver.find_element(css: selector).click
-    driver.find_element(css: selector).click
   end
 
   def delete_sickness_record
@@ -80,5 +79,40 @@ class SicknessExtension < Base
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:text, 'Other')
     driver.find_element(xpath: '//*[@id="new_sickness"]/p/input').click
+  end
+
+  def new_edit_sickness
+    first_row = driver.find_element(class: 'odd')
+    actions = first_row.find_elements(class: 'actions')
+    row_actions = actions[0].find_elements(tag_name: 'A')
+    edit = row_actions.find { |x| x.include? 'edit' }
+    edit.click
+  end
+
+  def click_sickness_breadcrumb
+    driver.find_element(css: 'body > div.hr-main-container > div.hr-main > section > div.breadcrumb > a').click
+  end
+
+  def click_sickness_form_breadcrumb
+    driver.find_element(css: 'body > div.hr-main-container > div.hr-main > section > div > div > div > a').click
+  end
+
+  def open_sickness_form
+    driver.find_element(
+      css: 'body > div.hr-main-container > div.hr-main > section > div.employee-section-header > div > a:nth-child(2) > span > svg.svg-inline--fa.fa-plus.fa-w-14.fa-inverse.fa-stack-1x' # rubocop:disable Layout/LineLength
+    ).click
+  end
+
+  def manager_closing_sickness(sickness_id)
+    radio = driver.find_element(class: 'radio')
+    radio.find_element(id: 'complete-sickness').click
+    driver.find_element(id: '#sickness_end_date_react').send_keys two_week_date_string
+    driver.find_element(css: "#edit_sickness_#{sickness_id} > p > input").click
+  end
+
+  def manager_raising_query(sickness_id)
+    driver.find_element(id: 'reject-sickness').click
+    driver.find_element(id: 'sickness_review_notes').send_keys 'Regression Test'
+    driver.find_element(css: "#edit_sickness_#{sickness_id} > p > input").click
   end
 end

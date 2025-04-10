@@ -16,7 +16,7 @@ require './functions_library/test_reference_extension'
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Metrics/MethodLength
 
-class TestCancelledLeave
+class TestCancelledLeave # rubocop:disable Metrics/ClassLength
   attr_accessor :driver
 
   def initialize

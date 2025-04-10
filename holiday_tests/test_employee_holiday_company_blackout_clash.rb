@@ -17,7 +17,7 @@ require './functions_library/people_page_extension'
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
-class TestLeaveRequest
+class TestLeaveRequest # rubocop:disable Metrics/ClassLength
   attr_accessor :driver
 
   def initialize
@@ -57,7 +57,7 @@ class TestLeaveRequest
     sleep 1
     AppNavigationExtensionManager.new(driver).navigate_to_company_blackouts
     puts 'Pass - Navigate to company blackouts'
-    sleep 2
+    sleep 3
     # binding.pry
     CompanyBlackoutsExtension.new(driver).company_blackout_add_new
     puts 'Pass - Added company blackout'
@@ -69,7 +69,9 @@ class TestLeaveRequest
     AppNavigationExtensionManager.new(driver).navigate_to_people_list
     sleep 2
     PeoplePageExtension.new(driver).select_employee_from_list('Holiday employee')
+    sleep 1
     AppNavigationExtensionManager.new(driver).open_employee_leave
+    sleep 1
     LeaveRequestExtension.new(driver).click_add_new_leave_request
     puts 'Pass - opens add absence record'
     LeaveRequestExtension.new(driver).employee_leave_request_in_two_weeks
@@ -81,6 +83,7 @@ class TestLeaveRequest
   def test_03_check_allowance_totals
     puts 'START test 03 - Check totals'
     HolidayExtension.new(driver).holiday_employee_absence_index
+    sleep 2
     HolidayExtension.new(driver).compare_booked_amount('0.0 days')
     HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     puts 'TEST 03 complete - No absences to change allowance'
@@ -89,8 +92,11 @@ class TestLeaveRequest
   def test_04_create_holiday_overrides_clash
     puts 'START test 04 - Create absence that clashes with company blackout'
     AppNavigationExtensionManager.new(driver).navigate_to_people_list
+    sleep 1
     PeoplePageExtension.new(driver).select_employee_from_list('Holiday employee')
+    sleep 1
     AppNavigationExtensionManager.new(driver).open_employee_leave
+    sleep 1
     LeaveRequestExtension.new(driver).click_add_new_leave_request
     puts 'Pass - opens add absence record'
     LeaveRequestExtension.new(driver).employee_leave_request_in_two_weeks
@@ -104,6 +110,7 @@ class TestLeaveRequest
   def test_05_check_allowance_totals
     puts 'START test 05 - Check totals'
     HolidayExtension.new(driver).holiday_employee_absence_index
+    sleep 2
     HolidayExtension.new(driver).compare_booked_amount('1.0 day')
     HolidayExtension.new(driver).compare_holiday_allowance('19.0 days')
     puts 'TEST 05 complete - Absence does not remove allowance from employee'
@@ -120,8 +127,8 @@ class TestLeaveRequest
     LoginAppExtension.new(driver).select_hr
     puts 'Pass - Selects HR'
     sleep 1
-    AppNavigationExtensionManager.new(driver).navigate_to_data
-    AppNavigationExtensionManager.new(driver).open_purge_data
+    AppNavigationExtensionManager.new(driver).open_purge_from_url
+    sleep 1
     HolidayExtension.new(driver).purge_holiday_data('Holiday employee')
     puts 'Pass - absences purged'
     sleep 1
@@ -129,6 +136,7 @@ class TestLeaveRequest
     puts 'Pass - Navigate to company blackouts'
     sleep 3
     CompanyBlackoutsExtension.new(driver).company_blackout_delete
+    sleep 2
     puts 'Pass - deleted company blackout'
     puts 'TEST 06 complete - Deleted blackout and company blackout'
   end

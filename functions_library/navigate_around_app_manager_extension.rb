@@ -136,6 +136,10 @@ class AppNavigationExtensionManager < Base
     driver.find_element(id: 'training').click
   end
 
+  def open_employee_sickness
+    driver.find_element(id: 'sickness').click
+  end
+
   def navigate_to_data
     wait = Selenium::WebDriver::Wait.new(timeout: 10)
     sleep 3
