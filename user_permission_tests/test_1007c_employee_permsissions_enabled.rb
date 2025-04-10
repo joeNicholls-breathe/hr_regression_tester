@@ -2,7 +2,7 @@
 
 require 'selenium-webdriver'
 require 'logger'
-require './functions_library/ui_page_element_check'
+require './functions_library/ui_page_element_check_extension'
 require './functions_library/test_reference_extension'
 require './functions_library/navigate_browser_extension'
 require './functions_library/login_extension'
@@ -16,7 +16,7 @@ class EmployeeInputs < Base
 
   def initialize
     options = Selenium::WebDriver::Chrome::Options.new
-    # options.add_argument('--headless')
+    options.add_argument('--headless')
     options.add_argument('--disable-gpu')
     options.add_argument('--window-size=1920,1080')
     @driver = Selenium::WebDriver.for(:chrome, options:)
@@ -38,10 +38,11 @@ class EmployeeInputs < Base
     EmployeeConfigExtension.new(driver).employee_congifuration_what_can_do_report_sickness
     EmployeeConfigExtension.new(driver).employee_congifuration_what_can_do_request_one_to_ones
     EmployeeConfigExtension.new(driver).employee_congifuration_update
+    sleep 1
     driver.close
   end
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
 EmployeeInputs.new.test_1007c_employee_permissions_enabled
-puts 'Test 1007c COMPLETED - PASS'
+puts 'Test 1007c Adding employee permissions as account admin COMPLETED - PASS'

@@ -171,5 +171,9 @@ class AppNavigationExtensionManager < Base
   def open_purge_from_url
     driver.navigate.to('https://hr.breathehrstaging.com/account/purge_data')
   end
+  
+  def employee_profile_sickness_tab
+    driver.find_element(id: 'sickness').click
+  end
 end
 # rubocop:enable Metrics/ClassLength
