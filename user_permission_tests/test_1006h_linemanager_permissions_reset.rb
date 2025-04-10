@@ -88,5 +88,6 @@ class AccountSetupLMUserReturnOriginStatus < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
+puts 'Test 1006g Line Manager permisssions RESET'
 AccountSetupLMUserReturnOriginStatus.new.test_1006h_linemanager_permisssions_reset
 puts 'Test 1006h COMPLETED - PASS'

@@ -72,5 +72,6 @@ class EmployeePermissions < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
+puts 'Test 1007d Employee permisssion testing with ALL perms'
 EmployeePermissions.new.test_1007d_employee_permissions_testing
 puts 'Test 1007d employee permissions test with all perms enabled - COMPLETED - PASS'

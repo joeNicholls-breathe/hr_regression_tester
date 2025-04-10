@@ -44,5 +44,6 @@ class EmployeeInputs < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
+puts 'Test 1007c Employee permisssions all ON'
 EmployeeInputs.new.test_1007c_employee_permissions_enabled
 puts 'Test 1007c Adding employee permissions as account admin COMPLETED - PASS'

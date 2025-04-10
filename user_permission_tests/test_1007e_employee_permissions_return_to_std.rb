@@ -46,5 +46,6 @@ class EmployeeInputs < Base
 end
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/MethodLength
+puts 'Test 1007e Employee permissions returned to standard state'
 EmployeeInputs.new.test_1007e_employee_permissions_return_to_std
 puts 'Test 1007e employee permissions returned to start state - COMPLETED - PASS'

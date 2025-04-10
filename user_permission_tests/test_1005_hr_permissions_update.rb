@@ -113,6 +113,6 @@ class AccountSetupHRUser < Base
 end
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/MethodLength
-
+puts ' Test 1005 HR user permission SETUP testing'
 AccountSetupHRUser.new.test_hr_user_setup
 puts 'Test 1005 COMPLETE - PASS'
