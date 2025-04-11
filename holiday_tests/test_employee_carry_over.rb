@@ -19,8 +19,11 @@ class TestLeaveRequest
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
-    # driver.manage.timeout.implicit_wait = 3
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for(:chrome, options:)
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -68,7 +71,9 @@ class TestLeaveRequest
     puts 'Start test - Check totals'
     sleep 2
     HolidayExtension.new(driver).compare_booked_amount('1.0 day')
-    if Time.now.utc.strftime('%d/%m/%Y') > '31/03/2025'
+    target_date = Date.new(2025, 3, 31) # Year, month, day
+    today = Date.today # rubocop:disable Rails/Date
+    if today > target_date
       puts 'Holiday year after carry over period'
       HolidayExtension.new(driver).compare_holiday_allowance('20.0 days')
     else
@@ -89,10 +94,10 @@ class TestLeaveRequest
     LoginAppExtension.new(driver).select_hr
     puts 'Pass - Selects HR'
     sleep 1
-    AppNavigationExtensionManager.new(driver).navigate_to_data
-    AppNavigationExtensionManager.new(driver).open_purge_data
-    HolidayExtension.new(driver).purge_holiday_data('Carry-over Employee')
+    AppNavigationExtensionManager.new(driver).open_purge_from_url
     sleep 1
+    HolidayExtension.new(driver).purge_holiday_data('Carry-over Employee')
+    sleep 2
     puts 'Pass - absences purged'
     puts 'test complete - absences deleted for Carry-over employee'
   end

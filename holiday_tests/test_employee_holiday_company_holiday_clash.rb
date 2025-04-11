@@ -20,8 +20,11 @@ class TestLeaveRequest
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
-    # driver.manage.timeout.implicit_wait = 3
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for(:chrome, options:)
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -75,6 +78,7 @@ class TestLeaveRequest
 
   def test_03_check_allowance_totals
     puts 'Start test - Check totals'
+    sleep 1
     HolidayExtension.new(driver).compare_booked_amount('0.5 days')
     HolidayExtension.new(driver).compare_holiday_allowance('19.5 days')
     sleep 1
@@ -92,8 +96,8 @@ class TestLeaveRequest
     LoginAppExtension.new(driver).select_hr
     puts 'Pass - Selects HR'
     sleep 1
-    AppNavigationExtensionManager.new(driver).navigate_to_data
-    AppNavigationExtensionManager.new(driver).open_purge_data
+    AppNavigationExtensionManager.new(driver).open_purge_from_url
+    sleep 1
     HolidayExtension.new(driver).purge_holiday_data('Holiday employee')
     puts 'Pass - absences purged'
     sleep 1
@@ -102,7 +106,7 @@ class TestLeaveRequest
     sleep 1
     CompanyHolidaysExtension.new(driver).company_holiday_delete
     puts 'Pass - deleted company holiday'
-    sleep 1
+    sleep 2
     puts 'Test complete - Deleted holiday and company holiday'
   end
 end

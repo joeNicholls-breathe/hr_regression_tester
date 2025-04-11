@@ -9,6 +9,7 @@ module Settings
         breathe_url_login: 'https://login.breathehrstaging.com',
         breathe_url_signup: 'https://hr.breathehrstaging.com/signup',
         login_password: 'Password1',
+        login_password2: 'Regression12',
         admin_email: 'admin@hr-regression.com',
         line_manager_email: 'line@hr-regression.com',
         employee_email: 'employee@hr-regression.com',

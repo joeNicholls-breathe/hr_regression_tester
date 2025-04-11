@@ -20,7 +20,11 @@ class TestLeaveRequest
   attr_accessor :driver
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for(:chrome, options:)
     Selenium::WebDriver.logger.level = :info
   end
 
@@ -44,17 +48,18 @@ class TestLeaveRequest
     puts 'Start test - Employee creates leave request'
     NavigateBrowserExtension.new(driver).breathe_login
     puts 'Pass - Navigate to Login Screen'
-    sleep 1
+    sleep 2
     LoginExtension.new(driver).login_admin
     puts 'Pass - Login as admin'
     sleep 1
     LoginAppExtension.new(driver).select_hr
     puts 'Pass - Selects HR'
     sleep 1
-    # EmployeeDashboardExtension.new(driver).click_widget('Request leave')
-    AppNavigationExtensionManager.new(driver).navigate_to_people_list
-    PeoplePageExtension.new(driver).select_employee_from_list('Holiday employee')
+    AppNavigationExtensionManager.new(driver).search_employee('Holiday employee')
+    puts 'Pass - Employee Opened'
+    sleep 1
     AppNavigationExtensionManager.new(driver).open_employee_leave
+    sleep 1
     LeaveRequestExtension.new(driver).click_add_new_leave_request
     puts 'Pass - opens add absence record'
     sleep 1
@@ -67,7 +72,7 @@ class TestLeaveRequest
     puts 'Start test 2 - Employee creates leave request'
     NavigateBrowserExtension.new(driver).breathe_login
     puts 'Pass - Navigate to Login Screen'
-    sleep 1
+    sleep 2
     LoginExtension.new(driver).login_holiday_employee
     puts 'Pass - Login as employee'
     sleep 1
@@ -111,16 +116,16 @@ class TestLeaveRequest
     NavigateBrowserExtension.new(driver).breathe_login
     puts 'Start Test - Holiday approver approves request'
     puts 'Pass - Navigate to Login Screen'
-    sleep 1
+    sleep 2
     LoginExtension.new(driver).login_admin
     puts 'Pass - Login as admin'
     sleep 1
     LoginAppExtension.new(driver).select_hr
     puts 'Pass - Selects HR'
     sleep 1
-    AppNavigationExtensionManager.new(driver).navigate_to_data
-    AppNavigationExtensionManager.new(driver).open_purge_data
+    AppNavigationExtensionManager.new(driver).open_purge_from_url
     HolidayExtension.new(driver).purge_holiday_data('Holiday employee')
+    sleep 1
     puts 'Pass - absences purged'
     puts 'test complete - absences deleted for auto approval employee one'
   end
