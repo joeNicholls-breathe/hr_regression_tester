@@ -155,5 +155,9 @@ class NavigateAroundAppEmployee < Base
   def click_dashboard_lhn
     driver.find_element(id: 'top-menu-menu-item-0-0').click
   end
+
+  def click_on_more_dropdown
+    driver.find_element(id: 'more-link').click
+  end
 end
 # rubocop:enable Metrics/ClassLength
