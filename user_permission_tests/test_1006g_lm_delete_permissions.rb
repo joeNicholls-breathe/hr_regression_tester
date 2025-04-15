@@ -111,6 +111,6 @@ class LMUserDeleteAccess < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
-
+puts 'Test 1006g Line Manager testing DELETE permisssions'
 LMUserDeleteAccess.new.test_1006g_lm_delete_permisssions
 puts 'Test 1006g COMPLETED - PASS'

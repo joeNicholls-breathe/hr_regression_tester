@@ -113,6 +113,7 @@ class LMUserManageAccess < Base
       AppNavigationExtensionLM.new(driver).return_to_dashboard_error_page_not_found
       puts '15P. Could not navigate to other employee profile pages by url - Pass'
     end
+    sleep 1
     LogoutExtension.new(driver).user_logout
     puts '16. user menu and logout - Pass'
     driver.close
@@ -120,5 +121,6 @@ class LMUserManageAccess < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
+puts 'Test 1006e Line Manager testing MANAGE permisssions'
 LMUserManageAccess.new.test_1006e_lm_manage_permisssions
 puts 'Test 1006e COMPLETED - PASS'

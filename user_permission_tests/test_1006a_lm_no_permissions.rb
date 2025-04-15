@@ -33,6 +33,7 @@ class LMUserNoAccess < Base
     LoginExtension.new(driver).login_setup_acc_line_manager_user
     LoginAppExtension.new(driver).select_hr
     puts '2. login as Line manager - Pass'
+    sleep 1
     AppNavigationExtensionLM.new(driver).my_people
     AppNavigationExtensionLM.new(driver).my_employee
     AppNavigationExtensionLM.new(driver).my_employee_leave
@@ -95,5 +96,6 @@ class LMUserNoAccess < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
+puts 'Test 1006a Line Manager testing NO permisssions'
 LMUserNoAccess.new.test_1006a_lm_no_permisssions
 puts 'Test 1006a COMPLETED - PASS'

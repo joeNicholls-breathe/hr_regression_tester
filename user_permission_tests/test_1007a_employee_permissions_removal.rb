@@ -43,5 +43,6 @@ class EmployeeInputs < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
+puts 'Test 1007a Employee permisssions REMOVE'
 EmployeeInputs.new.test_1007a_employee_permissions_removal
 puts 'Test 1007a Removing employee permissions from account admin COMPLETED - PASS'

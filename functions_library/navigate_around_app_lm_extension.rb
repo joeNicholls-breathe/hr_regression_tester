@@ -14,7 +14,7 @@ class AppNavigationExtensionLM < Base
 
   def my_people
     driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-people]').click
-    sleep 1
+    sleep 2
     driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-my_people]').click
   end
 

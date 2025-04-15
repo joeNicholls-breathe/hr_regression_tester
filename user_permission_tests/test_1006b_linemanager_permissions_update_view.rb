@@ -51,5 +51,6 @@ class AccountSetupLMUserView < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
+puts 'Test 1006b Line Manager permisssion update to VIEW'
 AccountSetupLMUserView.new.test_1006b_linemanager_view_permisssions_update_view
 puts 'Test 1006b COMPLETED - PASS'

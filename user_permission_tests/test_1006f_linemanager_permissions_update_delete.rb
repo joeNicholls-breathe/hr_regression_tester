@@ -53,5 +53,6 @@ class AccountSetupLMUserDelete < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
+puts 'Test 1006f Line Manager update permisssions DELETE'
 AccountSetupLMUserDelete.new.test_1006f_linemanger_permisssions_update_delete
 puts 'Test 1006f COMPLETED - PASS'

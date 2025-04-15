@@ -49,7 +49,7 @@ RSpec.describe 'Rota Regression test script' do
     LoginExtension.new(@driver).login_rota_admin
     sleep @sleep_time_long
     LoginAppExtension.new(@driver).select_hr
-    sleep @sleep_time_short
+    sleep @sleep_time_long
     RotaExtension.new(@driver).navigate_to_rota_from_hr_admin
     sleep @sleep_time_long
     # expect(@driver.title).to eql('Rota, Time & Attendance')
@@ -70,7 +70,7 @@ RSpec.describe 'Rota Regression test script' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_rota_employee
     LoginAppExtension.new(@driver).select_hr
-    sleep @sleep_time_short
+    sleep @sleep_time_long
     RotaEmpExtension.new(@driver).navigate_to_rota_from_hr
     sleep @sleep_time_long
     expect(@driver.title).to eql('Employee dashboard | My Rosters')

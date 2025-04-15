@@ -33,6 +33,7 @@ class LMUserViewAccess < Base
     LoginExtension.new(driver).login_setup_acc_line_manager_user
     LoginAppExtension.new(driver).select_hr
     puts '2. login as Line manager - Pass'
+    sleep 1
     AppNavigationExtensionLM.new(driver).my_people
     AppNavigationExtensionLM.new(driver).my_employee
     AppNavigationExtensionLM.new(driver).my_employee_leave
@@ -119,6 +120,7 @@ class LMUserViewAccess < Base
       AppNavigationExtensionLM.new(driver).return_to_dashboard_error_page_not_found
       puts '15P. Could not navigate to other employee profile pages by url- Pass'
     end
+    sleep 1
     LogoutExtension.new(driver).user_logout
     puts '16. user menu and logout - Pass'
     driver.close
@@ -128,5 +130,6 @@ end
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
+puts 'Test 1006c Line Manager testing VIEW permisssions'
 LMUserViewAccess.new.test_1006c_lm_view_permisssions
 puts 'Test 1006c COMPLETED - PASS'

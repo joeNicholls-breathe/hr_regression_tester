@@ -124,5 +124,6 @@ end
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
+puts 'Test 1007b Employee permisssions testing with LIMITED perms'
 EmployeePermissions.new.test_1007b_employee_permissions_testing
 puts 'Test 1007b employee without permissions test - COMPLETED PASS'

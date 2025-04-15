@@ -52,5 +52,6 @@ class AccountSetupLMUserManage < Base
 end
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/AbcSize
+puts 'Test 1006d Line Manager permisssions update MANAGE'
 AccountSetupLMUserManage.new.test_1006d_linemanger_permisssions_update_manage
 puts 'Test 1006d COMPLETED - PASS'

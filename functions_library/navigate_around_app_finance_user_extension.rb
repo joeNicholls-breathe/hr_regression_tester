@@ -6,11 +6,15 @@ require File.expand_path('base.rb', __dir__)
 # rubocop:disable Metrics/ClassLength
 class AppNavigationExtensionFinance < Base
   def finance_people_list
-    driver.navigate.to('https://hr.breathehrstaging.com/employees')
+    # driver.navigate.to('https://hr.breathehrstaging.com/employees')
+    driver.find_element(css: 'a[data-element-id=side-nav-l1-item-prefix-people]').click
+    sleep 2
+    driver.find_element(css: 'a[data-element-id=side-nav-l2-item-prefix-list_people]').click
   end
 
   def filter_people_list_employees_only
     driver.find_element(id: 'only-Employee-employees').click
+    sleep 1
     driver.find_element(css: '.btn-primary').click
   end
 
@@ -61,7 +65,7 @@ class AppNavigationExtensionFinance < Base
     driver.find_element(css: '#bulk-task-go').click
     sleep 0.5
     driver.find_element(css: '#benefit-update').click
-    sleep 0.50
+    sleep 0.5
     drop = driver.find_element(id: 'person_type')
     choose = Selenium::WebDriver::Support::Select.new(drop)
     choose.select_by(:value, 'Contractor')
@@ -69,30 +73,32 @@ class AppNavigationExtensionFinance < Base
   end
 
   def finance_change_plan
-    driver.navigate.to('https://hr.breathehrstaging.com/account/plan#monthly')
+    driver.navigate.to('https://hr.breathehrstaging.com/account/plan#annual')
     driver.find_element(css: 'li.nav-item:nth-child(2) > a:nth-child(1)').click
-    driver.find_element(css: '#annual > div > div:nth-child(3) > div > div.plan-select > input').click
+    driver.find_element(css: '#annual > div > div:nth-child(4) > div > div.plan-select > input').click
+    sleep 0.5
     driver.find_element(css: '#submit-modal-button').click
-    sleep 0.50
+    sleep 2
     driver.find_element(css: '#plan_change_modal > div > div >
       div.modal-footer > button.modal-confirm.btn.btn-success').click
+    sleep 1
   end
 
   def finance_return_to_previous_plan
     driver.navigate.to('https://hr.breathehrstaging.com/account/plan#monthly')
-    driver.find_element(css: '#monthly > div > div:nth-child(5) > div > div.plan-select > input').click
+    driver.find_element(css: '#monthly > div > div:nth-child(3) > div > div.plan-select > input').click
+    sleep 0.5
     driver.find_element(css: '#submit-modal-button').click
-    sleep 0.50
+    sleep 2
     driver.find_element(css: '#plan_change_modal > div > div >
       div.modal-footer > button.modal-confirm.btn.btn-success').click
   end
 
   def update_billing_details
     driver.navigate.to('https://hr.breathehrstaging.com/account/billing')
-    sleep 0.50
-    driver.find_element(css: 'body > section.content.container > div.row > div:nth-child(1)
-      > div > table > tbody > tr:nth-child(1) > td:nth-child(3) > a').click
-    sleep 0.50
+    sleep 0.5
+    driver.find_element(css: 'svg[data-icon=pencil-alt]').click
+    sleep 0.5
     driver.find_element(id: 'account_payment_contact_name').send_keys 'Finance User'
     driver.find_element(id: 'account_payment_contact_email').send_keys 'finance@auto-reg.com'
     driver.find_element(id: 'account_payment_contact_phone').send_keys '0208 654 2008'
@@ -104,7 +110,7 @@ class AppNavigationExtensionFinance < Base
     driver.find_element(xpath: '//*[@id="root"]/form/div/div[2]/span[2]/span[3]/span/span/input').send_keys '90210'
     driver.switch_to.default_content
     driver.find_element(xpath: '//*[@id="card-button"]').click
-    sleep 0.50
+    sleep 0.5
   end
 
   def check_billing_history
