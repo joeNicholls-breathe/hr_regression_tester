@@ -34,7 +34,6 @@ class LMUserNoAccess < Base
     LoginAppExtension.new(driver).select_hr
     puts '2. login as Line manager - Pass'
     sleep 1
-    binding.pry
     AppNavigationExtensionLM.new(driver).my_people
     AppNavigationExtensionLM.new(driver).my_employee
     AppNavigationExtensionLM.new(driver).my_employee_leave

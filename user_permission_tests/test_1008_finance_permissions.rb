@@ -29,7 +29,6 @@ class FinancePermissions < Base
     LoginExtension.new(driver).login_setup_acc_finance_user
     LoginAppExtension.new(driver).select_hr
     puts '1. finance user log in'
-    binding.pry
     AppNavigationExtensionFinance.new(driver).finance_people_list
     puts '2. access people list'
     AppNavigationExtensionFinance.new(driver).filter_people_list_employees_only

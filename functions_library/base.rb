@@ -24,13 +24,4 @@ class Base
   def wait
     Selenium::WebDriver::Wait.new(timeout: 10)
   end
-
-  def measure_execution_time(&block)
-    start_time = Time.now
-    yield
-    end_time = Time.now
-    execution_time = end_time - start_time
-    puts "Execution time: #{execution_time} seconds"
-    execution_time
-  end
 end
