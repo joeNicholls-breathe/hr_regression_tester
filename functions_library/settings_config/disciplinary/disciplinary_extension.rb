@@ -125,18 +125,6 @@ class DisciplinaryExtension < Base # rubocop:disable Metrics/ClassLength
     true
   end
 
-  def attempt_to_open_document_upload_url(employee_id, documentable_id)
-    driver.navigate.to("https://hr.breathehrstaging.com/employees/#{employee_id}/documents/new?anchor_id=disciplinary-documents&documentable_id=#{documentable_id}&documentable_type=Grievance&from_section=disciplinary")
-  end
-
-  def attempt_to_open_notes_upload_url(employee_id, documentable_id)
-    driver.navigate.to("https://hr.breathehrstaging.com/employees/#{employee_id}/disciplinaries/#{documentable_id}/grievance_notes/new")
-  end
-
-  def attempt_to_edit_disciplinary_url(employee_id, disc_id)
-    driver.navigate.to("https://hr.breathehrstaging.com/employees/#{employee_id}/disciplinaries/#{disc_id}/edit")
-  end
-
   def open_notes_upload_form
     notes = driver.find_element(id: 'notes-tab')
     notes.find_element(class: 'fa-stack').click

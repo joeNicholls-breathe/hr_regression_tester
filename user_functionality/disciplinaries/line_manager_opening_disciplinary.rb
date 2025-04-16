@@ -79,7 +79,7 @@ RSpec.describe 'LM Creating Disciplinary For Employee' do # rubocop:disable Metr
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 1
-    expect(DisciplinaryExtension.new(@driver).value_from_table('0', '2').text).to eql('Regression Testing')
+    expect(NavigateAroundAppEmployee.new(@driver).value_from_table('0', '2').text).to eql('Regression Testing')
   end
 
   it '3A - Edit Disciplinary' do
@@ -101,14 +101,14 @@ RSpec.describe 'LM Creating Disciplinary For Employee' do # rubocop:disable Metr
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 1
-    expect(DisciplinaryExtension.new(@driver).value_from_table('0', '2').text).to eql('Edited Regression Testing')
+    expect(NavigateAroundAppEmployee.new(@driver).value_from_table('0', '2').text).to eql('Edited Regression Testing')
   end
 
   it '3C - Confirm Resolution in Disciplinary Table' do
     TestFunctions.new(@driver).login_and_select_hr
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
-    resolved_on = DisciplinaryExtension.new(@driver).value_from_table('0', '6').text
+    resolved_on = NavigateAroundAppEmployee.new(@driver).value_from_table('0', '6').text
     expect(resolved_on).to include(DisciplinaryExtension.new(@driver).resolved_today)
   end
 

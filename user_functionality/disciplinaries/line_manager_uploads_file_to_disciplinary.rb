@@ -105,7 +105,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/Blo
     sleep 0.5
     DisciplinaryExtension.new(@driver).switch_to_documents_tab
     sleep 2
-    file_title = DisciplinaryExtension.new(@driver).value_from_table('0', '0')
+    file_title = NavigateAroundAppEmployee.new(@driver).value_from_table('0', '0')
     expect(file_title.text).to eql('Regression File')
   end
 
@@ -114,7 +114,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/Blo
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    num_of_docs = DisciplinaryExtension.new(@driver).value_from_table('0', '5')
+    num_of_docs = NavigateAroundAppEmployee.new(@driver).value_from_table('0', '5')
     expect(num_of_docs.text).to eql('1')
   end
 
@@ -129,8 +129,19 @@ RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/Blo
   end
 
   it '4B - Employee Attempts to Upload Document From URL' do
+    TestFunctions.new(@driver).login_and_select_hr
+    TestFunctions.new(@driver).open_employee_from_list
+    TestFunctions.new(@driver).open_disciplinary_from_profile
+    sleep 0.5
+    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    sleep 1
+    DisciplinaryExtension.new(@driver).switch_to_documents_tab
+    sleep 0.5
+    DisciplinaryExtension.new(@driver).open_document_upload_form
+    sleep 0.5
+    url = @driver.current_url
     TestFunctions.new(@driver).login_as_emp
-    DisciplinaryExtension.new(@driver).attempt_to_open_document_upload_url('25471', '211')
+    @driver.navigate.to(url)
     sleep 0.5
     expect(@driver.title).to eql('Permission Denied (403)')
   end
@@ -146,7 +157,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/Blo
     DisciplinaryExtension.new(@driver).open_edit_document_form
     DisciplinaryExtension.new(@driver).complete_edit_document_form
     sleep 1
-    doc_name = DisciplinaryExtension.new(@driver).value_from_table('0', '0')
+    doc_name = NavigateAroundAppEmployee.new(@driver).value_from_table('0', '0')
     expect(doc_name.text).to eql('Updated Document')
   end
 
@@ -172,7 +183,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/Blo
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    num_of_docs = DisciplinaryExtension.new(@driver).value_from_table('0', '5')
+    num_of_docs = NavigateAroundAppEmployee.new(@driver).value_from_table('0', '5')
     expect(num_of_docs.text).to eql('0')
   end
 
