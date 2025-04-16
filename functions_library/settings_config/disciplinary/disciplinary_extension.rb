@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require File.expand_path('../../base.rb', __dir__)
 
-class DisciplinaryExtension < Base
+class DisciplinaryExtension < Base # rubocop:disable Metrics/ClassLength
   def open_disciplinary_form
     driver.find_element(class: 'fa-stack').click
   end
@@ -22,28 +24,37 @@ class DisciplinaryExtension < Base
     docs.find_element(class: 'fa-stack').click
   end
 
-  def complete_document_upload_form
+  def complete_document_upload_form_pdf
     upload_file = File.expand_path(
-      '../../employee_imports/positive_imports/disciplinary_upload.txt', __dir__
-      )
+      '../../employee_imports/positive_imports/Disciplinary.pdf', __dir__
+    )
     file_input = driver.find_element(name: 'employee_document[file]')
     file_input.send_keys(upload_file)
     driver.find_element(name: 'employee_document[title]').send_keys 'Regression File'
-    driver.find_element(name: 'commit').click  
+    driver.find_element(name: 'commit').click
+  end
+
+  def complete_document_upload_form
+    upload_file = File.expand_path(
+      '../../employee_imports/positive_imports/disciplinary_upload.txt', __dir__
+    )
+    file_input = driver.find_element(name: 'employee_document[file]')
+    file_input.send_keys(upload_file)
+    driver.find_element(name: 'employee_document[title]').send_keys 'Regression File'
+    driver.find_element(name: 'commit').click
   end
 
   def title_of_documents_nav_link
     nav_links = driver.find_elements(class: 'nav-link')
-    title = nav_links.find { |x| x.attribute('href').include? '#disciplinary-documents' }
-    title
+    nav_links.find { |x| x.attribute('href').include? '#disciplinary-documents' }
   end
 
   def value_from_table(row, col)
     rows = driver.find_elements(class: 'odd')
     driver.find_elements(class: 'even') << rows
-    chosen_row = rows.find{|x| x.attribute('_DT_RowIndex') == row}
+    chosen_row = rows.find { |x| x.attribute('_DT_RowIndex') == row }
     columns = chosen_row.find_elements(tag_name: 'TD')
-    columns.find { |x| x.attribute('cellIndex') == col}
+    columns.find { |x| x.attribute('cellIndex') == col }
   end
 
   def click_disciplinary_breadcrumb
@@ -53,27 +64,26 @@ class DisciplinaryExtension < Base
   def go_to_disciplinary_from_table(row)
     rows = driver.find_elements(class: 'odd')
     driver.find_elements(class: 'even') << rows
-    chosen_row = rows.find{|x| x.attribute('_DT_RowIndex') == row}
+    chosen_row = rows.find { |x| x.attribute('_DT_RowIndex') == row }
     actions = chosen_row.find_element(class: 'actions')
     row_actions = actions.find_elements(tag_name: 'A')
-    row_actions.find { |x| x.attribute('title') == 'view report'}.click
+    row_actions.find { |x| x.attribute('title') == 'view report' }.click
   end
 
   def edit_disciplinary_from_table(row)
     rows = driver.find_elements(class: 'odd')
     driver.find_elements(class: 'even') << rows
-    chosen_row = rows.find{|x| x.attribute('_DT_RowIndex') == row}
+    chosen_row = rows.find { |x| x.attribute('_DT_RowIndex') == row }
     actions = chosen_row.find_element(class: 'actions')
     row_actions = actions.find_elements(tag_name: 'A')
-    row_actions.find { |x| x.attribute('title') == 'edit disciplinary'}.click
+    row_actions.find { |x| x.attribute('title') == 'edit disciplinary' }.click
   end
 
-  
   def open_edit_document_form
     row = driver.find_element(class: 'odd')
     actions = row.find_element(class: 'actions')
     icons = actions.find_elements(tag_name: 'A')
-    icons.find{|x| x.attribute('href').include? 'edit'}.click
+    icons.find { |x| x.attribute('href').include? 'edit' }.click
   end
 
   def complete_edit_document_form
@@ -83,40 +93,48 @@ class DisciplinaryExtension < Base
   end
 
   def delete_document
-    actions = driver.find_element(class: 'actions')
+    driver.find_element(class: 'actions')
     driver.find_element(class: 'delete-icon').click
     sleep 2
     modals = driver.find_elements(class: 'modal-content')
-    modal = modals.find{ |x| x.attribute('innerText').include? 'delete this document'}
-    modal.find_element(class: 'modal-confirm').click
-  end
- 
-  def delete_disciplinary
-    actions = driver.find_element(class: 'actions')
-    driver.find_element(class: 'delete-icon').click
-    sleep 2
-    modals = driver.find_elements(class: 'modal-content')
-    modal = modals.find{ |x| x.attribute('innerText').include? 'delete this record'}
+    modal = modals.find { |x| x.attribute('innerText').include? 'delete this document' }
     modal.find_element(class: 'modal-confirm').click
   end
 
+  def delete_disciplinary
+    driver.find_element(class: 'actions')
+    driver.find_element(class: 'delete-icon').click
+    sleep 2
+    modals = driver.find_elements(class: 'modal-content')
+    modal = modals.find { |x| x.attribute('innerText').include? 'delete this record' }
+    modal.find_element(class: 'modal-confirm').click
+  end
+
+  def view_pdf_document
+    row = driver.find_element(class: 'odd')
+    actions = row.find_element(class: 'actions')
+    icons = actions.find_elements(tag_name: 'A')
+    icons.find { |x| x.attribute('href').include? 'preview' }.click
+  end
 
   def verify_emp_cant_view_docs
     nav_links = driver.find_elements(class: 'nav-link')
     title = nav_links.find { |x| x.attribute('href').include? '#disciplinary-documents' }
-    if title != nil
-      return false
-    else
-      return true
-    end
+    return false unless title.nil?
+
+    true
   end
 
   def attempt_to_open_document_upload_url(employee_id, documentable_id)
     driver.navigate.to("https://hr.breathehrstaging.com/employees/#{employee_id}/documents/new?anchor_id=disciplinary-documents&documentable_id=#{documentable_id}&documentable_type=Grievance&from_section=disciplinary")
   end
-  
+
   def attempt_to_open_notes_upload_url(employee_id, documentable_id)
     driver.navigate.to("https://hr.breathehrstaging.com/employees/#{employee_id}/disciplinaries/#{documentable_id}/grievance_notes/new")
+  end
+
+  def attempt_to_edit_disciplinary_url(employee_id, disc_id)
+    driver.navigate.to("https://hr.breathehrstaging.com/employees/#{employee_id}/disciplinaries/#{disc_id}/edit")
   end
 
   def open_notes_upload_form
@@ -132,18 +150,15 @@ class DisciplinaryExtension < Base
 
   def title_of_notes_nav_link
     nav_links = driver.find_elements(class: 'nav-link')
-    title = nav_links.find { |x| x.attribute('href').include? '#notes-tab' }
-    title
+    nav_links.find { |x| x.attribute('href').include? '#notes-tab' }
   end
 
   def verify_emp_cant_view_notes
     nav_links = driver.find_elements(class: 'nav-link')
     title = nav_links.find { |x| x.attribute('href').include? '#notes-tab' }
-    if title != nil
-      return false
-    else
-      return true
-    end
+    return false unless title.nil?
+
+    true
   end
 
   def check_for_empty_disciplinary_table
@@ -151,21 +166,59 @@ class DisciplinaryExtension < Base
   end
 
   def delete_note
-    actions = driver.find_element(class: 'actions')
+    driver.find_element(class: 'actions')
     driver.find_element(class: 'delete-icon').click
     sleep 2
     modals = driver.find_elements(class: 'modal-content')
-    modal = modals.find{ |x| x.attribute('innerText').include? 'delete this note'}
+    modal = modals.find { |x| x.attribute('innerText').include? 'delete this note' }
     modal.find_element(class: 'modal-confirm').click
   end
-  
-  def complete_disciplinary_edit_form 
+
+  def complete_disciplinary_edit_form
+    driver.find_element(name: 'grievance[desc]').clear
+    driver.find_element(name: 'grievance[desc]').send_keys 'Edited Regression Testing'
+    set_appeal_status_to_completed
+    set_outcome_to_verbal_warning
+    mark_as_resolved
+    driver.find_element(name: 'commit').click
+  end
+
+  def mark_as_resolved
+    checkboxes = driver.find_elements(class: 'checkbox')
+    resolved = checkboxes.find { |x| x.text == 'mark as resolved' }
+    resolved.find_element(id: 'grievance_resolved').click
+  end
+
+  def set_appeal_status_to_completed
     appeal_status = driver.find_element(name: 'grievance[appeal_status]')
     select = Selenium::WebDriver::Support::Select.new(appeal_status)
     select.select_by(:text, 'Appeal completed')
+  end
+
+  def set_outcome_to_verbal_warning
     outcome = driver.find_element(name: 'grievance[company_disciplinary_outcome_id]')
     select = Selenium::WebDriver::Support::Select.new(outcome)
     select.select_by(:text, 'Verbal Warning')
-    driver.find_element(name: 'commit').click
+  end
+
+  def find_value_in_details_and_status(chosen_row)
+    table = driver.find_element(class: 'table')
+    rows = table.find_elements(tag_name: 'TR')
+    row = rows.find { |x| x.attribute('rowIndex') == chosen_row }
+    row.text
+  end
+
+  def resolved_today
+    today = todays_date_string_slash
+    "resolved on #{today}"
+  end
+
+  def check_last_note
+    if value_from_table('0', '4').text == todays_date_string_slash
+      true
+    else
+      puts value_from_table('0', '4').text
+      false
+    end
   end
 end

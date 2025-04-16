@@ -6,6 +6,7 @@ require './functions_library/navigate_browser_extension'
 require './functions_library/login_extension'
 require './functions_library/login_app_extension'
 require './functions_library/people_page_extension'
+require './functions_library/test_reference_extension'
 require './functions_library/navigate_around_app_manager_extension'
 require './functions_library/navigate_around_app_lm_extension'
 require './functions_library/navigate_around_app_employee_extension'
@@ -94,6 +95,13 @@ RSpec.describe 'Uploads Notes to Disciplinary' do # rubocop:disable Metrics/Bloc
     DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
     sleep 0.5
     expect(DisciplinaryExtension.new(@driver).value_from_table('0', '2').text).to eql('Regression Note')
+  end
+
+  it '3E - Verify Note Added From Disciplinary Table' do
+    TestFunctions.new(@driver).login_and_select_hr
+    TestFunctions.new(@driver).open_employee_from_list
+    TestFunctions.new(@driver).open_disciplinary_from_profile
+    expect(DisciplinaryExtension.new(@driver).check_last_note).to be(true)
   end
 
   it '4A - Check Notes Cant Be Viewed By Employee' do
@@ -186,3 +194,4 @@ class TestFunctions < Base
     sleep 1
   end
 end
+# rubocop:enable Style/FrozenStringLiteralComment

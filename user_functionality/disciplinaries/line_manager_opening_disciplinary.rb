@@ -6,6 +6,7 @@ require './functions_library/navigate_browser_extension'
 require './functions_library/login_extension'
 require './functions_library/login_app_extension'
 require './functions_library/people_page_extension'
+require './functions_library/test_reference_extension'
 require './functions_library/navigate_around_app_manager_extension'
 require './functions_library/navigate_around_app_lm_extension'
 require './functions_library/navigate_around_app_employee_extension'
@@ -14,7 +15,7 @@ require './functions_library/settings_config/disciplinary/disciplinary_extension
 RSpec.describe 'LM Creating Disciplinary For Employee' do # rubocop:disable Metrics/BlockLength
   before do
     options = Selenium::WebDriver::Chrome::Options.new
-    # options.add_argument('--headless')
+    options.add_argument('--headless')
     options.add_argument('--disable-gpu')
     options.add_argument('--window-size=1920,1080')
     @driver = Selenium::WebDriver.for :chrome, options:
@@ -88,8 +89,49 @@ RSpec.describe 'LM Creating Disciplinary For Employee' do # rubocop:disable Metr
     sleep 1
     DisciplinaryExtension.new(@driver).edit_disciplinary_from_table('0')
     sleep 0.5
-    DisciplinaryExtension.new(@driver).complete_edit_document_form
-    binding.pry
+    DisciplinaryExtension.new(@driver).complete_disciplinary_edit_form
+    sleep 1
+    expect(DisciplinaryExtension.new(@driver).find_value_in_details_and_status('3')).to eql(
+      'Description Edited Regression Testing'
+    )
+  end
+
+  it '3B - Confirm Edit in Disciplinary Table' do
+    TestFunctions.new(@driver).login_and_select_hr
+    TestFunctions.new(@driver).open_employee_from_list
+    TestFunctions.new(@driver).open_disciplinary_from_profile
+    sleep 1
+    expect(DisciplinaryExtension.new(@driver).value_from_table('0', '2').text).to eql('Edited Regression Testing')
+  end
+
+  it '3C - Confirm Resolution in Disciplinary Table' do
+    TestFunctions.new(@driver).login_and_select_hr
+    TestFunctions.new(@driver).open_employee_from_list
+    TestFunctions.new(@driver).open_disciplinary_from_profile
+    resolved_on = DisciplinaryExtension.new(@driver).value_from_table('0', '6').text
+    expect(resolved_on).to include(DisciplinaryExtension.new(@driver).resolved_today)
+  end
+
+  it '4A - Employee attempts to edit disciplinary' do
+    TestFunctions.new(@driver).login_and_select_hr
+    TestFunctions.new(@driver).open_employee_from_list
+    TestFunctions.new(@driver).open_disciplinary_from_profile
+    sleep 1
+    DisciplinaryExtension.new(@driver).edit_disciplinary_from_table('0')
+    url = @driver.current_url
+    TestFunctions.new(@driver).login_as_emp
+    @driver.navigate.to(url)
+    expect(@driver.title).to eql('Permission Denied (403)')
+  end
+
+  it '5A - Delete Disciplinary' do
+    TestFunctions.new(@driver).login_and_select_hr
+    sleep 1
+    TestFunctions.new(@driver).open_employee_from_list
+    TestFunctions.new(@driver).open_disciplinary_from_profile
+    DisciplinaryExtension.new(@driver).delete_disciplinary
+    sleep 1
+    expect(DisciplinaryExtension.new(@driver).check_for_empty_disciplinary_table).to be(true)
   end
 end
 
@@ -124,3 +166,4 @@ class TestFunctions < Base
     sleep 1
   end
 end
+# rubocop:enable Style/FrozenStringLiteralComment

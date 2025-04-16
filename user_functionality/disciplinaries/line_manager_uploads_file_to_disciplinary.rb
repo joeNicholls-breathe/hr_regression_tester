@@ -1,4 +1,4 @@
- # rubocop:disable Style/FrozenStringLiteralComment
+# rubocop:disable Style/FrozenStringLiteralComment
 require 'rspec'
 require 'selenium-webdriver'
 require 'logger'
@@ -11,8 +11,8 @@ require './functions_library/navigate_around_app_lm_extension'
 require './functions_library/navigate_around_app_employee_extension'
 require './functions_library/settings_config/disciplinary/disciplinary_extension'
 
-RSpec.describe 'Uploads a File to Disciplinary' do
-  before() do
+RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/BlockLength
+  before do
     options = Selenium::WebDriver::Chrome::Options.new
     options.add_argument('--headless')
     options.add_argument('--disable-gpu')
@@ -20,17 +20,17 @@ RSpec.describe 'Uploads a File to Disciplinary' do
     @driver = Selenium::WebDriver.for :chrome, options:
   end
 
-  after() do
+  after do
     @driver.quit
   end
 
   it '1A - LM login and select HR' do
-    TestFunctions.new(@driver).login_and_select_HR
+    TestFunctions.new(@driver).login_and_select_hr
     expect(@driver.title).to eql('My dashboard')
   end
 
-  it '1B - Open My People' do 
-    TestFunctions.new(@driver).login_and_select_HR
+  it '1B - Open My People' do
+    TestFunctions.new(@driver).login_and_select_hr
     sleep 1
     AppNavigationExtensionLM.new(@driver).my_people
     sleep 1
@@ -38,22 +38,22 @@ RSpec.describe 'Uploads a File to Disciplinary' do
   end
 
   it '1C - Select Employee User' do
-    TestFunctions.new(@driver).login_and_select_HR
+    TestFunctions.new(@driver).login_and_select_hr
     sleep 1
     TestFunctions.new(@driver).open_employee_from_list
     expect(@driver.title).to eql('Profile for Employee User')
   end
 
   it '1E - Open Employee Disciplinary Profile' do
-    TestFunctions.new(@driver).login_and_select_HR
+    TestFunctions.new(@driver).login_and_select_hr
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 1
     expect(@driver.title).to eql('Disciplinaries for Employee User')
   end
 
-  it '2A - Open Disciplinary Form' do 
-    TestFunctions.new(@driver).login_and_select_HR
+  it '2A - Open Disciplinary Form' do
+    TestFunctions.new(@driver).login_and_select_hr
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 1
@@ -61,8 +61,8 @@ RSpec.describe 'Uploads a File to Disciplinary' do
     expect(@driver.title).to eql('Add disciplinary for Employee User')
   end
 
-  it '2B - Complete Disciplinary Form' do 
-    TestFunctions.new(@driver).login_and_select_HR
+  it '2B - Complete Disciplinary Form' do
+    TestFunctions.new(@driver).login_and_select_hr
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 1
@@ -74,7 +74,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do
   end
 
   it '3A - Open Upload Documents Form' do
-    TestFunctions.new(@driver).login_and_select_HR
+    TestFunctions.new(@driver).login_and_select_hr
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
@@ -85,7 +85,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do
   end
 
   it '3B - Upload Document and Submit Form' do
-    TestFunctions.new(@driver).login_and_select_HR
+    TestFunctions.new(@driver).login_and_select_hr
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
@@ -97,7 +97,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do
   end
 
   it '3C - Verify Document Upload From Documents Table' do
-    TestFunctions.new(@driver).login_and_select_HR
+    TestFunctions.new(@driver).login_and_select_hr
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
@@ -110,11 +110,11 @@ RSpec.describe 'Uploads a File to Disciplinary' do
   end
 
   it '3D - Verify Document Upload From Disciplinary Table' do
-    TestFunctions.new(@driver).login_and_select_HR
+    TestFunctions.new(@driver).login_and_select_hr
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    num_of_docs = DisciplinaryExtension.new(@driver).value_from_table('0','5')
+    num_of_docs = DisciplinaryExtension.new(@driver).value_from_table('0', '5')
     expect(num_of_docs.text).to eql('1')
   end
 
@@ -123,7 +123,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do
     NavigateAroundAppEmployee.new(@driver).navigate_to_profile_employee
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0') 
+    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
     sleep 0.5
     expect(DisciplinaryExtension.new(@driver).verify_emp_cant_view_docs).to be(true)
   end
@@ -135,8 +135,8 @@ RSpec.describe 'Uploads a File to Disciplinary' do
     expect(@driver.title).to eql('Permission Denied (403)')
   end
 
-  it '5A - Edit Uploaded Document' do 
-    TestFunctions.new(@driver).login_and_select_HR
+  it '5A - Edit Uploaded Document' do
+    TestFunctions.new(@driver).login_and_select_hr
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
@@ -146,12 +146,12 @@ RSpec.describe 'Uploads a File to Disciplinary' do
     DisciplinaryExtension.new(@driver).open_edit_document_form
     DisciplinaryExtension.new(@driver).complete_edit_document_form
     sleep 1
-    doc_name = DisciplinaryExtension.new(@driver).value_from_table('0','0')
+    doc_name = DisciplinaryExtension.new(@driver).value_from_table('0', '0')
     expect(doc_name.text).to eql('Updated Document')
   end
 
-  it '6A - Delete Document' do 
-    TestFunctions.new(@driver).login_and_select_HR
+  it '6A - Delete Document' do
+    TestFunctions.new(@driver).login_and_select_hr
     sleep 1
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
@@ -167,17 +167,73 @@ RSpec.describe 'Uploads a File to Disciplinary' do
   end
 
   it '6B - Verify Document Delete From Disciplinary Table' do
-    TestFunctions.new(@driver).login_and_select_HR
+    TestFunctions.new(@driver).login_and_select_hr
     sleep 1
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    num_of_docs = DisciplinaryExtension.new(@driver).value_from_table('0','5')
+    num_of_docs = DisciplinaryExtension.new(@driver).value_from_table('0', '5')
     expect(num_of_docs.text).to eql('0')
   end
 
-  it '7C - Delete Disciplinary' do 
-    TestFunctions.new(@driver).login_and_select_HR
+  it '7A - Uploading a pdf' do
+    TestFunctions.new(@driver).login_and_select_hr
+    TestFunctions.new(@driver).open_employee_from_list
+    TestFunctions.new(@driver).open_disciplinary_from_profile
+    sleep 0.5
+    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    TestFunctions.new(@driver).upload_document_pdf
+    sleep 1
+    documents_nav_link = DisciplinaryExtension.new(@driver).title_of_documents_nav_link
+    expect(documents_nav_link.text).to eql('Attached documents 1')
+  end
+
+  it '7B - LM Previews PDF in browser' do
+    TestFunctions.new(@driver).login_and_select_hr
+    TestFunctions.new(@driver).open_employee_from_list
+    TestFunctions.new(@driver).open_disciplinary_from_profile
+    sleep 0.5
+    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    sleep 0.5
+    DisciplinaryExtension.new(@driver).switch_to_documents_tab
+    sleep 0.5
+    original_window = @driver.window_handle
+    DisciplinaryExtension.new(@driver).view_pdf_document
+    @driver.window_handles.each do |handle|
+      if handle != original_window
+        @driver.switch_to.window handle
+        break
+      end
+    end
+    expect(@driver.current_url).to include('preview')
+  end
+
+  it '7C - Employee Attempts to View PDF' do
+    TestFunctions.new(@driver).login_and_select_hr
+    TestFunctions.new(@driver).open_employee_from_list
+    TestFunctions.new(@driver).open_disciplinary_from_profile
+    sleep 0.5
+    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    sleep 0.5
+    DisciplinaryExtension.new(@driver).switch_to_documents_tab
+    sleep 0.5
+    original_window = @driver.window_handle
+    DisciplinaryExtension.new(@driver).view_pdf_document
+    @driver.window_handles.each do |handle|
+      if handle != original_window
+        @driver.switch_to.window handle
+        break
+      end
+    end
+    pdf_url = @driver.current_url
+    TestFunctions.new(@driver).login_as_emp
+    @driver.navigate.to(pdf_url)
+
+    expect(@driver.title).to eql('Permission Denied (403)')
+  end
+
+  it '8A - Delete Disciplinary' do
+    TestFunctions.new(@driver).login_and_select_hr
     sleep 1
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
@@ -187,9 +243,8 @@ RSpec.describe 'Uploads a File to Disciplinary' do
   end
 end
 
-  
 class TestFunctions < Base
-  def login_and_select_HR 
+  def login_and_select_hr
     NavigateBrowserExtension.new(@driver).breathe_login
     sleep 1
     LoginExtension.new(@driver).login_functionality_lm
@@ -216,6 +271,12 @@ class TestFunctions < Base
     DisciplinaryExtension.new(@driver).complete_document_upload_form
   end
 
+  def upload_document_pdf
+    DisciplinaryExtension.new(@driver).switch_to_documents_tab
+    DisciplinaryExtension.new(@driver).open_document_upload_form
+    DisciplinaryExtension.new(@driver).complete_document_upload_form_pdf
+  end
+
   def login_as_emp
     NavigateBrowserExtension.new(@driver).breathe_login
     sleep 1
@@ -225,3 +286,4 @@ class TestFunctions < Base
     sleep 1
   end
 end
+# rubocop:enable Style/FrozenStringLiteralComment
