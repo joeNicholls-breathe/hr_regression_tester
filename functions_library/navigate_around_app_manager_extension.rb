@@ -165,7 +165,7 @@ class AppNavigationExtensionManager < Base
   end
 
   def open_reports
-    driver.find_element(id: 'top-menu-menu-item-2-2').click
+    driver.find_element(id: 'top-menu-menu-item-1-2').click
   end
 
   def open_purge_from_url

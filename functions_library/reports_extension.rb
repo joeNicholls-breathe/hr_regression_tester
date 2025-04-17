@@ -39,7 +39,7 @@ class ReportsExtension < Base
   end
 
   def check_table_is_empty
-    driver.find_element(class: 'dataTables_empty')
+    driver.find_element(class: 'blankstate')
   end
 
   def filter_by_department(department)
