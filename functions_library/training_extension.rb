@@ -118,4 +118,27 @@ class TrainingExtension < Base
     outcome = columns.select { |x| x.attribute('cellIndex') == '7' }
     outcome[0].text
   end
+
+  def fill_out_training_form # rubocop:disable Metrics/AbcSize
+    TrainingExtension.new(driver).give_training_request_name
+    TrainingExtension.new(driver).select_company_training_type
+    TrainingExtension.new(driver).select_company_training_category
+    TrainingExtension.new(driver).add_training_start_date
+    TrainingExtension.new(driver).add_training_end_date
+    TrainingExtension.new(driver).add_training_cost
+    TrainingExtension.new(driver).add_training_expires_on_date
+    TrainingExtension.new(driver).add_training_structured_units
+    TrainingExtension.new(driver).add_training_unstructured_units
+    TrainingExtension.new(driver).confirm_training_form
+  end
+
+  def training_title
+    driver.find_element(css: 'body > div.hr-main-container > div.hr-main > section > div.employee-section-header > h1').text
+  end
+
+  def status_from_request_form
+    table = driver.find_element(class: 'table')
+    rows = table.find_elements(tag_name: 'TR')
+    rows.find { |x| x.attribute('sectionRowIndex') == '4' }.text
+  end
 end

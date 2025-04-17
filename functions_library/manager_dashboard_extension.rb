@@ -41,4 +41,10 @@ class ManagerDashboardExtension < Base
       css: '#training > div > table > tbody > tr > td.bdds-table__table-data.bdds-table__table-data--column-align-left > span > p.bdds-text.bdds-text--ui-small.bdds-text--style-normal.bdds-text--weight-regular.text--light' # rubocop:disable Layout/LineLength
     ).text
   end
+
+  def description_of_open_training
+    row = @driver.find_element(class: 'bdds-table__table-row')
+    columns = row.find_elements(tag_name: 'TD')
+    columns.find { |x| x.attribute('cellIndex') == '1' }.text
+  end
 end

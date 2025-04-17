@@ -29,6 +29,7 @@ class UserKudos < Base
     # see methods for new way to navigate to dashboard widget buttons
     NavigateAroundAppEmployee.new(driver).navigate_to_dashboard_employee
     NavigateAroundAppEmployee.new(driver).navigate_to_leave_request_widget_manage_leave
+    binding.pry
     puts 'Test 1012 complete'
     driver.close
   end
