@@ -155,5 +155,17 @@ class NavigateAroundAppEmployee < Base
   def click_dashboard_lhn
     driver.find_element(id: 'top-menu-menu-item-0-0').click
   end
+
+  def click_on_more_dropdown
+    driver.find_element(id: 'more-link').click
+  end
+
+  def value_from_table(row, col)
+    rows = driver.find_elements(class: 'odd')
+    driver.find_elements(class: 'even') << rows
+    chosen_row = rows.find { |x| x.attribute('_DT_RowIndex') == row }
+    columns = chosen_row.find_elements(tag_name: 'TD')
+    columns.find { |x| x.attribute('cellIndex') == col }
+  end
 end
 # rubocop:enable Metrics/ClassLength

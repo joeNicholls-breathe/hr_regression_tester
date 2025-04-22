@@ -165,7 +165,7 @@ class AppNavigationExtensionManager < Base
   end
 
   def open_reports
-    driver.find_element(id: 'top-menu-menu-item-2-2').click
+    driver.find_element(id: 'top-menu-menu-item-1-2').click
   end
 
   def open_purge_from_url
@@ -174,6 +174,14 @@ class AppNavigationExtensionManager < Base
 
   def employee_profile_sickness_tab
     driver.find_element(id: 'sickness').click
+  end
+
+  def employee_profile_disciplinary_tab
+    driver.find_element(id: 'disciplinary').click
+  end
+
+  def click_on_more_dropdown
+    driver.find_element(id: 'more-link').click
   end
 end
 # rubocop:enable Metrics/ClassLength
