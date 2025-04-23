@@ -8,89 +8,42 @@ require './functions_library/login_app_extension'
 require './functions_library/navigate_around_app_manager_extension'
 require './functions_library/marketplace_extension'
 
-class MarketPlaceTests
-  attr_accessor :driver
-
-  # Tests the create, edit, delete functions for bradford factor triggers
-
-  def initialize
-    @driver = Selenium::WebDriver.for :chrome
-    Selenium::WebDriver.logger.level = :info
+RSpec.describe 'Verify MarketPlace Functionality' do # rubocop:disable Metrics/BlockLength
+  before do
+    options = Selenium::WebDriver::Chrome::Options.new
+    # options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    @driver = Selenium::WebDriver.for :chrome, options:
   end
 
-  def execute # rubocop:disable Metrics/MethodLength
-    open_marketplace
-    open_elmo_learning
-    open_elmo_survey
-    open_harriet
-    open_hireful
-    open_ithink_connect_sync
-    open_live_pay
-    open_mintago
-    open_pleo
-    open_rota_cloud
-    open_xero
+  after do
+    @driver.quit
   end
+  #  Left value is the title of the page at /marketplace/product
+  #  Right value is the end of the href on the 'Find out more button'
+  endpoint = {
+    'ELMO Learning' => 'elmolearning',
+    'ELMO Survey' => 'elmosurvey',
+    'Harriet' => 'harriet',
+    'hireful' => 'hireful',
+    'iThink Connect Sync' => 'ithinkconnectsync',
+    'LivePay' => 'livepay',
+    'Mintago' => 'mintago',
+    'Pleo' => 'pleo',
+    'RotaCloud' => 'rotacloud',
+    'Xero' => 'xero'
+  }
 
-  def open_marketplace
-    NavigateBrowserExtension.new(driver).breathe_login
-    puts 'PASS - load landing page'
-    LoginExtension.new(driver).login_setup_acc_admin
-    puts 'PASS - login as admin'
-    LoginAppExtension.new(driver).select_hr
-    MarketPlaceExtension.new(driver).navigate_to_marketplace
-    puts 'PASS - MarketPlace Opened'
-  end
-
-  def open_elmo_learning
-    MarketPlaceExtension.new(driver).open_marketplace_widget('elmolearning')
-    MarketPlaceExtension.new(driver).check_page_title('ELMO Learning')
-  end
-
-  def open_elmo_survey
-    MarketPlaceExtension.new(driver).open_marketplace_widget('elmosurvey')
-    MarketPlaceExtension.new(driver).check_page_title('ELMO Survey')
-  end
-
-  def open_harriet
-    MarketPlaceExtension.new(driver).open_marketplace_widget('harriet')
-    MarketPlaceExtension.new(driver).check_page_title('Harriet')
-  end
-
-  def open_hireful
-    MarketPlaceExtension.new(driver).open_marketplace_widget('hireful')
-    MarketPlaceExtension.new(driver).check_page_title('hireful')
-  end
-
-  def open_ithink_connect_sync
-    MarketPlaceExtension.new(driver).open_marketplace_widget('ithinkconnectsync')
-    MarketPlaceExtension.new(driver).check_page_title('iThink Connect Sync')
-  end
-
-  def open_live_pay
-    MarketPlaceExtension.new(driver).open_marketplace_widget('livepay')
-    MarketPlaceExtension.new(driver).check_page_title('LivePay')
-  end
-
-  def open_mintago
-    MarketPlaceExtension.new(driver).open_marketplace_widget('mintago')
-    MarketPlaceExtension.new(driver).check_page_title('Mintago')
-  end
-
-  def open_pleo
-    MarketPlaceExtension.new(driver).open_marketplace_widget('pleo')
-    MarketPlaceExtension.new(driver).check_page_title('Pleo')
-  end
-
-  def open_rota_cloud
-    MarketPlaceExtension.new(driver).open_marketplace_widget('rotacloud')
-    MarketPlaceExtension.new(driver).check_page_title('RotaCloud')
-  end
-
-  def open_xero
-    MarketPlaceExtension.new(driver).open_marketplace_widget('xero')
-    MarketPlaceExtension.new(driver).check_page_title('Xero')
+  endpoint.each do |name, href|
+    it "#{name} Opened" do
+      NavigateBrowserExtension.new(@driver).breathe_login
+      LoginExtension.new(@driver).login_functionality_admin
+      LoginAppExtension.new(@driver).select_hr
+      MarketPlaceExtension.new(@driver).navigate_to_marketplace
+      MarketPlaceExtension.new(@driver).open_marketplace_widget(href)
+      sleep 0.5
+      expect(MarketPlaceExtension.new(@driver).page_title(name))
+    end
   end
 end
-
-MarketPlaceTests.new.execute
