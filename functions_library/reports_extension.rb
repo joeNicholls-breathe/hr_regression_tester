@@ -28,10 +28,12 @@ class ReportsExtension < Base
     end
   end
 
-  def click_action_for_selected_row(target_id)
-    all_a = driver.find_elements(tag_name: 'A')
-    action = all_a.select { |x| x.attribute('href').include? target_id }
-    action[0].click
+  def click_action_for_selected_row(row)
+    rows = driver.find_elements(class: 'odd')
+    driver.find_elements(class: 'even') << rows
+    chosen_row = rows.find { |x| x.attribute('rowIndex') == row }
+    action = chosen_row.find_element(tag_name: 'A')
+    action.click
   end
 
   def check_table_not_empty
@@ -60,7 +62,6 @@ class ReportsExtension < Base
 
   def filter_by_start_next_month
     driver.find_element(id: '#start_date_react').send_keys one_month
-    puts 'PASS - Start Date added'
     driver.find_element(class: 'btn-primary').click
   end
 

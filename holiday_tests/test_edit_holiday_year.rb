@@ -7,6 +7,7 @@ require './functions_library/logout_extension'
 require './functions_library/login_app_extension'
 require './functions_library/settings_config/holiday_years/holiday_years_extension'
 require './functions_library/holiday_extension'
+require './functions_library/employee_profile_extension'
 require './functions_library/navigate_around_app_manager_extension'
 require './functions_library/people_page_extension'
 
@@ -83,7 +84,7 @@ class EditHolidayYear # rubocop:disable Metrics/ClassLength
     puts 'PASS - People List Opened'
     PeoplePageExtension.new(driver).select_employee_from_list('EmployeeA year-end')
     puts 'PASS - Daily Employee Opened'
-    AppNavigationExtensionManager.new(driver).open_employee_leave
+    EmployeeProfileExtension.new(driver).open_employee_leave
     sleep 1
     HolidayExtension.new(driver).compare_holiday_allowance('19') if holiday_route == 'b'
     HolidayExtension.new(driver).compare_holiday_allowance('20') if holiday_route == 'a'
@@ -95,7 +96,7 @@ class EditHolidayYear # rubocop:disable Metrics/ClassLength
     puts 'PASS - People List Opened'
     PeoplePageExtension.new(driver).select_employee_from_list('EmployeeB year-end')
     puts 'PASS - Hourly Employee Opened'
-    AppNavigationExtensionManager.new(driver).open_employee_leave
+    EmployeeProfileExtension.new(driver).open_employee_leave
     sleep 1
     HolidayExtension.new(driver).compare_holiday_allowance('92h 30m') if holiday_route == 'b'
     HolidayExtension.new(driver).compare_holiday_allowance('100h') if holiday_route == 'a'
@@ -107,7 +108,7 @@ class EditHolidayYear # rubocop:disable Metrics/ClassLength
     puts 'PASS - People List Opened'
     PeoplePageExtension.new(driver).select_employee_from_list('EmployeeC year-end')
     puts 'PASS - Positive Carryover Employee Opened'
-    AppNavigationExtensionManager.new(driver).open_employee_leave
+    EmployeeProfileExtension.new(driver).open_employee_leave
     sleep 1
     HolidayExtension.new(driver).compare_holiday_carried_daily('5.0') if holiday_route == 'b'
     HolidayExtension.new(driver).compare_holiday_carried_daily('2.0') if holiday_route == 'a'
@@ -119,7 +120,7 @@ class EditHolidayYear # rubocop:disable Metrics/ClassLength
     puts 'PASS - People List Opened'
     PeoplePageExtension.new(driver).select_employee_from_list('EmployeeD year-end')
     puts 'PASS - Hourly Employee Opened'
-    AppNavigationExtensionManager.new(driver).open_employee_leave
+    EmployeeProfileExtension.new(driver).open_employee_leave
     sleep 1
     HolidayExtension.new(driver).compare_negative_allowance('2h 30m') if holiday_route == 'a'
     HolidayExtension.new(driver).compare_holiday_used_from_next_year('2h 30m') if holiday_route == 'b'

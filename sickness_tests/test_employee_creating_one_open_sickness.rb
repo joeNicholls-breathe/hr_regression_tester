@@ -9,6 +9,7 @@ require './functions_library/employee_dashboard_extension'
 require './functions_library/holiday_extension'
 require './functions_library/sickness_extension'
 require './functions_library/navigate_around_app_employee_extension'
+require './functions_library/employee_profile_extension'
 require './functions_library/navigate_around_app_manager_extension'
 require './functions_library/ui_page_element_check_extension'
 
@@ -95,7 +96,7 @@ class TestEmployeeOneOpenSicknessProcess
     AppNavigationExtensionManager.new(driver).search_employee('Employee User')
     puts 'Pass - User Opened'
     sleep 1
-    AppNavigationExtensionManager.new(driver).open_employee_sickness
+    EmployeeProfileExtension.new(driver).open_employee_sickness
     puts 'Pass - navigates to sickness index'
     sleep 1
     SicknessExtension.new(driver).delete_sickness_record

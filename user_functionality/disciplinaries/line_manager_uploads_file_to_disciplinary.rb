@@ -78,7 +78,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/Blo
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    EmployeeProfileExtension.new(@driver).open_show_page_from_table('0')
     DisciplinaryExtension.new(@driver).switch_to_documents_tab
     DisciplinaryExtension.new(@driver).open_document_upload_form
     expect(@driver.title).to eql('Add document for Employee User')
@@ -89,7 +89,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/Blo
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    EmployeeProfileExtension.new(@driver).open_show_page_from_table('0')
     TestFunctions.new(@driver).upload_document
     sleep 1
     documents_nav_link = DisciplinaryExtension.new(@driver).title_of_documents_nav_link
@@ -101,11 +101,11 @@ RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/Blo
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    EmployeeProfileExtension.new(@driver).open_show_page_from_table('0')
     sleep 0.5
     DisciplinaryExtension.new(@driver).switch_to_documents_tab
     sleep 2
-    file_title = NavigateAroundAppEmployee.new(@driver).value_from_table('0', '0')
+    file_title = EmployeeProfileExtension.new(@driver).value_from_table('0', '0')
     expect(file_title.text).to eql('Regression File')
   end
 
@@ -114,7 +114,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/Blo
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    num_of_docs = NavigateAroundAppEmployee.new(@driver).value_from_table('0', '5')
+    num_of_docs = EmployeeProfileExtension.new(@driver).value_from_table('0', '5')
     expect(num_of_docs.text).to eql('1')
   end
 
@@ -123,7 +123,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/Blo
     NavigateAroundAppEmployee.new(@driver).navigate_to_profile_employee
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    EmployeeProfileExtension.new(@driver).open_show_page_from_table('0')
     sleep 0.5
     expect(DisciplinaryExtension.new(@driver).verify_emp_cant_view_docs).to be(true)
   end
@@ -133,7 +133,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/Blo
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    EmployeeProfileExtension.new(@driver).open_show_page_from_table('0')
     sleep 1
     DisciplinaryExtension.new(@driver).switch_to_documents_tab
     sleep 0.5
@@ -151,13 +151,13 @@ RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/Blo
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    EmployeeProfileExtension.new(@driver).open_show_page_from_table('0')
     sleep 1
     DisciplinaryExtension.new(@driver).switch_to_documents_tab
     DisciplinaryExtension.new(@driver).open_edit_document_form
     DisciplinaryExtension.new(@driver).complete_edit_document_form
     sleep 1
-    doc_name = NavigateAroundAppEmployee.new(@driver).value_from_table('0', '0')
+    doc_name = EmployeeProfileExtension.new(@driver).value_from_table('0', '0')
     expect(doc_name.text).to eql('Updated Document')
   end
 
@@ -167,7 +167,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/Blo
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    EmployeeProfileExtension.new(@driver).open_show_page_from_table('0')
     sleep 1
     DisciplinaryExtension.new(@driver).switch_to_documents_tab
     sleep 0.5
@@ -183,7 +183,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/Blo
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    num_of_docs = NavigateAroundAppEmployee.new(@driver).value_from_table('0', '5')
+    num_of_docs = EmployeeProfileExtension.new(@driver).value_from_table('0', '5')
     expect(num_of_docs.text).to eql('0')
   end
 
@@ -192,7 +192,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/Blo
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    EmployeeProfileExtension.new(@driver).open_show_page_from_table('0')
     TestFunctions.new(@driver).upload_document_pdf
     sleep 1
     documents_nav_link = DisciplinaryExtension.new(@driver).title_of_documents_nav_link
@@ -204,7 +204,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/Blo
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    EmployeeProfileExtension.new(@driver).open_show_page_from_table('0')
     sleep 0.5
     DisciplinaryExtension.new(@driver).switch_to_documents_tab
     sleep 0.5
@@ -224,7 +224,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/Blo
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    EmployeeProfileExtension.new(@driver).open_show_page_from_table('0')
     sleep 0.5
     DisciplinaryExtension.new(@driver).switch_to_documents_tab
     sleep 0.5
@@ -250,7 +250,7 @@ RSpec.describe 'Uploads a File to Disciplinary' do # rubocop:disable Metrics/Blo
     TestFunctions.new(@driver).open_disciplinary_from_profile
     DisciplinaryExtension.new(@driver).delete_disciplinary
     sleep 1
-    expect(DisciplinaryExtension.new(@driver).check_for_empty_disciplinary_table).to be(true)
+    expect(EmployeeProfileExtension.new(@driver).check_for_empty_table).to be(true)
   end
 end
 

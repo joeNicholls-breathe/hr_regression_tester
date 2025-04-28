@@ -61,15 +61,6 @@ class DisciplinaryExtension < Base # rubocop:disable Metrics/ClassLength
     driver.find_element(css: 'body > div.hr-main-container > div.hr-main > section > div.breadcrumb > a > svg').click
   end
 
-  def go_to_disciplinary_from_table(row)
-    rows = driver.find_elements(class: 'odd')
-    driver.find_elements(class: 'even') << rows
-    chosen_row = rows.find { |x| x.attribute('_DT_RowIndex') == row }
-    actions = chosen_row.find_element(class: 'actions')
-    row_actions = actions.find_elements(tag_name: 'A')
-    row_actions.find { |x| x.attribute('title') == 'view report' }.click
-  end
-
   def edit_disciplinary_from_table(row)
     rows = driver.find_elements(class: 'odd')
     driver.find_elements(class: 'even') << rows
@@ -149,10 +140,6 @@ class DisciplinaryExtension < Base # rubocop:disable Metrics/ClassLength
     true
   end
 
-  def check_for_empty_disciplinary_table
-    driver.find_element(class: 'blankstate').displayed?
-  end
-
   def delete_note
     driver.find_element(class: 'actions')
     driver.find_element(class: 'delete-icon').click
@@ -187,13 +174,6 @@ class DisciplinaryExtension < Base # rubocop:disable Metrics/ClassLength
     outcome = driver.find_element(name: 'grievance[company_disciplinary_outcome_id]')
     select = Selenium::WebDriver::Support::Select.new(outcome)
     select.select_by(:text, 'Verbal Warning')
-  end
-
-  def find_value_in_details_and_status(chosen_row)
-    table = driver.find_element(class: 'table')
-    rows = table.find_elements(tag_name: 'TR')
-    row = rows.find { |x| x.attribute('rowIndex') == chosen_row }
-    row.text
   end
 
   def resolved_today

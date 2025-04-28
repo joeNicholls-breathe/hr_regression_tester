@@ -141,4 +141,8 @@ class TrainingExtension < Base
     rows = table.find_elements(tag_name: 'TR')
     rows.find { |x| x.attribute('sectionRowIndex') == '4' }.text
   end
+
+  def click_on_training
+    driver.find_element(css: '#DataTables_Table_0 > tbody > tr > td.actions > a:nth-child(2) > svg').click
+  end
 end

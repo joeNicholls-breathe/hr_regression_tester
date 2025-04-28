@@ -12,9 +12,10 @@ require './functions_library/employee_dashboard_extension'
 require './functions_library/employee_profile_extension'
 require './functions_library/manager_dashboard_extension'
 require './functions_library/people_page_extension'
+require './functions_library/calendar_extension'
 require './functions_library/training_extension'
 
-RSpec.describe 'Employee Requests Training and is Approved' do # rubocop:disable Metrics/BlockLength
+RSpec.describe 'Employee Requests Training and Calendar is checked' do # rubocop:disable Metrics/BlockLength
   before do
     options = Selenium::WebDriver::Chrome::Options.new
     options.add_argument('--headless')
@@ -27,19 +28,7 @@ RSpec.describe 'Employee Requests Training and is Approved' do # rubocop:disable
     @driver.quit
   end
 
-  it '1A - Logs in and Opens Training Request Form' do
-    NavigateBrowserExtension.new(@driver).breathe_login
-    LoginExtension.new(@driver).login_functionality_employee
-    LoginAppExtension.new(@driver).select_hr
-    sleep 1
-    EmployeeDashboardExtension.new(@driver).expand_dashboard_container
-    sleep 1
-    EmployeeDashboardExtension.new(@driver).click_widget('Request training')
-    sleep 0.5
-    expect(@driver.title).to eql('Request training')
-  end
-
-  it '2A - Complete Training Request Form' do
+  it '1A - Open Training Request Form' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_functionality_employee
     LoginAppExtension.new(@driver).select_hr
@@ -52,39 +41,16 @@ RSpec.describe 'Employee Requests Training and is Approved' do # rubocop:disable
     expect(TrainingExtension.new(@driver).training_title).to eql('Employee Requested Training')
   end
 
-  it '3A - LM Logs In and Views Request in Dashboard' do
-    NavigateBrowserExtension.new(@driver).breathe_login
-    LoginExtension.new(@driver).login_functionality_lm
-    LoginAppExtension.new(@driver).select_hr
-    sleep 0.5
-    ManagerDashboardExtension.new(@driver).switch_todos_to_training
-    expect(ManagerDashboardExtension.new(@driver).description_of_open_training).to include('Employee Requested Training')
-  end
-
-  it '3B - LM Opens Training Request and Approves Training' do
-    NavigateBrowserExtension.new(@driver).breathe_login
-    LoginExtension.new(@driver).login_functionality_lm
-    LoginAppExtension.new(@driver).select_hr
-    sleep 0.5
-    ManagerDashboardExtension.new(@driver).switch_todos_to_training
-    ManagerDashboardExtension.new(@driver).view_open_training_request
-    sleep 0.5
-    expect(TrainingExtension.new(@driver).status_from_request_form).to eql('Status Requested')
-    TrainingExtension.new(@driver).manager_approves_training_request
-    expect(TrainingExtension.new(@driver).status_from_request_form).to eql('Status Approved')
-  end
-
-  it '4A - Employee Checks Status of Training Request' do
+  it '2A - Employee Opens Calendar' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_functionality_employee
     LoginAppExtension.new(@driver).select_hr
-    sleep 0.5
-    NavigateAroundAppEmployee.new(@driver).navigate_to_profile_employee
-    EmployeeProfileExtension.new(@driver).open_employee_training
-    expect(EmployeeProfileExtension.new(@driver).value_from_table('0', '2').text).to eql('Approved')
+    sleep 1
+    NavigateAroundAppEmployee.new(@driver).navigate_to_calendar_employee
+    expect(@driver.title).to eql('Calendar')
   end
 
-  it '5A - LM Edits Status of Training' do
+  it '2B - Employee Views Training in Calendar' do
     NavigateBrowserExtension.new(@driver).breathe_login
     LoginExtension.new(@driver).login_functionality_lm
     LoginAppExtension.new(@driver).select_hr
@@ -93,12 +59,49 @@ RSpec.describe 'Employee Requests Training and is Approved' do # rubocop:disable
     PeoplePageExtension.new(@driver).select_employee_from_lm_list('Employee User')
     sleep 0.5
     EmployeeProfileExtension.new(@driver).open_employee_training
+    TrainingExtension.new(@driver).click_on_training
+    training_id = TrainingExtension.new(@driver).training_id_employee
+    sleep 1
+    NavigateAroundAppEmployee.new(@driver).navigate_to_calendar_employee
     sleep 0.5
-    TrainingExtension.new(@driver).open_edit_modal
-    sleep 0.25
-    TrainingExtension.new(@driver).set_outcome_to_passed
-    TrainingExtension.new(@driver).confirm_training_form
-    expect(EmployeeProfileExtension.new(@driver).find_value_in_show_page('7')).to eql('Outcome Passed')
+    expect(CalendarExtension.new(@driver).find_training_request(training_id))
+    CalendarExtension.new(@driver).filter_only_training
+    expect(CalendarExtension.new(@driver).find_training_request(training_id))
+  end
+
+  it '3A - LM Opens Training Request and Rejects Training' do
+    NavigateBrowserExtension.new(@driver).breathe_login
+    LoginExtension.new(@driver).login_functionality_lm
+    LoginAppExtension.new(@driver).select_hr
+    sleep 0.5
+    ManagerDashboardExtension.new(@driver).switch_todos_to_training
+    ManagerDashboardExtension.new(@driver).view_open_training_request
+    sleep 0.5
+    expect(TrainingExtension.new(@driver).status_from_request_form).to eql('Status Requested')
+    TrainingExtension.new(@driver).manager_rejects_training_request
+    sleep 1
+    TrainingExtension.new(@driver).fill_out_rejection_form
+    sleep 1
+    expect(TrainingExtension.new(@driver).status_from_request_form).to eql('Status Rejected')
+  end
+
+  it '3B - LM Verifies that Training is no longer on Calendar' do
+    NavigateBrowserExtension.new(@driver).breathe_login
+    LoginExtension.new(@driver).login_functionality_lm
+    LoginAppExtension.new(@driver).select_hr
+    sleep 0.5
+    AppNavigationExtensionLM.new(@driver).my_people
+    sleep 0.5
+    PeoplePageExtension.new(@driver).select_employee_from_lm_list('Employee User')
+    sleep 0.5
+    EmployeeProfileExtension.new(@driver).open_employee_training
+    TrainingExtension.new(@driver).click_on_training
+    training_id = TrainingExtension.new(@driver).training_id_employee
+    NavigateAroundAppEmployee.new(@driver).navigate_to_calendar_employee
+    sleep 0.5
+    expect(
+      CalendarExtension.new(@driver).verify_training_not_present("EmployeeTrainingCourse_#{training_id}")
+      ).to be(true)
   end
 
   it '5B - LM Deletes the Training' do

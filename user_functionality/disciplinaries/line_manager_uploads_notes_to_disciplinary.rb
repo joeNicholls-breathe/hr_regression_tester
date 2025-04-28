@@ -79,7 +79,7 @@ RSpec.describe 'Uploads Notes to Disciplinary' do # rubocop:disable Metrics/Bloc
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 1
-    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    EmployeeProfileExtension.new(@driver).open_show_page_from_table('0')
     sleep 1
     DisciplinaryExtension.new(@driver).open_notes_upload_form
     sleep 0.5
@@ -92,9 +92,9 @@ RSpec.describe 'Uploads Notes to Disciplinary' do # rubocop:disable Metrics/Bloc
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    EmployeeProfileExtension.new(@driver).open_show_page_from_table('0')
     sleep 0.5
-    expect(NavigateAroundAppEmployee.new(@driver).value_from_table('0', '2').text).to eql('Regression Note')
+    expect(EmployeeProfileExtension.new(@driver).value_from_table('0', '2').text).to eql('Regression Note')
   end
 
   it '3E - Verify Note Added From Disciplinary Table' do
@@ -109,7 +109,7 @@ RSpec.describe 'Uploads Notes to Disciplinary' do # rubocop:disable Metrics/Bloc
     NavigateAroundAppEmployee.new(@driver).navigate_to_profile_employee
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 1
-    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    EmployeeProfileExtension.new(@driver).open_show_page_from_table('0')
     sleep 1
     DisciplinaryExtension.new(@driver).verify_emp_cant_view_notes
   end
@@ -119,7 +119,7 @@ RSpec.describe 'Uploads Notes to Disciplinary' do # rubocop:disable Metrics/Bloc
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    EmployeeProfileExtension.new(@driver).open_show_page_from_table('0')
     DisciplinaryExtension.new(@driver).open_notes_upload_form
     url = @driver.current_url
     TestFunctions.new(@driver).login_as_emp
@@ -132,11 +132,11 @@ RSpec.describe 'Uploads Notes to Disciplinary' do # rubocop:disable Metrics/Bloc
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    EmployeeProfileExtension.new(@driver).open_show_page_from_table('0')
     DisciplinaryExtension.new(@driver).open_edit_document_form
     sleep 1
     DisciplinaryExtension.new(@driver).complete_notes_form('Updated Regression Note')
-    expect(NavigateAroundAppEmployee.new(@driver).value_from_table('0', '2').text).to eql('Updated Regression Note')
+    expect(EmployeeProfileExtension.new(@driver).value_from_table('0', '2').text).to eql('Updated Regression Note')
   end
 
   it '6A - Delete Note' do
@@ -144,7 +144,7 @@ RSpec.describe 'Uploads Notes to Disciplinary' do # rubocop:disable Metrics/Bloc
     TestFunctions.new(@driver).open_employee_from_list
     TestFunctions.new(@driver).open_disciplinary_from_profile
     sleep 0.5
-    DisciplinaryExtension.new(@driver).go_to_disciplinary_from_table('0')
+    EmployeeProfileExtension.new(@driver).open_show_page_from_table('0')
     sleep 0.5
     DisciplinaryExtension.new(@driver).delete_note
     sleep 1
@@ -158,7 +158,7 @@ RSpec.describe 'Uploads Notes to Disciplinary' do # rubocop:disable Metrics/Bloc
     TestFunctions.new(@driver).open_disciplinary_from_profile
     DisciplinaryExtension.new(@driver).delete_disciplinary
     sleep 1
-    expect(DisciplinaryExtension.new(@driver).check_for_empty_disciplinary_table).to be(true)
+    expect(EmployeeProfileExtension.new(@driver).check_for_empty_table).to be(true)
   end
 end
 

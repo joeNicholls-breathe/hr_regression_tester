@@ -6,6 +6,7 @@ require './functions_library/login_extension'
 require './functions_library/logout_extension'
 require './functions_library/login_app_extension'
 require './functions_library/employee_dashboard_extension'
+require './functions_library/employee_profile_extension'
 require './functions_library/holiday_extension'
 require './functions_library/leave_request_extension'
 require './functions_library/navigate_around_app_employee_extension'
@@ -58,7 +59,7 @@ class TestLeaveRequest
     AppNavigationExtensionManager.new(driver).search_employee('Holiday employee')
     puts 'Pass - Employee Opened'
     sleep 1
-    AppNavigationExtensionManager.new(driver).open_employee_leave
+    EmployeeProfileExtension.new(driver).open_employee_leave
     sleep 1
     LeaveRequestExtension.new(driver).click_add_new_leave_request
     puts 'Pass - opens add absence record'

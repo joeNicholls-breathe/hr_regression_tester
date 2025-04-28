@@ -92,7 +92,7 @@ class TestEmployeeOneOpenSicknessProcess
     AppNavigationExtensionManager.new(driver).search_employee('Employee User')
     puts 'Pass - User Opened'
     sleep 1
-    AppNavigationExtensionManager.new(driver).open_employee_sickness
+    EmployeeProfileExtension.new(driver).open_employee_sickness
     puts 'Pass - navigates to sickness index'
     sleep 1
     SicknessExtension.new(driver).delete_sickness_record

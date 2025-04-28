@@ -132,14 +132,6 @@ class AppNavigationExtensionManager < Base
     driver.find_element(id: 'leave').click
   end
 
-  def open_employee_training
-    driver.find_element(id: 'training').click
-  end
-
-  def open_employee_sickness
-    driver.find_element(id: 'sickness').click
-  end
-
   def navigate_to_data
     wait = Selenium::WebDriver::Wait.new(timeout: 10)
     sleep 3
@@ -165,7 +157,7 @@ class AppNavigationExtensionManager < Base
   end
 
   def open_reports
-    driver.find_element(id: 'top-menu-menu-item-2-2').click
+    driver.find_element(id: 'top-menu-menu-item-1-2').click
   end
 
   def open_purge_from_url

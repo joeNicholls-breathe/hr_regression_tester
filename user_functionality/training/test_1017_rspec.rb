@@ -11,6 +11,7 @@ require './functions_library/navigate_around_app_lm_extension'
 require './functions_library/employee_dashboard_extension'
 require './functions_library/manager_dashboard_extension'
 require './functions_library/people_page_extension'
+require './functions_library/employee_profile_extension'
 require './functions_library/training_extension'
 
 RSpec.describe 'Employee Requests Training and is Rejected' do
@@ -81,8 +82,8 @@ RSpec.describe 'Employee Requests Training and is Rejected' do
     LoginAppExtension.new(@driver).select_hr
     sleep 0.5
     NavigateAroundAppEmployee.new(@driver).navigate_to_profile_employee
-    AppNavigationExtensionManager.new(@driver).open_employee_training
-    expect(NavigateAroundAppEmployee.new(@driver).value_from_table('0', '2').text).to eql('Rejected')
+    EmployeeProfileExtension.new(@driver).open_employee_training
+    expect(EmployeeProfileExtension.new(@driver).value_from_table('0', '2').text).to eql('Rejected')
   end
 
   it '5A - LM Deletes Training' do
@@ -95,7 +96,7 @@ RSpec.describe 'Employee Requests Training and is Rejected' do
     sleep 1
     PeoplePageExtension.new(@driver).select_employee_from_lm_list('Employee User')
     sleep 0.5
-    AppNavigationExtensionManager.new(@driver).open_employee_training
+    EmployeeProfileExtension.new(@driver).open_employee_training
     TrainingExtension.new(@driver).delete_training_request
     expect(@driver.find_element(class: 'blankstate'))
   end

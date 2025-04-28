@@ -10,10 +10,8 @@ class CalendarExtension < Base
 
   def verify_training_not_present(element)
     driver.find_element(id: element)
-    puts 'FAIL - Training still exists'
     false
   rescue Selenium::WebDriver::Error::NoSuchElementError
-    puts 'PASS - Training Removed from calendar'
     true
   end
 
