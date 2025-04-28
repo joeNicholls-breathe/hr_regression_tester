@@ -2,7 +2,7 @@
 
 require File.expand_path('base.rb', __dir__)
 
-class TrainingExtension < Base
+class TrainingExtension < Base # rubocop:disable Metrics/ClassLength
   def give_training_request_name
     driver.find_element(id: 'employee_training_course_name').send_keys 'Employee Requested Training'
   end
@@ -132,8 +132,23 @@ class TrainingExtension < Base
     TrainingExtension.new(driver).confirm_training_form
   end
 
+  def fill_out_training_form_next_week # rubocop:disable Metrics/AbcSize
+    TrainingExtension.new(driver).give_training_request_name
+    TrainingExtension.new(driver).select_company_training_type
+    TrainingExtension.new(driver).select_company_training_category
+    TrainingExtension.new(driver).add_training_start_date_next_week
+    TrainingExtension.new(driver).add_training_end_date
+    TrainingExtension.new(driver).add_training_cost
+    TrainingExtension.new(driver).add_training_expires_on_date
+    TrainingExtension.new(driver).add_training_structured_units
+    TrainingExtension.new(driver).add_training_unstructured_units
+    TrainingExtension.new(driver).confirm_training_form
+  end
+
   def training_title
-    driver.find_element(css: 'body > div.hr-main-container > div.hr-main > section > div.employee-section-header > h1').text
+    driver.find_element(
+      css: 'body > div.hr-main-container > div.hr-main > section > div.employee-section-header > h1'
+    ).text
   end
 
   def status_from_request_form

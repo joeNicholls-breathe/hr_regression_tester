@@ -37,9 +37,8 @@ class ManagerDashboardExtension < Base
   end
 
   def find_next_7_days_requested_training
-    driver.find_element(
-      css: '#training > div > table > tbody > tr > td.bdds-table__table-data.bdds-table__table-data--column-align-left > span > p.bdds-text.bdds-text--ui-small.bdds-text--style-normal.bdds-text--weight-regular.text--light' # rubocop:disable Layout/LineLength
-    ).text
+    training = @driver.find_element(id: 'training')
+    training.find_element(class: 'bdds-table__table-row').text
   end
 
   def description_of_open_training

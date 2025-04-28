@@ -6,121 +6,115 @@ require './functions_library/navigate_browser_extension'
 require './functions_library/login_extension'
 require './functions_library/login_app_extension'
 require './functions_library/navigate_around_app_manager_extension'
+require './functions_library/navigate_around_app_employee_extension'
+require './functions_library/navigate_around_app_lm_extension'
 require './functions_library/employee_dashboard_extension'
+require './functions_library/employee_profile_extension'
 require './functions_library/manager_dashboard_extension'
+require './functions_library/people_page_extension'
 require './functions_library/training_extension'
 
-# rubocop:disable Metrics/MethodLength
-# rubocop:disable Metrics/AbcSize
-class TestEmployeeTrainingApproved
-  attr_accessor :driver
-
-  # Tests an employee requesting training
-
-  def initialize
+RSpec.describe 'Employee Requests Training and is Approved' do # rubocop:disable Metrics/BlockLength
+  before do
     options = Selenium::WebDriver::Chrome::Options.new
     options.add_argument('--headless')
     options.add_argument('--disable-gpu')
     options.add_argument('--window-size=1920,1080')
-    @driver = Selenium::WebDriver.for(:chrome, options:)
-    Selenium::WebDriver.logger.level = :info
+    @driver = Selenium::WebDriver.for :chrome, options:
   end
 
-  def execute
-    puts 'Starting test_1018_employee_training_request_approved'
-    test_01_employee_opens_training_request_form
-    test_02_fill_out_form
-    test_03_confirm_request_training
-    test_04_line_manager_approves_request
-    test_05_edit_form
-    test_06_delete_training_request
-    puts 'test_1018_employee_training_request_approved Finished'
+  after do
+    @driver.quit
   end
 
-  def test_01_employee_opens_training_request_form
-    NavigateBrowserExtension.new(driver).breathe_login
-    puts 'PASS - load landing page'
-    LoginExtension.new(driver).login_functionality_employee
-    puts 'PASS - logged in as std employee'
-    LoginAppExtension.new(driver).select_hr
-    puts 'PASS - hr selected'
+  it '1A - Logs in and Opens Training Request Form' do
+    NavigateBrowserExtension.new(@driver).breathe_login
+    LoginExtension.new(@driver).login_functionality_employee
+    LoginAppExtension.new(@driver).select_hr
     sleep 1
-    EmployeeDashboardExtension.new(driver).expand_dashboard_container
+    EmployeeDashboardExtension.new(@driver).expand_dashboard_container
     sleep 1
-    EmployeeDashboardExtension.new(driver).click_widget('Request training')
-    puts 'PASS - Training Form Opened'
+    EmployeeDashboardExtension.new(@driver).click_widget('Request training')
+    sleep 0.5
+    expect(@driver.title).to eql('Request training')
   end
 
-  def test_02_fill_out_form
-    TrainingExtension.new(driver).give_training_request_name
-    puts 'PASS - Name Added'
-    TrainingExtension.new(driver).select_company_training_type
-    puts 'PASS - Training Type Selected'
-    TrainingExtension.new(driver).select_company_training_category
-    puts 'PASS - Training Category Selected'
-    TrainingExtension.new(driver).add_training_start_date
-    puts 'PASS - Start Date Added'
-    TrainingExtension.new(driver).add_training_end_date
-    puts 'PASS - End Date Added'
-    TrainingExtension.new(driver).add_training_cost
-    puts 'PASS - Training Added'
-    TrainingExtension.new(driver).add_training_expires_on_date
-    puts 'PASS - Expiry Date Added'
-    TrainingExtension.new(driver).add_training_structured_units
-    puts 'PASS - Structured Units Added'
-    TrainingExtension.new(driver).add_training_unstructured_units
-    puts 'PASS - Unstructured Units Added'
-    TrainingExtension.new(driver).confirm_training_form
-    puts 'PASS - Training Request Form Submitted'
-  end
-
-  def test_03_confirm_request_training
-    TrainingExtension.new(driver).click_training_breadcrumb
-    puts 'PASS - Navigate back to training overview'
-    TrainingExtension.new(driver).compare_training_request_status('Requested')
-  end
-
-  def test_04_line_manager_approves_request
-    NavigateBrowserExtension.new(driver).breathe_login
-    puts 'PASS - load landing page'
-    LoginExtension.new(driver).login_functionality_lm
-    puts 'PASS - Logged in as LM'
-    LoginAppExtension.new(driver).select_hr
-    puts 'PASS - hr selected'
-    ManagerDashboardExtension.new(driver).switch_todos_to_training
+  it '2A - Complete Training Request Form' do
+    NavigateBrowserExtension.new(@driver).breathe_login
+    LoginExtension.new(@driver).login_functionality_employee
+    LoginAppExtension.new(@driver).select_hr
     sleep 1
-    ManagerDashboardExtension.new(driver).view_open_training_request
-    puts 'PASS - Training Request Opened by Manager'
+    EmployeeDashboardExtension.new(@driver).expand_dashboard_container
     sleep 1
-    TrainingExtension.new(driver).manager_approves_training_request
-    puts 'PASS - Training Request Approved'
-    TrainingExtension.new(driver).click_training_breadcrumb
-    puts 'PASS - Training BreadCrumb Clicked'
-    sleep 1
-    TrainingExtension.new(driver).compare_training_request_status('Approved')
+    EmployeeDashboardExtension.new(@driver).click_widget('Request training')
+    sleep 0.5
+    TrainingExtension.new(@driver).fill_out_training_form
+    expect(TrainingExtension.new(@driver).training_title).to eql('Employee Requested Training')
   end
 
-  def test_05_edit_form
-    TrainingExtension.new(driver).open_edit_modal
-    puts 'PASS - Click edit icon'
-    TrainingExtension.new(driver).set_outcome_to_passed
-    TrainingExtension.new(driver).confirm_training_form
-    puts 'PASS - Training Request Form Submitted'
-    TrainingExtension.new(driver).click_training_breadcrumb
-    outcome = TrainingExtension.new(driver).training_outcome
-    if outcome == 'Passed'
-      puts 'PASS - Outcome updated to Passed'
-    else
-      puts 'FAIL - Outcome not marked as Passed'
-    end
+  it '3A - LM Logs In and Views Request in Dashboard' do
+    NavigateBrowserExtension.new(@driver).breathe_login
+    LoginExtension.new(@driver).login_functionality_lm
+    LoginAppExtension.new(@driver).select_hr
+    sleep 0.5
+    ManagerDashboardExtension.new(@driver).switch_todos_to_training
+    expect(ManagerDashboardExtension.new(@driver).description_of_open_training).to include(
+      'Employee Requested Training'
+    )
   end
 
-  def test_06_delete_training_request
-    TrainingExtension.new(driver).delete_training_request
-    sleep 2
-    puts 'PASS - Training Request Deleted'
+  it '3B - LM Opens Training Request and Approves Training' do
+    NavigateBrowserExtension.new(@driver).breathe_login
+    LoginExtension.new(@driver).login_functionality_lm
+    LoginAppExtension.new(@driver).select_hr
+    sleep 0.5
+    ManagerDashboardExtension.new(@driver).switch_todos_to_training
+    ManagerDashboardExtension.new(@driver).view_open_training_request
+    sleep 0.5
+    expect(TrainingExtension.new(@driver).status_from_request_form).to eql('Status Requested')
+    TrainingExtension.new(@driver).manager_approves_training_request
+    expect(TrainingExtension.new(@driver).status_from_request_form).to eql('Status Approved')
+  end
+
+  it '4A - Employee Checks Status of Training Request' do
+    NavigateBrowserExtension.new(@driver).breathe_login
+    LoginExtension.new(@driver).login_functionality_employee
+    LoginAppExtension.new(@driver).select_hr
+    sleep 0.5
+    NavigateAroundAppEmployee.new(@driver).navigate_to_profile_employee
+    EmployeeProfileExtension.new(@driver).open_employee_training
+    expect(EmployeeProfileExtension.new(@driver).value_from_table('0', '2').text).to eql('Approved')
+  end
+
+  it '5A - LM Edits Status of Training' do
+    NavigateBrowserExtension.new(@driver).breathe_login
+    LoginExtension.new(@driver).login_functionality_lm
+    LoginAppExtension.new(@driver).select_hr
+    AppNavigationExtensionLM.new(@driver).my_people
+    sleep 0.5
+    PeoplePageExtension.new(@driver).select_employee_from_lm_list('Employee User')
+    sleep 0.5
+    EmployeeProfileExtension.new(@driver).open_employee_training
+    sleep 0.5
+    TrainingExtension.new(@driver).open_edit_modal
+    sleep 0.25
+    TrainingExtension.new(@driver).set_outcome_to_passed
+    TrainingExtension.new(@driver).confirm_training_form
+    expect(EmployeeProfileExtension.new(@driver).find_value_in_show_page('7')).to eql('Outcome Passed')
+  end
+
+  it '5B - LM Deletes the Training' do
+    NavigateBrowserExtension.new(@driver).breathe_login
+    LoginExtension.new(@driver).login_functionality_lm
+    LoginAppExtension.new(@driver).select_hr
+    AppNavigationExtensionLM.new(@driver).my_people
+    sleep 0.5
+    PeoplePageExtension.new(@driver).select_employee_from_lm_list('Employee User')
+    sleep 0.5
+    EmployeeProfileExtension.new(@driver).open_employee_training
+    sleep 0.5
+    TrainingExtension.new(@driver).delete_training_request
+    sleep 0.25
+    expect(EmployeeProfileExtension.new(@driver).check_for_empty_table).to be(true)
   end
 end
-TestEmployeeTrainingApproved.new.execute
-# rubocop:enable Metrics/AbcSize
-# rubocop:enable Metrics/MethodLength
